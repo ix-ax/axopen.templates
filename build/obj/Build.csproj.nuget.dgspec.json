@@ -1,0 +1,75 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\W\\Develop\\gh\\ix-ax\\_axopen\\axopen.templates\\build\\Build.csproj": {}
+  },
+  "projects": {
+    "C:\\W\\Develop\\gh\\ix-ax\\_axopen\\axopen.templates\\build\\Build.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\W\\Develop\\gh\\ix-ax\\_axopen\\axopen.templates\\build\\Build.csproj",
+        "projectName": "Build",
+        "projectPath": "C:\\W\\Develop\\gh\\ix-ax\\_axopen\\axopen.templates\\build\\Build.csproj",
+        "packagesPath": "C:\\Users\\peter\\.nuget\\packages\\",
+        "outputPath": "C:\\W\\Develop\\gh\\ix-ax\\_axopen\\axopen.templates\\build\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\peter\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.pkg.github.com/ix-ax/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Cake.Frosting": {
+              "target": "Package",
+              "version": "[4.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
