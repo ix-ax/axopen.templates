@@ -1,5 +1,4 @@
-﻿// #define WEBAPI_3_1
-// ixsharpblazor
+﻿// ixsharpblazor
 // Copyright (c) 2023 Peter Kurhajec (PTKu), MTS,  and Contributors. All Rights Reserved.
 // Contributors: https://github.com/ix-ax/axsharp/graphs/contributors
 // See the LICENSE file in the repository root for more information.
@@ -20,14 +19,8 @@ namespace axosimple
     {
         public static string TargetIp { get; } = Environment.GetEnvironmentVariable("AXTARGET"); // <- replace by your IP 
 
-
-#if WEBAPI_3_1
-        private static string Pass => Environment.GetEnvironmentVariable("AX_TARGET_PWD") ?? string.Empty; // <- Pass in the password that you have set up for the user. NOT AS PLAIN TEXT! Use user secrets instead.
-        private const string UserName = "Anonymous"; //<- replace by user name you have set up in your WebAPI settings
-# else
         private static string Pass => string.Empty; // <- Pass in the password that you have set up for the user. NOT AS PLAIN TEXT! Use user secrets instead.
-        private const string UserName = "Everybody"; //<- replace by user name you have set up in your WebAPI settings
-#endif
+        private const string UserName = "Everybody"; //<- replace by user name you have set up in your WebAPI settings        
 
         private const bool IgnoreSslErrors = true; // <- When you have your certificates in order set this to false.
 
