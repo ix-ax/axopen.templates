@@ -1,9 +1,9 @@
 {
-  "ImgSrc": "Images/VisualComposerSerialize/Context.UnitTemplate/A.jpg",
-  "BackgroundWidth": 0,
-  "BackgroundHeight": 0,
-  "EmptyBackground": false,
+  "BackgroundWidth": 200,
+  "BackgroundHeight": 200,
+  "ImgSrc": "Images/VisualComposerSerialize/Context.UnitTemplate/A.png",
   "BackgroundColor": "#FFFFFF",
+  "BackgroundSVGInput": null,
   "Items": [
     {
       "Id": "f21502b7b86f1bdb2606b5aee9f26d9f8ae23c584aed42b78e371dfe7a0604b8",

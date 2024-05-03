@@ -9,6 +9,10 @@
 
 ### Using TIA portal
 
+How to setup the communication 
+
+https://console.simatic-ax.siemens.io/docs/sld/example#getting-started-with-a-windows-computer
+
 If you use TIA portal for you hardware configuration you must enable WebAPI communication with your target PLC.
 
 [How to set-up WebAPI in TIA portal](https://youtu.be/d9EX2FixY1A?t=151)

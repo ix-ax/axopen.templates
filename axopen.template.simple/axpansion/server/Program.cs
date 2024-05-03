@@ -14,6 +14,7 @@ using AXSharp.Connector;
 using AXSharp.Presentation.Blazor.Services;
 using Serilog;
 using System.Reflection;
+using AXOpen.VisualComposer;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson.Serialization;
 
@@ -29,6 +30,8 @@ builder.Services.AddIxBlazorServices();
 builder.Services.AddAxoCoreServices();
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddVisualComposerService();
 
 #region AxoApplication
 
@@ -51,10 +54,10 @@ Entry.Plc.Connector.SetLoggerConfiguration(new LoggerConfiguration()
 await Entry.Plc.Connector.IdentityProvider.ConstructIdentitiesAsync();
 
 AxoApplication.CreateBuilder().ConfigureLogger(new SerilogLogger(new LoggerConfiguration()
-    .WriteTo.Console().MinimumLevel.Verbose()
+    .WriteTo.Console().MinimumLevel.Information()
     .CreateLogger()));
 
-Entry.Plc.ContextLogger.StartDequeuing(AxoApplication.Current.Logger, 250);
+//Entry.Plc.ContextLogger.StartDequeuing(AxoApplication.Current.Logger, 250);
 
 axosimple.StarterUnitTemplate.UnitServices.Create(ContextService.Instance);
 axosimple.UnitTemplate.UnitServices.Create(ContextService.Instance);

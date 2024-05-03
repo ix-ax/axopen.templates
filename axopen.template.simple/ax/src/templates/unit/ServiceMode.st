@@ -63,17 +63,17 @@ NAMESPACE axosimple.UnitTemplate
             // components.Cylinder_3.ActivateManualControl();
             // components.Cylinder_4.ActivateManualControl();
                         
-            components.Reader_1.ActivateManualControl();
-            components.Reader_2.ActivateManualControl();
+            // components.Reader_1.ActivateManualControl();
+            // components.Reader_2.ActivateManualControl();
             
-            components.Camera_1.ActivateManualControl();
-            components.Camera_2.ActivateManualControl();
+            // components.Camera_1.ActivateManualControl();
+            // components.Camera_2.ActivateManualControl();
 
-            components.Drive_R1.ActivateManualControl();
-            components.Drive_R2.ActivateManualControl();
+            // components.Drive_R1.ActivateManualControl();
+            // components.Drive_R2.ActivateManualControl();
         
-            components.Drive_F1.ActivateManualControl();
-            components.Drive_F2.ActivateManualControl();
+            // components.Drive_F1.ActivateManualControl();
+            // components.Drive_F2.ActivateManualControl();
         
 
         END_METHOD

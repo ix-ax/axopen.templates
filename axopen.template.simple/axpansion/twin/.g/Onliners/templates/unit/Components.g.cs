@@ -28,38 +28,6 @@ namespace axosimple.UnitTemplate
 
         public AXOpen.Components.Pneumatics.AxoCylinder Cylinder_2 { get; }
 
-        public AXOpen.Components.Cognex.Vision.v_6_0_0_0.AxoDataman Reader_1 { get; }
-
-        public AXOpen.Components.Cognex.Vision.v_6_0_0_0.AxoDataman Reader_2 { get; }
-
-        public AXOpen.Components.Cognex.Vision.v_6_0_0_0.AxoInsight Camera_1 { get; }
-
-        public AXOpen.Components.Cognex.Vision.v_6_0_0_0.AxoInsight Camera_2 { get; }
-
-        [Container(Layout.Stack)]
-        public AXOpen.Components.Rexroth.Drives.AxoIndraDrive Drive_R1 { get; }
-
-        [Container(Layout.Stack)]
-        public AXOpen.Components.Rexroth.Drives.AxoIndraDrive Drive_R2 { get; }
-
-        [Container(Layout.Stack)]
-        public AXOpen.Components.Festo.Drives.AxoCmmtAs Drive_F1 { get; }
-
-        [Container(Layout.Stack)]
-        public AXOpen.Components.Festo.Drives.AxoCmmtAs Drive_F2 { get; }
-
-        public OnlinerBool _enable { get; }
-
-        public OnlinerBool _enablePositive { get; }
-
-        public OnlinerBool _enableNegative { get; }
-
-        [Container(Layout.Stack)]
-        public AXOpen.Components.Abb.Robotics.AxoIrc5_v_1_x_x Robot_A1 { get; }
-
-        [Container(Layout.Stack)]
-        public AXOpen.Components.Abb.Robotics.AxoOmnicore_v_1_x_x Robot_A2 { get; }
-
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         public Components(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail) : base(parent, readableTail, symbolTail)
@@ -76,19 +44,6 @@ namespace axosimple.UnitTemplate
             AO_2 = new AXOpen.Elements.AxoAo(this, "AO_2", "AO_2");
             Cylinder_1 = new AXOpen.Components.Pneumatics.AxoCylinder(this, "Cylinder_1", "Cylinder_1");
             Cylinder_2 = new AXOpen.Components.Pneumatics.AxoCylinder(this, "Cylinder_2", "Cylinder_2");
-            Reader_1 = new AXOpen.Components.Cognex.Vision.v_6_0_0_0.AxoDataman(this, "Reader_1", "Reader_1");
-            Reader_2 = new AXOpen.Components.Cognex.Vision.v_6_0_0_0.AxoDataman(this, "Reader_2", "Reader_2");
-            Camera_1 = new AXOpen.Components.Cognex.Vision.v_6_0_0_0.AxoInsight(this, "Camera_1", "Camera_1");
-            Camera_2 = new AXOpen.Components.Cognex.Vision.v_6_0_0_0.AxoInsight(this, "Camera_2", "Camera_2");
-            Drive_R1 = new AXOpen.Components.Rexroth.Drives.AxoIndraDrive(this, "Drive_R1", "Drive_R1");
-            Drive_R2 = new AXOpen.Components.Rexroth.Drives.AxoIndraDrive(this, "Drive_R2", "Drive_R2");
-            Drive_F1 = new AXOpen.Components.Festo.Drives.AxoCmmtAs(this, "Drive_F1", "Drive_F1");
-            Drive_F2 = new AXOpen.Components.Festo.Drives.AxoCmmtAs(this, "Drive_F2", "Drive_F2");
-            _enable = @Connector.ConnectorAdapter.AdapterFactory.CreateBOOL(this, "_enable", "_enable");
-            _enablePositive = @Connector.ConnectorAdapter.AdapterFactory.CreateBOOL(this, "_enablePositive", "_enablePositive");
-            _enableNegative = @Connector.ConnectorAdapter.AdapterFactory.CreateBOOL(this, "_enableNegative", "_enableNegative");
-            Robot_A1 = new AXOpen.Components.Abb.Robotics.AxoIrc5_v_1_x_x(this, "Robot_A1", "Robot_A1");
-            Robot_A2 = new AXOpen.Components.Abb.Robotics.AxoOmnicore_v_1_x_x(this, "Robot_A2", "Robot_A2");
             PostConstruct(parent, readableTail, symbolTail);
         }
 
@@ -134,39 +89,6 @@ namespace axosimple.UnitTemplate
 #pragma warning disable CS0612
             plain.Cylinder_2 = await Cylinder_2._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Reader_1 = await Reader_1._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Reader_2 = await Reader_2._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Camera_1 = await Camera_1._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Camera_2 = await Camera_2._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Drive_R1 = await Drive_R1._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Drive_R2 = await Drive_R2._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Drive_F1 = await Drive_F1._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Drive_F2 = await Drive_F2._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-            plain._enable = _enable.LastValue;
-            plain._enablePositive = _enablePositive.LastValue;
-            plain._enableNegative = _enableNegative.LastValue;
-#pragma warning disable CS0612
-            plain.Robot_A1 = await Robot_A1._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Robot_A2 = await Robot_A2._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
             return plain;
         }
 
@@ -208,39 +130,6 @@ namespace axosimple.UnitTemplate
 #pragma warning disable CS0612
             plain.Cylinder_2 = await Cylinder_2._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Reader_1 = await Reader_1._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Reader_2 = await Reader_2._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Camera_1 = await Camera_1._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Camera_2 = await Camera_2._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Drive_R1 = await Drive_R1._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Drive_R2 = await Drive_R2._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Drive_F1 = await Drive_F1._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Drive_F2 = await Drive_F2._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-            plain._enable = _enable.LastValue;
-            plain._enablePositive = _enablePositive.LastValue;
-            plain._enableNegative = _enableNegative.LastValue;
-#pragma warning disable CS0612
-            plain.Robot_A1 = await Robot_A1._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Robot_A2 = await Robot_A2._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
             return plain;
         }
 
@@ -280,39 +169,6 @@ namespace axosimple.UnitTemplate
 #pragma warning restore CS0612
 #pragma warning disable CS0612
             plain.Cylinder_2 = await Cylinder_2._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Reader_1 = await Reader_1._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Reader_2 = await Reader_2._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Camera_1 = await Camera_1._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Camera_2 = await Camera_2._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Drive_R1 = await Drive_R1._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Drive_R2 = await Drive_R2._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Drive_F1 = await Drive_F1._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Drive_F2 = await Drive_F2._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-            plain._enable = _enable.LastValue;
-            plain._enablePositive = _enablePositive.LastValue;
-            plain._enableNegative = _enableNegative.LastValue;
-#pragma warning disable CS0612
-            plain.Robot_A1 = await Robot_A1._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Robot_A2 = await Robot_A2._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -355,45 +211,6 @@ namespace axosimple.UnitTemplate
 #pragma warning disable CS0612
             await this.Cylinder_2._PlainToOnlineNoacAsync(plain.Cylinder_2);
 #pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.Reader_1._PlainToOnlineNoacAsync(plain.Reader_1);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.Reader_2._PlainToOnlineNoacAsync(plain.Reader_2);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.Camera_1._PlainToOnlineNoacAsync(plain.Camera_1);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.Camera_2._PlainToOnlineNoacAsync(plain.Camera_2);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.Drive_R1._PlainToOnlineNoacAsync(plain.Drive_R1);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.Drive_R2._PlainToOnlineNoacAsync(plain.Drive_R2);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.Drive_F1._PlainToOnlineNoacAsync(plain.Drive_F1);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.Drive_F2._PlainToOnlineNoacAsync(plain.Drive_F2);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            _enable.LethargicWrite(plain._enable);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            _enablePositive.LethargicWrite(plain._enablePositive);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            _enableNegative.LethargicWrite(plain._enableNegative);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.Robot_A1._PlainToOnlineNoacAsync(plain.Robot_A1);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.Robot_A2._PlainToOnlineNoacAsync(plain.Robot_A2);
-#pragma warning restore CS0612
             return await this.WriteAsync<IgnoreOnPocoOperation>();
         }
 
@@ -432,45 +249,6 @@ namespace axosimple.UnitTemplate
 #pragma warning disable CS0612
             await this.Cylinder_2._PlainToOnlineNoacAsync(plain.Cylinder_2);
 #pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.Reader_1._PlainToOnlineNoacAsync(plain.Reader_1);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.Reader_2._PlainToOnlineNoacAsync(plain.Reader_2);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.Camera_1._PlainToOnlineNoacAsync(plain.Camera_1);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.Camera_2._PlainToOnlineNoacAsync(plain.Camera_2);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.Drive_R1._PlainToOnlineNoacAsync(plain.Drive_R1);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.Drive_R2._PlainToOnlineNoacAsync(plain.Drive_R2);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.Drive_F1._PlainToOnlineNoacAsync(plain.Drive_F1);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.Drive_F2._PlainToOnlineNoacAsync(plain.Drive_F2);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            _enable.LethargicWrite(plain._enable);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            _enablePositive.LethargicWrite(plain._enablePositive);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            _enableNegative.LethargicWrite(plain._enableNegative);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.Robot_A1._PlainToOnlineNoacAsync(plain.Robot_A1);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.Robot_A2._PlainToOnlineNoacAsync(plain.Robot_A2);
-#pragma warning restore CS0612
         }
 
         public async override Task<T> ShadowToPlain<T>()
@@ -492,19 +270,6 @@ namespace axosimple.UnitTemplate
             plain.AO_2 = await AO_2.ShadowToPlainAsync();
             plain.Cylinder_1 = await Cylinder_1.ShadowToPlainAsync();
             plain.Cylinder_2 = await Cylinder_2.ShadowToPlainAsync();
-            plain.Reader_1 = await Reader_1.ShadowToPlainAsync();
-            plain.Reader_2 = await Reader_2.ShadowToPlainAsync();
-            plain.Camera_1 = await Camera_1.ShadowToPlainAsync();
-            plain.Camera_2 = await Camera_2.ShadowToPlainAsync();
-            plain.Drive_R1 = await Drive_R1.ShadowToPlainAsync();
-            plain.Drive_R2 = await Drive_R2.ShadowToPlainAsync();
-            plain.Drive_F1 = await Drive_F1.ShadowToPlainAsync();
-            plain.Drive_F2 = await Drive_F2.ShadowToPlainAsync();
-            plain._enable = _enable.Shadow;
-            plain._enablePositive = _enablePositive.Shadow;
-            plain._enableNegative = _enableNegative.Shadow;
-            plain.Robot_A1 = await Robot_A1.ShadowToPlainAsync();
-            plain.Robot_A2 = await Robot_A2.ShadowToPlainAsync();
             return plain;
         }
 
@@ -521,19 +286,6 @@ namespace axosimple.UnitTemplate
             plain.AO_2 = await AO_2.ShadowToPlainAsync();
             plain.Cylinder_1 = await Cylinder_1.ShadowToPlainAsync();
             plain.Cylinder_2 = await Cylinder_2.ShadowToPlainAsync();
-            plain.Reader_1 = await Reader_1.ShadowToPlainAsync();
-            plain.Reader_2 = await Reader_2.ShadowToPlainAsync();
-            plain.Camera_1 = await Camera_1.ShadowToPlainAsync();
-            plain.Camera_2 = await Camera_2.ShadowToPlainAsync();
-            plain.Drive_R1 = await Drive_R1.ShadowToPlainAsync();
-            plain.Drive_R2 = await Drive_R2.ShadowToPlainAsync();
-            plain.Drive_F1 = await Drive_F1.ShadowToPlainAsync();
-            plain.Drive_F2 = await Drive_F2.ShadowToPlainAsync();
-            plain._enable = _enable.Shadow;
-            plain._enablePositive = _enablePositive.Shadow;
-            plain._enableNegative = _enableNegative.Shadow;
-            plain.Robot_A1 = await Robot_A1.ShadowToPlainAsync();
-            plain.Robot_A2 = await Robot_A2.ShadowToPlainAsync();
             return plain;
         }
 
@@ -555,19 +307,6 @@ namespace axosimple.UnitTemplate
             await this.AO_2.PlainToShadowAsync(plain.AO_2);
             await this.Cylinder_1.PlainToShadowAsync(plain.Cylinder_1);
             await this.Cylinder_2.PlainToShadowAsync(plain.Cylinder_2);
-            await this.Reader_1.PlainToShadowAsync(plain.Reader_1);
-            await this.Reader_2.PlainToShadowAsync(plain.Reader_2);
-            await this.Camera_1.PlainToShadowAsync(plain.Camera_1);
-            await this.Camera_2.PlainToShadowAsync(plain.Camera_2);
-            await this.Drive_R1.PlainToShadowAsync(plain.Drive_R1);
-            await this.Drive_R2.PlainToShadowAsync(plain.Drive_R2);
-            await this.Drive_F1.PlainToShadowAsync(plain.Drive_F1);
-            await this.Drive_F2.PlainToShadowAsync(plain.Drive_F2);
-            _enable.Shadow = plain._enable;
-            _enablePositive.Shadow = plain._enablePositive;
-            _enableNegative.Shadow = plain._enableNegative;
-            await this.Robot_A1.PlainToShadowAsync(plain.Robot_A1);
-            await this.Robot_A2.PlainToShadowAsync(plain.Robot_A2);
             return this.RetrievePrimitives();
         }
 
@@ -609,32 +348,6 @@ namespace axosimple.UnitTemplate
                 if (await Cylinder_1.DetectsAnyChangeAsync(plain.Cylinder_1, latest.Cylinder_1))
                     somethingChanged = true;
                 if (await Cylinder_2.DetectsAnyChangeAsync(plain.Cylinder_2, latest.Cylinder_2))
-                    somethingChanged = true;
-                if (await Reader_1.DetectsAnyChangeAsync(plain.Reader_1, latest.Reader_1))
-                    somethingChanged = true;
-                if (await Reader_2.DetectsAnyChangeAsync(plain.Reader_2, latest.Reader_2))
-                    somethingChanged = true;
-                if (await Camera_1.DetectsAnyChangeAsync(plain.Camera_1, latest.Camera_1))
-                    somethingChanged = true;
-                if (await Camera_2.DetectsAnyChangeAsync(plain.Camera_2, latest.Camera_2))
-                    somethingChanged = true;
-                if (await Drive_R1.DetectsAnyChangeAsync(plain.Drive_R1, latest.Drive_R1))
-                    somethingChanged = true;
-                if (await Drive_R2.DetectsAnyChangeAsync(plain.Drive_R2, latest.Drive_R2))
-                    somethingChanged = true;
-                if (await Drive_F1.DetectsAnyChangeAsync(plain.Drive_F1, latest.Drive_F1))
-                    somethingChanged = true;
-                if (await Drive_F2.DetectsAnyChangeAsync(plain.Drive_F2, latest.Drive_F2))
-                    somethingChanged = true;
-                if (plain._enable != _enable.LastValue)
-                    somethingChanged = true;
-                if (plain._enablePositive != _enablePositive.LastValue)
-                    somethingChanged = true;
-                if (plain._enableNegative != _enableNegative.LastValue)
-                    somethingChanged = true;
-                if (await Robot_A1.DetectsAnyChangeAsync(plain.Robot_A1, latest.Robot_A1))
-                    somethingChanged = true;
-                if (await Robot_A2.DetectsAnyChangeAsync(plain.Robot_A2, latest.Robot_A2))
                     somethingChanged = true;
                 plain = latest;
                 return somethingChanged;

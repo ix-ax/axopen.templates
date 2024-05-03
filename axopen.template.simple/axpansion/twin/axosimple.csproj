@@ -17,6 +17,16 @@
 		<Content Include=".meta\**" />
 		<Compile Include="..\..\ax\src\templates\starterunit\twin\StarterUnitTemplate.cs" Link="Context\Units\StarterUnitTemplate.cs" />
 		<Compile Include="..\..\ax\src\templates\unit\twin\UnitTemplateServices.cs" Link="Context\Units\UnitTemplateServices.cs" />
+		<Folder Include=".certs\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="..\..\.certs\PLC-1Communication-1.cer" Link=".certs\PLC-1Communication-1.cer">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="..\..\.certs\PLC-1Webserver-2.cer" Link=".certs\PLC-1Webserver-2.cer">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 
 	<!--PROJECTS-->
@@ -39,39 +49,28 @@
 		<ProjectReference Include="..\..\..\..\axopen\src\components.abb.robotics\src\AXOpen.Components.Abb.Robotics\ix_ax_axopen_components_abb_robotics.csproj" />
 		<ProjectReference Include="..\..\..\..\axopen\src\components.mitsubishi.robotics\src\AXOpen.Components.Mitsubishi.Robotics\ix_ax_axopen_components_mitsubishi_robotics.csproj" />
 		<ProjectReference Include="..\..\..\..\axopen\src\components.ur.robotics\src\AXOpen.Components.Ur.Robotics\ix_ax_axopen_components_ur_robotics.csproj" />
-		<PackageReference Include="AXSharp.Connector.S71500.WebAPI" Version="0.18.0-alpha.198" />
+		<PackageReference Include="AXSharp.Connector.S71500.WebAPI" Version="0.18.0-alpha.201" />
 	</ItemGroup>
 	<!--PROJECTS-->
 
 
 	<!--PACKAGES
 	 <ItemGroup>
-	 
-	  <PackageReference Include="AXOpen.Components.Abb.Robotics" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXOpen.Components.Cognex.Vision" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXOpen.Components.Elements" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXOpen.Components.Festo.Drives" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXOpen.Components.Mitsubishi.Robotics" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXOpen.Components.Pneumatics" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXOpen.Components.Rexroth.Press" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXOpen.Components.Ur.Robotics" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXOpen.Data" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXOpen.Data.MongoDb" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXOpen.Inspectors" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXOpen.S71500" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXSharp.Connector.S71500.WebAPI" Version="0.18.0-alpha.198" />
+	  <PackageReference Include="AXOpen.Components.Abb.Robotics" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Components.Cognex.Vision" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Components.Drives" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Components.Elements" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Components.Festo.Drives" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Components.Mitsubishi.Robotics" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Components.Pneumatics" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Components.Rexroth.Drives" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Components.Rexroth.Press" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Components.Ur.Robotics" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Data" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Data.MongoDb" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Inspectors" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.S71500" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXSharp.Connector.S71500.WebAPI" Version="0.18.0-alpha.201" />
 	</ItemGroup>
 	PACKAGES-->
 	
@@ -87,5 +86,5 @@
 			<Generator>PublicResXFileCodeGenerator</Generator>
 			<LastGenOutput>PlcStringResources.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
-	</ItemGroup>
+	</ItemGroup>		
 </Project>
