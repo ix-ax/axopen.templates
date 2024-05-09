@@ -1,10 +1,9 @@
 using System;
+using Pocos.AXOpen.Core;
+using Pocos.AXOpen.Data;
 
 namespace Pocos
 {
-    using AXOpen.Core;
-    using AXOpen.Data;
-
     namespace axosimple
     {
         public partial class Context : AXOpen.Core.AxoContext, AXSharp.Connector.IPlain
