@@ -2,9 +2,9 @@ name: "axosimple"
 version: '0.0.0-dev.0'
 type: app
 targets:
-  # - plcsim
+  - plcsim
   # - swcpu 
-  - "1500"
+  # - "1500"
   # - llvm
 registries:
   '@ix-ax': https://npm.pkg.github.com/
@@ -18,13 +18,13 @@ dependencies:
   "@ix-ax/axopen.components.elements": '0.0.0-dev.0'
   "@ix-ax/axopen.components.pneumatics": '0.0.0-dev.0'
   "@ix-ax/axopen.components.cognex.vision": '0.0.0-dev.0'
-  "@ix-ax/axopen.components.drives": '0.0.0-dev.0'
-  "@ix-ax/axopen.components.rexroth.drives": '0.0.0-dev.0'
-  "@ix-ax/axopen.components.rexroth.press": '0.0.0-dev.0'
-  "@ix-ax/axopen.components.festo.drives": '0.0.0-dev.0'
-  "@ix-ax/axopen.components.abb.robotics": '0.0.0-dev.0'
-  "@ix-ax/axopen.components.mitsubishi.robotics": '0.0.0-dev.0'
-  "@ix-ax/axopen.components.ur.robotics": '0.0.0-dev.0'
+  #"@ix-ax/axopen.components.drives": '0.0.0-dev.0'
+  #"@ix-ax/axopen.components.rexroth.drives": '0.0.0-dev.0'
+  #"@ix-ax/axopen.components.rexroth.press": '0.0.0-dev.0'
+  #"@ix-ax/axopen.components.festo.drives": '0.0.0-dev.0'
+  #"@ix-ax/axopen.components.abb.robotics": '0.0.0-dev.0'
+  #"@ix-ax/axopen.components.mitsubishi.robotics": '0.0.0-dev.0'
+  #"@ix-ax/axopen.components.ur.robotics": '0.0.0-dev.0'
   "@ix-ax/axopen.simatic1500": '0.0.0-dev.0'
   # "@ix-ax/axopen.data": '0.4.4-alpha.857'
   # "@ix-ax/axopen.inspectors": '0.4.4-alpha.857'
