@@ -6,6 +6,10 @@ namespace Pocos
     {
         public partial class FragmentTechnologyDataManger : AXOpen.Data.AxoDataExchange, AXSharp.Connector.IPlain
         {
+            public FragmentTechnologyDataManger() : base()
+            {
+            }
+
             public axosimple.UnitTemplate.TechnologyData Payload { get; set; } = new axosimple.UnitTemplate.TechnologyData();
         }
     }

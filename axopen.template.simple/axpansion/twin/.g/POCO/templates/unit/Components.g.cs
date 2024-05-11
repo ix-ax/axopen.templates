@@ -6,6 +6,10 @@ namespace Pocos
     {
         public partial class Components : AXOpen.Core.AxoObject, AXSharp.Connector.IPlain
         {
+            public Components() : base()
+            {
+            }
+
             public AXOpen.Elements.AxoDi DI_1 { get; set; } = new AXOpen.Elements.AxoDi();
             public AXOpen.Elements.AxoDi DI_2 { get; set; } = new AXOpen.Elements.AxoDi();
             public AXOpen.Elements.AxoDo DO_1 { get; set; } = new AXOpen.Elements.AxoDo();

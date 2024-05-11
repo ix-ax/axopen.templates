@@ -6,6 +6,10 @@ namespace Pocos
     {
         public partial class ProcessData : AXOpen.Data.AxoDataEntity, AXSharp.Connector.IPlain
         {
+            public ProcessData() : base()
+            {
+            }
+
             public axosimple.UnitHeader Header { get; set; } = new axosimple.UnitHeader();
             public AXOpen.Inspectors.AxoDataInspector JigDataMatrixCode { get; set; } = new AXOpen.Inspectors.AxoDataInspector();
             public AXOpen.Inspectors.AxoDigitalInspector PartPresence { get; set; } = new AXOpen.Inspectors.AxoDigitalInspector();

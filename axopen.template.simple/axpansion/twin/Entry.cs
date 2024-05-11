@@ -35,7 +35,7 @@ namespace axosimple
         static string GetCertPath()
         {
             var fp = new FileInfo(Path.Combine(Assembly.GetExecutingAssembly().Location));
-            return Path.Combine(fp.DirectoryName, ".certs\\PLC-1Webserver-2.cer");
+            return Path.Combine(fp.DirectoryName, ".certs\\Webserver.cer");
         }
 
         static X509Certificate2 customCertificate = new X509Certificate2(GetCertPath());

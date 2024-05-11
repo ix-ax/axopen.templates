@@ -9,6 +9,10 @@ namespace Pocos
     {
         public partial class Cylinder : AXOpen.Core.AxoComponent, AXSharp.Connector.IPlain
         {
+            public Cylinder() : base()
+            {
+            }
+
             public AXOpen.Core.AxoTask MoveToWork { get; set; } = new AXOpen.Core.AxoTask();
             public AXOpen.Core.AxoTask Stop { get; set; } = new AXOpen.Core.AxoTask();
             public AXOpen.Core.AxoTask MoveToHome { get; set; } = new AXOpen.Core.AxoTask();

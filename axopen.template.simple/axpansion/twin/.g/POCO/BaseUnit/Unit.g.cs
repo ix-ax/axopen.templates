@@ -6,6 +6,9 @@ namespace Pocos
     {
         public partial class UnitBase : AXOpen.Core.AxoObject, AXSharp.Connector.IPlain, axosimple.IUnit
         {
+            public UnitBase() : base()
+            {
+            }
         }
     }
 }

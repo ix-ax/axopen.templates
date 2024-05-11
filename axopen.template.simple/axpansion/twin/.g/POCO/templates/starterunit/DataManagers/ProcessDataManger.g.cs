@@ -6,6 +6,10 @@ namespace Pocos
     {
         public partial class ProcessDataManager : AXOpen.Data.AxoDataFragmentExchange, AXSharp.Connector.IPlain
         {
+            public ProcessDataManager() : base()
+            {
+            }
+
             public axosimple.EntityHeaderDataManager Shared { get; set; } = new axosimple.EntityHeaderDataManager();
             public axosimple.StarterUnitTemplate.FragmentProcessDataManger DataManger { get; set; } = new axosimple.StarterUnitTemplate.FragmentProcessDataManger();
         }

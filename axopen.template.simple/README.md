@@ -1,6 +1,6 @@
-# WORK IN PROGRESS. NOTHING READY YET. STAY TUNED.
+# Axosimple application template
 
-# AXOpen simple Blazor application template 
+This application template provides the starting point for application developers within (MTS)[www.mts.sk/en]. It covers the most common scenarios to help scaffold the application in a fast way.
 
 **IMPORTANT!!! When you create the project from Visual Studio, you will need to run `install.ps1` manually to finish creating the project.**
 
@@ -9,21 +9,30 @@
 
 ### Using TIA portal
 
-How to setup the communication 
+How to setup the communication in TIA portal
 
-https://console.simatic-ax.siemens.io/docs/sld/example#getting-started-with-a-windows-computer
+https://console.simatic-ax.siemens.io/docs/sld/example
 
-If you use TIA portal for you hardware configuration you must enable WebAPI communication with your target PLC.
+You will need to export the certificates into `.certs` folder of this directory named `Communication.cer` and `Webserver.cer`. For program loading and web server communication respectively. 
 
-[How to set-up WebAPI in TIA portal](https://youtu.be/d9EX2FixY1A?t=151)
+> IMPORTANT!
+> This template points to these files with these exact names; please make sure you named the files as indicated.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/d9EX2FixY1A?start=151" frameborder="0" allowfullscreen></iframe>
+your.project/
+├── .certs                          [Communication certificates]
+│     ├── Communication.cer         [Program loading (sld)]
+│     └── Webserver.cer             [WebAPI server application communication]
 
 
-## Template directory scructure
+### Using `hwc`
+
+You can alternatively use hwc to prepare your target system (see here)[https://console.simatic-ax.siemens.io/docs/hw/hwc].
+
+
+## Template directory structure
 ```
 your.project/
-│
+├── .certs        [Communication certificates]
 ├── .config       [dotnet config]
 ├── .runtime      [contains kiosk client configuration]
 ├── .tests        [should contain tests of the application]
@@ -40,43 +49,6 @@ your.project/
 ├── slngen.ps1          [Run to regenerate visual studio solution file]
 ├── axosimple.sln       [VS2022 solution file open to work with server, hmi, etc]
 └── this.proj           [traversal project for this directory]
-```
-
-**Opening template from within the AXOpen repository**
-
-When creating the template from within AXOpen repository the solution structure will look something like the schema below. You application template is in `.application` solution folder. Remember to set the the project contained in `server` folder to `Set as start-up project`:
-
-- In the Solution Explorer, find the project you want to set as the startup project. The Solution Explorer is usually located on the right side of the Visual Studio interface, but its location may vary depending on your layout settings.
-
-- Right-click on the desired project.
-
-- From the context menu that appears, select "Set as StartUp Project".
-
-- The project's name will now appear in bold in the Solution Explorer, indicating that it's the startup project. When you press F5 or click on the "Start Debugging" button, this project will be the one that runs.
-
-
-```
-Solution 'axiosimple' (25 of 25 projects)
-├── **.application**
-│   │
-│   ├── **axpansion**
-│   │   ├── **server**
-│   │   └── **twin**
-├── abstractions
-├── base
-├── components.abstractions
-├── components.cognex.vision
-├── components.elements
-├── components.pneumatics
-├── core
-├── data
-├── inspectors
-├── security
-├── simatic1500
-├── timers
-├── toolbox
-└── utils
-
 ```
 
 ## Setting up the connection
@@ -175,7 +147,7 @@ In Visual Studio (VS2022), open the solution file from the project folder `axosi
 
 > **NOTE: Security is set to a minimal level for a speedy start. Make sure you set the security appropriately**.
 
-## Other usefull scripts
+## Other useful scripts
 
 Build both AX and AX# part of the project and DOWNLOADS the program to the target controller
 ```

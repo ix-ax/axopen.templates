@@ -21,10 +21,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="..\..\.certs\PLC-1Communication-1.cer" Link=".certs\PLC-1Communication-1.cer">
+	  <Content Include="..\..\.certs\Communication.cer" Link=".certs\Communication.cer">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
-	  <Content Include="..\..\.certs\PLC-1Webserver-2.cer" Link=".certs\PLC-1Webserver-2.cer">
+	  <Content Include="..\..\.certs\Webserver.cer" Link=".certs\Webserver.cer">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>
