@@ -1,0 +1,73 @@
+{
+  "Version": 1,
+  "HardwareIdentifiers": [
+    {
+      "Name": "plc",
+      "Value": 32
+    },
+    {
+      "Name": "plc~Rail_0",
+      "Value": 256
+    },
+    {
+      "Name": "plc~plc",
+      "Value": 48
+    },
+    {
+      "Name": "plc~plc~ plc",
+      "Value": 49
+    },
+    {
+      "Name": "plc~plc~CPU display_1",
+      "Value": 54
+    },
+    {
+      "Name": "plc~plc~CPU exec unit_1",
+      "Value": 52
+    },
+    {
+      "Name": "plc~plc~Card reader/writer_1",
+      "Value": 51
+    },
+    {
+      "Name": "plc~plc~DP interface_1",
+      "Value": 60
+    },
+    {
+      "Name": "plc~plc~LicenseManager_1",
+      "Value": 42
+    },
+    {
+      "Name": "plc~plc~OPC UA_1",
+      "Value": 117
+    },
+    {
+      "Name": "plc~plc~PROFINET interface_2",
+      "Value": 72
+    },
+    {
+      "Name": "plc~plc~PROFINET interface_2~Port_1",
+      "Value": 73
+    },
+    {
+      "Name": "plc~plc~Virtual communication interface",
+      "Value": 135
+    },
+    {
+      "Name": "plc~plc~plc",
+      "Value": 50
+    },
+    {
+      "Name": "plc~plc~profinet",
+      "Value": 64
+    },
+    {
+      "Name": "plc~plc~profinet~Port1",
+      "Value": 65
+    },
+    {
+      "Name": "plc~plc~profinet~Port2",
+      "Value": 66
+    }
+  ]
+}

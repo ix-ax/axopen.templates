@@ -79,40 +79,56 @@ scripts:
   download:
     # Here you will need to set the argumen -t to your plc IP and -i to platfrom you are dowloading to
     # --default-server-interface is a must if you are using WebAPI          
-    - apax sld load -C ../.certs/Communication.cer
-      --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r
+    - apax sld load -C ../.certs/Communication.cer --accept-security-disclaimer
+      -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r
     # - apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r
   delta:
     # Here you will need to set the argumen -t to your plc IP and -i to platfrom you are dowloading to
     # --default-server-interface is a must if you are using WebAPI 
     - apax build --ignore-scripts
-    - apax sld load -C ../.certs/Communication.cer
-      --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT --mode
-      delta
+    - apax sld load -C ../.certs/Communication.cer --accept-security-disclaimer
+      -t $AXTARGET -i $AXTARGETPLATFORMINPUT --mode delta
     # - apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT --mode delta
-  dcpli: 
+  dcpli:
     # list all interfaces, used to discover MAC address of the adapter connected to PLC and set the PC_MAC value accordingly
     - apax dcp-utility list-interfaces -f JSON
-  dcpd: 
+  dcpd:
     # list all interfaces, used to discover MAC address of the adapter connected to PLC and set the PC_MAC value accordingly
     - apax dcp-utility discover --source-mac 02:1B:1B:44:47:00 --timeout 10000 # discover all accesible devices connected to adapter with MAC address equal to PC_MAC, used to discover MAC-addresses of the slaves and setting the PLC_MAC,RF186_MAC and ET201_MAC variables
-  reset_plc: 
+  reset_plc:
     # list all interfaces, used to discover MAC address of the adapter connected to PLC and set the PC_MAC value accordingly
     - apax hwld -t $AXTARGET --resetPlc KeepOnlyIP --accept-security-disclaimer #total reset of the PLC including IP and name
-    
-  hw-security-setup: 
-    - openssl genpkey -algorithm RSA -out ../.certs/pk.key -pkeyopt rsa_keygen_bits:2048
-    - openssl req -new -key ../.certs/pk.key -out ../.certs/csr.csr -subj "//C=US/ST=California/L=San Francisco/O=Your Organization/OU=Your Organizational Unit/CN=www.example.com"    
-    - openssl req -x509 -sha256 -days 365 -key ../.certs/pk.key -in ../.certs/csr.csr -out ../.certs/cert.crt 
-    - openssl pkcs12 -export -out ../.certs/plc.p12 -inkey ../.certs/pk.key -in ../.certs/cert.crt -certfile ../.certs/cert.crt -passout pass:$AX_TARGET_PWD
-       
-    # - apax hwc setup-secure-communication -n plc -i "default.hwl.json" -p $AX_TARGET_PWD    
-    # - apax hwc import-certificate --name plc --input default.hwl.json --certificate ../.certs/plc.p12 --password $AX_TARGET_PWD --purpose "TLS"
-    # - apax hwc import-certificate --name plc --input default.hwl.json --certificate ../.certs/plc.p12 --password $AX_TARGET_PWD --purpose "WebServer"
-    # - apax hwc manage-users -n plc -i ./default.hwl.json set-password -u "usr" -p $AX_TARGET_PWD   
-  hw-compile-download:    
-    - apax hwc compile -i default.hwl.json -o bin/hwc/    
-    - apax hwld -i bin/hwc/plc -t $AXTARGET -M:$AX_TARGET_PWD --accept-security-disclaimer -l Information
+
+  generate-certificates:
+    - openssl genpkey -algorithm RSA -out ../.certs/pk.key -pkeyopt
+      rsa_keygen_bits:2048
+    - openssl req -new -key ../.certs/pk.key -out ../.certs/csr.csr -subj
+      "//C=US/ST=California/L=San Francisco/O=Your Organization/OU=Your
+      Organizational Unit/CN=www.example.com"
+    - openssl req -x509 -sha256 -days 365 -key ../.certs/pk.key -in
+      ../.certs/csr.csr -out ../.certs/cert.crt
+    - openssl pkcs12 -export -out ../.certs/plc.p12 -inkey ../.certs/pk.key -in
+      ../.certs/cert.crt -certfile ../.certs/cert.crt -passout
+      pass:$AX_TARGET_PWD
+    - openssl x509 -inform PEM -in ../.certs/cert.crt -outform DER -out ../.certs/Certificate.cer  
+  gs:
+    - openssl req -x509 -newkey rsa:4096 -keyout ../.certs/key.pem -out ../.certs/cert.pem -days 365 -nodes -subj "//CN=MyHost.com" -passin "env:AX_TARGET_PWD"
+    - openssl pkcs12 -export -in ../.certs/cert.pem -inkey ../.certs/key.pem -out ../.certs/plc.p12 -name "alias" -passout "env:AX_TARGET_PWD"
+    - openssl x509 -inform PEM -in ../.certs/cert.pem -outform DER -out ../.certs/Certificate.cer
+  hw-security-setup:
+    - apax hwc setup-secure-communication -n plc -i "default.hwl.json" -p
+      $AX_TARGET_PWD
+    - apax hwc import-certificate --name plc --input default.hwl.json
+      --certificate ../.certs/plc.p12 --password $AX_TARGET_PWD --purpose "TLS"
+    - apax hwc import-certificate --name plc --input default.hwl.json
+      --certificate ../.certs/plc.p12 --password $AX_TARGET_PWD --purpose
+      "WebServer"
+    - apax hwc manage-users -n plc -i ./default.hwl.json set-password -u "usr"
+      -p $AX_TARGET_PWD
+  hw-compile-download:
+    - apax hwc compile -i default.hwl.json -o bin/hwc/
+    - apax hwld -i bin/hwc/plc -t $AXTARGET -M:$AX_TARGET_PWD
+      --accept-security-disclaimer -l Information
     - apax plc-cert -t $AXTARGET -o ../.certs/Certificate.cer  
 
 publicKeys:

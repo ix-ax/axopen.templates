@@ -12,13 +12,6 @@
       "@ix-ax/axopen.components.elements": "0.0.0-dev.0",
       "@ix-ax/axopen.components.pneumatics": "0.0.0-dev.0",
       "@ix-ax/axopen.components.cognex.vision": "0.0.0-dev.0",
-      "@ix-ax/axopen.components.drives": "0.0.0-dev.0",
-      "@ix-ax/axopen.components.rexroth.drives": "0.0.0-dev.0",
-      "@ix-ax/axopen.components.rexroth.press": "0.0.0-dev.0",
-      "@ix-ax/axopen.components.festo.drives": "0.0.0-dev.0",
-      "@ix-ax/axopen.components.abb.robotics": "0.0.0-dev.0",
-      "@ix-ax/axopen.components.mitsubishi.robotics": "0.0.0-dev.0",
-      "@ix-ax/axopen.components.ur.robotics": "0.0.0-dev.0",
       "@ix-ax/axopen.simatic1500": "0.0.0-dev.0"
     },
     "devDependencies": {
@@ -185,18 +178,11 @@
       "resolved": "https://registry.simatic-ax.siemens.io/@ax/simatic-1500-diagnostics-hardware/-/simatic-1500-diagnostics-hardware-6.0.1.tgz",
       "dependencies": {}
     },
-    "@ax/system-bitaccess": {
-      "name": "@ax/system-bitaccess",
-      "version": "6.0.94",
-      "integrity": "sha512-yraxVjHomL0fNcvo0zscDzUsnEJC1fAuWw/DR+ZQUSWQuQHPi7gQ6tUpiKBAixyPi3Imauw18OOkH6rdpGA9zg==",
-      "resolved": "https://registry.simatic-ax.siemens.io/@ax/system-bitaccess/-/system-bitaccess-6.0.94.tgz",
-      "dependencies": {}
-    },
-    "@ax/system-math": {
-      "name": "@ax/system-math",
-      "version": "6.0.94",
-      "integrity": "sha512-lmkqZnJRT6zjAaVEKgWDwB1J7st+rgj/lfJc+6PZ/zgiRxoJ/s7BSTl/6YQ6k12RskKrA4E5VvLiqJhaNd3ssw==",
-      "resolved": "https://registry.simatic-ax.siemens.io/@ax/system-math/-/system-math-6.0.94.tgz",
+    "@ax/simatic-1500-clocks": {
+      "name": "@ax/simatic-1500-clocks",
+      "version": "6.0.37",
+      "integrity": "sha512-s9f+7HH/NopPgeddgxhDdUrHFVEldgPSlAJWPr0igEWqR5d05uaWpEOzYFl2ap9CvxQ6D+WnZ582qev1haeJ2w==",
+      "resolved": "https://registry.simatic-ax.siemens.io/@ax/simatic-1500-clocks/-/simatic-1500-clocks-6.0.37.tgz",
       "dependencies": {}
     },
     "@ax/system-strings": {
@@ -209,11 +195,11 @@
         "@ax/system-datetime": "6.0.94"
       }
     },
-    "@ax/simatic-1500-clocks": {
-      "name": "@ax/simatic-1500-clocks",
-      "version": "6.0.37",
-      "integrity": "sha512-s9f+7HH/NopPgeddgxhDdUrHFVEldgPSlAJWPr0igEWqR5d05uaWpEOzYFl2ap9CvxQ6D+WnZ582qev1haeJ2w==",
-      "resolved": "https://registry.simatic-ax.siemens.io/@ax/simatic-1500-clocks/-/simatic-1500-clocks-6.0.37.tgz",
+    "@ax/system-math": {
+      "name": "@ax/system-math",
+      "version": "6.0.94",
+      "integrity": "sha512-lmkqZnJRT6zjAaVEKgWDwB1J7st+rgj/lfJc+6PZ/zgiRxoJ/s7BSTl/6YQ6k12RskKrA4E5VvLiqJhaNd3ssw==",
+      "resolved": "https://registry.simatic-ax.siemens.io/@ax/system-math/-/system-math-6.0.94.tgz",
       "dependencies": {}
     },
     "@ax/system-datetime": {
@@ -634,96 +620,6 @@
         "@ax/simatic-1500-diagnostics-hardware": "^6.0.1"
       }
     },
-    "@ix-ax/axopen.components.drives": {
-      "version": "0.0.0-dev.0",
-      "dir": "..\\..\\..\\axopen\\src\\components.drives\\ctrl",
-      "dependencies": {
-        "@ix-ax/axopen.components.abstractions": "0.0.0-dev.0"
-      }
-    },
-    "@ix-ax/axopen.components.rexroth.drives": {
-      "version": "0.0.0-dev.0",
-      "dir": "..\\..\\..\\axopen\\src\\components.rexroth.drives\\ctrl",
-      "dependencies": {
-        "@ix-ax/axopen.components.abstractions": "0.0.0-dev.0",
-        "@ix-ax/axopen.components.drives": "0.0.0-dev.0",
-        "@ix-ax/axopen.io": "0.0.0-dev.0",
-        "@ax/system-bitaccess": "^6.0.94",
-        "@ax/system-math": "^6.0.94",
-        "@ax/system-strings": "^6.0.94",
-        "@ax/simatic-1500-distributedio": "^6.0.3",
-        "@ax/simatic-1500-diagnostics-hardware": "^6.0.1"
-      }
-    },
-    "@ix-ax/axopen.components.rexroth.press": {
-      "version": "0.0.0-dev.0",
-      "dir": "..\\..\\..\\axopen\\src\\components.rexroth.press\\ctrl",
-      "dependencies": {
-        "@ix-ax/axopen.components.abstractions": "0.0.0-dev.0",
-        "@ix-ax/axopen.core": "0.0.0-dev.0",
-        "@ix-ax/axopen.timers": "0.0.0-dev.0",
-        "@ix-ax/axopen.abstractions": "0.0.0-dev.0",
-        "@ix-ax/axopen.io": "0.0.0-dev.0",
-        "@ax/system-serde": "^6.0.94",
-        "@ax/simatic-1500-distributedio": "^6.0.3",
-        "@ax/simatic-1500-diagnostics-hardware": "^6.0.1"
-      }
-    },
-    "@ix-ax/axopen.components.festo.drives": {
-      "version": "0.0.0-dev.0",
-      "dir": "..\\..\\..\\axopen\\src\\components.festo.drives\\ctrl",
-      "dependencies": {
-        "@ix-ax/axopen.components.drives": "0.0.0-dev.0",
-        "@ax/system-bitaccess": "^6.0.94",
-        "@ax/simatic-1500-clocks": "^6.0.37",
-        "@ax/simatic-1500-distributedio": "^6.0.3",
-        "@ax/simatic-1500-diagnostics-hardware": "^6.0.1",
-        "@ax/system-strings": "^6.0.94",
-        "@ix-ax/axopen.io": "0.0.0-dev.0"
-      }
-    },
-    "@ix-ax/axopen.components.abb.robotics": {
-      "version": "0.0.0-dev.0",
-      "dir": "..\\..\\..\\axopen\\src\\components.abb.robotics\\ctrl",
-      "dependencies": {
-        "@ix-ax/axopen.components.abstractions": "0.0.0-dev.0",
-        "@ix-ax/axopen.core": "0.0.0-dev.0",
-        "@ix-ax/axopen.timers": "0.0.0-dev.0",
-        "@ix-ax/axopen.abstractions": "0.0.0-dev.0",
-        "@ix-ax/axopen.components.robotics": "0.0.0-dev.0",
-        "@ix-ax/axopen.io": "0.0.0-dev.0",
-        "@ax/simatic-1500-distributedio": "^6.0.3",
-        "@ax/simatic-1500-diagnostics-hardware": "^6.0.1"
-      }
-    },
-    "@ix-ax/axopen.components.mitsubishi.robotics": {
-      "version": "0.0.0-dev.0",
-      "dir": "..\\..\\..\\axopen\\src\\components.mitsubishi.robotics\\ctrl",
-      "dependencies": {
-        "@ix-ax/axopen.components.abstractions": "0.0.0-dev.0",
-        "@ix-ax/axopen.components.robotics": "0.0.0-dev.0",
-        "@ix-ax/axopen.core": "0.0.0-dev.0",
-        "@ix-ax/axopen.timers": "0.0.0-dev.0",
-        "@ix-ax/axopen.abstractions": "0.0.0-dev.0",
-        "@ix-ax/axopen.io": "0.0.0-dev.0",
-        "@ax/simatic-1500-distributedio": "^6.0.3",
-        "@ax/simatic-1500-diagnostics-hardware": "^6.0.1"
-      }
-    },
-    "@ix-ax/axopen.components.ur.robotics": {
-      "version": "0.0.0-dev.0",
-      "dir": "..\\..\\..\\axopen\\src\\components.ur.robotics\\ctrl",
-      "dependencies": {
-        "@ix-ax/axopen.components.abstractions": "0.0.0-dev.0",
-        "@ix-ax/axopen.core": "0.0.0-dev.0",
-        "@ix-ax/axopen.timers": "0.0.0-dev.0",
-        "@ix-ax/axopen.abstractions": "0.0.0-dev.0",
-        "@ix-ax/axopen.components.robotics": "0.0.0-dev.0",
-        "@ix-ax/axopen.io": "0.0.0-dev.0",
-        "@ax/simatic-1500-distributedio": "^6.0.3",
-        "@ax/simatic-1500-diagnostics-hardware": "^6.0.1"
-      }
-    },
     "@ix-ax/axopen.simatic1500": {
       "version": "0.0.0-dev.0",
       "dir": "..\\..\\..\\axopen\\src\\simatic1500\\ctrl",
@@ -768,13 +664,6 @@
         "@ax/simatic-1500-diagnostics-hardware": "^6.0.1"
       }
     },
-    "@ix-ax/axopen.timers": {
-      "version": "0.0.0-dev.0",
-      "dir": "..\\..\\..\\axopen\\src\\timers\\ctrl",
-      "dependencies": {
-        "@ix-ax/axopen.abstractions": "0.0.0-dev.0"
-      }
-    },
     "@ix-ax/axopen.abstractions": {
       "version": "0.0.0-dev.0",
       "dir": "..\\..\\..\\axopen\\src\\abstractions\\ctrl",
@@ -782,15 +671,11 @@
         "@ax/system-strings": "^6.0.94"
       }
     },
-    "@ix-ax/axopen.components.robotics": {
+    "@ix-ax/axopen.timers": {
       "version": "0.0.0-dev.0",
-      "dir": "..\\..\\..\\axopen\\src\\components.robotics\\ctrl",
+      "dir": "..\\..\\..\\axopen\\src\\timers\\ctrl",
       "dependencies": {
-        "@ix-ax/axopen.components.abstractions": "0.0.0-dev.0",
-        "@ix-ax/axopen.core": "0.0.0-dev.0",
-        "@ix-ax/axopen.timers": "0.0.0-dev.0",
-        "@ix-ax/axopen.abstractions": "0.0.0-dev.0",
-        "@ax/system-math": "^6.0.94"
+        "@ix-ax/axopen.abstractions": "0.0.0-dev.0"
       }
     }
   }
