@@ -12,7 +12,8 @@
       "@ix-ax/axopen.components.elements": "0.0.0-dev.0",
       "@ix-ax/axopen.components.pneumatics": "0.0.0-dev.0",
       "@ix-ax/axopen.components.cognex.vision": "0.0.0-dev.0",
-      "@ix-ax/axopen.simatic1500": "0.0.0-dev.0"
+      "@ix-ax/axopen.simatic1500": "0.0.0-dev.0",
+      "@ax/certificate-management": "^1.1.1"
     },
     "devDependencies": {
       "@ix-ax/ax-sdk": "0.0.0-dev.0",
@@ -26,6 +27,16 @@
       "integrity": "sha512-4YiABcXRqpS6InViS1dWvmk45XxlPtWyBR/GaJxnUQOuG2vrmR0FMknXko3dglzW9CP2AwRsUWX3r44hx9irzw==",
       "resolved": "https://registry.simatic-ax.siemens.io/@ax/st-lang-contrib-library-toolbox/-/st-lang-contrib-library-toolbox-0.17.2.tgz",
       "dependencies": {}
+    },
+    "@ax/certificate-management": {
+      "name": "@ax/certificate-management",
+      "version": "1.1.1",
+      "integrity": "sha512-iGWHocZp+OAdQBQ2XFqJQBpT4v+IpliIVa9nOxm5/6kPaXHYxNTy42Amut2DBi7QfMPnPhiVf6lOK8Doi1E8yQ==",
+      "resolved": "https://registry.simatic-ax.siemens.io/@ax/certificate-management/-/certificate-management-1.1.1.tgz",
+      "dependencies": {
+        "@ax/certificate-management-win-x64": "1.1.1",
+        "@ax/certificate-management-linux-x64": "1.1.1"
+      }
     },
     "@ax/hwc": {
       "name": "@ax/hwc",
@@ -103,9 +114,9 @@
     },
     "@ax/sld": {
       "name": "@ax/sld",
-      "version": "2.1.48",
-      "integrity": "sha512-PtMLVRWvL/agg4RhvKK3DlVqDPtIaURxEFYseosMiyeC04IzjVoAhJgSISSX3Lxv1Ev0WqSHoyVV/c2L5GTdjw==",
-      "resolved": "https://registry.simatic-ax.siemens.io/@ax/sld/-/sld-2.1.48.tgz",
+      "version": "2.5.5",
+      "integrity": "sha512-yZEvXjQL96TM9fRGU162S3hZPdE7Oxc/yIfmkC4mfGn9Vb9nIM5oZkOqGJWfwUK3XXtG7CmsgQH2GCS9Wop/IA==",
+      "resolved": "https://registry.simatic-ax.siemens.io/@ax/sld/-/sld-2.5.5.tgz",
       "cpu": [
         "x64"
       ],
@@ -183,6 +194,32 @@
       "version": "6.0.37",
       "integrity": "sha512-s9f+7HH/NopPgeddgxhDdUrHFVEldgPSlAJWPr0igEWqR5d05uaWpEOzYFl2ap9CvxQ6D+WnZ582qev1haeJ2w==",
       "resolved": "https://registry.simatic-ax.siemens.io/@ax/simatic-1500-clocks/-/simatic-1500-clocks-6.0.37.tgz",
+      "dependencies": {}
+    },
+    "@ax/certificate-management-win-x64": {
+      "name": "@ax/certificate-management-win-x64",
+      "version": "1.1.1",
+      "integrity": "sha512-1xfLLCXI26tj0Ovcbb9U6IaHV5hleZY06e9nrtbQD/fsmPDquTPOPZFfGj0BviiBAyrvv5gtqukNUbEeFdLGZw==",
+      "resolved": "https://registry.simatic-ax.siemens.io/@ax/certificate-management-win-x64/-/certificate-management-win-x64-1.1.1.tgz",
+      "os": [
+        "win32"
+      ],
+      "cpu": [
+        "x64"
+      ],
+      "dependencies": {}
+    },
+    "@ax/certificate-management-linux-x64": {
+      "name": "@ax/certificate-management-linux-x64",
+      "version": "1.1.1",
+      "integrity": "sha512-acQTT0273znGzf7RTm+IG0Z5gT4ifu1abprDyuiiWDY3BaN8Hir05RLrLyEPdOAPcC/Vx/PNDK0FSTXO+aseXg==",
+      "resolved": "https://registry.simatic-ax.siemens.io/@ax/certificate-management-linux-x64/-/certificate-management-linux-x64-1.1.1.tgz",
+      "os": [
+        "linux"
+      ],
+      "cpu": [
+        "x64"
+      ],
       "dependencies": {}
     },
     "@ax/system-strings": {
