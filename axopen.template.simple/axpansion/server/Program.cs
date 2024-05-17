@@ -17,6 +17,7 @@ using System.Reflection;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson.Serialization;
 using System.Diagnostics;
+using AXOpen.VisualComposer;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +31,8 @@ builder.Services.AddIxBlazorServices();
 builder.Services.AddAxoCoreServices();
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddVisualComposerService();
 
 #region AxoApplication
 
