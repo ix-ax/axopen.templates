@@ -2,9 +2,9 @@ name: "axosimple"
 version: '0.0.0-dev.0'
 type: app
 targets:
-  - plcsim
+  # - plcsim
   # - swcpu 
-  # - "1500"
+  - "1500"
   # - llvm
 registries:
   '@ix-ax': https://npm.pkg.github.com/
@@ -43,12 +43,15 @@ dependencies:
 variables:
   APAX_BUILD_ARGS: [ -d ]
   PLC_NAME: "plc_line"
+  HWCONFIG: "HWC"
   # Uncomment if you want overrite system variables
   AXTARGET: 192.168.0.4
-  AXTARGETPLATFORMINPUT: './bin/plcsim/'
-  AX_USERNAME: "adm"
-  MY_VERY_STRONG_PASSWORD: "1abcdss1364654aUOIREWNKSHDJFHK368924hlsdkfh@"
+  AXTARGETPLATFORMINPUT: .\bin\1500\
+  # AX_USERNAME: "$AX_USERNAME"
+  # AX_TARGET_PWD: "$AX_TARGET_PWD"
+  MY_VERY_STRONG_PASSWORD: $AX_TARGET_PWD
 scripts:
+  ci: apax clean apax install
   ixc:
     - dotnet tool restore --no-cache
     - dotnet ixc
@@ -80,62 +83,84 @@ scripts:
     mkdir -p ../axpansion/server/Pages/Context/Units/
     mv  ./src/$unitname/server/*.* ../axpansion/server/Pages/Context/Units/
     rm -rf ./src/$unitname/server/
-  download:
-    # Here you will need to set the argumen -t to your plc IP and -i to platfrom you are dowloading to
-    # --default-server-interface is a must if you are using WebAPI          
-    # - apax sld load -C ../.certs/Certificate.cer --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r
-    # - apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r
-    - apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r -C ./certs/$PLC_NAME/$PLC_NAME.cer
-  delta:
-    # Here you will need to set the argumen -t to your plc IP and -i to platfrom you are dowloading to
-    # --default-server-interface is a must if you are using WebAPI 
-    - apax build --ignore-scripts
-    # apax sld load -C ../.certs/Certificate.cer --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT --mode delta
-    - apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT --mode delta
-    # For proper execution of these scripts, the following variables need to be defined as environment variables or local variables.
-    # Local variables can override environment variables.
-    # It is highly recommended NOT to store secrets such as 'AX_USERNAME' and 'MY_VERY_STRONG_PASSWORD' in local variables.
-    # PLC_NAME: Name of the PLC (also equal to the PLC Profinet name)
-    # AX_USERNAME: Name of the PLC user used for WebAPI and HMI
-    # AXTARGET: IP address of the PLC
-    # AXTARGETPLATFORMINPUT: Folder of the compiled software to be downloaded to the PLC. Use the value ".\bin\plcsim\" in case PLCSIM is used. For an S7-1500 controller, use ".\bin\1500\"
-    # AXTARGETPLCSIMINSTANCE: Name of the PLCSIM instance to start. The instance must already exist.
-    # MY_VERY_STRONG_PASSWORD: Password for 'AX_USERNAME'
-    # PNIO_MAC: MAC address of the network adapter connected to the Profinet network  
-  plcsim: ..\\..\\scripts\\StartPlcSimAdvCli.exe #start PLCSIM
-
-  r: | #restart PLC
-    ..\\..\\scripts\\restart_PLC.sh $AXTARGET $PLC_NAME
-
-  dcpli: | # list all interfaces, used to discover MAC address of the adapter connected to PLC 
-    ..\\..\\scripts\\dcp_utility_list_interfaces.sh 
-
-  dcpd: | # discover all accesible devices connected to adapter with MAC address equal to entered MAC, used to discover MAC-addresses of the slaves
-    ..\\..\\scripts\\dcp_utility_discover.sh $PNIO_MAC
-
-  hdl: | #List configured harware and its state
-    ..\\..\\scripts\\hw_diag_list.sh $AXTARGET $PLC_NAME
-
-  ci: | #clean and install dependencies
-    apax clean
-    apax install
-
-  # reset_plc: ..\\scripts\\reset_plc.sh $AXTARGET
-  clean_plc: ..\\scripts\\clean_plc.sh $AXTARGET
-  ssc: ..\\scripts\\setup_secure_communication.sh $PLC_NAME $AX_USERNAME $MY_VERY_STRONG_PASSWORD
-  gsd: ..\\scripts\\copy_and_install_gsd.sh
-  hwl: ..\\scripts\\copy_hwl_templates.sh
-  hwid: ..\\scripts\\copy_hardware_ids.sh
-  hwfd: ..\\scripts\\hw_first_download.sh $PLC_NAME $AXTARGET $MY_VERY_STRONG_PASSWORD
-  hwu: ..\\scripts\\hw_update.sh $PLC_NAME $AXTARGET
-  swfd: ..\\scripts\\sw_build_and_download_full.sh $PLC_NAME $AXTARGET $AXTARGETPLATFORMINPUT
-  swdd: ..\\scripts\\sw_build_and_download_delta.sh $PLC_NAME $AXTARGET $AXTARGETPLATFORMINPUT
+  download: |
+    if [[ "$HWCONFIG" == "HWC" ]]; then
+      apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r -C ./certs/$PLC_NAME/$PLC_NAME.cer      
+    fi
+    if [[ "$HWCONFIG" == "TIA" ]]; then
+      apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r -C ./certs/TIA/Communication.cer      
+    fi   
+    if [[ "$HWCONFIG" == "TIA-NON-SECURE" ]]; then
+      apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r    
+    fi  
+  delta: |
+    apax build --ignore-scripts
+    if [[ "$HWCONFIG" == "HWC" ]]; then
+      apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -C ./certs/$PLC_NAME/$PLC_NAME.cer  --mode delta    
+    fi
+    if [[ "$HWCONFIG" == "TIA" ]]; then
+      apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -C ./certs/TIA/Communication.cer  --mode delta    
+    fi   
+    if [[ "$HWCONFIG" == "TIA-NON-SECURE" ]]; then
+      apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT --mode delta
+    fi      
+  r: ..\\scripts\\restart_PLC.sh $AXTARGET $PLC_NAME
+  dcpli: ..\\scripts\\dcp_utility_list_interfaces.sh
+  dcpd: ..\\scripts\\dcp_utility_discover.sh $PNIO_MAC
+  hdl: ..\\scripts\\hw_diag_list.sh $AXTARGET $PLC_NAME
+  clean_plc: |
+    if [[ "$HWCONFIG" == "HWC" ]]; then 
+      ..\\scripts\\clean_plc.sh $AXTARGET 
+    fi 
+  ssc: |
+    if 
+      [[ "$HWCONFIG" == "HWC" ]]; then ..\\scripts\\setup_secure_communication.sh $PLC_NAME $AX_USERNAME $AX_TARGET_PWD 
+    fi
+  gsd: |
+    if 
+      [[ "$HWCONFIG" == "HWC" ]]; then
+         ..\\scripts\\copy_and_install_gsd.sh 
+    fi
+  hwl: |
+    if [[ "$HWCONFIG" == "HWC" ]]; then
+      ..\\scripts\\copy_hwl_templates.sh 
+    fi
+  hwid: |
+    if [[ "$HWCONFIG" == "HWC" ]]; then 
+      ..\\scripts\\copy_hardware_ids.sh 
+    fi
+  hwfd: |
+    if [[ "$HWCONFIG" == "HWC" ]]; then 
+      ..\\scripts\\hw_first_download.sh $PLC_NAME $AXTARGET $AX_TARGET_PWD 
+    fi
+  hwu: |
+    if [[ "$HWCONFIG" == "HWC" ]]; then 
+      ..\\scripts\\hw_update.sh $PLC_NAME $AXTARGET 
+    fi
+  swfd: |
+    if [[ "$HWCONFIG" == "HWC" ]]; then 
+      ..\\scripts\\sw_build_and_download_full.sh $PLC_NAME $AXTARGET $AXTARGETPLATFORMINPUT 
+    fi
+  swdd: |
+    if [[ "$HWCONFIG" == "HWC" ]]; then 
+      ..\\scripts\\sw_build_and_download_delta.sh $PLC_NAME $AXTARGET $AXTARGETPLATFORMINPUT 
+    fi
   alf:
     - START=$(date +%s)
-    - ..\\scripts\\all_first.sh $PLC_NAME $AXTARGET $AXTARGETPLATFORMINPUT $AX_USERNAME $MY_VERY_STRONG_PASSWORD
+    - |
+      if 
+        [[ "$HWCONFIG" == "HWC" ]]; then 
+          ..\\scripts\\all_first.sh $PLC_NAME $AXTARGET $AXTARGETPLATFORMINPUT $AX_USERNAME $AX_TARGET_PWD 
+      fi
     - echo $(date +%D)"-"$(date +%H)":"$(date +%M)":"$(date +%S) " - Finished in :" $(expr $(date +%s) - $START) "s"
-
-  all: START=$(date +%s) ..\\scripts\\all.sh $PLC_NAME $AXTARGET $AXTARGETPLATFORMINPUT echo $(date +%D)"-"$(date +%H)":"$(date +%M)":"$(date +%S) " - Finished in :" $(expr $(date +%s) - $START) "s"
+  all:
+    - START=$(date +%s)
+    - |
+      if 
+        [[ "$HWCONFIG" == "HWC" ]]; then 
+          ..\\scripts\\all.sh $PLC_NAME $AXTARGET $AXTARGETPLATFORMINPUT 
+      fi
+    - echo $(date +%D)"-"$(date +%H)":"$(date +%M)":"$(date +%S) " - Finished in :" $(expr $(date +%s) - $START) "s"
 
 publicKeys:
   "@ix-ax": 30c06ef7830b4dfd8f16e003508da1ac2d187714d0e1f38279a9332cbe4e4e17
