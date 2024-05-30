@@ -22,8 +22,8 @@ namespace axosimple
     {
         public static string TargetIp { get; } = Environment.GetEnvironmentVariable("AXTARGET"); // <- replace by your IP 
 
-        private static string Pass => string.Empty;//Environment.GetEnvironmentVariable("AX_TARGET_PWD"); // <- Pass in the password that you have set up for the user. NOT AS PLAIN TEXT! Use user secrets instead.
-        private const string UserName = "Anonymous"; //<- replace by user name you have set up in your WebAPI settings        
+        private static string Pass => "1abcdss1364654aUOIREWNKSHDJFHK368924hlsdkfh@";//Environment.GetEnvironmentVariable("AX_TARGET_PWD"); // <- Pass in the password that you have set up for the user. NOT AS PLAIN TEXT! Use user secrets instead.
+        private const string UserName = "adm"; //<- replace by user name you have set up in your WebAPI settings        
 
         private const bool IgnoreSslErrors = true; // <- When you have your certificates in order set this to false.
 
@@ -35,7 +35,7 @@ namespace axosimple
         static string GetCertPath()
         {
             var fp = new FileInfo(Path.Combine(Assembly.GetExecutingAssembly().Location));
-            return Path.Combine(fp.DirectoryName, ".certs\\Certificate.cer");
+            return Path.Combine(fp.DirectoryName, ".certs\\plc_line.cer");
         }
 
         static X509Certificate2 customCertificate = new X509Certificate2(GetCertPath());

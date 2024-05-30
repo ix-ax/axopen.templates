@@ -44,8 +44,10 @@ variables:
   APAX_BUILD_ARGS: [ -d ]
   PLC_NAME: "plc_line"
   # Uncomment if you want overrite system variables
-  # AXTARGET: 10.10.10.116
+  AXTARGET: 192.168.0.4
   AXTARGETPLATFORMINPUT: './bin/plcsim/'
+  AX_USERNAME: "adm"
+  MY_VERY_STRONG_PASSWORD: "1abcdss1364654aUOIREWNKSHDJFHK368924hlsdkfh@"
 scripts:
   ixc:
     - dotnet tool restore --no-cache
@@ -82,7 +84,8 @@ scripts:
     # Here you will need to set the argumen -t to your plc IP and -i to platfrom you are dowloading to
     # --default-server-interface is a must if you are using WebAPI          
     # - apax sld load -C ../.certs/Certificate.cer --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r
-    - apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r
+    # - apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r
+    - apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r -C ./certs/$PLC_NAME/$PLC_NAME.cer
   delta:
     # Here you will need to set the argumen -t to your plc IP and -i to platfrom you are dowloading to
     # --default-server-interface is a must if you are using WebAPI 
@@ -127,9 +130,12 @@ scripts:
   hwu: ..\\scripts\\hw_update.sh $PLC_NAME $AXTARGET
   swfd: ..\\scripts\\sw_build_and_download_full.sh $PLC_NAME $AXTARGET $AXTARGETPLATFORMINPUT
   swdd: ..\\scripts\\sw_build_and_download_delta.sh $PLC_NAME $AXTARGET $AXTARGETPLATFORMINPUT
-  alf: START=$(date +%s) ..\\scripts\\all_first.sh $PLC_NAME $AXTARGET $AXTARGETPLATFORMINPUT $AX_USERNAME $MY_VERY_STRONG_PASSWORD echo $(date +%D)"-"$(date +%H)":"$(date +%M)":"$(date +%S) " - Finished in :" $(expr $(date +%s) - $START) "s"
+  alf:
+    - START=$(date +%s)
+    - ..\\scripts\\all_first.sh $PLC_NAME $AXTARGET $AXTARGETPLATFORMINPUT $AX_USERNAME $MY_VERY_STRONG_PASSWORD
+    - echo $(date +%D)"-"$(date +%H)":"$(date +%M)":"$(date +%S) " - Finished in :" $(expr $(date +%s) - $START) "s"
 
-  all: START=$(date +%s) ..\\..\\scripts\\all.sh $PLC_NAME $AXTARGET $AXTARGETPLATFORMINPUT echo $(date +%D)"-"$(date +%H)":"$(date +%M)":"$(date +%S) " - Finished in :" $(expr $(date +%s) - $START) "s"
+  all: START=$(date +%s) ..\\scripts\\all.sh $PLC_NAME $AXTARGET $AXTARGETPLATFORMINPUT echo $(date +%D)"-"$(date +%H)":"$(date +%M)":"$(date +%S) " - Finished in :" $(expr $(date +%s) - $START) "s"
 
 publicKeys:
   "@ix-ax": 30c06ef7830b4dfd8f16e003508da1ac2d187714d0e1f38279a9332cbe4e4e17

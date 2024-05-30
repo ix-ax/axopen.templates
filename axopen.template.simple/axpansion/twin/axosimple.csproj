@@ -13,15 +13,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Folder Include=".certs\" />
 		<Folder Include=".meta\" />
 		<Content Include=".meta\**" />
 		<Compile Include="..\..\ax\src\templates\starterunit\twin\StarterUnitTemplate.cs" Link="Context\Units\StarterUnitTemplate.cs" />
 		<Compile Include="..\..\ax\src\templates\unit\twin\UnitTemplateServices.cs" Link="Context\Units\UnitTemplateServices.cs" />
-		<Folder Include=".certs\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="..\..\.certs\Certificate.cer" Link=".certs\Certificate.cer">
+	  <None Include="..\..\ax\certs\plc_line\plc_line.cer" Link=".certs\plc_line.cer">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>
