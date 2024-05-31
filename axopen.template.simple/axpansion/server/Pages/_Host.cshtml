@@ -6,18 +6,17 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="@(Request.Cookies["themeDark"] == "dark" ? "dark" : "light")">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="~/" />
 
+    <link rel="stylesheet" href="~/css/bootstrap/bootstrap.min.css" />
+
     @*Custom Bootstrap*@
     @switch (Request.Cookies["theme"])
     {
-        case "Bootstrap":
-            <link rel="stylesheet" href="~/css/custom/bootstrap_default_custom.css" />
-            break;
         case "MTS":
             <link rel="stylesheet" href="~/css/custom/mts.css" />
             break;
@@ -28,7 +27,6 @@
             <link rel="stylesheet" href="~/css/custom/jupiter.css" />
             break;
         default:
-            <link rel="stylesheet" href="~/css/custom/bootstrap_default_custom.css" />
             break;
     }
 

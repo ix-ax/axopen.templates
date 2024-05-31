@@ -10,16 +10,22 @@
     }
 </select>
 
+<label>@Localizer["Choose a theme"]</label>
+<select class="form-control" @bind="ThemeDark" @bind:event="oninput">
+    <option value="light">light</option>
+    <option value="dark">dark</option>
+</select>
+
 <div class="ms-auto">
-        <select class="form-control" @bind="Culture" @bind:event="oninput">
-            @foreach (var culture in supportedCultures)
-            {
-                <option data value="@culture">@culture.NativeName</option>
-            }
-        </select>
-    </div>
+    <select class="form-control" @bind="Culture" @bind:event="oninput">
+        @foreach (var culture in supportedCultures)
+        {
+            <option data value="@culture">@culture.NativeName</option>
+        }
+    </select>
+</div>
 @code {
-    
+
     private CultureInfo[] supportedCultures = new[]
     {
         new CultureInfo("en-US"),
@@ -41,7 +47,7 @@
         }
     }
 
-    
+
     [Inject]
     IHttpContextAccessor HttpContextAccessor { get; set; }
 
@@ -76,9 +82,32 @@
         }
     }
 
+    private string themeDark;
+    public string ThemeDark
+    {
+        get => themeDark;
+        set
+        {
+            // Prevent initial navigation (causes error)
+            if (themeDark == null)
+            {
+                themeDark = value;
+                return;
+            }
+
+            // Prevent unnecessary navigation
+            if (themeDark != value)
+            {
+                themeDark = value;
+                NavigationManager.NavigateTo($"/themeDark?theme={themeDark}", true);
+            }
+        }
+    }
+
     protected override void OnInitialized()
     {
         Theme = HttpContextAccessor.HttpContext.Request.Cookies["theme"] ?? defaultTheme;
+        ThemeDark = HttpContextAccessor.HttpContext.Request.Cookies["themeDark"] ?? "light";
         Culture = CultureInfo.CurrentCulture;
     }
 }
