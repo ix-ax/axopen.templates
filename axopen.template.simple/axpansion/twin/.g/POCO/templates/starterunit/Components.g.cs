@@ -2,7 +2,7 @@ using System;
 
 namespace Pocos
 {
-    namespace axosimple.UnitTemplate
+    namespace axosimple.StarterUnitTemplate
     {
         public partial class Components : AXOpen.Core.AxoObject, AXSharp.Connector.IPlain
         {

@@ -1,4 +1,4 @@
-NAMESPACE axosimple.UnitTemplate
+NAMESPACE axosimple.StarterUnitTemplate
     USING axosimple;
     USING AXOpen.Data;
     USING AXOpen.Core;
@@ -13,20 +13,18 @@ NAMESPACE axosimple.UnitTemplate
         VAR PUBLIC
             // HERE DECLARE COMPONENTS USED BY THIS CONTROLLED UNIT           
         END_VAR
-
         
         METHOD PUBLIC Update
             VAR_INPUT
-                parent : IAxoObject;
-                Inputs : ref_to axosimple.Inputs; // must be a ref_to due to arrays in components
-                Outputs : ref_to axosimple.Outputs;
+                parent : AXOpen.Core.IAxoObject;
             END_VAR
-            THIS.Initialize(parent);
-            
+            VAR_IN_OUT
+                Inputs : axosimple.Inputs;
+                Outputs : axosimple.Outputs;
+            END_VAR
             THIS.Initialize(parent);
             // HERE INITIALIZE YOUR COMPONENTS
             ;
-            
         END_METHOD
     END_CLASS
 END_NAMESPACE    

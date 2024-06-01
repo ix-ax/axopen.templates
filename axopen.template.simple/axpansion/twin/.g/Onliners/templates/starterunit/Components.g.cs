@@ -4,7 +4,7 @@ using AXSharp.Connector.ValueTypes;
 using System.Collections.Generic;
 using AXSharp.Connector.Localizations;
 
-namespace axosimple.UnitTemplate
+namespace axosimple.StarterUnitTemplate
 {
     public partial class Components : AXOpen.Core.AxoObject
     {
@@ -22,9 +22,9 @@ namespace axosimple.UnitTemplate
             return await (dynamic)this.OnlineToPlainAsync();
         }
 
-        public new async Task<Pocos.axosimple.UnitTemplate.Components> OnlineToPlainAsync()
+        public new async Task<Pocos.axosimple.StarterUnitTemplate.Components> OnlineToPlainAsync()
         {
-            Pocos.axosimple.UnitTemplate.Components plain = new Pocos.axosimple.UnitTemplate.Components();
+            Pocos.axosimple.StarterUnitTemplate.Components plain = new Pocos.axosimple.StarterUnitTemplate.Components();
             await this.ReadAsync<IgnoreOnPocoOperation>();
 #pragma warning disable CS0612
             await base._OnlineToPlainNoacAsync(plain);
@@ -34,9 +34,9 @@ namespace axosimple.UnitTemplate
 
         [Obsolete("This method should not be used if you indent to access the controllers data. Use `OnlineToPlain` instead.")]
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-        public new async Task<Pocos.axosimple.UnitTemplate.Components> _OnlineToPlainNoacAsync()
+        public new async Task<Pocos.axosimple.StarterUnitTemplate.Components> _OnlineToPlainNoacAsync()
         {
-            Pocos.axosimple.UnitTemplate.Components plain = new Pocos.axosimple.UnitTemplate.Components();
+            Pocos.axosimple.StarterUnitTemplate.Components plain = new Pocos.axosimple.StarterUnitTemplate.Components();
 #pragma warning disable CS0612
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
@@ -45,7 +45,7 @@ namespace axosimple.UnitTemplate
 
         [Obsolete("This method should not be used if you indent to access the controllers data. Use `OnlineToPlain` instead.")]
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-        protected async Task<Pocos.axosimple.UnitTemplate.Components> _OnlineToPlainNoacAsync(Pocos.axosimple.UnitTemplate.Components plain)
+        protected async Task<Pocos.axosimple.StarterUnitTemplate.Components> _OnlineToPlainNoacAsync(Pocos.axosimple.StarterUnitTemplate.Components plain)
         {
 #pragma warning disable CS0612
             await base._OnlineToPlainNoacAsync(plain);
@@ -58,7 +58,7 @@ namespace axosimple.UnitTemplate
             await this.PlainToOnlineAsync((dynamic)plain);
         }
 
-        public async Task<IEnumerable<ITwinPrimitive>> PlainToOnlineAsync(Pocos.axosimple.UnitTemplate.Components plain)
+        public async Task<IEnumerable<ITwinPrimitive>> PlainToOnlineAsync(Pocos.axosimple.StarterUnitTemplate.Components plain)
         {
             await base._PlainToOnlineNoacAsync(plain);
             return await this.WriteAsync<IgnoreOnPocoOperation>();
@@ -66,7 +66,7 @@ namespace axosimple.UnitTemplate
 
         [Obsolete("This method should not be used if you indent to access the controllers data. Use `PlainToOnline` instead.")]
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-        public async Task _PlainToOnlineNoacAsync(Pocos.axosimple.UnitTemplate.Components plain)
+        public async Task _PlainToOnlineNoacAsync(Pocos.axosimple.StarterUnitTemplate.Components plain)
         {
             await base._PlainToOnlineNoacAsync(plain);
         }
@@ -76,14 +76,14 @@ namespace axosimple.UnitTemplate
             return await (dynamic)this.ShadowToPlainAsync();
         }
 
-        public new async Task<Pocos.axosimple.UnitTemplate.Components> ShadowToPlainAsync()
+        public new async Task<Pocos.axosimple.StarterUnitTemplate.Components> ShadowToPlainAsync()
         {
-            Pocos.axosimple.UnitTemplate.Components plain = new Pocos.axosimple.UnitTemplate.Components();
+            Pocos.axosimple.StarterUnitTemplate.Components plain = new Pocos.axosimple.StarterUnitTemplate.Components();
             await base.ShadowToPlainAsync(plain);
             return plain;
         }
 
-        protected async Task<Pocos.axosimple.UnitTemplate.Components> ShadowToPlainAsync(Pocos.axosimple.UnitTemplate.Components plain)
+        protected async Task<Pocos.axosimple.StarterUnitTemplate.Components> ShadowToPlainAsync(Pocos.axosimple.StarterUnitTemplate.Components plain)
         {
             await base.ShadowToPlainAsync(plain);
             return plain;
@@ -94,7 +94,7 @@ namespace axosimple.UnitTemplate
             await this.PlainToShadowAsync((dynamic)plain);
         }
 
-        public async Task<IEnumerable<ITwinPrimitive>> PlainToShadowAsync(Pocos.axosimple.UnitTemplate.Components plain)
+        public async Task<IEnumerable<ITwinPrimitive>> PlainToShadowAsync(Pocos.axosimple.StarterUnitTemplate.Components plain)
         {
             await base.PlainToShadowAsync(plain);
             return this.RetrievePrimitives();
@@ -110,7 +110,7 @@ namespace axosimple.UnitTemplate
         ///Compares if the current plain object has changed from the previous object.This method is used by the framework to determine if the object has changed and needs to be updated.
         ///[!NOTE] Any member in the hierarchy that is ignored by the compilers (e.g. when CompilerOmitAttribute is used) will not be compared, and therefore will not be detected as changed.
         ///</summary>
-        public new async Task<bool> DetectsAnyChangeAsync(Pocos.axosimple.UnitTemplate.Components plain, Pocos.axosimple.UnitTemplate.Components latest = null)
+        public new async Task<bool> DetectsAnyChangeAsync(Pocos.axosimple.StarterUnitTemplate.Components plain, Pocos.axosimple.StarterUnitTemplate.Components latest = null)
         {
             if (latest == null)
                 latest = await this._OnlineToPlainNoacAsync();
@@ -129,9 +129,9 @@ namespace axosimple.UnitTemplate
             this.RetrievePrimitives().ToList().ForEach(x => x.Poll());
         }
 
-        public new Pocos.axosimple.UnitTemplate.Components CreateEmptyPoco()
+        public new Pocos.axosimple.StarterUnitTemplate.Components CreateEmptyPoco()
         {
-            return new Pocos.axosimple.UnitTemplate.Components();
+            return new Pocos.axosimple.StarterUnitTemplate.Components();
         }
     }
 }

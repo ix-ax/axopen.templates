@@ -11,8 +11,6 @@
       "@ix-ax/axopen.inspectors": "0.0.0-dev.0",
       "@ix-ax/axopen.components.elements": "0.0.0-dev.0",
       "@ix-ax/axopen.components.pneumatics": "0.0.0-dev.0",
-      "@ix-ax/axopen.components.cognex.vision": "0.0.0-dev.0",
-      "@ix-ax/axopen.components.ur.robotics": "0.0.0-dev.0",
       "@ix-ax/axopen.simatic1500": "0.0.0-dev.0",
       "@ax/certificate-management": "^1.1.1"
     },
@@ -31,12 +29,12 @@
     },
     "@ax/certificate-management": {
       "name": "@ax/certificate-management",
-      "version": "1.1.1",
-      "integrity": "sha512-iGWHocZp+OAdQBQ2XFqJQBpT4v+IpliIVa9nOxm5/6kPaXHYxNTy42Amut2DBi7QfMPnPhiVf6lOK8Doi1E8yQ==",
-      "resolved": "https://registry.simatic-ax.siemens.io/@ax/certificate-management/-/certificate-management-1.1.1.tgz",
+      "version": "1.1.2",
+      "integrity": "sha512-BBEJUjE+WjldDxzeCdVBTXkXtWEO3HK+fdS1frKiIOqmmpeAGfJ01P0qRhNcdzF+ORApQvkBBYorP9Son0nUWA==",
+      "resolved": "https://registry.simatic-ax.siemens.io/@ax/certificate-management/-/certificate-management-1.1.2.tgz",
       "dependencies": {
-        "@ax/certificate-management-win-x64": "1.1.1",
-        "@ax/certificate-management-linux-x64": "1.1.1"
+        "@ax/certificate-management-win-x64": "1.1.2",
+        "@ax/certificate-management-linux-x64": "1.1.2"
       }
     },
     "@ax/hwc": {
@@ -85,39 +83,39 @@
     },
     "@ax/mod": {
       "name": "@ax/mod",
-      "version": "1.1.2",
-      "integrity": "sha512-h1QdEg6UJcKFa6rCr6BgMSliqnlgpJq1uq4f8o05U/aoc0BdO2F93ReqMGGCeR+0nMjxRfmGf9fRrroXAxDH7A==",
-      "resolved": "https://registry.simatic-ax.siemens.io/@ax/mod/-/mod-1.1.2.tgz",
+      "version": "1.2.2",
+      "integrity": "sha512-X5hmfil9iQoe7s+8hxUN90n9+x7RGMaCJ5an2xP6t3Ch1BolhoPe5oZPt79z/4p1kXIef4bO7/7l5cNoVf1INA==",
+      "resolved": "https://registry.simatic-ax.siemens.io/@ax/mod/-/mod-1.2.2.tgz",
       "dependencies": {
-        "@ax/mod-win-x64": "1.1.2",
-        "@ax/mod-linux-x64": "1.1.2"
+        "@ax/mod-win-x64": "1.2.2",
+        "@ax/mod-linux-x64": "1.2.2"
       }
     },
     "@ax/mon": {
       "name": "@ax/mon",
-      "version": "1.1.2",
-      "integrity": "sha512-KMMxXTmAuwkvqroapb7qisRxnFvARHvZjahbtGMwcYveWa90NNLpatG2FJ03Op9VQk8MXXXV6o2LXQT/rJQFMg==",
-      "resolved": "https://registry.simatic-ax.siemens.io/@ax/mon/-/mon-1.1.2.tgz",
+      "version": "1.2.2",
+      "integrity": "sha512-JPI5kMod5iNwVHX7HmW7+VP6CC9MpLH/vSPWBMWOqwO5egl82BJ7bzjBvqs8cxLGUg0DXLph39f5kxLeH+hZLg==",
+      "resolved": "https://registry.simatic-ax.siemens.io/@ax/mon/-/mon-1.2.2.tgz",
       "dependencies": {
-        "@ax/mon-win-x64": "1.1.2",
-        "@ax/mon-linux-x64": "1.1.2"
+        "@ax/mon-win-x64": "1.2.2",
+        "@ax/mon-linux-x64": "1.2.2"
       }
     },
     "@ax/sdb": {
       "name": "@ax/sdb",
-      "version": "1.1.2",
-      "integrity": "sha512-/f2BeQtS7P/oMGnn6uVqWMUXGOJ5qp8ULa3rz6sVCIp4qOwCtZr4p+wBR9+BFpnlzqB/FpXNPnrKbq1cCC+soQ==",
-      "resolved": "https://registry.simatic-ax.siemens.io/@ax/sdb/-/sdb-1.1.2.tgz",
+      "version": "1.2.2",
+      "integrity": "sha512-Yi8STvJfVnP2ucIcySe8K0wWhfb0nNCSgDvcHan9Yr6pbYibmfLu0VaaJ/rvxIrP882Ssu2QNoDXdmKfYFmDEA==",
+      "resolved": "https://registry.simatic-ax.siemens.io/@ax/sdb/-/sdb-1.2.2.tgz",
       "dependencies": {
-        "@ax/sdb-win-x64": "1.1.2",
-        "@ax/sdb-linux-x64": "1.1.2"
+        "@ax/sdb-win-x64": "1.2.2",
+        "@ax/sdb-linux-x64": "1.2.2"
       }
     },
     "@ax/sld": {
       "name": "@ax/sld",
-      "version": "2.5.5",
-      "integrity": "sha512-yZEvXjQL96TM9fRGU162S3hZPdE7Oxc/yIfmkC4mfGn9Vb9nIM5oZkOqGJWfwUK3XXtG7CmsgQH2GCS9Wop/IA==",
-      "resolved": "https://registry.simatic-ax.siemens.io/@ax/sld/-/sld-2.5.5.tgz",
+      "version": "2.5.6",
+      "integrity": "sha512-o/yd/POIqXB8Ov0CUYddrDVzLnOH7iPrld+OE/hn/oI9r8S8EKqfK6dgImMsjvBx9MZKOxoT5K2k7lhXu8pzpA==",
+      "resolved": "https://registry.simatic-ax.siemens.io/@ax/sld/-/sld-2.5.6.tgz",
       "cpu": [
         "x64"
       ],
@@ -179,36 +177,13 @@
     },
     "@ax/plc-info": {
       "name": "@ax/plc-info",
-      "version": "2.3.0",
-      "integrity": "sha512-k+iOi1eUpVW5xBXRvdqS6Qj+ju2wQMsZIAZDvz32NDSv6HoAUTwMIEB5BA6xv9plRr1zi3jn99plslUshCEFPQ==",
-      "resolved": "https://registry.simatic-ax.siemens.io/@ax/plc-info/-/plc-info-2.3.0.tgz",
+      "version": "2.4.0",
+      "integrity": "sha512-dOdzSN7yGCdLeKv1ET1BWlNqg+mskhNoe4WYmOA25Dq5OWvkgCnnHGjjRgo7bw4ZGWctPzE/vKjlX9diNAa6Og==",
+      "resolved": "https://registry.simatic-ax.siemens.io/@ax/plc-info/-/plc-info-2.4.0.tgz",
       "dependencies": {
-        "@ax/plc-info-linux-x64": "2.3.0",
-        "@ax/plc-info-win-x64": "2.3.0"
+        "@ax/plc-info-linux-x64": "2.4.0",
+        "@ax/plc-info-win-x64": "2.4.0"
       }
-    },
-    "@ax/system-serde": {
-      "name": "@ax/system-serde",
-      "version": "6.0.94",
-      "integrity": "sha512-Hx8HbgjGqCMDmimWoxKCoYW93EbwkwwVmmJxh1VCKwjp4AAzgeOhRusTXFGTLq7YnMcl4ZngWIwHDjzy9M0DDA==",
-      "resolved": "https://registry.simatic-ax.siemens.io/@ax/system-serde/-/system-serde-6.0.94.tgz",
-      "dependencies": {
-        "@ax/system-strings": "6.0.94"
-      }
-    },
-    "@ax/simatic-1500-distributedio": {
-      "name": "@ax/simatic-1500-distributedio",
-      "version": "6.0.3",
-      "integrity": "sha512-4/yWGeDIMIO9pEKMCJvjB7za4XVUKOystA7iUIaANqOBAmh/2K6KlTND4AwzNDQ/FD8E/SYk3Y1nzhrAtNmmRA==",
-      "resolved": "https://registry.simatic-ax.siemens.io/@ax/simatic-1500-distributedio/-/simatic-1500-distributedio-6.0.3.tgz",
-      "dependencies": {}
-    },
-    "@ax/simatic-1500-diagnostics-hardware": {
-      "name": "@ax/simatic-1500-diagnostics-hardware",
-      "version": "6.0.1",
-      "integrity": "sha512-dlXC0JuAXxQ+E8hIlMbixEPBFe/qXIrt3zD05YJh5MyQtEECsNk4NkCoMuUC0HXYLPgiG6HVLDT8Gf7CoXZ9Bg==",
-      "resolved": "https://registry.simatic-ax.siemens.io/@ax/simatic-1500-diagnostics-hardware/-/simatic-1500-diagnostics-hardware-6.0.1.tgz",
-      "dependencies": {}
     },
     "@ax/simatic-1500-clocks": {
       "name": "@ax/simatic-1500-clocks",
@@ -721,32 +696,6 @@
         "@ix-ax/axopen.components.abstractions": "0.0.0-dev.0"
       }
     },
-    "@ix-ax/axopen.components.cognex.vision": {
-      "version": "0.0.0-dev.0",
-      "dir": "..\\..\\..\\axopen\\src\\components.cognex.vision\\ctrl",
-      "dependencies": {
-        "@ix-ax/axopen.components.abstractions": "0.0.0-dev.0",
-        "@ix-ax/axopen.utils": "0.0.0-dev.0",
-        "@ax/system-serde": "^6.0.94",
-        "@ix-ax/axopen.io": "0.0.0-dev.0",
-        "@ax/simatic-1500-distributedio": "^6.0.3",
-        "@ax/simatic-1500-diagnostics-hardware": "^6.0.1"
-      }
-    },
-    "@ix-ax/axopen.components.ur.robotics": {
-      "version": "0.0.0-dev.0",
-      "dir": "..\\..\\..\\axopen\\src\\components.ur.robotics\\ctrl",
-      "dependencies": {
-        "@ix-ax/axopen.components.abstractions": "0.0.0-dev.0",
-        "@ix-ax/axopen.core": "0.0.0-dev.0",
-        "@ix-ax/axopen.timers": "0.0.0-dev.0",
-        "@ix-ax/axopen.abstractions": "0.0.0-dev.0",
-        "@ix-ax/axopen.components.robotics": "0.0.0-dev.0",
-        "@ix-ax/axopen.io": "0.0.0-dev.0",
-        "@ax/simatic-1500-distributedio": "^6.0.3",
-        "@ax/simatic-1500-diagnostics-hardware": "^6.0.1"
-      }
-    },
     "@ix-ax/axopen.simatic1500": {
       "version": "0.0.0-dev.0",
       "dir": "..\\..\\..\\axopen\\src\\simatic1500\\ctrl",
@@ -772,32 +721,6 @@
         "@ix-ax/axopen.abstractions": "0.0.0-dev.0"
       }
     },
-    "@ix-ax/axopen.utils": {
-      "version": "0.0.0-dev.0",
-      "dir": "..\\..\\..\\axopen\\src\\utils\\ctrl",
-      "dependencies": {
-        "@ax/system-serde": "^6.0.94",
-        "@ax/system-strings": "^6.0.94"
-      }
-    },
-    "@ix-ax/axopen.io": {
-      "version": "0.0.0-dev.0",
-      "dir": "..\\..\\..\\axopen\\src\\io\\ctrl",
-      "dependencies": {
-        "@ix-ax/axopen.components.abstractions": "0.0.0-dev.0",
-        "@ix-ax/axopen.core": "0.0.0-dev.0",
-        "@ix-ax/axopen.timers": "0.0.0-dev.0",
-        "@ix-ax/axopen.abstractions": "0.0.0-dev.0",
-        "@ax/simatic-1500-diagnostics-hardware": "^6.0.1"
-      }
-    },
-    "@ix-ax/axopen.timers": {
-      "version": "0.0.0-dev.0",
-      "dir": "..\\..\\..\\axopen\\src\\timers\\ctrl",
-      "dependencies": {
-        "@ix-ax/axopen.abstractions": "0.0.0-dev.0"
-      }
-    },
     "@ix-ax/axopen.abstractions": {
       "version": "0.0.0-dev.0",
       "dir": "..\\..\\..\\axopen\\src\\abstractions\\ctrl",
@@ -805,15 +728,11 @@
         "@ax/system-strings": "^6.0.94"
       }
     },
-    "@ix-ax/axopen.components.robotics": {
+    "@ix-ax/axopen.timers": {
       "version": "0.0.0-dev.0",
-      "dir": "..\\..\\..\\axopen\\src\\components.robotics\\ctrl",
+      "dir": "..\\..\\..\\axopen\\src\\timers\\ctrl",
       "dependencies": {
-        "@ix-ax/axopen.components.abstractions": "0.0.0-dev.0",
-        "@ix-ax/axopen.core": "0.0.0-dev.0",
-        "@ix-ax/axopen.timers": "0.0.0-dev.0",
-        "@ix-ax/axopen.abstractions": "0.0.0-dev.0",
-        "@ax/system-math": "^6.0.94"
+        "@ix-ax/axopen.abstractions": "0.0.0-dev.0"
       }
     }
   }
