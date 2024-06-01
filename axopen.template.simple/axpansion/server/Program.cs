@@ -17,12 +17,14 @@ using System.Reflection;
 using AXOpen.VisualComposer;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson.Serialization;
+using System.Diagnostics;
+using AXOpen.VisualComposer;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.ConfigureAxBlazorSecurity(SetUpUserRepositories(), Roles.CreateRoles());
+builder.Services.ConfigureAxBlazorSecurity(SetUpUserRepositories(), Roles.CreateRoles(),true);
 builder.Services.AddLocalization();
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
@@ -113,7 +115,24 @@ static (IRepository<User>, IRepository<Group>) SetUpUserRepositories()
 {
     var MongoConnectionString = "mongodb://localhost:27017";
     var MongoDatabaseName = "axosimple";
+    var MongoExePath = "C:\\Program Files\\MongoDB\\Server\\7.0\\bin\\mongod.exe";
+    var MongoDbPath = "D:\\DATA\\DB6\\";
 
+    try
+    {
+        var processes = Process.GetProcessesByName("mongod");
+        foreach (Process process in processes)
+        {
+            process.Kill(); 
+        }
+        Process.Start(MongoExePath, $" --dbpath {MongoDbPath} --bind_ip_all");
+    }
+    catch (Exception e)
+    {
+
+        throw e;
+    }
+    
     IRepository<User> userRepo      = Repository.Factory<User>(new MongoDbRepositorySettings<User>(MongoConnectionString, MongoDatabaseName, "Users", idExpression: t => t.Id));
     IRepository<Group> groupRepo    = Repository.Factory<Group>(new MongoDbRepositorySettings<Group>(MongoConnectionString, MongoDatabaseName, "Groups"));
     return (userRepo, groupRepo);
