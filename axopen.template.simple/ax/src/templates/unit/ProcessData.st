@@ -8,13 +8,10 @@ NAMESPACE axosimple.UnitTemplate
     CLASS ProcessData
         EXTENDS AXOpen.Data.AxoDataEntity
         VAR PUBLIC
-
-            Header : axosimple.UnitHeader;
-
-            JigDataMatrixCode   : AXOpen.Inspectors.AxoDataInspector;
-            PartPresence        : AXOpen.Inspectors.AxoDigitalInspector;
-            RivetingPreasure    : AXOpen.Inspectors.AxoAnalogueInspector;
-            
+            Header : axosimple.UnitHeader;            
+            DimX    : AXOpen.Inspectors.AxoAnalogueInspector;
+            DimY    : AXOpen.Inspectors.AxoAnalogueInspector;
+            DimZ    : AXOpen.Inspectors.AxoAnalogueInspector;            
         END_VAR
     END_CLASS
 END_NAMESPACE    

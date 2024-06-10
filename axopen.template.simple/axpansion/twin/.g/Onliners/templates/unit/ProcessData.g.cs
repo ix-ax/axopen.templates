@@ -10,11 +10,11 @@ namespace axosimple.UnitTemplate
     {
         public axosimple.UnitHeader Header { get; }
 
-        public AXOpen.Inspectors.AxoDataInspector JigDataMatrixCode { get; }
+        public AXOpen.Inspectors.AxoAnalogueInspector DimX { get; }
 
-        public AXOpen.Inspectors.AxoDigitalInspector PartPresence { get; }
+        public AXOpen.Inspectors.AxoAnalogueInspector DimY { get; }
 
-        public AXOpen.Inspectors.AxoAnalogueInspector RivetingPreasure { get; }
+        public AXOpen.Inspectors.AxoAnalogueInspector DimZ { get; }
 
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
@@ -23,9 +23,9 @@ namespace axosimple.UnitTemplate
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
             PreConstruct(parent, readableTail, symbolTail);
             Header = new axosimple.UnitHeader(this, "Header", "Header");
-            JigDataMatrixCode = new AXOpen.Inspectors.AxoDataInspector(this, "JigDataMatrixCode", "JigDataMatrixCode");
-            PartPresence = new AXOpen.Inspectors.AxoDigitalInspector(this, "PartPresence", "PartPresence");
-            RivetingPreasure = new AXOpen.Inspectors.AxoAnalogueInspector(this, "RivetingPreasure", "RivetingPreasure");
+            DimX = new AXOpen.Inspectors.AxoAnalogueInspector(this, "DimX", "DimX");
+            DimY = new AXOpen.Inspectors.AxoAnalogueInspector(this, "DimY", "DimY");
+            DimZ = new AXOpen.Inspectors.AxoAnalogueInspector(this, "DimZ", "DimZ");
             PostConstruct(parent, readableTail, symbolTail);
         }
 
@@ -45,13 +45,13 @@ namespace axosimple.UnitTemplate
             plain.Header = await Header._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.JigDataMatrixCode = await JigDataMatrixCode._OnlineToPlainNoacAsync();
+            plain.DimX = await DimX._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.PartPresence = await PartPresence._OnlineToPlainNoacAsync();
+            plain.DimY = await DimY._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.RivetingPreasure = await RivetingPreasure._OnlineToPlainNoacAsync();
+            plain.DimZ = await DimZ._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -68,13 +68,13 @@ namespace axosimple.UnitTemplate
             plain.Header = await Header._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.JigDataMatrixCode = await JigDataMatrixCode._OnlineToPlainNoacAsync();
+            plain.DimX = await DimX._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.PartPresence = await PartPresence._OnlineToPlainNoacAsync();
+            plain.DimY = await DimY._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.RivetingPreasure = await RivetingPreasure._OnlineToPlainNoacAsync();
+            plain.DimZ = await DimZ._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -90,13 +90,13 @@ namespace axosimple.UnitTemplate
             plain.Header = await Header._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.JigDataMatrixCode = await JigDataMatrixCode._OnlineToPlainNoacAsync();
+            plain.DimX = await DimX._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.PartPresence = await PartPresence._OnlineToPlainNoacAsync();
+            plain.DimY = await DimY._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.RivetingPreasure = await RivetingPreasure._OnlineToPlainNoacAsync();
+            plain.DimZ = await DimZ._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -113,13 +113,13 @@ namespace axosimple.UnitTemplate
             await this.Header._PlainToOnlineNoacAsync(plain.Header);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this.JigDataMatrixCode._PlainToOnlineNoacAsync(plain.JigDataMatrixCode);
+            await this.DimX._PlainToOnlineNoacAsync(plain.DimX);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this.PartPresence._PlainToOnlineNoacAsync(plain.PartPresence);
+            await this.DimY._PlainToOnlineNoacAsync(plain.DimY);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this.RivetingPreasure._PlainToOnlineNoacAsync(plain.RivetingPreasure);
+            await this.DimZ._PlainToOnlineNoacAsync(plain.DimZ);
 #pragma warning restore CS0612
             return await this.WriteAsync<IgnoreOnPocoOperation>();
         }
@@ -133,13 +133,13 @@ namespace axosimple.UnitTemplate
             await this.Header._PlainToOnlineNoacAsync(plain.Header);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this.JigDataMatrixCode._PlainToOnlineNoacAsync(plain.JigDataMatrixCode);
+            await this.DimX._PlainToOnlineNoacAsync(plain.DimX);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this.PartPresence._PlainToOnlineNoacAsync(plain.PartPresence);
+            await this.DimY._PlainToOnlineNoacAsync(plain.DimY);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this.RivetingPreasure._PlainToOnlineNoacAsync(plain.RivetingPreasure);
+            await this.DimZ._PlainToOnlineNoacAsync(plain.DimZ);
 #pragma warning restore CS0612
         }
 
@@ -153,9 +153,9 @@ namespace axosimple.UnitTemplate
             Pocos.axosimple.UnitTemplate.ProcessData plain = new Pocos.axosimple.UnitTemplate.ProcessData();
             await base.ShadowToPlainAsync(plain);
             plain.Header = await Header.ShadowToPlainAsync();
-            plain.JigDataMatrixCode = await JigDataMatrixCode.ShadowToPlainAsync();
-            plain.PartPresence = await PartPresence.ShadowToPlainAsync();
-            plain.RivetingPreasure = await RivetingPreasure.ShadowToPlainAsync();
+            plain.DimX = await DimX.ShadowToPlainAsync();
+            plain.DimY = await DimY.ShadowToPlainAsync();
+            plain.DimZ = await DimZ.ShadowToPlainAsync();
             return plain;
         }
 
@@ -163,9 +163,9 @@ namespace axosimple.UnitTemplate
         {
             await base.ShadowToPlainAsync(plain);
             plain.Header = await Header.ShadowToPlainAsync();
-            plain.JigDataMatrixCode = await JigDataMatrixCode.ShadowToPlainAsync();
-            plain.PartPresence = await PartPresence.ShadowToPlainAsync();
-            plain.RivetingPreasure = await RivetingPreasure.ShadowToPlainAsync();
+            plain.DimX = await DimX.ShadowToPlainAsync();
+            plain.DimY = await DimY.ShadowToPlainAsync();
+            plain.DimZ = await DimZ.ShadowToPlainAsync();
             return plain;
         }
 
@@ -178,9 +178,9 @@ namespace axosimple.UnitTemplate
         {
             await base.PlainToShadowAsync(plain);
             await this.Header.PlainToShadowAsync(plain.Header);
-            await this.JigDataMatrixCode.PlainToShadowAsync(plain.JigDataMatrixCode);
-            await this.PartPresence.PlainToShadowAsync(plain.PartPresence);
-            await this.RivetingPreasure.PlainToShadowAsync(plain.RivetingPreasure);
+            await this.DimX.PlainToShadowAsync(plain.DimX);
+            await this.DimY.PlainToShadowAsync(plain.DimY);
+            await this.DimZ.PlainToShadowAsync(plain.DimZ);
             return this.RetrievePrimitives();
         }
 
@@ -205,11 +205,11 @@ namespace axosimple.UnitTemplate
                     return true;
                 if (await Header.DetectsAnyChangeAsync(plain.Header, latest.Header))
                     somethingChanged = true;
-                if (await JigDataMatrixCode.DetectsAnyChangeAsync(plain.JigDataMatrixCode, latest.JigDataMatrixCode))
+                if (await DimX.DetectsAnyChangeAsync(plain.DimX, latest.DimX))
                     somethingChanged = true;
-                if (await PartPresence.DetectsAnyChangeAsync(plain.PartPresence, latest.PartPresence))
+                if (await DimY.DetectsAnyChangeAsync(plain.DimY, latest.DimY))
                     somethingChanged = true;
-                if (await RivetingPreasure.DetectsAnyChangeAsync(plain.RivetingPreasure, latest.RivetingPreasure))
+                if (await DimZ.DetectsAnyChangeAsync(plain.DimZ, latest.DimZ))
                     somethingChanged = true;
                 plain = latest;
                 return somethingChanged;

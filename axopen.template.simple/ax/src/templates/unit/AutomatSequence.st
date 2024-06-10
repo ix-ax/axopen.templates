@@ -71,49 +71,97 @@ NAMESPACE axosimple.UnitTemplate
             
             IF (Steps[0].Execute(THIS, TRUE, '<#GET ID#>')) THEN
                 //-------------------------------------------------------
-                _currentId := 'newProducedPart';
-                THIS.MoveNext(); 
+                 IF(ProcessSettingsManager^.Read('default').IsDone()) THEN
+                    ProcessDataManager^.DataManger.Payload := ProcessSettingsManager^.Payload;
+                    _currentId := 'newProducedPart';
+                    THIS.MoveNext(); 
+                END_IF;                                    
                 //-------------------------------------------------------
             END_IF;
 
             IF (Steps[10].Execute(THIS, TRUE, '<#GET DATA#>')) THEN
-                //-------------------------------------------------------
-                // IF(ProcessSettingsManager^.Read('MODEL_S').IsDone()) THEN
-                //     ProcessDataManager^.DataManger.Payload := ProcessSettingsManager^.Payload;
-                //     THIS.MoveNext(); 
-                // END_IF;    
-
+                //-------------------------------------------------------                  
                 IF (ProcessDataManager^.CreateOrUpdate(_currentId).IsDone()) THEN 
                     THIS.MoveNext(); 
                 END_IF;
-
                 //-------------------------------------------------------
             END_IF;
+           
+            // IF (Steps[15].Execute(THIS, TRUE, '<#MOVE HORIZONTAL CYLINDER TO WORK POSITION#>')) THEN
+            //     //-------------------------------------------------------                   
+            //     IF(THIS.Components^.HorizontalCylinder.MoveToWork().IsDone()) THEN
+            //         THIS.MoveNext();
+            //     END_IF;                                  
+            //     //-------------------------------------------------------
+            // END_IF;
             
-            IF (Steps[20].Execute(THIS, TRUE, '<#DO SOMETHING#>')) THEN
-                //-------------------------------------------------------   
-                
-                IF(THIS.ProcessDataManager^.DataManger.Payload.JigDataMatrixCode.Inspect(THIS, '').Done()) THEN
-                    THIS.MoveNext();
-                END_IF;                                  
-                //-------------------------------------------------------
-            END_IF;
+            // IF (Steps[20].Execute(THIS, TRUE, '<#MOVE VERTICAL CYLINDER TO WORK POSITION#>')) THEN
+            //     //-------------------------------------------------------                   
+            //     IF(THIS.Components^.VerticalCylinder.MoveToWork().IsDone()) THEN
+            //         THIS.MoveNext();
+            //     END_IF;                                  
+            //     //-------------------------------------------------------
+            // END_IF;
+           
+            // IF (Steps[30].Execute(THIS, TRUE, '<#CLOSE GRIPPER#>')) THEN
+            //     //-------------------------------------------------------                   
+            //     IF(THIS.Components^.GripperCylinder.MoveToWork().IsDone()) THEN
+            //         THIS.MoveNext();
+            //     END_IF;                                  
+            //     //-------------------------------------------------------
+            // END_IF;
+          
 
-            IF (Steps[30].Execute(THIS, TRUE, '<#DO SOMETHING#>')) THEN
-                //-------------------------------------------------------                   
-                IF(THIS.ProcessDataManager^.DataManger.Payload.PartPresence.Inspect(THIS, TRUE).Done()) THEN
-                    THIS.MoveNext();
-                END_IF;                                  
-                //-------------------------------------------------------
-            END_IF;
+            // IF (Steps[50].Execute(THIS, TRUE, '<#CHECK DIM X#>')) THEN
+            //     //-------------------------------------------------------                   
+            //     IF(THIS.ProcessDataManager^.DataManger.Payload.DimX.Inspect(THIS, 10.0).Done()) THEN
+            //         THIS.MoveNext();
+            //     END_IF;                                  
+            //     //-------------------------------------------------------
+            // END_IF;
 
-            IF (Steps[4].Execute(THIS, TRUE, '<#DO SOMETHING#>')) THEN
-                //-------------------------------------------------------                   
-                IF(THIS.ProcessDataManager^.DataManger.Payload.RivetingPreasure.Inspect(THIS, 1.5).Done()) THEN
-                    THIS.MoveNext();
-                END_IF;                                  
-                //-------------------------------------------------------
-            END_IF;
+            
+            // IF (Steps[60].Execute(THIS, TRUE, '<#CHECK DIM Y#>')) THEN
+            //     //-------------------------------------------------------                   
+            //     IF(THIS.ProcessDataManager^.DataManger.Payload.DimY.Inspect(THIS, 10.0).Done()) THEN
+            //         THIS.MoveNext();
+            //     END_IF;                                   
+            //     //-------------------------------------------------------
+            // END_IF;
+                      
+
+            // IF (Steps[70].Execute(THIS, TRUE, '<#CHECK DIM Z#>')) THEN
+            //     //-------------------------------------------------------                   
+            //     IF(THIS.ProcessDataManager^.DataManger.Payload.DimZ.Inspect(THIS, 10.0).Done()) THEN
+            //         THIS.MoveNext();
+            //     END_IF;                                  
+            //     //-------------------------------------------------------
+            // END_IF;
+            
+            // IF (Steps[110].Execute(THIS, TRUE, '<#MOVE VERTICAL CYLINDER TO WORK POSITION#>')) THEN
+            //     //-------------------------------------------------------                   
+            //     IF(THIS.Components^.VerticalCylinder.MoveToHome().IsDone()) THEN
+            //         THIS.MoveNext();
+            //     END_IF;                                  
+            //     //-------------------------------------------------------
+            // END_IF;
+
+            // IF (Steps[120].Execute(THIS, TRUE, '<#MOVE HORIZONTAL CYLINDER TO HOME POSITION#>')) THEN
+            //     //-------------------------------------------------------                   
+            //     IF(THIS.Components^.HorizontalCylinder.MoveToHome().IsDone()) THEN
+            //         THIS.MoveNext();
+            //     END_IF;                                  
+            //     //-------------------------------------------------------
+            // END_IF;
+
+            // IF (Steps[130].Execute(THIS, TRUE, '<#CLOSE GRIPPER#>')) THEN
+            //     //-------------------------------------------------------                   
+            //     IF(THIS.Components^.GripperCylinder.MoveToHome().IsDone()) THEN
+            //         THIS.MoveNext();
+            //     END_IF;                                  
+            //     //-------------------------------------------------------
+            // END_IF;
+
 
             IF (Steps[149].Execute(THIS, TRUE, '<#UPDATE DATA#>')) THEN
                 //-------------------------------------------------------

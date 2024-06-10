@@ -41,7 +41,10 @@ namespace axosimple.UnitTemplate
             DataHeader,
             UnitComponents,
             Entry.Plc.Context.Safety.Zone_1, 
-            Entry.Plc.Context.Safety.Zone_2
+            Entry.Plc.Context.Safety.Zone_2,
+            Entry.Plc.Context.ProcessSettings,
+            Entry.Plc.Inputs,
+            Entry.Plc.Outputs
         };
         
         private AxoMessageProvider _messageProvider;

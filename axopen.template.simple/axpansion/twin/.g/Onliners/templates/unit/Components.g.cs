@@ -8,12 +8,21 @@ namespace axosimple.UnitTemplate
 {
     public partial class Components : AXOpen.Core.AxoObject
     {
+        public AXOpen.Components.Pneumatics.AxoCylinder HorizontalCylinder { get; }
+
+        public AXOpen.Components.Pneumatics.AxoCylinder VerticalCylinder { get; }
+
+        public AXOpen.Components.Pneumatics.AxoCylinder GripperCylinder { get; }
+
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         public Components(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail) : base(parent, readableTail, symbolTail)
         {
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
             PreConstruct(parent, readableTail, symbolTail);
+            HorizontalCylinder = new AXOpen.Components.Pneumatics.AxoCylinder(this, "HorizontalCylinder", "HorizontalCylinder");
+            VerticalCylinder = new AXOpen.Components.Pneumatics.AxoCylinder(this, "VerticalCylinder", "VerticalCylinder");
+            GripperCylinder = new AXOpen.Components.Pneumatics.AxoCylinder(this, "GripperCylinder", "GripperCylinder");
             PostConstruct(parent, readableTail, symbolTail);
         }
 
@@ -29,6 +38,15 @@ namespace axosimple.UnitTemplate
 #pragma warning disable CS0612
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.HorizontalCylinder = await HorizontalCylinder._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.VerticalCylinder = await VerticalCylinder._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.GripperCylinder = await GripperCylinder._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
             return plain;
         }
 
@@ -40,6 +58,15 @@ namespace axosimple.UnitTemplate
 #pragma warning disable CS0612
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.HorizontalCylinder = await HorizontalCylinder._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.VerticalCylinder = await VerticalCylinder._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.GripperCylinder = await GripperCylinder._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
             return plain;
         }
 
@@ -49,6 +76,15 @@ namespace axosimple.UnitTemplate
         {
 #pragma warning disable CS0612
             await base._OnlineToPlainNoacAsync(plain);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.HorizontalCylinder = await HorizontalCylinder._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.VerticalCylinder = await VerticalCylinder._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.GripperCylinder = await GripperCylinder._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -61,6 +97,15 @@ namespace axosimple.UnitTemplate
         public async Task<IEnumerable<ITwinPrimitive>> PlainToOnlineAsync(Pocos.axosimple.UnitTemplate.Components plain)
         {
             await base._PlainToOnlineNoacAsync(plain);
+#pragma warning disable CS0612
+            await this.HorizontalCylinder._PlainToOnlineNoacAsync(plain.HorizontalCylinder);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.VerticalCylinder._PlainToOnlineNoacAsync(plain.VerticalCylinder);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.GripperCylinder._PlainToOnlineNoacAsync(plain.GripperCylinder);
+#pragma warning restore CS0612
             return await this.WriteAsync<IgnoreOnPocoOperation>();
         }
 
@@ -69,6 +114,15 @@ namespace axosimple.UnitTemplate
         public async Task _PlainToOnlineNoacAsync(Pocos.axosimple.UnitTemplate.Components plain)
         {
             await base._PlainToOnlineNoacAsync(plain);
+#pragma warning disable CS0612
+            await this.HorizontalCylinder._PlainToOnlineNoacAsync(plain.HorizontalCylinder);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.VerticalCylinder._PlainToOnlineNoacAsync(plain.VerticalCylinder);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.GripperCylinder._PlainToOnlineNoacAsync(plain.GripperCylinder);
+#pragma warning restore CS0612
         }
 
         public async override Task<T> ShadowToPlain<T>()
@@ -80,12 +134,18 @@ namespace axosimple.UnitTemplate
         {
             Pocos.axosimple.UnitTemplate.Components plain = new Pocos.axosimple.UnitTemplate.Components();
             await base.ShadowToPlainAsync(plain);
+            plain.HorizontalCylinder = await HorizontalCylinder.ShadowToPlainAsync();
+            plain.VerticalCylinder = await VerticalCylinder.ShadowToPlainAsync();
+            plain.GripperCylinder = await GripperCylinder.ShadowToPlainAsync();
             return plain;
         }
 
         protected async Task<Pocos.axosimple.UnitTemplate.Components> ShadowToPlainAsync(Pocos.axosimple.UnitTemplate.Components plain)
         {
             await base.ShadowToPlainAsync(plain);
+            plain.HorizontalCylinder = await HorizontalCylinder.ShadowToPlainAsync();
+            plain.VerticalCylinder = await VerticalCylinder.ShadowToPlainAsync();
+            plain.GripperCylinder = await GripperCylinder.ShadowToPlainAsync();
             return plain;
         }
 
@@ -97,6 +157,9 @@ namespace axosimple.UnitTemplate
         public async Task<IEnumerable<ITwinPrimitive>> PlainToShadowAsync(Pocos.axosimple.UnitTemplate.Components plain)
         {
             await base.PlainToShadowAsync(plain);
+            await this.HorizontalCylinder.PlainToShadowAsync(plain.HorizontalCylinder);
+            await this.VerticalCylinder.PlainToShadowAsync(plain.VerticalCylinder);
+            await this.GripperCylinder.PlainToShadowAsync(plain.GripperCylinder);
             return this.RetrievePrimitives();
         }
 
@@ -119,6 +182,12 @@ namespace axosimple.UnitTemplate
             {
                 if (await base.DetectsAnyChangeAsync(plain))
                     return true;
+                if (await HorizontalCylinder.DetectsAnyChangeAsync(plain.HorizontalCylinder, latest.HorizontalCylinder))
+                    somethingChanged = true;
+                if (await VerticalCylinder.DetectsAnyChangeAsync(plain.VerticalCylinder, latest.VerticalCylinder))
+                    somethingChanged = true;
+                if (await GripperCylinder.DetectsAnyChangeAsync(plain.GripperCylinder, latest.GripperCylinder))
+                    somethingChanged = true;
                 plain = latest;
                 return somethingChanged;
             });
