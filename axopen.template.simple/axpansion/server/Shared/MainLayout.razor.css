@@ -6,7 +6,6 @@
 
 main {
     flex: 1;
-    margin-top: 40px; /* height of collapsed navbar */
 }
 
 @media (min-width: 770px) {
