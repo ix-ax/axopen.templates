@@ -1,4 +1,6 @@
 {
-  "Views": [],
-  "DefaultView": "a"
+  "Views": [
+    "A"
+  ],
+  "DefaultView": "A"
 }

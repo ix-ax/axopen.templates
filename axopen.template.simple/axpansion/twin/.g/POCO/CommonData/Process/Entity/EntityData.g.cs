@@ -6,6 +6,10 @@ namespace Pocos
     {
         public partial class EntityData : AXOpen.Data.AxoDataEntity, AXSharp.Connector.IPlain
         {
+            public EntityData() : base()
+            {
+            }
+
             public Int16 LastStation { get; set; }
 
             public Int16 NextStation { get; set; }

@@ -6,6 +6,10 @@ namespace Pocos
     {
         public partial class Unit : axosimple.BaseUnit.UnitBase, AXSharp.Connector.IPlain
         {
+            public Unit() : base()
+            {
+            }
+
             public axosimple.StarterUnitTemplate.UnitObjects UnitObjects { get; set; } = new axosimple.StarterUnitTemplate.UnitObjects();
             public axosimple.StarterUnitTemplate.GroundSequence GroundSequence { get; set; } = new axosimple.StarterUnitTemplate.GroundSequence();
             public axosimple.StarterUnitTemplate.AutomatSequence AutomatSequence { get; set; } = new axosimple.StarterUnitTemplate.AutomatSequence();

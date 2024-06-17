@@ -6,6 +6,10 @@ namespace Pocos
     {
         public partial class ProcessData : AXOpen.Data.AxoDataEntity, AXSharp.Connector.IPlain
         {
+            public ProcessData() : base()
+            {
+            }
+
             public UInt64 CounterDelay { get; set; }
 
             public AXOpen.Inspectors.AxoDigitalInspector PartPresence { get; set; } = new AXOpen.Inspectors.AxoDigitalInspector();

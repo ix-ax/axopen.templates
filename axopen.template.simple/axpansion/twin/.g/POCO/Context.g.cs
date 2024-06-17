@@ -1,14 +1,17 @@
 using System;
+using Pocos.AXOpen.Core;
+using Pocos.AXOpen.Data;
 
 namespace Pocos
 {
-    using AXOpen.Core;
-    using AXOpen.Data;
-
     namespace axosimple
     {
         public partial class Context : AXOpen.Core.AxoContext, AXSharp.Connector.IPlain
         {
+            public Context() : base()
+            {
+            }
+
             public axosimple.TechnologyData TechnologySettings { get; set; } = new axosimple.TechnologyData();
             public axosimple.ProcessData ProcessSettings { get; set; } = new axosimple.ProcessData();
             public axosimple.ProcessData ProcessData { get; set; } = new axosimple.ProcessData();
@@ -27,11 +30,19 @@ namespace Pocos
 
         public partial class GlobalContextObjects : AXSharp.Connector.IPlain
         {
+            public GlobalContextObjects()
+            {
+            }
+
             public string LastTechnologySettings { get; set; } = string.Empty;
         }
 
         public partial class ProcessData : AXOpen.Data.AxoDataFragmentExchange, AXSharp.Connector.IPlain
         {
+            public ProcessData() : base()
+            {
+            }
+
             public axosimple.EntityHeaderDataManager Entity { get; set; } = new axosimple.EntityHeaderDataManager();
             public axosimple.UnitTemplate.FragmentProcessDataManger UnitTemplate { get; set; } = new axosimple.UnitTemplate.FragmentProcessDataManger();
             public axosimple.StarterUnitTemplate.FragmentProcessDataManger StarterUnitTemplate { get; set; } = new axosimple.StarterUnitTemplate.FragmentProcessDataManger();
@@ -39,6 +50,10 @@ namespace Pocos
 
         public partial class TechnologyData : AXOpen.Data.AxoDataFragmentExchange, AXSharp.Connector.IPlain
         {
+            public TechnologyData() : base()
+            {
+            }
+
             public axosimple.TechnologyCommonDataManager Common { get; set; } = new axosimple.TechnologyCommonDataManager();
             public axosimple.UnitTemplate.FragmentTechnologyDataManger UnitTemplate { get; set; } = new axosimple.UnitTemplate.FragmentTechnologyDataManger();
             public axosimple.StarterUnitTemplate.FragmentTechnologyDataManger StarterUnitTemplate { get; set; } = new axosimple.StarterUnitTemplate.FragmentTechnologyDataManger();

@@ -1,9 +1,8 @@
 using System;
+using Pocos.axosimple;
 
 namespace Pocos
 {
-    using axosimple;
-
     public partial class axosimpleTwinController
     {
         public axosimple.Inputs Inputs { get; set; } = new axosimple.Inputs();

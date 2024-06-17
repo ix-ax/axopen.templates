@@ -1,6 +1,7 @@
 .apax
 .env
 .vscode
+.certs
 bin
 
 obj

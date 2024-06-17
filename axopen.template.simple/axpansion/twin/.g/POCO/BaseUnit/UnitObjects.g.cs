@@ -6,6 +6,10 @@ namespace Pocos
     {
         public partial class UnitObjects : AXSharp.Connector.IPlain
         {
+            public UnitObjects()
+            {
+            }
+
             public Int16 StationNumber { get; set; }
 
             public string LastTechnologySettings { get; set; } = string.Empty;

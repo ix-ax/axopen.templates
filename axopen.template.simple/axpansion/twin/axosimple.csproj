@@ -13,65 +13,47 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Folder Include=".certs\TIA\" />
 		<Folder Include=".meta\" />
 		<Content Include=".meta\**" />
 		<Compile Include="..\..\ax\src\templates\starterunit\twin\StarterUnitTemplate.cs" Link="Context\Units\StarterUnitTemplate.cs" />
 		<Compile Include="..\..\ax\src\templates\unit\twin\UnitTemplateServices.cs" Link="Context\Units\UnitTemplateServices.cs" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Include="..\..\ax\certs\plc_line\plc_line.cer" Link=".certs\plc_line.cer">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Include="..\..\ax\certs\TIA\Communication.cer" Link=".certs\TIA\Communication.cer">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 	<!--PROJECTS-->
-	<ItemGroup>		
-		<ProjectReference Include="..\..\..\..\axopen\src\simatic1500\ctrl\ix\ix_ax_axopen_simatic1500.csproj" />
-		<ProjectReference Include="..\..\..\..\axopen\src\data\src\AXOpen.Data\ix_ax_axopen_data.csproj" />
-		<ProjectReference Include="..\..\..\..\axopen\src\inspectors\src\AXOpen.Inspectors\ix_ax_axopen_inspectors.csproj" />
+	<ItemGroup>
 		<ProjectReference Include="..\..\..\..\axopen\src\data\src\repositories\MongoDb\AXOpen.Data.MongoDb.csproj" />
-		<ProjectReference Include="..\..\..\..\axopen\src\components.cognex.vision\src\AXOpen.Components.Cognex.Vision\ix_ax_axopen_components_cognex_vision.csproj" />
-		<ProjectReference Include="..\..\..\..\axopen\src\components.pneumatics\src\AXOpen.Components.Pneumatics\ix_ax_axopen_components_pneumatics.csproj" />
-		<ProjectReference Include="..\..\..\..\axopen\src\components.elements\src\AXOpen.Components.Elements\ix_ax_axopen_components_elements.csproj" />
-		<ProjectReference Include="..\..\..\..\axopen\src\core\src\AXOpen.Core\ix_ax_axopen_core.csproj" />
-		<ProjectReference Include="..\..\..\..\axopen\src\components.abstractions\src\AXOpen.Components.Abstractions\ix_ax_axopen_components_abstractions.csproj" />
-		<ProjectReference Include="..\..\..\..\axopen\src\timers\src\AXOpen.Timers\ix_ax_axopen_timers.csproj" />
-		<ProjectReference Include="..\..\..\..\axopen\src\abstractions\src\AXOpen.Abstractions\ix_ax_axopen_abstractions.csproj" />
-		<ProjectReference Include="..\..\..\..\axopen\src\components.drives\src\AXOpen.Components.Drives\ix_ax_axopen_components_drives.csproj" />
-		<ProjectReference Include="..\..\..\..\axopen\src\components.rexroth.drives\src\AXOpen.Components.Rexroth.Drives\ix_ax_axopen_components_rexroth_drives.csproj" />
-		<ProjectReference Include="..\..\..\..\axopen\src\components.festo.drives\src\AXOpen.Components.Festo.Drives\ix_ax_axopen_components_festo_drives.csproj" />
-		<ProjectReference Include="..\..\..\..\axopen\src\components.rexroth.press\src\AXOpen.Components.Rexroth.Press\ix_ax_axopen_components_rexroth_press.csproj" />
-		<ProjectReference Include="..\..\..\..\axopen\src\components.abb.robotics\src\AXOpen.Components.Abb.Robotics\ix_ax_axopen_components_abb_robotics.csproj" />
-		<ProjectReference Include="..\..\..\..\axopen\src\components.mitsubishi.robotics\src\AXOpen.Components.Mitsubishi.Robotics\ix_ax_axopen_components_mitsubishi_robotics.csproj" />
-		<ProjectReference Include="..\..\..\..\axopen\src\components.ur.robotics\src\AXOpen.Components.Ur.Robotics\ix_ax_axopen_components_ur_robotics.csproj" />
-		<PackageReference Include="AXSharp.Connector.S71500.WebAPI" Version="0.18.0-alpha.198" />
+		<PackageReference Include="AXSharp.Connector.S71500.WebAPI" Version="0.19.3-alpha.214" />
 	</ItemGroup>
 	<!--PROJECTS-->
 
 
 	<!--PACKAGES
 	 <ItemGroup>
-	 
-	  <PackageReference Include="AXOpen.Components.Abb.Robotics" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXOpen.Components.Cognex.Vision" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXOpen.Components.Elements" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXOpen.Components.Festo.Drives" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXOpen.Components.Mitsubishi.Robotics" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXOpen.Components.Pneumatics" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXOpen.Components.Rexroth.Press" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXOpen.Components.Ur.Robotics" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXOpen.Data" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXOpen.Data.MongoDb" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXOpen.Inspectors" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXOpen.S71500" Version="0.4.3-dev-2311.790" />
-	 
-	  <PackageReference Include="AXSharp.Connector.S71500.WebAPI" Version="0.18.0-alpha.198" />
+	  <PackageReference Include="AXOpen.Components.Abb.Robotics" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Components.Cognex.Vision" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Components.Drives" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Components.Elements" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Components.Festo.Drives" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Components.Mitsubishi.Robotics" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Components.Pneumatics" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Components.Rexroth.Drives" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Components.Rexroth.Press" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Components.Ur.Robotics" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Data" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Data.MongoDb" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.Inspectors" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXOpen.S71500" Version="0.4.4-alpha.857" />
+	  <PackageReference Include="AXSharp.Connector.S71500.WebAPI" Version="0.18.0-alpha.201" />
 	</ItemGroup>
 	PACKAGES-->
 	
@@ -88,4 +70,11 @@
 			<LastGenOutput>PlcStringResources.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
 	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\..\axopen\src\data\src\AXOpen.Data\ix_ax_axopen_data.csproj" />
+	  <ProjectReference Include="..\..\..\..\axopen\src\inspectors\src\AXOpen.Inspectors\ix_ax_axopen_inspectors.csproj" />
+	  <ProjectReference Include="..\..\..\..\axopen\src\components.elements\src\AXOpen.Components.Elements\ix_ax_axopen_components_elements.csproj" />
+	  <ProjectReference Include="..\..\..\..\axopen\src\components.pneumatics\src\AXOpen.Components.Pneumatics\ix_ax_axopen_components_pneumatics.csproj" />
+	  <ProjectReference Include="..\..\..\..\axopen\src\simatic1500\ctrl\ix\ix_ax_axopen_simatic1500.csproj" />
+	</ItemGroup>		
 </Project>

@@ -1,6 +1,6 @@
 using System;
+using Pocos.axosimple;
 
 namespace Pocos
 {
-    using axosimple;
 }

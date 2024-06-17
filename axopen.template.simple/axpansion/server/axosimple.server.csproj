@@ -36,30 +36,27 @@
 		<Content Include="..\..\ax\src\templates\unit\server\UnitTemplate.razor" Link="Pages\Context\Units\UnitTemplate.razor" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\twin\axosimple.csproj" />
-	</ItemGroup>
-
 	<!--PACKAGES
 	 <ItemGroup>
-		<PackageReference Include="AXOpen.Components.Abb.Robotics.Blazor" Version="0.4.3-dev-2311.790" />
-		<PackageReference Include="AXOpen.Components.Abstractions" Version="0.4.3-dev-2311.790" />
-		<PackageReference Include="AXOpen.Components.Cognex.Vision.Blazor" Version="0.4.3-dev-2311.790" />
-		<PackageReference Include="AXOpen.Components.Drives.Blazor" Version="0.4.3-dev-2311.790" />
-		<PackageReference Include="AXOpen.Components.Elements.Blazor" Version="0.4.3-dev-2311.790" />
-		<PackageReference Include="AXOpen.Components.Festo.Drives.Blazor" Version="0.4.3-dev-2311.790" />
-		<PackageReference Include="AXOpen.Components.Mitsubishi.Robotics.Blazor" Version="0.4.3-dev-2311.790" />
-		<PackageReference Include="AXOpen.Components.Pneumatics.Blazor" Version="0.4.3-dev-2311.790" />
-		<PackageReference Include="AXOpen.Components.Rexroth.Drives.Blazor" Version="0.4.3-dev-2311.790" />
-		<PackageReference Include="AXOpen.Components.Rexroth.Press.Blazor" Version="0.4.3-dev-2311.790" />
-		<PackageReference Include="AXOpen.Components.Ur.Robotics" Version="0.4.3-dev-2311.790" />
-		<PackageReference Include="AXOpen.Core.Blazor" Version="0.4.3-dev-2311.790" />
-		<PackageReference Include="AXOpen.Data.Blazor" Version="0.4.3-dev-2311.790" />
-		<PackageReference Include="AXOpen.Data.MongoDb" Version="0.4.3-dev-2311.790" />
-		<PackageReference Include="AXOpen.Inspectors.Blazor" Version="0.4.3-dev-2311.790" />
-		<PackageReference Include="AXOpen.Logging.Serilog" Version="0.4.3-dev-2311.790" />
-		<PackageReference Include="AXOpen.Security.Blazor" Version="0.4.3-dev-2311.790" />
-		<PackageReference Include="AXSharp.Connector.S71500.WebAPI" Version="0.18.0-alpha.199" />
+		<PackageReference Include="AXOpen.Components.Abb.Robotics.Blazor" Version="0.4.4-alpha.857" />
+		<PackageReference Include="AXOpen.Components.Abstractions" Version="0.4.4-alpha.857" />
+		<PackageReference Include="AXOpen.Components.Cognex.Vision.Blazor" Version="0.4.4-alpha.857" />
+		<PackageReference Include="AXOpen.Components.Drives.Blazor" Version="0.4.4-alpha.857" />
+		<PackageReference Include="AXOpen.Components.Elements.Blazor" Version="0.4.4-alpha.857" />
+		<PackageReference Include="AXOpen.Components.Festo.Drives.Blazor" Version="0.4.4-alpha.857" />
+		<PackageReference Include="AXOpen.Components.Mitsubishi.Robotics.Blazor" Version="0.4.4-alpha.857" />
+		<PackageReference Include="AXOpen.Components.Pneumatics.Blazor" Version="0.4.4-alpha.857" />
+		<PackageReference Include="AXOpen.Components.Rexroth.Drives.Blazor" Version="0.4.4-alpha.857" />
+		<PackageReference Include="AXOpen.Components.Rexroth.Press.Blazor" Version="0.4.4-alpha.857" />
+		<PackageReference Include="AXOpen.Components.Ur.Robotics" Version="0.4.4-alpha.857" />
+		<PackageReference Include="AXOpen.Core.Blazor" Version="0.4.4-alpha.857" />
+		<PackageReference Include="AXOpen.Data.Blazor" Version="0.4.4-alpha.857" />
+		<PackageReference Include="AXOpen.Data.MongoDb" Version="0.4.4-alpha.857" />
+		<PackageReference Include="AXOpen.Inspectors.Blazor" Version="0.4.4-alpha.857" />
+		<PackageReference Include="AXOpen.Logging.Serilog" Version="0.4.4-alpha.857" />
+		<PackageReference Include="AXOpen.Security.Blazor" Version="0.4.4-alpha.857" />
+		<PackageReference Include="AXSharp.Connector.S71500.WebAPI" Version="0.18.0-alpha.201" />
+		<ProjectReference Include="..\twin\axosimple.csproj" />
 	</ItemGroup>
 	PACKAGES -->
 

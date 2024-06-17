@@ -3,8 +3,8 @@ param (
     [string]$ProjectName        
 )
 
-git clone -b dev-2311 https://github.com/ix-ax/AXOpen.git axopen
-git clone -b dev-2311 https://github.com/ix-ax/axopen.templates.git
+git clone -b dev https://github.com/ix-ax/AXOpen.git axopen
+git clone -b dev https://github.com/ix-ax/axopen.templates.git
 
 Copy-Item -Path ".\axopen.templates\workspace_apax.yml" -Destination "apax.yml"
 

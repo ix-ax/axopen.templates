@@ -6,6 +6,10 @@ namespace Pocos
     {
         public partial class EntityHeaderDataManager : AXOpen.Data.AxoDataExchange, AXSharp.Connector.IPlain
         {
+            public EntityHeaderDataManager() : base()
+            {
+            }
+
             public axosimple.EntityData Entity { get; set; } = new axosimple.EntityData();
         }
     }

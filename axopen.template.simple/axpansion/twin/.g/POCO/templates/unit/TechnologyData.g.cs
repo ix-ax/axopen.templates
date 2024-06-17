@@ -6,6 +6,10 @@ namespace Pocos
     {
         public partial class TechnologyData : AXOpen.Data.AxoDataEntity, AXSharp.Connector.IPlain
         {
+            public TechnologyData() : base()
+            {
+            }
+
             public axosimple.TechnologyUnitHeader Header { get; set; } = new axosimple.TechnologyUnitHeader();
             public Single HeatingTemperature { get; set; }
         }

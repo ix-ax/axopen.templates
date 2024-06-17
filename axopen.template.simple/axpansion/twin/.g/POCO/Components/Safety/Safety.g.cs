@@ -6,6 +6,10 @@ namespace Pocos
     {
         public partial class BaseZoneLogic : AXOpen.Core.AxoObject, AXSharp.Connector.IPlain, axosimple.Safety.IZone
         {
+            public BaseZoneLogic() : base()
+            {
+            }
+
             public Boolean AllUnitInAuto { get; set; }
 
             public Boolean AllUnitInGrounded { get; set; }
@@ -19,6 +23,10 @@ namespace Pocos
 
         public partial class ControlPanel : AXOpen.Core.AxoObject, AXSharp.Connector.IPlain, axosimple.Safety.IControlPanel
         {
+            public ControlPanel() : base()
+            {
+            }
+
             public axosimple.Safety.EmergencyStop EStop { get; set; } = new axosimple.Safety.EmergencyStop();
             public AXOpen.Elements.AxoDi ButtonStart { get; set; } = new AXOpen.Elements.AxoDi();
             public AXOpen.Elements.AxoDi ButtonStop { get; set; } = new AXOpen.Elements.AxoDi();
@@ -28,11 +36,18 @@ namespace Pocos
 
         public partial class Door : AXOpen.Core.AxoObject, AXSharp.Connector.IPlain, axosimple.Safety.IDoor
         {
+            public Door() : base()
+            {
+            }
+
             public AXOpen.Components.Pneumatics.AxoCylinder Lock { get; set; } = new AXOpen.Components.Pneumatics.AxoCylinder();
         }
 
         public partial class EmergencyStop : AXOpen.Elements.AxoDi, AXSharp.Connector.IPlain, axosimple.Safety.IEmergencyStop
         {
+            public EmergencyStop() : base()
+            {
+            }
         }
     }
 }
