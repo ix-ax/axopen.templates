@@ -1,30 +1,84 @@
 ﻿@page "/Settings/settings"
 @inject NavigationManager NavigationManager
 
-
 <label>@Localizer["Choose a theme"]</label>
 <select class="form-control" @bind="Theme" @bind:event="oninput">
-    @foreach (var theme in supportedThemes)
-    {
-        <option value="@theme">@theme</option>
-    }
-</select>
-
-<label>@Localizer["Choose a theme"]</label>
-<select class="form-control" @bind="ThemeDark" @bind:event="oninput">
     <option value="light">Light</option>
     <option value="dark">Dark</option>
 </select>
 
-<div class="ms-auto">
-    <select class="form-control" @bind="Culture" @bind:event="oninput">
-        @foreach (var culture in supportedCultures)
-        {
-            <option data value="@culture">@culture.NativeName</option>
-        }
-    </select>
-</div>
+<label>@Localizer["Choose a theme color"]</label>
+<select class="form-control" @bind="ThemeColor" @bind:event="oninput">
+    @foreach (var themeColor in supportedThemeColors)
+    {
+        <option value="@themeColor">@themeColor</option>
+    }
+</select>
+
+<label>@Localizer["Choose a culture"]</label>
+<select class="form-control" @bind="Culture" @bind:event="oninput">
+    @foreach (var culture in supportedCultures)
+    {
+        <option data value="@culture">@culture.NativeName</option>
+    }
+</select>
+
 @code {
+    [Inject]
+    IHttpContextAccessor HttpContextAccessor { get; set; }
+
+    private string _theme;
+    public string Theme
+    {
+        get => _theme;
+        set
+        {
+            // Prevent initial navigation (causes error)
+            if (_theme == null)
+            {
+                _theme = value;
+                return;
+            }
+
+            // Prevent unnecessary navigation
+            if (_theme != value)
+            {
+                _theme = value;
+                NavigationManager.NavigateTo($"/theme?theme={_theme}", true);
+            }
+        }
+    }
+
+    private string defaultThemeColor = "Bootstrap";
+    private string[] supportedThemeColors = new[]
+    {
+        "Bootstrap",
+        "MTS",
+        "Tropical",
+        "Jupiter"
+    };
+
+    private string _themeColor;
+    public string ThemeColor
+    {
+        get => _themeColor;
+        set
+        {
+            // Prevent initial navigation (causes error)
+            if (_themeColor == null)
+            {
+                _themeColor = value;
+                return;
+            }
+
+            // Prevent unnecessary navigation
+            if (_themeColor != value)
+            {
+                _themeColor = value;
+                NavigationManager.NavigateTo($"/themeColor?themeColor={_themeColor}", true);
+            }
+        }
+    }
 
     private CultureInfo[] supportedCultures = new[]
     {
@@ -47,67 +101,10 @@
         }
     }
 
-
-    [Inject]
-    IHttpContextAccessor HttpContextAccessor { get; set; }
-
-    private string defaultTheme = "Bootstrap";
-    private string[] supportedThemes = new[]
-    {
-        "Bootstrap",
-        "MTS",
-        "Tropical",
-        "Jupiter"
-    };
-
-    private string theme;
-    public string Theme
-    {
-        get => theme;
-        set
-        {
-            // Prevent initial navigation (causes error)
-            if (theme == null)
-            {
-                theme = value;
-                return;
-            }
-
-            // Prevent unnecessary navigation
-            if (theme != value)
-            {
-                theme = value;
-                NavigationManager.NavigateTo($"/theme?theme={theme}", true);
-            }
-        }
-    }
-
-    private string themeDark;
-    public string ThemeDark
-    {
-        get => themeDark;
-        set
-        {
-            // Prevent initial navigation (causes error)
-            if (themeDark == null)
-            {
-                themeDark = value;
-                return;
-            }
-
-            // Prevent unnecessary navigation
-            if (themeDark != value)
-            {
-                themeDark = value;
-                NavigationManager.NavigateTo($"/themeDark?theme={themeDark}", true);
-            }
-        }
-    }
-
     protected override void OnInitialized()
     {
-        Theme = HttpContextAccessor.HttpContext.Request.Cookies["theme"] ?? defaultTheme;
-        ThemeDark = HttpContextAccessor.HttpContext.Request.Cookies["themeDark"] ?? "light";
+        Theme = HttpContextAccessor.HttpContext.Request.Cookies["Theme"] ?? "light";
+        ThemeColor = HttpContextAccessor.HttpContext.Request.Cookies["ThemeColor"] ?? defaultThemeColor;
         Culture = CultureInfo.CurrentCulture;
     }
 }

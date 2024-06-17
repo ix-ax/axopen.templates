@@ -5,11 +5,11 @@ namespace axosimple.server.Controllers;
 
 [Route("/[controller]")]
 [ApiController]
-public class ThemeDarkController : ControllerBase
+public class ThemeColorController : ControllerBase
 {
-    public async Task<ActionResult> ChangeTheme([FromQuery] string theme)
+    public async Task<ActionResult> ChangeThemeColor([FromQuery] string themeColor)
     {
-        Response.Cookies.Append("themeDark", theme);
+        Response.Cookies.Append("ThemeColor", themeColor);
         return Redirect("/");
     }
 }

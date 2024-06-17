@@ -9,7 +9,7 @@ public class ThemeController : ControllerBase
 {
     public async Task<ActionResult> ChangeTheme([FromQuery] string theme)
     {
-        Response.Cookies.Append("theme", theme);
+        Response.Cookies.Append("Theme", theme);
         return Redirect("/");
     }
 }
