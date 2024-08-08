@@ -2,10 +2,7 @@ name: "axosimple"
 version: '0.0.0-dev.0'
 type: app
 targets:
-  - plcsim
-  # - swcpu 
-  # - "1500"
-  # - llvm
+  - "1500"
 registries:
   '@ix-ax': https://npm.pkg.github.com/
 devDependencies:
@@ -46,7 +43,7 @@ variables:
   HWCONFIG: "HWC"
   # Uncomment if you want overrite system variables
   AXTARGET: 192.168.0.4
-  AXTARGETPLATFORMINPUT: .\bin\plcsim\
+  AXTARGETPLATFORMINPUT: .\bin\1500\
   # AX_USERNAME: "$AX_USERNAME"
   # AX_TARGET_PWD: "$AX_TARGET_PWD"
   MY_VERY_STRONG_PASSWORD: $AX_TARGET_PWD
@@ -88,7 +85,7 @@ scripts:
       apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r -C ./certs/$PLC_NAME/$PLC_NAME.cer      
     fi
     if [[ "$HWCONFIG" == "TIA" ]]; then
-      apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r -C ./certs/TIA/Communication.cer      
+      apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r -C ./certs/TIA/Communication.cer --password $AX_TARGET_PWD   
     fi   
     if [[ "$HWCONFIG" == "TIA-NON-SECURE" ]]; then
       apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r    
