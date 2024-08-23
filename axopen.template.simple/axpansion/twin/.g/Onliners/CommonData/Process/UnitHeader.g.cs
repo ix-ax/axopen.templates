@@ -29,6 +29,8 @@ namespace axosimple
         [RenderIgnore("Control", "ShadowControl")]
         public OnlinerString Operator { get; }
 
+        partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
+        partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         public UnitHeader(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail)
         {
             this.@SymbolTail = symbolTail;
@@ -36,6 +38,7 @@ namespace axosimple
             this.@Parent = parent;
             HumanReadable = AXSharp.Connector.Connector.CreateHumanReadable(parent.HumanReadable, readableTail);
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
+            PreConstruct(parent, readableTail, symbolTail);
             OnPassed = @Connector.ConnectorAdapter.AdapterFactory.CreateINT(this, "<#Next on Passed#>", "OnPassed");
             OnPassed.AttributeName = "<#Next on Passed#>";
             OnFailed = @Connector.ConnectorAdapter.AdapterFactory.CreateINT(this, "<#Next on Failed#>", "OnFailed");
@@ -52,6 +55,7 @@ namespace axosimple
             Operator.AttributeName = "<#Operatod id#>";
             parent.AddChild(this);
             parent.AddKid(this);
+            PostConstruct(parent, readableTail, symbolTail);
         }
 
         public async virtual Task<T> OnlineToPlain<T>()

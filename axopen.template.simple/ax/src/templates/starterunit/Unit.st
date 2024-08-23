@@ -11,7 +11,7 @@ NAMESPACE axosimple.StarterUnitTemplate
     CLASS Unit
         EXTENDS axosimple.BaseUnit.UnitBase
         VAR PUBLIC
-                        ///<summary>
+            ///<summary>
             /// Provide access to unit objets, that are used into sequnces.
             ///</summary>
             UnitObjects  : axosimple.StarterUnitTemplate.UnitObjects;
@@ -49,8 +49,16 @@ NAMESPACE axosimple.StarterUnitTemplate
                 ///</summary>
                 Outputs : axosimple.Outputs;                
             END_VAR
+            VAR_INPUT
+                TechnologySettings : REF_TO axosimple.StarterUnitTemplate.FragmentTechnologyDataManger;
+                ProcessSettings : REF_TO axosimple.StarterUnitTemplate.FragmentProcessDataManger; 
+                Global : REF_TO axosimple.GlobalContextObjects;             
+            END_VAR    
             THIS.Initialize(parent);
-            THIS.Execute(Inputs, Outputs);
+            UnitObjects.ProcessSettings := ProcessSettings;
+            UnitObjects.TechnologySettings := TechnologySettings;    
+            UnitObjects.Global := Global;
+            THIS.Execute(Inputs, Outputs);                         
         END_METHOD
 
         METHOD PRIVATE Execute
@@ -60,13 +68,15 @@ NAMESPACE axosimple.StarterUnitTemplate
             END_VAR
            
             // Component I/O immange and management handling.
-             UnitObjects.Components^.Update(THIS, Inputs, Outputs);
+             UnitObjects.Components.Update(THIS, Inputs, Outputs);
+             
              // Process data manager
-             UnitObjects.ProcessData^.Run(THIS);
-             // Process settings data manager
-             UnitObjects.ProcessSettings^.Run(THIS);
-             // Technology data manager
-             UnitObjects.TechnologySettings^.Run(THIS);
+             UnitObjects.ProcessData.Run(THIS);
+             
+
+             UnitObjects.TechnologyData.Run(THIS);
+                         
+            
              // Handles ground sequence
              GroundSequence.Run(THIS, REF(UnitObjects));
              // Restores other states when Ground executes
@@ -79,18 +89,19 @@ NAMESPACE axosimple.StarterUnitTemplate
              AutomatSequence.IsDisabled := GroundSequence.Status <> eAxoTaskState#Done;
              AutomatSequence.Run(THIS, REF(UnitObjects));
              // Handles service/manual mode
-             ServiceMode.Run(THIS, UnitObjects.Components^);
+             ServiceMode.Run(THIS, UnitObjects.Components);
  
              IF ServiceMode.IsBusy() THEN
                  GroundSequence.Restore();
                  AutomatSequence.Restore();
              END_IF;
 
+             RETURN;
             // remember last selected technolgy identifier 
-            if  (UnitObjects.TechnologySettings^.DataManger.Payload.DataEntityId <> '') THEN
-                IF UnitObjects.LastTechnologySettings <> UnitObjects.TechnologySettings^.DataManger.Payload.DataEntityId THEN 
+            if  (UnitObjects.TechnologySettings^.Payload.DataEntityId <> '') THEN
+                IF UnitObjects.LastTechnologySettings <> UnitObjects.TechnologySettings^.Payload.DataEntityId THEN 
                     IF UnitObjects.Global^.PersistentData^.InvokeUpdate(THIS, '') THEN 
-                        UnitObjects.LastTechnologySettings :=  UnitObjects.TechnologySettings^.DataManger.Payload.DataEntityId;
+                        UnitObjects.LastTechnologySettings :=  UnitObjects.TechnologySettings^.Payload.DataEntityId;
                     END_IF;
                 END_IF;
             END_IF;

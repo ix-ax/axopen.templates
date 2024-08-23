@@ -19,13 +19,7 @@ namespace Pocos
             public axosimple.GlobalContextObjects GlobalObjects { get; set; } = new axosimple.GlobalContextObjects();
             public axosimple.TechnologySafety Safety { get; set; } = new axosimple.TechnologySafety();
             public axosimple.StarterUnitTemplate.Unit StarterUnitTemplate { get; set; } = new axosimple.StarterUnitTemplate.Unit();
-            public axosimple.StarterUnitTemplate.Components StarterUnitTemplateComponents { get; set; } = new axosimple.StarterUnitTemplate.Components();
-            public axosimple.StarterUnitTemplate.ProcessDataManager StarterUnitTemplateProcessData { get; set; } = new axosimple.StarterUnitTemplate.ProcessDataManager();
-            public axosimple.StarterUnitTemplate.TechnologyDataManager StarterUnitTemplateTechnologySettings { get; set; } = new axosimple.StarterUnitTemplate.TechnologyDataManager();
             public axosimple.UnitTemplate.Unit UnitTemplate { get; set; } = new axosimple.UnitTemplate.Unit();
-            public axosimple.UnitTemplate.Components UnitTemplateComponents { get; set; } = new axosimple.UnitTemplate.Components();
-            public axosimple.UnitTemplate.ProcessDataManager UnitTemplateProcessData { get; set; } = new axosimple.UnitTemplate.ProcessDataManager();
-            public axosimple.UnitTemplate.TechnologyDataManager UnitTemplateTechnologySettings { get; set; } = new axosimple.UnitTemplate.TechnologyDataManager();
         }
 
         public partial class GlobalContextObjects : AXSharp.Connector.IPlain

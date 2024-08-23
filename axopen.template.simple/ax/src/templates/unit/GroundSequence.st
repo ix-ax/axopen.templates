@@ -38,13 +38,7 @@ NAMESPACE axosimple.UnitTemplate
             END_VAR     
 
             IF Objs = NULL THEN 
-                Objs := _unitObjects;
-                
-                Components := Objs^.Components;
-                ProcessDataManager := Objs^.ProcessData;
-                ProcessSettingsManager := Objs^.ProcessSettings;
-                TechnologySettingsManager := Objs^.TechnologySettings;
-                PersistentSettingsManager := Objs^.Global^.PersistentData;
+                Objs := _unitObjects;                               
             END_IF;
 
             SUPER.Run(_parent);
@@ -98,8 +92,8 @@ NAMESPACE axosimple.UnitTemplate
                     IF Objs^.Global^.TechnologySettings^.Common.Entity.DataEntityId <> '' THEN
                        techSetttingsId := Objs^.Global^.TechnologySettings^.Common.Entity.DataEntityId; // TAKE GLOGAL TECHNOLOGY SETTINGS ID
 
-                    ELSIF Objs^.TechnologySettings^.Shared.Entity.DataEntityId <> '' THEN // TAKE LAST LOADED FOR STATION
-                        techSetttingsId := Objs^.TechnologySettings^.Shared.Entity.DataEntityId;
+                    ELSIF Objs^.TechnologySettings^.Payload.DataEntityId <> '' THEN // TAKE LAST LOADED FOR STATION
+                        techSetttingsId := Objs^.TechnologySettings^.Payload.DataEntityId;
 
                     ELSIF Objs^.LastTechnologySettings <> '' THEN // TAKE LAST LOADED FROM PERSISTENT
                         techSetttingsId := Objs^.LastTechnologySettings;
@@ -108,7 +102,7 @@ NAMESPACE axosimple.UnitTemplate
                         techSetttingsId := Objs^.LastTechnologySettings;
                     END_IF;
                     
-                    IF Objs^.Global^.TechnologySettings^.Common.Entity.DataEntityId = Objs^.TechnologySettings^.Shared.Entity.DataEntityId then 
+                    IF Objs^.Global^.TechnologySettings^.Common.Entity.DataEntityId = Objs^.TechnologySettings^.Payload.DataEntityId then 
                         //THIS.MoveNext(); // you can skip loading...
                         ;
                     end_if;

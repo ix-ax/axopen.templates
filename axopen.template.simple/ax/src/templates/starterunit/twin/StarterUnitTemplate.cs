@@ -19,19 +19,19 @@ namespace axosimple.StarterUnitTemplate
             _contextService = contextService;
         }
         
-        public AXOpen.Data.AxoDataEntity? Data { get; } = Entry.Plc.Context.StarterUnitTemplateProcessData.DataManger.Payload;
+        public AXOpen.Data.AxoDataEntity? Data { get; } = Entry.Plc.Context.StarterUnitTemplate.UnitObjects.ProcessData.DataManger.Payload;
 
-        public AXOpen.Data.AxoDataEntity? DataHeader { get; } = Entry.Plc.Context.StarterUnitTemplateProcessData.Shared.Entity;
+        public AXOpen.Data.AxoDataEntity? DataHeader { get; } = Entry.Plc.Context.StarterUnitTemplate.UnitObjects.ProcessData.Shared.Entity;
 
-        public AXOpen.Data.AxoDataExchangeBase? DataManger { get; } = Entry.Plc.Context.StarterUnitTemplateProcessData;
+        public AXOpen.Data.AxoDataExchangeBase? DataManger { get; } = Entry.Plc.Context.StarterUnitTemplate.UnitObjects.ProcessData.DataManger;
 
         public AXOpen.Data.AxoDataEntity? TechnologySettings { get; } =
-            Entry.Plc.Context.StarterUnitTemplateTechnologySettings.Shared.Entity;
+            Entry.Plc.Context.StarterUnitTemplate.UnitObjects.TechnologyData.Shared.Entity;
 
         public AXOpen.Data.AxoDataEntity? SharedTechnologySettings { get; } =
-            Entry.Plc.Context.StarterUnitTemplateTechnologySettings.DataManger.Payload;
+            Entry.Plc.Context.StarterUnitTemplate.UnitObjects.TechnologyData.DataManger.Payload;
 
-        public AxoObject? UnitComponents => Entry.Plc.Context.StarterUnitTemplateComponents;
+        public AxoObject? UnitComponents => Entry.Plc.Context.StarterUnitTemplate.UnitObjects.Components;
         
         public ITwinObject[] Associates => new ITwinObject[]
         {
@@ -64,11 +64,11 @@ namespace axosimple.StarterUnitTemplate
 
         // Technology Data manager of unit
         private StarterUnitTemplate.TechnologyDataManager StarterUnitTechnologyDataManager { get; } = 
-        Entry.Plc.Context.StarterUnitTemplateTechnologySettings.CreateBuilder<StarterUnitTemplate.TechnologyDataManager>();
+        Entry.Plc.Context.StarterUnitTemplate.UnitObjects.TechnologyData.CreateBuilder<StarterUnitTemplate.TechnologyDataManager>();
 
         // Process Data manager of unit
         private StarterUnitTemplate.ProcessDataManager StarterUnitProcessDataManager { get; } = 
-        Entry.Plc.Context.StarterUnitTemplateProcessData.CreateBuilder<StarterUnitTemplate.ProcessDataManager>();
+        Entry.Plc.Context.StarterUnitTemplate.UnitObjects.ProcessData.CreateBuilder<StarterUnitTemplate.ProcessDataManager>();
         
         private ContextService _contextService { get; }
 

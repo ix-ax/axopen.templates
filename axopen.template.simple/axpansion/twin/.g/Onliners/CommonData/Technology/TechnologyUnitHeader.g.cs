@@ -22,6 +22,8 @@ namespace axosimple
 
         public OnlinerUInt ConsecutiveErrorCount { get; }
 
+        partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
+        partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         public TechnologyUnitHeader(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail)
         {
             this.@SymbolTail = symbolTail;
@@ -29,6 +31,7 @@ namespace axosimple
             this.@Parent = parent;
             HumanReadable = AXSharp.Connector.Connector.CreateHumanReadable(parent.HumanReadable, readableTail);
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
+            PreConstruct(parent, readableTail, symbolTail);
             IdealCycleTime = @Connector.ConnectorAdapter.AdapterFactory.CreateTIME(this, "<#Cycle time#> - <#Nominal#>", "IdealCycleTime");
             IdealCycleTime.AttributeName = "<#Cycle time#> - <#Nominal#>";
             WarningCycleTime = @Connector.ConnectorAdapter.AdapterFactory.CreateTIME(this, "<#Cycle time#> - <#Warning#>", "WarningCycleTime");
@@ -45,6 +48,7 @@ namespace axosimple
             ConsecutiveErrorCount.AttributeName = "<#Consecutive Error count #> ";
             parent.AddChild(this);
             parent.AddKid(this);
+            PostConstruct(parent, readableTail, symbolTail);
         }
 
         public async virtual Task<T> OnlineToPlain<T>()

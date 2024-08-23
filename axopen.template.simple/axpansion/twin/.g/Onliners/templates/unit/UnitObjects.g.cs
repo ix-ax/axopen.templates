@@ -8,6 +8,12 @@ namespace axosimple.UnitTemplate
 {
     public partial class UnitObjects : axosimple.BaseUnit.UnitObjects
     {
+        public axosimple.UnitTemplate.Components Components { get; }
+
+        public axosimple.UnitTemplate.ProcessDataManager ProcessData { get; }
+
+        public axosimple.UnitTemplate.TechnologyDataManager TechnologyData { get; }
+
         [AXOpen.Data.PersistentAttribute("UnitTemplate")]
         public OnlinerString SpecialSettings { get; }
 
@@ -23,6 +29,9 @@ namespace axosimple.UnitTemplate
         {
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
             PreConstruct(parent, readableTail, symbolTail);
+            Components = new axosimple.UnitTemplate.Components(this, "Components", "Components");
+            ProcessData = new axosimple.UnitTemplate.ProcessDataManager(this, "ProcessData", "ProcessData");
+            TechnologyData = new axosimple.UnitTemplate.TechnologyDataManager(this, "TechnologyData", "TechnologyData");
             SpecialSettings = @Connector.ConnectorAdapter.AdapterFactory.CreateSTRING(this, "SpecialSettings", "SpecialSettings");
             _dialog = new AXOpen.Core.AxoDialog(this, "_dialog", "_dialog");
             _alertDialog = new AXOpen.Core.AxoAlert(this, "_alertDialog", "_alertDialog");
@@ -41,6 +50,15 @@ namespace axosimple.UnitTemplate
             await this.ReadAsync<IgnoreOnPocoOperation>();
 #pragma warning disable CS0612
             await base._OnlineToPlainNoacAsync(plain);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.Components = await Components._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.ProcessData = await ProcessData._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.TechnologyData = await TechnologyData._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             plain.SpecialSettings = SpecialSettings.LastValue;
 #pragma warning disable CS0612
@@ -63,6 +81,15 @@ namespace axosimple.UnitTemplate
 #pragma warning disable CS0612
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.Components = await Components._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.ProcessData = await ProcessData._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.TechnologyData = await TechnologyData._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
             plain.SpecialSettings = SpecialSettings.LastValue;
 #pragma warning disable CS0612
             plain._dialog = await _dialog._OnlineToPlainNoacAsync();
@@ -82,6 +109,15 @@ namespace axosimple.UnitTemplate
         {
 #pragma warning disable CS0612
             await base._OnlineToPlainNoacAsync(plain);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.Components = await Components._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.ProcessData = await ProcessData._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.TechnologyData = await TechnologyData._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             plain.SpecialSettings = SpecialSettings.LastValue;
 #pragma warning disable CS0612
@@ -105,6 +141,15 @@ namespace axosimple.UnitTemplate
         {
             await base._PlainToOnlineNoacAsync(plain);
 #pragma warning disable CS0612
+            await this.Components._PlainToOnlineNoacAsync(plain.Components);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.ProcessData._PlainToOnlineNoacAsync(plain.ProcessData);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.TechnologyData._PlainToOnlineNoacAsync(plain.TechnologyData);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
             SpecialSettings.LethargicWrite(plain.SpecialSettings);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
@@ -124,6 +169,15 @@ namespace axosimple.UnitTemplate
         public async Task _PlainToOnlineNoacAsync(Pocos.axosimple.UnitTemplate.UnitObjects plain)
         {
             await base._PlainToOnlineNoacAsync(plain);
+#pragma warning disable CS0612
+            await this.Components._PlainToOnlineNoacAsync(plain.Components);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.ProcessData._PlainToOnlineNoacAsync(plain.ProcessData);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.TechnologyData._PlainToOnlineNoacAsync(plain.TechnologyData);
+#pragma warning restore CS0612
 #pragma warning disable CS0612
             SpecialSettings.LethargicWrite(plain.SpecialSettings);
 #pragma warning restore CS0612
@@ -147,6 +201,9 @@ namespace axosimple.UnitTemplate
         {
             Pocos.axosimple.UnitTemplate.UnitObjects plain = new Pocos.axosimple.UnitTemplate.UnitObjects();
             await base.ShadowToPlainAsync(plain);
+            plain.Components = await Components.ShadowToPlainAsync();
+            plain.ProcessData = await ProcessData.ShadowToPlainAsync();
+            plain.TechnologyData = await TechnologyData.ShadowToPlainAsync();
             plain.SpecialSettings = SpecialSettings.Shadow;
             plain._dialog = await _dialog.ShadowToPlainAsync();
             plain._alertDialog = await _alertDialog.ShadowToPlainAsync();
@@ -157,6 +214,9 @@ namespace axosimple.UnitTemplate
         protected async Task<Pocos.axosimple.UnitTemplate.UnitObjects> ShadowToPlainAsync(Pocos.axosimple.UnitTemplate.UnitObjects plain)
         {
             await base.ShadowToPlainAsync(plain);
+            plain.Components = await Components.ShadowToPlainAsync();
+            plain.ProcessData = await ProcessData.ShadowToPlainAsync();
+            plain.TechnologyData = await TechnologyData.ShadowToPlainAsync();
             plain.SpecialSettings = SpecialSettings.Shadow;
             plain._dialog = await _dialog.ShadowToPlainAsync();
             plain._alertDialog = await _alertDialog.ShadowToPlainAsync();
@@ -172,6 +232,9 @@ namespace axosimple.UnitTemplate
         public async Task<IEnumerable<ITwinPrimitive>> PlainToShadowAsync(Pocos.axosimple.UnitTemplate.UnitObjects plain)
         {
             await base.PlainToShadowAsync(plain);
+            await this.Components.PlainToShadowAsync(plain.Components);
+            await this.ProcessData.PlainToShadowAsync(plain.ProcessData);
+            await this.TechnologyData.PlainToShadowAsync(plain.TechnologyData);
             SpecialSettings.Shadow = plain.SpecialSettings;
             await this._dialog.PlainToShadowAsync(plain._dialog);
             await this._alertDialog.PlainToShadowAsync(plain._alertDialog);
@@ -198,6 +261,12 @@ namespace axosimple.UnitTemplate
             {
                 if (await base.DetectsAnyChangeAsync(plain))
                     return true;
+                if (await Components.DetectsAnyChangeAsync(plain.Components, latest.Components))
+                    somethingChanged = true;
+                if (await ProcessData.DetectsAnyChangeAsync(plain.ProcessData, latest.ProcessData))
+                    somethingChanged = true;
+                if (await TechnologyData.DetectsAnyChangeAsync(plain.TechnologyData, latest.TechnologyData))
+                    somethingChanged = true;
                 if (plain.SpecialSettings != SpecialSettings.LastValue)
                     somethingChanged = true;
                 if (await _dialog.DetectsAnyChangeAsync(plain._dialog, latest._dialog))

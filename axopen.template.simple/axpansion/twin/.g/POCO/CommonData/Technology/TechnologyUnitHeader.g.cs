@@ -4,8 +4,12 @@ namespace Pocos
 {
     namespace axosimple
     {
-        public partial class TechnologyUnitHeader
+        public partial class TechnologyUnitHeader : AXSharp.Connector.IPlain
         {
+            public TechnologyUnitHeader()
+            {
+            }
+
             public TimeSpan IdealCycleTime { get; set; } = default(TimeSpan);
             public TimeSpan WarningCycleTime { get; set; } = default(TimeSpan);
             public TimeSpan ErrorCycleTime { get; set; } = default(TimeSpan);

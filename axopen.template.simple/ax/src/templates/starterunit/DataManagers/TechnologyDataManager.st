@@ -9,8 +9,7 @@ NAMESPACE axosimple.StarterUnitTemplate
         EXTENDS AXOpen.Data.AxoDataFragmentExchange
         VAR PUBLIC
             {#ix-attr:[AXOpen.Data.AxoDataFragmentAttribute]}
-            Shared : axosimple.TechnologyCommonDataManager;
-            
+            Shared : axosimple.TechnologyCommonDataManager;            
             {#ix-attr:[AXOpen.Data.AxoDataFragmentAttribute]}
             DataManger : axosimple.StarterUnitTemplate.FragmentTechnologyDataManger;
         END_VAR        

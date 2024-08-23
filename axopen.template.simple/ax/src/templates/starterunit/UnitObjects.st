@@ -7,27 +7,33 @@ NAMESPACE axosimple.StarterUnitTemplate
 
     {S7.extern=ReadWrite}
     CLASS PUBLIC UnitObjects EXTENDS axosimple.BaseUnit.UnitObjects
-        VAR PUBLIC
+        VAR PUBLIC            
             ///<summary>
             /// Handles and intializes components used by this unit.
             ///</summary>
-            Components : REF_TO axosimple.StarterUnitTemplate.Components;
+            Components : axosimple.StarterUnitTemplate.Components;
+            
+            ///<summary>
+            /// Provides access to process data manager of this unit.
+            ///</summary>
+            ProcessData : axosimple.StarterUnitTemplate.ProcessDataManager;
+
+            
+            ///<summary>
+            /// Provides access to technology data managers of this unit.
+            ///</summary>
+            TechnologyData : axosimple.StarterUnitTemplate.TechnologyDataManager;
 
             ///<summary>
-            /// Provides access to process data manager of this unit
+            /// Provides access to process data manager of this unit.
+            ///</summary>
+            TechnologySettings : REF_TO axosimple.StarterUnitTemplate.FragmentTechnologyDataManger;
+
+            ///<summary>
+            /// Provides access to process data manager of this unit.
             ///</summary>
             ProcessSettings : REF_TO axosimple.StarterUnitTemplate.FragmentProcessDataManger;
 
-            ///<summary>
-            /// Provides access to process data manager of this unit
-            ///</summary>
-            ProcessData : REF_TO axosimple.StarterUnitTemplate.ProcessDataManager;
-
-            ///<summary>
-            /// Provides access to process data manager of this unit
-            ///</summary>
-            TechnologySettings : REF_TO axosimple.StarterUnitTemplate.TechnologyDataManager;
-                        
             {#ix-attr:[AXOpen.Data.PersistentAttribute("StarterUnitTemplate")]}
             SpecialSettings :STRING[64] ;
 

@@ -123,9 +123,9 @@ static (IRepository<User>, IRepository<Group>) SetUpUserRepositories()
         var processes = Process.GetProcessesByName("mongod");
         foreach (Process process in processes)
         {
-            process.Kill(); 
+          //  process.Kill(); 
         }
-        Process.Start(MongoExePath, $" --dbpath {MongoDbPath} --bind_ip_all");
+        //Process.Start(MongoExePath, $" --dbpath {MongoDbPath} --bind_ip_all");
     }
     catch (Exception e)
     {

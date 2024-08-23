@@ -18,19 +18,19 @@ namespace axosimple.UnitTemplate
             _contextService = contextService;
         }
 
-        public AXOpen.Data.AxoDataEntity? Data { get; } = Entry.Plc.Context.UnitTemplateProcessData.DataManger.Payload;
+        public AXOpen.Data.AxoDataEntity? Data { get; } = Entry.Plc.Context.UnitTemplate.UnitObjects.ProcessData.DataManger.Payload;
 
-        public AXOpen.Data.AxoDataEntity? DataHeader { get; } = Entry.Plc.Context.UnitTemplateProcessData.Shared.Entity;
+        public AXOpen.Data.AxoDataEntity? DataHeader { get; } = Entry.Plc.Context.UnitTemplate.UnitObjects.ProcessData.Shared.Entity;
 
-        public AXOpen.Data.AxoDataExchangeBase? DataManger { get; } = Entry.Plc.Context.UnitTemplateProcessData;
+        public AXOpen.Data.AxoDataExchangeBase? DataManger { get; } = Entry.Plc.Context.UnitTemplate.UnitObjects.ProcessData;
 
         public AXOpen.Data.AxoDataEntity? TechnologySettings { get; } =
-            Entry.Plc.Context.UnitTemplateTechnologySettings.Shared.Entity;
+            Entry.Plc.Context.TechnologySettings.UnitTemplate.Payload;
 
         public AXOpen.Data.AxoDataEntity? SharedTechnologySettings { get; } =
-            Entry.Plc.Context.UnitTemplateTechnologySettings.DataManger.Payload;
+            Entry.Plc.Context.TechnologySettings.UnitTemplate.Payload;
 
-        public AxoObject? UnitComponents => Entry.Plc.Context.UnitTemplateComponents;
+        public AxoObject? UnitComponents => Entry.Plc.Context.UnitTemplate.UnitObjects.Components;
         
         public ITwinObject[] Associates => new ITwinObject[]
         {
@@ -64,11 +64,11 @@ namespace axosimple.UnitTemplate
 
         // Technology Data manager of unit
         private UnitTemplate.TechnologyDataManager UnitTechnologyDataManager { get; } = 
-        Entry.Plc.Context.UnitTemplateTechnologySettings.CreateBuilder<UnitTemplate.TechnologyDataManager>();
+            Entry.Plc.Context.UnitTemplate.UnitObjects.TechnologyData.CreateBuilder<UnitTemplate.TechnologyDataManager>();
 
         // Process Data manager of unit
         private UnitTemplate.ProcessDataManager UnitProcessDataManager { get; } = 
-        Entry.Plc.Context.UnitTemplateProcessData.CreateBuilder<UnitTemplate.ProcessDataManager>();
+            Entry.Plc.Context.UnitTemplate.UnitObjects.ProcessData.CreateBuilder<UnitTemplate.ProcessDataManager>();
         
         private ContextService _contextService { get; }
 

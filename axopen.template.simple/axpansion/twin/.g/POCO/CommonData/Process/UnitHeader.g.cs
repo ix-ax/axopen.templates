@@ -4,8 +4,12 @@ namespace Pocos
 {
     namespace axosimple
     {
-        public partial class UnitHeader
+        public partial class UnitHeader : AXSharp.Connector.IPlain
         {
+            public UnitHeader()
+            {
+            }
+
             public Int16 OnPassed { get; set; }
 
             public Int16 OnFailed { get; set; }

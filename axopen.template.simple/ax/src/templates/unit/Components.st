@@ -17,10 +17,12 @@ NAMESPACE axosimple.UnitTemplate
         
         METHOD PUBLIC Update
             VAR_INPUT
-                parent : IAxoObject;
-                Inputs : ref_to axosimple.Inputs; // must be a ref_to due to arrays in components
-                Outputs : ref_to axosimple.Outputs;
+                parent : IAxoObject;                
             END_VAR
+            VAR_IN_OUT
+                Inputs : axosimple.Inputs; // must be a ref_to due to arrays in components
+                Outputs : axosimple.Outputs;
+            END_VAR    
             THIS.Initialize(parent);
             
             THIS.Initialize(parent);

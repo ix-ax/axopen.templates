@@ -24,16 +24,7 @@ NAMESPACE axosimple.StarterUnitTemplate
 
         VAR PRIVATE
             Objs : REF_TO axosimple.StarterUnitTemplate.UnitObjects;
-            Components : REF_TO axosimple.StarterUnitTemplate.Components;
-            ProcessDataManager : REF_TO axosimple.StarterUnitTemplate.ProcessDataManager;
-            ProcessSettingsManager : REF_TO axosimple.StarterUnitTemplate.FragmentProcessDataManger;
-            TechnologySettingsManager : REF_TO axosimple.StarterUnitTemplate.TechnologyDataManager;
-
-            EntityHeader : REF_TO axosimple.EntityData;
-            ProcessData : REF_TO axosimple.StarterUnitTemplate.ProcessData;
-            ProcessSettings : REF_TO axosimple.StarterUnitTemplate.ProcessData;
-            TechnologySettings : REF_TO axosimple.StarterUnitTemplate.TechnologyData;
-
+           
             _currentId : STRING;
 
             _dialogAnswer : eDialogAnswer;
@@ -47,18 +38,7 @@ NAMESPACE axosimple.StarterUnitTemplate
             END_VAR     
 
             IF Objs = NULL THEN 
-                Objs := _unitObjects;
-                
-                Components := Objs^.Components;
-                ProcessDataManager := Objs^.ProcessData;
-                ProcessSettingsManager := Objs^.ProcessSettings;
-                TechnologySettingsManager := Objs^.TechnologySettings;
-
-                EntityHeader := REF(ProcessDataManager^.Shared.Entity);
-                ProcessData :=  REF(ProcessDataManager^.DataManger.Payload);
-                ProcessSettings :=  REF(ProcessSettingsManager^.Payload);
-                TechnologySettings :=  REF(TechnologySettingsManager^.DataManger.Payload);
-
+                Objs := _unitObjects;                                             
             END_IF;
 
             SUPER.Run(_parent);
@@ -67,13 +47,17 @@ NAMESPACE axosimple.StarterUnitTemplate
         /// Contains logic of the steps of this sequence
         ///</summary>
 
+        VAR
+            resutl : IAxoTaskState;
+            _isDone : BOOL;
+        END_VAR        
         METHOD OVERRIDE Main
             VAR
                 forIterator : INT := 0;  
                 dialogTimeOut : TIME:= t#3000ms;         
             END_VAR
 
-            IF (Components = NULL OR ProcessDataManager = NULL) THEN
+            IF (Objs = NULL) THEN
                 RETURN;
             END_IF;
             // This sequecner executes the steps in cycles from top to bottom
@@ -90,18 +74,18 @@ NAMESPACE axosimple.StarterUnitTemplate
                 // copy data from setting to station data -> it's a problem with override checks identity
                 //ProcessData^ :=  ProcessSettings^;
 
-                ProcessData^.PartPresence.Data()^.FailTime := TIME#3s;
-                ProcessData^.LoadPosition.Data()^.FailTime := TIME#3s;
-                ProcessData^.JigDataMatrixCode.Data()^.FailTime := TIME#3s;
+                Objs^.ProcessData.DataManger.Payload.PartPresence.Data()^.FailTime := TIME#3s;
+                Objs^.ProcessData.DataManger.Payload.LoadPosition.Data()^.FailTime := TIME#3s;
+                Objs^.ProcessData.DataManger.Payload.JigDataMatrixCode.Data()^.FailTime := TIME#3s;
     
-                ProcessData^.PartPresence.Data()^.PassTime := TIME#2.5s;
-                ProcessData^.LoadPosition.Data()^.PassTime := TIME#2s;
-                ProcessData^.JigDataMatrixCode.Data()^.PassTime := TIME#2s;
+                Objs^.ProcessData.DataManger.Payload.PartPresence.Data()^.PassTime := TIME#2.5s;
+                Objs^.ProcessData.DataManger.Payload.LoadPosition.Data()^.PassTime := TIME#2s;
+                Objs^.ProcessData.DataManger.Payload.JigDataMatrixCode.Data()^.PassTime := TIME#2s;
 
-                ProcessData^.PartPresence.Data()^.RequiredStatus := TRUE;
-                ProcessData^.LoadPosition.Data()^.RequiredMin := 1000.0;
-                ProcessData^.LoadPosition.Data()^.RequiredMax := 2000.0;
-                ProcessData^.JigDataMatrixCode.Data()^.RequiredStatus := 'passCode';
+                Objs^.ProcessData.DataManger.Payload.PartPresence.Data()^.RequiredStatus := TRUE;
+                Objs^.ProcessData.DataManger.Payload.LoadPosition.Data()^.RequiredMin := 1000.0;
+                Objs^.ProcessData.DataManger.Payload.LoadPosition.Data()^.RequiredMax := 2000.0;
+                Objs^.ProcessData.DataManger.Payload.JigDataMatrixCode.Data()^.RequiredStatus := 'passCode';
 
                 _currentId := 'newProducedPart';
                 THIS.MoveNext(); 
@@ -110,7 +94,12 @@ NAMESPACE axosimple.StarterUnitTemplate
 
             IF (Steps[1].Execute(THIS, TRUE, '<#GET DATA#>')) THEN
                 //-------------------------------------------------------
-                IF (ProcessDataManager^.CreateOrUpdate(_currentId).IsDone()) THEN 
+                
+                resutl := Objs^.ProcessData.DataManger.CreateOrUpdate('fasdfa');  
+                //resutl.IsDone();                 
+                RETURN;    
+                
+                IF (Objs^.ProcessData.DataManger.CreateOrUpdate(_currentId).IsDone()) THEN 
                     THIS.MoveNext(); 
                 END_IF;
                 //-------------------------------------------------------
@@ -185,7 +174,7 @@ NAMESPACE axosimple.StarterUnitTemplate
 
             IF (Steps[6].Execute(THIS, TRUE, 'Example Digital inspection')) THEN
                 //-------------------------------------------------------
-                ProcessData^.PartPresence.WithCoordinator(THIS).Inspect(THIS,_inspectionResult)
+                Objs^.ProcessData.DataManger.Payload.PartPresence.WithCoordinator(THIS).Inspect(THIS,_inspectionResult)
                 .UpdateComprehensiveResult(_comprehensiveResult)
                 .OnFail()
                 .CarryOn();
@@ -196,7 +185,7 @@ NAMESPACE axosimple.StarterUnitTemplate
                 //-------------------------------------------------------
                 _inspectionValue := -5500;
 
-                ProcessData^.LoadPosition.WithCoordinator(THIS)
+                Objs^.ProcessData.DataManger.Payload.LoadPosition.WithCoordinator(THIS)
                 .Inspect(THIS,_inspectionValue)
                 .UpdateComprehensiveResult(_comprehensiveResult)
                 .OnFail()
@@ -208,7 +197,7 @@ NAMESPACE axosimple.StarterUnitTemplate
                 //-------------------------------------------------------
                 _inspectionData := 'tempCode';
 
-                ProcessData^.JigDataMatrixCode.WithCoordinator(THIS)
+                Objs^.ProcessData.DataManger.Payload.JigDataMatrixCode.WithCoordinator(THIS)
                 .Inspect(THIS,_inspectionData)
                 .UpdateComprehensiveResult(_comprehensiveResult)
                 .OnFail()
@@ -232,7 +221,7 @@ NAMESPACE axosimple.StarterUnitTemplate
 
             IF (Steps[99].Execute(THIS, TRUE,'<#UPDATE DATA#>')) THEN
                 //-------------------------------------------------------
-                IF (ProcessDataManager^.Update(_currentId).IsDone()) THEN 
+                IF (Objs^.ProcessData.DataManger.Update(_currentId).IsDone()) THEN 
                     THIS.MoveNext(); 
                 END_IF;
                 //-------------------------------------------------------

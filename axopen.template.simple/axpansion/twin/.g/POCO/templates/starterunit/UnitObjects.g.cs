@@ -10,6 +10,9 @@ namespace Pocos
             {
             }
 
+            public axosimple.StarterUnitTemplate.Components Components { get; set; } = new axosimple.StarterUnitTemplate.Components();
+            public axosimple.StarterUnitTemplate.ProcessDataManager ProcessData { get; set; } = new axosimple.StarterUnitTemplate.ProcessDataManager();
+            public axosimple.StarterUnitTemplate.TechnologyDataManager TechnologyData { get; set; } = new axosimple.StarterUnitTemplate.TechnologyDataManager();
             public string SpecialSettings { get; set; } = string.Empty;
             public AXOpen.Core.AxoDialog _dialog { get; set; } = new AXOpen.Core.AxoDialog();
             public AXOpen.Core.AxoAlert _alertDialog { get; set; } = new AXOpen.Core.AxoAlert();

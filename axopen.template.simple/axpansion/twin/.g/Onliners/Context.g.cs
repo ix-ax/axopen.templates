@@ -24,19 +24,7 @@ namespace axosimple
 
         public axosimple.StarterUnitTemplate.Unit StarterUnitTemplate { get; }
 
-        public axosimple.StarterUnitTemplate.Components StarterUnitTemplateComponents { get; }
-
-        public axosimple.StarterUnitTemplate.ProcessDataManager StarterUnitTemplateProcessData { get; }
-
-        public axosimple.StarterUnitTemplate.TechnologyDataManager StarterUnitTemplateTechnologySettings { get; }
-
         public axosimple.UnitTemplate.Unit UnitTemplate { get; }
-
-        public axosimple.UnitTemplate.Components UnitTemplateComponents { get; }
-
-        public axosimple.UnitTemplate.ProcessDataManager UnitTemplateProcessData { get; }
-
-        public axosimple.UnitTemplate.TechnologyDataManager UnitTemplateTechnologySettings { get; }
 
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
@@ -51,13 +39,7 @@ namespace axosimple
             GlobalObjects = new axosimple.GlobalContextObjects(this, "GlobalObjects", "GlobalObjects");
             Safety = new axosimple.TechnologySafety(this, "Safety", "Safety");
             StarterUnitTemplate = new axosimple.StarterUnitTemplate.Unit(this, "StarterUnitTemplate", "StarterUnitTemplate");
-            StarterUnitTemplateComponents = new axosimple.StarterUnitTemplate.Components(this, "StarterUnitTemplateComponents", "StarterUnitTemplateComponents");
-            StarterUnitTemplateProcessData = new axosimple.StarterUnitTemplate.ProcessDataManager(this, "StarterUnitTemplateProcessData", "StarterUnitTemplateProcessData");
-            StarterUnitTemplateTechnologySettings = new axosimple.StarterUnitTemplate.TechnologyDataManager(this, "StarterUnitTemplateTechnologySettings", "StarterUnitTemplateTechnologySettings");
             UnitTemplate = new axosimple.UnitTemplate.Unit(this, "UnitTemplate", "UnitTemplate");
-            UnitTemplateComponents = new axosimple.UnitTemplate.Components(this, "UnitTemplateComponents", "UnitTemplateComponents");
-            UnitTemplateProcessData = new axosimple.UnitTemplate.ProcessDataManager(this, "UnitTemplateProcessData", "UnitTemplateProcessData");
-            UnitTemplateTechnologySettings = new axosimple.UnitTemplate.TechnologyDataManager(this, "UnitTemplateTechnologySettings", "UnitTemplateTechnologySettings");
             PostConstruct(parent, readableTail, symbolTail);
         }
 
@@ -95,25 +77,7 @@ namespace axosimple
             plain.StarterUnitTemplate = await StarterUnitTemplate._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.StarterUnitTemplateComponents = await StarterUnitTemplateComponents._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.StarterUnitTemplateProcessData = await StarterUnitTemplateProcessData._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.StarterUnitTemplateTechnologySettings = await StarterUnitTemplateTechnologySettings._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
             plain.UnitTemplate = await UnitTemplate._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.UnitTemplateComponents = await UnitTemplateComponents._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.UnitTemplateProcessData = await UnitTemplateProcessData._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.UnitTemplateTechnologySettings = await UnitTemplateTechnologySettings._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -148,25 +112,7 @@ namespace axosimple
             plain.StarterUnitTemplate = await StarterUnitTemplate._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.StarterUnitTemplateComponents = await StarterUnitTemplateComponents._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.StarterUnitTemplateProcessData = await StarterUnitTemplateProcessData._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.StarterUnitTemplateTechnologySettings = await StarterUnitTemplateTechnologySettings._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
             plain.UnitTemplate = await UnitTemplate._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.UnitTemplateComponents = await UnitTemplateComponents._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.UnitTemplateProcessData = await UnitTemplateProcessData._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.UnitTemplateTechnologySettings = await UnitTemplateTechnologySettings._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -200,25 +146,7 @@ namespace axosimple
             plain.StarterUnitTemplate = await StarterUnitTemplate._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.StarterUnitTemplateComponents = await StarterUnitTemplateComponents._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.StarterUnitTemplateProcessData = await StarterUnitTemplateProcessData._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.StarterUnitTemplateTechnologySettings = await StarterUnitTemplateTechnologySettings._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
             plain.UnitTemplate = await UnitTemplate._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.UnitTemplateComponents = await UnitTemplateComponents._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.UnitTemplateProcessData = await UnitTemplateProcessData._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.UnitTemplateTechnologySettings = await UnitTemplateTechnologySettings._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -253,25 +181,7 @@ namespace axosimple
             await this.StarterUnitTemplate._PlainToOnlineNoacAsync(plain.StarterUnitTemplate);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this.StarterUnitTemplateComponents._PlainToOnlineNoacAsync(plain.StarterUnitTemplateComponents);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.StarterUnitTemplateProcessData._PlainToOnlineNoacAsync(plain.StarterUnitTemplateProcessData);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.StarterUnitTemplateTechnologySettings._PlainToOnlineNoacAsync(plain.StarterUnitTemplateTechnologySettings);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
             await this.UnitTemplate._PlainToOnlineNoacAsync(plain.UnitTemplate);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.UnitTemplateComponents._PlainToOnlineNoacAsync(plain.UnitTemplateComponents);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.UnitTemplateProcessData._PlainToOnlineNoacAsync(plain.UnitTemplateProcessData);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.UnitTemplateTechnologySettings._PlainToOnlineNoacAsync(plain.UnitTemplateTechnologySettings);
 #pragma warning restore CS0612
             return await this.WriteAsync<IgnoreOnPocoOperation>();
         }
@@ -303,25 +213,7 @@ namespace axosimple
             await this.StarterUnitTemplate._PlainToOnlineNoacAsync(plain.StarterUnitTemplate);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this.StarterUnitTemplateComponents._PlainToOnlineNoacAsync(plain.StarterUnitTemplateComponents);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.StarterUnitTemplateProcessData._PlainToOnlineNoacAsync(plain.StarterUnitTemplateProcessData);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.StarterUnitTemplateTechnologySettings._PlainToOnlineNoacAsync(plain.StarterUnitTemplateTechnologySettings);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
             await this.UnitTemplate._PlainToOnlineNoacAsync(plain.UnitTemplate);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.UnitTemplateComponents._PlainToOnlineNoacAsync(plain.UnitTemplateComponents);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.UnitTemplateProcessData._PlainToOnlineNoacAsync(plain.UnitTemplateProcessData);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.UnitTemplateTechnologySettings._PlainToOnlineNoacAsync(plain.UnitTemplateTechnologySettings);
 #pragma warning restore CS0612
         }
 
@@ -341,13 +233,7 @@ namespace axosimple
             plain.GlobalObjects = await GlobalObjects.ShadowToPlainAsync();
             plain.Safety = await Safety.ShadowToPlainAsync();
             plain.StarterUnitTemplate = await StarterUnitTemplate.ShadowToPlainAsync();
-            plain.StarterUnitTemplateComponents = await StarterUnitTemplateComponents.ShadowToPlainAsync();
-            plain.StarterUnitTemplateProcessData = await StarterUnitTemplateProcessData.ShadowToPlainAsync();
-            plain.StarterUnitTemplateTechnologySettings = await StarterUnitTemplateTechnologySettings.ShadowToPlainAsync();
             plain.UnitTemplate = await UnitTemplate.ShadowToPlainAsync();
-            plain.UnitTemplateComponents = await UnitTemplateComponents.ShadowToPlainAsync();
-            plain.UnitTemplateProcessData = await UnitTemplateProcessData.ShadowToPlainAsync();
-            plain.UnitTemplateTechnologySettings = await UnitTemplateTechnologySettings.ShadowToPlainAsync();
             return plain;
         }
 
@@ -361,13 +247,7 @@ namespace axosimple
             plain.GlobalObjects = await GlobalObjects.ShadowToPlainAsync();
             plain.Safety = await Safety.ShadowToPlainAsync();
             plain.StarterUnitTemplate = await StarterUnitTemplate.ShadowToPlainAsync();
-            plain.StarterUnitTemplateComponents = await StarterUnitTemplateComponents.ShadowToPlainAsync();
-            plain.StarterUnitTemplateProcessData = await StarterUnitTemplateProcessData.ShadowToPlainAsync();
-            plain.StarterUnitTemplateTechnologySettings = await StarterUnitTemplateTechnologySettings.ShadowToPlainAsync();
             plain.UnitTemplate = await UnitTemplate.ShadowToPlainAsync();
-            plain.UnitTemplateComponents = await UnitTemplateComponents.ShadowToPlainAsync();
-            plain.UnitTemplateProcessData = await UnitTemplateProcessData.ShadowToPlainAsync();
-            plain.UnitTemplateTechnologySettings = await UnitTemplateTechnologySettings.ShadowToPlainAsync();
             return plain;
         }
 
@@ -386,13 +266,7 @@ namespace axosimple
             await this.GlobalObjects.PlainToShadowAsync(plain.GlobalObjects);
             await this.Safety.PlainToShadowAsync(plain.Safety);
             await this.StarterUnitTemplate.PlainToShadowAsync(plain.StarterUnitTemplate);
-            await this.StarterUnitTemplateComponents.PlainToShadowAsync(plain.StarterUnitTemplateComponents);
-            await this.StarterUnitTemplateProcessData.PlainToShadowAsync(plain.StarterUnitTemplateProcessData);
-            await this.StarterUnitTemplateTechnologySettings.PlainToShadowAsync(plain.StarterUnitTemplateTechnologySettings);
             await this.UnitTemplate.PlainToShadowAsync(plain.UnitTemplate);
-            await this.UnitTemplateComponents.PlainToShadowAsync(plain.UnitTemplateComponents);
-            await this.UnitTemplateProcessData.PlainToShadowAsync(plain.UnitTemplateProcessData);
-            await this.UnitTemplateTechnologySettings.PlainToShadowAsync(plain.UnitTemplateTechnologySettings);
             return this.RetrievePrimitives();
         }
 
@@ -429,19 +303,7 @@ namespace axosimple
                     somethingChanged = true;
                 if (await StarterUnitTemplate.DetectsAnyChangeAsync(plain.StarterUnitTemplate, latest.StarterUnitTemplate))
                     somethingChanged = true;
-                if (await StarterUnitTemplateComponents.DetectsAnyChangeAsync(plain.StarterUnitTemplateComponents, latest.StarterUnitTemplateComponents))
-                    somethingChanged = true;
-                if (await StarterUnitTemplateProcessData.DetectsAnyChangeAsync(plain.StarterUnitTemplateProcessData, latest.StarterUnitTemplateProcessData))
-                    somethingChanged = true;
-                if (await StarterUnitTemplateTechnologySettings.DetectsAnyChangeAsync(plain.StarterUnitTemplateTechnologySettings, latest.StarterUnitTemplateTechnologySettings))
-                    somethingChanged = true;
                 if (await UnitTemplate.DetectsAnyChangeAsync(plain.UnitTemplate, latest.UnitTemplate))
-                    somethingChanged = true;
-                if (await UnitTemplateComponents.DetectsAnyChangeAsync(plain.UnitTemplateComponents, latest.UnitTemplateComponents))
-                    somethingChanged = true;
-                if (await UnitTemplateProcessData.DetectsAnyChangeAsync(plain.UnitTemplateProcessData, latest.UnitTemplateProcessData))
-                    somethingChanged = true;
-                if (await UnitTemplateTechnologySettings.DetectsAnyChangeAsync(plain.UnitTemplateTechnologySettings, latest.UnitTemplateTechnologySettings))
                     somethingChanged = true;
                 plain = latest;
                 return somethingChanged;
