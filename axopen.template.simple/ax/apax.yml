@@ -52,6 +52,10 @@ variables:
   MY_VERY_STRONG_PASSWORD: $AX_TARGET_PWD
   COM_CERT_PATH: .\certs\Communication.cer
 scripts:
+  repro_9202:
+    - apax install
+    - apax build --ignore-scripts
+    - apax download --ignore-scripts
   ci: apax clean apax install
   ixc:
     - dotnet tool restore --no-cache
@@ -84,9 +88,9 @@ scripts:
     mv  ./src/$unitname/server/*.* ../axpansion/server/Pages/Context/Units/
     rm -rf ./src/$unitname/server/
   osrc: |
-   if [[ "$HWCONFIG" == "TIA-NON-SECURE" ]]; then
-      apax oscr interface install $AXTARGETPLATFORMINPUT -t $AXTARGET  --accept-security-disclaimer   
-   fi   
+    if [[ "$HWCONFIG" == "TIA-NON-SECURE" ]]; then
+       apax oscr interface install $AXTARGETPLATFORMINPUT -t $AXTARGET  --accept-security-disclaimer   
+    fi   
   download: |
     apax build --ignore-scripts
     if [[ "$HWCONFIG" == "HWC" ]]; then

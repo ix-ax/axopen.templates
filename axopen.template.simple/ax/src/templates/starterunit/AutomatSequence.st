@@ -29,6 +29,7 @@ NAMESPACE axosimple.StarterUnitTemplate
 
             _dialogAnswer : eDialogAnswer;
             _externalCloseOkSignal : BOOL;
+            resutl : IAxoTaskState;
         END_VAR
 
         METHOD INTERNAL Run
@@ -44,8 +45,7 @@ NAMESPACE axosimple.StarterUnitTemplate
             resutl := Objs^.ProcessData.DataManger.CreateOrUpdate('fasdfa');  
 
             // Result is null!
-
-            //resutl.IsDone();
+            resutl.IsDone();
 
             SUPER.Run(inParent);
         END_METHOD
@@ -53,8 +53,7 @@ NAMESPACE axosimple.StarterUnitTemplate
         /// Contains logic of the steps of this sequence
         ///</summary>
 
-        VAR
-            resutl : IAxoTaskState;
+        VAR           
             _isDone : BOOL;
         END_VAR        
         METHOD OVERRIDE Main
