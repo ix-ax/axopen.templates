@@ -30,12 +30,12 @@ NAMESPACE axosimple.StarterUnitTemplate
 
         METHOD INTERNAL Run
             VAR_INPUT
-                _parent : AXOpen.Core.IAxoObject;
-                _unitObjects : REF_TO axosimple.StarterUnitTemplate.UnitObjects;
+                inParent : AXOpen.Core.IAxoObject;
+                inUnitObjects : REF_TO axosimple.StarterUnitTemplate.UnitObjects;
             END_VAR     
 
             IF Objs = NULL THEN 
-                Objs := _unitObjects;
+                Objs := inUnitObjects;
                 
                 // Components := Objs^.Components;
                 // ProcessDataManager := Objs^.ProcessData;
@@ -44,7 +44,7 @@ NAMESPACE axosimple.StarterUnitTemplate
                 PersistentSettings := Objs^.Global^.PersistentData;
             END_IF;
 
-            SUPER.Run(_parent);
+            SUPER.Run(inParent);
         END_METHOD
 
         ///<summary>

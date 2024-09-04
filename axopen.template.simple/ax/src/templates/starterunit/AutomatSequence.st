@@ -33,15 +33,21 @@ NAMESPACE axosimple.StarterUnitTemplate
 
         METHOD INTERNAL Run
             VAR_INPUT
-                _parent : AXOpen.Core.IAxoObject;
-                _unitObjects : REF_TO UnitObjects;
+                inParent : AXOpen.Core.IAxoObject;
+                inUnitObjects : REF_TO UnitObjects;
             END_VAR     
 
             IF Objs = NULL THEN 
-                Objs := _unitObjects;                                             
+                Objs := inUnitObjects;                                             
             END_IF;
 
-            SUPER.Run(_parent);
+            resutl := Objs^.ProcessData.DataManger.CreateOrUpdate('fasdfa');  
+
+            // Result is null!
+
+            //resutl.IsDone();
+
+            SUPER.Run(inParent);
         END_METHOD
         ///<summary>
         /// Contains logic of the steps of this sequence
@@ -56,6 +62,10 @@ NAMESPACE axosimple.StarterUnitTemplate
                 forIterator : INT := 0;  
                 dialogTimeOut : TIME:= t#3000ms;         
             END_VAR
+
+
+            
+
 
             IF (Objs = NULL) THEN
                 RETURN;

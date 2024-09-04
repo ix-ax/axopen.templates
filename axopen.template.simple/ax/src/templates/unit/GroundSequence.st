@@ -33,15 +33,15 @@ NAMESPACE axosimple.UnitTemplate
 
         METHOD INTERNAL Run
             VAR_INPUT
-                _parent : AXOpen.Core.IAxoObject;
-                _unitObjects : REF_TO axosimple.UnitTemplate.UnitObjects;
+                inParent : AXOpen.Core.IAxoObject;
+                inUnitObjects : REF_TO axosimple.UnitTemplate.UnitObjects;
             END_VAR     
 
             IF Objs = NULL THEN 
-                Objs := _unitObjects;                               
+                Objs := inUnitObjects;                               
             END_IF;
 
-            SUPER.Run(_parent);
+            SUPER.Run(inParent);
 
         END_METHOD
         ///<summary>

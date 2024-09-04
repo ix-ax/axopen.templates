@@ -23,11 +23,11 @@ NAMESPACE axosimple.UnitTemplate
 
         METHOD INTERNAL Run
             VAR_INPUT
-                _parent :  AXOpen.Core.IAxoObject;
-                _unitObjects : REF_TO axosimple.UnitTemplate.UnitObjects;
+                inParent :  AXOpen.Core.IAxoObject;
+                inUnitObjects : REF_TO axosimple.UnitTemplate.UnitObjects;
             END_VAR     
             
-            SUPER.Run(_parent);
+            SUPER.Run(inParent);
         END_METHOD
         ///<summary>
         /// Contains logic of the steps of this sequence
