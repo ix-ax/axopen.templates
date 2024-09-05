@@ -32,7 +32,7 @@
 	<!--PROJECTS-->
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\..\axopen\src\data\src\repositories\MongoDb\AXOpen.Data.MongoDb.csproj" />
-		<PackageReference Include="AXSharp.Connector.S71500.WebAPI" Version="0.19.3-alpha.214" />
+		<PackageReference Include="AXSharp.Connector.S71500.WebAPI" Version="0.19.3-alpha.231" />
 	</ItemGroup>
 	<!--PROJECTS-->
 
