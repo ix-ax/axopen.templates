@@ -9,15 +9,15 @@
 
 <div class="card" style="width: 18rem;">
     <h3 class="m-3">@Component.AttributeName</h3>
-    <img src="@Component.UnitServices.ImageLink" class="card-img-top p-3" alt="...">
+    <img src="@Component.Services.ImageLink" class="card-img-top p-3" alt="...">
     <div class="card-body">
         <h5 class="card-title">@Component.GetAttributeName(CultureInfo.CurrentUICulture)</h5>
         <p class="card-text">
             <span class="badge rounded-pill @Mode">@ModeDescription</span>
         </p>
-         <a href="@Component.UnitServices.Link" class="btn btn-primary position-relative">
+         <a href="@Component.Services.Link" class="btn btn-primary position-relative">
               @Localizer["OPEN"]
-              <AlarmsIndicator MessageProvider="@this.Component.UnitServices.MessageProvider"></AlarmsIndicator>
+              <AlarmsIndicator MessageProvider="@this.Component.MessageProvider"></AlarmsIndicator>
               @* @if (this.Component.UnitServices.MessageProvider.ActiveMessagesCount > 0) *@
               @* { *@
               @*     <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"> *@
@@ -94,13 +94,13 @@
     {
         if (Component != null)
         {
-            Component.Ground.Status.StartPolling(2500, this);
-            Component.Automat.Status.StartPolling(2500, this);
-            Component.Service.Status.StartPolling(2500, this);
+            Component.GroundTask.Status.StartPolling(2500, this);
+            Component.AutomatTask.Status.StartPolling(2500, this);
+            Component.ServiceTask.Status.StartPolling(2500, this);
 
-            PolledElements.Add(Component.Ground.Status);
-            PolledElements.Add(Component.Automat.Status);
-            PolledElements.Add(Component.Service.Status);
+            PolledElements.Add(Component.GroundTask.Status);
+            PolledElements.Add(Component.AutomatTask.Status);
+            PolledElements.Add(Component.ServiceTask.Status);
         }
     }
     
@@ -119,8 +119,8 @@
     protected override void OnInitialized()
     {
         
-        this.UpdateValuesOnChange(Component.Ground.Status);
-        this.UpdateValuesOnChange(Component.Automat.Status);
-        this.UpdateValuesOnChange(Component.Service.Status);
+        this.UpdateValuesOnChange(Component.GroundTask.Status);
+        this.UpdateValuesOnChange(Component.AutomatTask.Status);
+        this.UpdateValuesOnChange(Component.ServiceTask.Status);
     }
 }

@@ -8,13 +8,13 @@
     @* <div> *@
     @*     <VisualComposerContainer Objects="@AllVisualItems" Id="@Component.Symbol"></VisualComposerContainer> *@
     @* </div> *@
-    <UnitsSequences Component="@this.Component" ObjectCollection="@this.Component.UnitServices.Associates"></UnitsSequences>
-    <UnitsService ServiceTask="((dynamic)this.Component).ServiceMode" Components="@this.Component.UnitServices.Associates"></UnitsService>
+    <UnitsSequences Component="@this.Component" ObjectCollection="@this.Component.Associates"></UnitsSequences>
+    <UnitsService ServiceTask="((dynamic)this.Component).Service" Components="@this.Component.Associates"></UnitsService>
 </div>
 
 <!-- Modal data alarms -->
 <div class="modal fade" id="alarmsviewmodal" tabindex="-1" aria-labelledby="alarmsviewTitle" aria-hidden="true">
-    <AlarmsView MessageProvider="@this.Component.UnitServices.MessageProvider"></AlarmsView>
+    <AlarmsView MessageProvider="@this.Component.MessageProvider"></AlarmsView>
 </div>
 
 
@@ -32,8 +32,8 @@
                     </div>
                     <div class="row">
                         <button type="button" class="btn btn-primary"
-                                @onclick="async () => {await Component.UnitServices.TechnologySettings.OnlineToShadowAsync();
-                                               await Component.UnitServices.SharedTechnologySettings.OnlineToShadowAsync();
+                                @onclick="async () => {await Component.TechnologySettings.OnlineToShadowAsync();
+                                               await Component.SharedTechnologySettings.OnlineToShadowAsync();
                                     }">
                             Refresh
                         </button>
@@ -45,8 +45,8 @@
                     <div class="row">
                         @if (EnableModalTechnologySettings)
                         {
-                            <RenderableContentControl Context="@Component.UnitServices.SharedTechnologySettings" Presentation="Display" />
-                            <RenderableContentControl Context="@Component.UnitServices.TechnologySettings" Presentation="Display" />
+                            <RenderableContentControl Context="@Component.SharedTechnologySettings" Presentation="Display" />
+                            <RenderableContentControl Context="@Component.TechnologySettings" Presentation="Display" />
                         }
                     </div>
                 </div>
@@ -69,8 +69,8 @@
                     </div>
                     <div class="row">
                         <button type="button" class="btn btn-primary"
-                                @onclick="async () => {await Component.UnitServices.DataHeader.OnlineToShadowAsync();
-                                               await Component.UnitServices.Data.OnlineToShadowAsync();
+                                @onclick="async () => {await Component.DataHeader.OnlineToShadowAsync();
+                                               await Component.Data.OnlineToShadowAsync();
                                     }">
                             Refresh
                         </button>
@@ -82,8 +82,8 @@
                 {
                     <div class="container-fluid">
                         <div class="row">
-                            <RenderableContentControl Context="@Component.UnitServices.DataHeader" Presentation="Status-Display" />
-                            <RenderableContentControl Context="@Component.UnitServices.Data" Presentation="Status-Display" />
+                            <RenderableContentControl Context="@Component.DataHeader" Presentation="Status-Display" />
+                            <RenderableContentControl Context="@Component.Data" Presentation="Status-Display" />
                         </div>
                     </div>
                 }
@@ -110,7 +110,7 @@
                 {
                     <div class="container-fluid">
                         <div class="row">
-                            <RenderableContentControl Context="Component.UnitServices.UnitComponents" Presentation="Command-Control" />
+                            <RenderableContentControl Context="Component.UnitComponents" Presentation="Command-Control" />
                         </div>
                     </div>
                 }
@@ -129,7 +129,7 @@
         Process Data
     </button>
 
-    <AlarmsButton MessageProvider="@this.Component?.UnitServices.MessageProvider"></AlarmsButton>
+    <AlarmsButton MessageProvider="@this.Component?.MessageProvider"></AlarmsButton>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#componentsviewmodal" onclick="@ShowModalComponents">
         Components
     </button>

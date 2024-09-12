@@ -10,10 +10,10 @@ namespace Pocos
             {
             }
 
-            public axosimple.StarterUnitTemplate.UnitObjects UnitObjects { get; set; } = new axosimple.StarterUnitTemplate.UnitObjects();
-            public axosimple.StarterUnitTemplate.GroundSequence GroundSequence { get; set; } = new axosimple.StarterUnitTemplate.GroundSequence();
-            public axosimple.StarterUnitTemplate.AutomatSequence AutomatSequence { get; set; } = new axosimple.StarterUnitTemplate.AutomatSequence();
-            public axosimple.StarterUnitTemplate.ServiceMode ServiceMode { get; set; } = new axosimple.StarterUnitTemplate.ServiceMode();
+            public axosimple.StarterUnitTemplate.UnitObjects X { get; set; } = new axosimple.StarterUnitTemplate.UnitObjects();
+            public axosimple.StarterUnitTemplate.GroundSequence Ground { get; set; } = new axosimple.StarterUnitTemplate.GroundSequence();
+            public axosimple.StarterUnitTemplate.AutomatSequence Auto { get; set; } = new axosimple.StarterUnitTemplate.AutomatSequence();
+            public axosimple.StarterUnitTemplate.ServiceMode Service { get; set; } = new axosimple.StarterUnitTemplate.ServiceMode();
         }
     }
 }

@@ -2,7 +2,7 @@ using System;
 
 namespace Pocos
 {
-    namespace axosimple.UnitTemplate
+    namespace axosimple.StarterUnitTemplate
     {
         public partial class TechnologyDataManager : AXOpen.Data.AxoDataFragmentExchange, AXSharp.Connector.IPlain
         {
@@ -11,7 +11,7 @@ namespace Pocos
             }
 
             public axosimple.TechnologySharedDataExchange Shared { get; set; } = new axosimple.TechnologySharedDataExchange();
-            public axosimple.UnitTemplate.FragmentTechnologyDataManger DataManger { get; set; } = new axosimple.UnitTemplate.FragmentTechnologyDataManger();
+            public axosimple.StarterUnitTemplate.TechnologyDataExchange Data { get; set; } = new axosimple.StarterUnitTemplate.TechnologyDataExchange();
         }
     }
 }

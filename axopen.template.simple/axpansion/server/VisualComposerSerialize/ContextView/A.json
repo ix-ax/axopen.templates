@@ -1,14 +1,14 @@
 {
-  "BackgroundWidth": 200,
-  "BackgroundHeight": 200,
+  "BackgroundWidth": 100,
+  "BackgroundHeight": 100,
   "ImgSrc": null,
-  "BackgroundColor": "#FFFFFF",
+  "BackgroundColor": "#027dfb",
   "BackgroundSVGInput": "",
   "Items": [
     {
       "Id": "8e729099b499008e6604e84d6b67169f01935c21fc69da20fcc0a0ec0dd770a0",
-      "Left": 19.20466675089179,
-      "Top": 8.269928393720756,
+      "Left": 27.283950617283935,
+      "Top": 6.527777777777779,
       "Transform": "TopCenter",
       "Presentation": "Spot",
       "Width": -1,
@@ -22,8 +22,8 @@
     },
     {
       "Id": "f122746ffacbbf3a0633a9695c646677467d58ed708ea07d46a16dea4f178979",
-      "Left": 56.452503680101614,
-      "Top": 8.132190574594096,
+      "Left": 78.74999999999999,
+      "Top": 6.913580246913581,
       "Transform": "TopCenter",
       "Presentation": "Spot",
       "Width": -1,
@@ -37,8 +37,8 @@
     }
   ],
   "Theme": "text-dark",
-  "Scale": 1.0040000000000004,
-  "TranslateX": -0.11673156246186264,
+  "Scale": 1,
+  "TranslateX": 0,
   "TranslateY": 0,
   "AllowZoomingAndPanning": true
 }

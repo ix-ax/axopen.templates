@@ -46,7 +46,7 @@
 
         foreach (var a in ControlledUnits)
         {
-            await a.Automat.ExecuteAsync();
+            await a.AutomatTask.ExecuteAsync();
         }
 
         _alerts.AddAlertDialog(eAlertType.Success, Localizer["Mode change"], $"{Localizer[$"Automatic mode of selected units"]} has been started.", 3);
@@ -56,7 +56,7 @@
     {
         _alerts.AddAlertDialog(eAlertType.Info, Localizer["Mode change"], $"{Localizer[$"Requesting ground mode of selected units"]}.", 1);
         int expectedTimeToExecute = 20000;
-        ControlledUnits.ToList().ForEach(async a => await a.Ground.ExecuteAsync());
+        ControlledUnits.ToList().ForEach(async a => await a.GroundTask.ExecuteAsync());
 
         var sw = new System.Diagnostics.Stopwatch();
         sw.Start();
@@ -96,7 +96,7 @@
 
     private void Service()
     {
-        ControlledUnits.ToList().ForEach(async a => await a.Service.ExecuteAsync());
+        ControlledUnits.ToList().ForEach(async a => await a.ServiceTask.ExecuteAsync());
         this.StateHasChanged();
     }
 

@@ -12,25 +12,7 @@ namespace axosimple.server.Units;
 
 public interface IUnitServices
 {
-    AXOpen.Data.AxoDataEntity? Data { get; }
+    public string Link => "Context/StarterUnitTemplate";
 
-    AXOpen.Data.AxoDataEntity? DataHeader { get; }
-
-    AXOpen.Data.AxoDataExchangeBase? DataManger { get; }
-
-    AXOpen.Data.AxoDataEntity? TechnologySettings { get; }
-
-    AXOpen.Data.AxoDataEntity? SharedTechnologySettings { get; }
-
-    public AxoObject? UnitComponents { get; }
-        
-    public AxoMessageProvider MessageProvider { get; }
-    
-    public axosimple.BaseUnit.UnitBase Unit { get; }
-    
-    ITwinObject[] Associates { get; }
-    
-    string Link { get; }
-    
-    string ImageLink { get; }
+    public string ImageLink => "logo-header.svg";
 }

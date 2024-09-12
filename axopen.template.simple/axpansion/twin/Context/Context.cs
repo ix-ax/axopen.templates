@@ -1,4 +1,5 @@
-﻿using AXOpen.Base.Data;
+﻿using System;
+using AXOpen.Base.Data;
 using AXOpen.Data;
 using AXOpen.Data.MongoDb;
 using axosimple.server.Units;
@@ -21,9 +22,9 @@ namespace axosimple
 
         private axosimple.Context Context { get; } = Entry.Plc.Context;
         
-        public axosimple.ProcessData ProcessData { get; } = Entry.Plc.Context.ProcessData.CreateBuilder<axosimple.ProcessData>();
-        public axosimple.ProcessData ProcessSettings { get; } = Entry.Plc.Context.ProcessSettings.CreateBuilder<axosimple.ProcessData>();
-        public axosimple.TechnologyData TechnologySettings { get; } = Entry.Plc.Context.TechnologySettings.CreateBuilder<axosimple.TechnologyData>();
+        public axosimple.ProcessData ProcessData { get; } = Entry.Plc.Context.ProcessData.CreateDataFragments<axosimple.ProcessData>();
+        public axosimple.ProcessData ProcessSettings { get; } = Entry.Plc.Context.ProcessSettings.CreateDataFragments<axosimple.ProcessData>();
+        public axosimple.TechnologyData TechnologySettings { get; } = Entry.Plc.Context.TechnologySettings.CreateDataFragments<axosimple.TechnologyData>();
 
         public static string DataBaseConnectionString { get; } = "mongodb://localhost:27017";
         public static string DataBaseName { get; } = "axosimple";
@@ -32,20 +33,26 @@ namespace axosimple
         /// <summary>
         /// repository - settings connected with specific recepie
         /// </summary>
-        public IRepository<Pocos.axosimple.TechnologyCommonData> TechnologyCommonRepository { get; } 
-            = AXOpen.Data.MongoDb.Repository.Factory<Pocos.axosimple.TechnologyCommonData>(new MongoDbRepositorySettings<Pocos.axosimple.TechnologyCommonData>(DataBaseConnectionString, DataBaseName, "TechnologyCommon_Settings"));
+        public IRepository<Pocos.axosimple.TechnologySharedDataPayload> TechnologyCommonRepository { get; } 
+            = new MongoDbRepositorySettings<Pocos.axosimple.TechnologySharedDataPayload>(DataBaseConnectionString, DataBaseName, 
+                "TechnologyCommon_Settings")
+                .Factory<Pocos.axosimple.TechnologySharedDataPayload>();
 
         /// <summary>
         /// repository - settings connected with specific recepie
         /// </summary>
-        public IRepository<Pocos.axosimple.EntityData> EntitySettingsRepository { get; } 
-            = AXOpen.Data.MongoDb.Repository.Factory<Pocos.axosimple.EntityData>( new MongoDbRepositorySettings<Pocos.axosimple.EntityData>(DataBaseConnectionString, DataBaseName, "Entity_Settings"));
+        public IRepository<Pocos.axosimple.SharedDataPayload> EntitySettingsRepository { get; } 
+            = new MongoDbRepositorySettings<Pocos.axosimple.SharedDataPayload>(DataBaseConnectionString, DataBaseName, 
+                "Entity_Settings")
+                .Factory<Pocos.axosimple.SharedDataPayload>();
 
         /// <summary>
         /// repository - data connected with specific part or piece in production/technology
         /// </summary>
-        public IRepository<Pocos.axosimple.EntityData> EntityDataRepository { get; } =
-            AXOpen.Data.MongoDb.Repository.Factory<Pocos.axosimple.EntityData>(new MongoDbRepositorySettings<Pocos.axosimple.EntityData>(DataBaseConnectionString, DataBaseName, "Entity_Data"));
+        public IRepository<Pocos.axosimple.SharedDataPayload> EntityDataRepository { get; } =
+            new MongoDbRepositorySettings<Pocos.axosimple.SharedDataPayload>(DataBaseConnectionString, DataBaseName, 
+                "Entity_Data")
+                .Factory();
 
         public ContextService SetContextData()
         {

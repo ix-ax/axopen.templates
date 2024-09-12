@@ -2,7 +2,7 @@ using System;
 
 namespace Pocos
 {
-    namespace axosimple.UnitTemplate
+    namespace axosimple.StarterUnitTemplate
     {
         public partial class ProcessDataManager : AXOpen.Data.AxoDataFragmentExchange, AXSharp.Connector.IPlain
         {
@@ -11,7 +11,7 @@ namespace Pocos
             }
 
             public axosimple.SharedDataExchange Shared { get; set; } = new axosimple.SharedDataExchange();
-            public axosimple.UnitTemplate.FragmentProcessDataManger DataManger { get; set; } = new axosimple.UnitTemplate.FragmentProcessDataManger();
+            public axosimple.StarterUnitTemplate.ProcessDataExchange Data { get; set; } = new axosimple.StarterUnitTemplate.ProcessDataExchange();
         }
     }
 }

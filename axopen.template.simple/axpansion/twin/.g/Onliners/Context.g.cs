@@ -535,13 +535,13 @@ namespace axosimple
     public partial class ProcessData : AXOpen.Data.AxoDataFragmentExchange
     {
         [AXOpen.Data.AxoDataFragmentAttribute]
-        public axosimple.EntityHeaderDataManager Entity { get; }
+        public axosimple.SharedDataExchange Entity { get; }
 
         [AXOpen.Data.AxoDataFragmentAttribute]
         public axosimple.UnitTemplate.FragmentProcessDataManger UnitTemplate { get; }
 
         [AXOpen.Data.AxoDataFragmentAttribute]
-        public axosimple.StarterUnitTemplate.FragmentProcessDataManger StarterUnitTemplate { get; }
+        public axosimple.StarterUnitTemplate.ProcessDataExchange StarterUnitTemplate { get; }
 
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
@@ -549,9 +549,9 @@ namespace axosimple
         {
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
             PreConstruct(parent, readableTail, symbolTail);
-            Entity = new axosimple.EntityHeaderDataManager(this, "Entity", "Entity");
+            Entity = new axosimple.SharedDataExchange(this, "Entity", "Entity");
             UnitTemplate = new axosimple.UnitTemplate.FragmentProcessDataManger(this, "UnitTemplate", "UnitTemplate");
-            StarterUnitTemplate = new axosimple.StarterUnitTemplate.FragmentProcessDataManger(this, "StarterUnitTemplate", "StarterUnitTemplate");
+            StarterUnitTemplate = new axosimple.StarterUnitTemplate.ProcessDataExchange(this, "StarterUnitTemplate", "StarterUnitTemplate");
             PostConstruct(parent, readableTail, symbolTail);
         }
 
@@ -736,13 +736,13 @@ namespace axosimple
     public partial class TechnologyData : AXOpen.Data.AxoDataFragmentExchange
     {
         [AXOpen.Data.AxoDataFragmentAttribute]
-        public axosimple.TechnologyCommonDataManager Common { get; }
+        public axosimple.TechnologySharedDataExchange Common { get; }
 
         [AXOpen.Data.AxoDataFragmentAttribute]
         public axosimple.UnitTemplate.FragmentTechnologyDataManger UnitTemplate { get; }
 
         [AXOpen.Data.AxoDataFragmentAttribute]
-        public axosimple.StarterUnitTemplate.FragmentTechnologyDataManger StarterUnitTemplate { get; }
+        public axosimple.StarterUnitTemplate.TechnologyDataExchange StarterUnitTemplate { get; }
 
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
@@ -750,9 +750,9 @@ namespace axosimple
         {
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
             PreConstruct(parent, readableTail, symbolTail);
-            Common = new axosimple.TechnologyCommonDataManager(this, "Common", "Common");
+            Common = new axosimple.TechnologySharedDataExchange(this, "Common", "Common");
             UnitTemplate = new axosimple.UnitTemplate.FragmentTechnologyDataManger(this, "UnitTemplate", "UnitTemplate");
-            StarterUnitTemplate = new axosimple.StarterUnitTemplate.FragmentTechnologyDataManger(this, "StarterUnitTemplate", "StarterUnitTemplate");
+            StarterUnitTemplate = new axosimple.StarterUnitTemplate.TechnologyDataExchange(this, "StarterUnitTemplate", "StarterUnitTemplate");
             PostConstruct(parent, readableTail, symbolTail);
         }
 

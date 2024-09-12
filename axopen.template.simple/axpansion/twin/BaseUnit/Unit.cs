@@ -5,36 +5,50 @@
 // https://github.com/PTKu/ix/blob/master/LICENSE
 // Third party licenses: https://github.com/PTKu/ix/blob/master/notices.md
 
+using AXOpen.Messaging.Static;
 using axosimple.server.Units;
+using AXSharp.Connector;
 
 namespace axosimple.BaseUnit
 {
-    public partial class UnitBase : AXOpen.Core.AxoObject, axosimple.IUnit
+    public abstract partial class UnitBase : AXOpen.Core.AxoObject, axosimple.IUnit
     {
-        public IUnitServices UnitServices { get; internal set; }
+        /// <summary>
+        /// Gets the data payload for the unit.
+        /// </summary>
+        public abstract AXOpen.Data.AxoDataEntity? Data { get; }
+
+        /// <summary>
+        /// Gets data header for the unit.
+        /// </summary>
+        public abstract AXOpen.Data.AxoDataEntity? DataHeader { get; }
         
-        public AxoTask Automat
-        {
-            get { return this.GetType().GetProperty("AutomatSequence").GetValue(this) as AxoTask; }
-        }
+        public abstract AXOpen.Data.AxoDataEntity? TechnologySettings { get; }
 
-        public AxoTask Ground
-        {
-            get { return this.GetType().GetProperty("GroundSequence").GetValue(this) as AxoTask; }
-        }
+        public abstract AXOpen.Data.AxoDataEntity? SharedTechnologySettings { get; }
 
-        public AxoTask Service
-        {
-            get { return this.GetType().GetProperty("ServiceMode").GetValue(this) as AxoTask; }
-        }
+        public abstract AxoObject? UnitComponents { get; }
+        
+        public abstract AxoMessageProvider MessageProvider { get; }
+    
+        public abstract ITwinObject[] Associates { get; }
+        
+        public IUnitServices Services { get; internal set; } 
+        
+        public abstract AxoTask AutomatTask { get; }
+        
+        public abstract AxoTask GroundTask { get; }
+        
 
+        public abstract AxoTask ServiceTask { get; }
+        
         public eAxoTaskState GroundStatus
         {
             get
             {
                 try
                 {
-                    return (AXOpen.Core.eAxoTaskState)Ground?.Status.LastValue;
+                    return (AXOpen.Core.eAxoTaskState)GroundTask?.Status.LastValue;
                 }
                 catch
                 {
@@ -49,7 +63,7 @@ namespace axosimple.BaseUnit
             {
                 try
                 {
-                    return (AXOpen.Core.eAxoTaskState)Automat?.Status.LastValue;
+                    return (AXOpen.Core.eAxoTaskState)AutomatTask?.Status.LastValue;
                 }
                 catch
                 {
@@ -64,7 +78,7 @@ namespace axosimple.BaseUnit
             {
                 try
                 {
-                    return (AXOpen.Core.eAxoTaskState)Service?.Status.LastValue;
+                    return (AXOpen.Core.eAxoTaskState)ServiceTask?.Status.LastValue;
                 }
                 catch
                 {

@@ -37,9 +37,9 @@ namespace Pocos
             {
             }
 
-            public axosimple.EntityHeaderDataManager Entity { get; set; } = new axosimple.EntityHeaderDataManager();
+            public axosimple.SharedDataExchange Entity { get; set; } = new axosimple.SharedDataExchange();
             public axosimple.UnitTemplate.FragmentProcessDataManger UnitTemplate { get; set; } = new axosimple.UnitTemplate.FragmentProcessDataManger();
-            public axosimple.StarterUnitTemplate.FragmentProcessDataManger StarterUnitTemplate { get; set; } = new axosimple.StarterUnitTemplate.FragmentProcessDataManger();
+            public axosimple.StarterUnitTemplate.ProcessDataExchange StarterUnitTemplate { get; set; } = new axosimple.StarterUnitTemplate.ProcessDataExchange();
         }
 
         public partial class TechnologyData : AXOpen.Data.AxoDataFragmentExchange, AXSharp.Connector.IPlain
@@ -48,9 +48,9 @@ namespace Pocos
             {
             }
 
-            public axosimple.TechnologyCommonDataManager Common { get; set; } = new axosimple.TechnologyCommonDataManager();
+            public axosimple.TechnologySharedDataExchange Common { get; set; } = new axosimple.TechnologySharedDataExchange();
             public axosimple.UnitTemplate.FragmentTechnologyDataManger UnitTemplate { get; set; } = new axosimple.UnitTemplate.FragmentTechnologyDataManger();
-            public axosimple.StarterUnitTemplate.FragmentTechnologyDataManger StarterUnitTemplate { get; set; } = new axosimple.StarterUnitTemplate.FragmentTechnologyDataManger();
+            public axosimple.StarterUnitTemplate.TechnologyDataExchange StarterUnitTemplate { get; set; } = new axosimple.StarterUnitTemplate.TechnologyDataExchange();
         }
     }
 }

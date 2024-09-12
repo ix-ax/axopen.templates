@@ -4,24 +4,21 @@ using AXSharp.Connector.ValueTypes;
 using System.Collections.Generic;
 using AXSharp.Connector.Localizations;
 
-namespace axosimple.UnitTemplate
+namespace axosimple
 {
-    public partial class TechnologyDataManager : AXOpen.Data.AxoDataFragmentExchange
+    public partial class SharedDataExchange : AXOpen.Data.AxoDataExchange<axosimple.SharedDataPayload, Pocos.axosimple.SharedDataPayload>
     {
-        [AXOpen.Data.AxoDataFragmentAttribute]
-        public axosimple.TechnologySharedDataExchange Shared { get; }
-
-        [AXOpen.Data.AxoDataFragmentAttribute]
-        public axosimple.UnitTemplate.FragmentTechnologyDataManger DataManger { get; }
+        [AXOpen.Data.AxoDataEntityAttribute]
+        [Container(Layout.Stack)]
+        public axosimple.SharedDataPayload Payload { get; }
 
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
-        public TechnologyDataManager(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail) : base(parent, readableTail, symbolTail)
+        public SharedDataExchange(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail) : base(parent, readableTail, symbolTail)
         {
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
             PreConstruct(parent, readableTail, symbolTail);
-            Shared = new axosimple.TechnologySharedDataExchange(this, "Shared", "Shared");
-            DataManger = new axosimple.UnitTemplate.FragmentTechnologyDataManger(this, "DataManger", "DataManger");
+            Payload = new axosimple.SharedDataPayload(this, "Payload", "Payload");
             PostConstruct(parent, readableTail, symbolTail);
         }
 
@@ -30,51 +27,42 @@ namespace axosimple.UnitTemplate
             return await (dynamic)this.OnlineToPlainAsync();
         }
 
-        public new async Task<Pocos.axosimple.UnitTemplate.TechnologyDataManager> OnlineToPlainAsync()
+        public new async Task<Pocos.axosimple.SharedDataExchange> OnlineToPlainAsync()
         {
-            Pocos.axosimple.UnitTemplate.TechnologyDataManager plain = new Pocos.axosimple.UnitTemplate.TechnologyDataManager();
+            Pocos.axosimple.SharedDataExchange plain = new Pocos.axosimple.SharedDataExchange();
             await this.ReadAsync<IgnoreOnPocoOperation>();
 #pragma warning disable CS0612
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.Shared = await Shared._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.DataManger = await DataManger._OnlineToPlainNoacAsync();
+            plain.Payload = await Payload._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
 
         [Obsolete("This method should not be used if you indent to access the controllers data. Use `OnlineToPlain` instead.")]
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-        public new async Task<Pocos.axosimple.UnitTemplate.TechnologyDataManager> _OnlineToPlainNoacAsync()
+        public new async Task<Pocos.axosimple.SharedDataExchange> _OnlineToPlainNoacAsync()
         {
-            Pocos.axosimple.UnitTemplate.TechnologyDataManager plain = new Pocos.axosimple.UnitTemplate.TechnologyDataManager();
+            Pocos.axosimple.SharedDataExchange plain = new Pocos.axosimple.SharedDataExchange();
 #pragma warning disable CS0612
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.Shared = await Shared._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.DataManger = await DataManger._OnlineToPlainNoacAsync();
+            plain.Payload = await Payload._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
 
         [Obsolete("This method should not be used if you indent to access the controllers data. Use `OnlineToPlain` instead.")]
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-        protected async Task<Pocos.axosimple.UnitTemplate.TechnologyDataManager> _OnlineToPlainNoacAsync(Pocos.axosimple.UnitTemplate.TechnologyDataManager plain)
+        protected async Task<Pocos.axosimple.SharedDataExchange> _OnlineToPlainNoacAsync(Pocos.axosimple.SharedDataExchange plain)
         {
 #pragma warning disable CS0612
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.Shared = await Shared._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.DataManger = await DataManger._OnlineToPlainNoacAsync();
+            plain.Payload = await Payload._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -84,28 +72,22 @@ namespace axosimple.UnitTemplate
             await this.PlainToOnlineAsync((dynamic)plain);
         }
 
-        public async Task<IEnumerable<ITwinPrimitive>> PlainToOnlineAsync(Pocos.axosimple.UnitTemplate.TechnologyDataManager plain)
+        public async Task<IEnumerable<ITwinPrimitive>> PlainToOnlineAsync(Pocos.axosimple.SharedDataExchange plain)
         {
             await base._PlainToOnlineNoacAsync(plain);
 #pragma warning disable CS0612
-            await this.Shared._PlainToOnlineNoacAsync(plain.Shared);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.DataManger._PlainToOnlineNoacAsync(plain.DataManger);
+            await this.Payload._PlainToOnlineNoacAsync(plain.Payload);
 #pragma warning restore CS0612
             return await this.WriteAsync<IgnoreOnPocoOperation>();
         }
 
         [Obsolete("This method should not be used if you indent to access the controllers data. Use `PlainToOnline` instead.")]
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-        public async Task _PlainToOnlineNoacAsync(Pocos.axosimple.UnitTemplate.TechnologyDataManager plain)
+        public async Task _PlainToOnlineNoacAsync(Pocos.axosimple.SharedDataExchange plain)
         {
             await base._PlainToOnlineNoacAsync(plain);
 #pragma warning disable CS0612
-            await this.Shared._PlainToOnlineNoacAsync(plain.Shared);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.DataManger._PlainToOnlineNoacAsync(plain.DataManger);
+            await this.Payload._PlainToOnlineNoacAsync(plain.Payload);
 #pragma warning restore CS0612
         }
 
@@ -114,20 +96,18 @@ namespace axosimple.UnitTemplate
             return await (dynamic)this.ShadowToPlainAsync();
         }
 
-        public new async Task<Pocos.axosimple.UnitTemplate.TechnologyDataManager> ShadowToPlainAsync()
+        public new async Task<Pocos.axosimple.SharedDataExchange> ShadowToPlainAsync()
         {
-            Pocos.axosimple.UnitTemplate.TechnologyDataManager plain = new Pocos.axosimple.UnitTemplate.TechnologyDataManager();
+            Pocos.axosimple.SharedDataExchange plain = new Pocos.axosimple.SharedDataExchange();
             await base.ShadowToPlainAsync(plain);
-            plain.Shared = await Shared.ShadowToPlainAsync();
-            plain.DataManger = await DataManger.ShadowToPlainAsync();
+            plain.Payload = await Payload.ShadowToPlainAsync();
             return plain;
         }
 
-        protected async Task<Pocos.axosimple.UnitTemplate.TechnologyDataManager> ShadowToPlainAsync(Pocos.axosimple.UnitTemplate.TechnologyDataManager plain)
+        protected async Task<Pocos.axosimple.SharedDataExchange> ShadowToPlainAsync(Pocos.axosimple.SharedDataExchange plain)
         {
             await base.ShadowToPlainAsync(plain);
-            plain.Shared = await Shared.ShadowToPlainAsync();
-            plain.DataManger = await DataManger.ShadowToPlainAsync();
+            plain.Payload = await Payload.ShadowToPlainAsync();
             return plain;
         }
 
@@ -136,11 +116,10 @@ namespace axosimple.UnitTemplate
             await this.PlainToShadowAsync((dynamic)plain);
         }
 
-        public async Task<IEnumerable<ITwinPrimitive>> PlainToShadowAsync(Pocos.axosimple.UnitTemplate.TechnologyDataManager plain)
+        public async Task<IEnumerable<ITwinPrimitive>> PlainToShadowAsync(Pocos.axosimple.SharedDataExchange plain)
         {
             await base.PlainToShadowAsync(plain);
-            await this.Shared.PlainToShadowAsync(plain.Shared);
-            await this.DataManger.PlainToShadowAsync(plain.DataManger);
+            await this.Payload.PlainToShadowAsync(plain.Payload);
             return this.RetrievePrimitives();
         }
 
@@ -154,7 +133,7 @@ namespace axosimple.UnitTemplate
         ///Compares if the current plain object has changed from the previous object.This method is used by the framework to determine if the object has changed and needs to be updated.
         ///[!NOTE] Any member in the hierarchy that is ignored by the compilers (e.g. when CompilerOmitAttribute is used) will not be compared, and therefore will not be detected as changed.
         ///</summary>
-        public new async Task<bool> DetectsAnyChangeAsync(Pocos.axosimple.UnitTemplate.TechnologyDataManager plain, Pocos.axosimple.UnitTemplate.TechnologyDataManager latest = null)
+        public new async Task<bool> DetectsAnyChangeAsync(Pocos.axosimple.SharedDataExchange plain, Pocos.axosimple.SharedDataExchange latest = null)
         {
             if (latest == null)
                 latest = await this._OnlineToPlainNoacAsync();
@@ -163,9 +142,7 @@ namespace axosimple.UnitTemplate
             {
                 if (await base.DetectsAnyChangeAsync(plain))
                     return true;
-                if (await Shared.DetectsAnyChangeAsync(plain.Shared, latest.Shared))
-                    somethingChanged = true;
-                if (await DataManger.DetectsAnyChangeAsync(plain.DataManger, latest.DataManger))
+                if (await Payload.DetectsAnyChangeAsync(plain.Payload, latest.Payload))
                     somethingChanged = true;
                 plain = latest;
                 return somethingChanged;
@@ -177,9 +154,9 @@ namespace axosimple.UnitTemplate
             this.RetrievePrimitives().ToList().ForEach(x => x.Poll());
         }
 
-        public new Pocos.axosimple.UnitTemplate.TechnologyDataManager CreateEmptyPoco()
+        public new Pocos.axosimple.SharedDataExchange CreateEmptyPoco()
         {
-            return new Pocos.axosimple.UnitTemplate.TechnologyDataManager();
+            return new Pocos.axosimple.SharedDataExchange();
         }
     }
 }

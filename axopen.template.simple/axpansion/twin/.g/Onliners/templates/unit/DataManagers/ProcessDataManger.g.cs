@@ -9,7 +9,7 @@ namespace axosimple.UnitTemplate
     public partial class ProcessDataManager : AXOpen.Data.AxoDataFragmentExchange
     {
         [AXOpen.Data.AxoDataFragmentAttribute]
-        public axosimple.EntityHeaderDataManager Shared { get; }
+        public axosimple.SharedDataExchange Shared { get; }
 
         [AXOpen.Data.AxoDataFragmentAttribute]
         public axosimple.UnitTemplate.FragmentProcessDataManger DataManger { get; }
@@ -20,7 +20,7 @@ namespace axosimple.UnitTemplate
         {
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
             PreConstruct(parent, readableTail, symbolTail);
-            Shared = new axosimple.EntityHeaderDataManager(this, "Shared", "Shared");
+            Shared = new axosimple.SharedDataExchange(this, "Shared", "Shared");
             DataManger = new axosimple.UnitTemplate.FragmentProcessDataManger(this, "DataManger", "DataManger");
             PostConstruct(parent, readableTail, symbolTail);
         }

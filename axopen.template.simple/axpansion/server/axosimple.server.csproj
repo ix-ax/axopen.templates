@@ -28,6 +28,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Folder Include="VisualComposerSerialize\" />
 		<Folder Include="wwwroot\js\" />
 	</ItemGroup>
 
