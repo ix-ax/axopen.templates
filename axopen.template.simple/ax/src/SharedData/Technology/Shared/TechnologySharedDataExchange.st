@@ -1,12 +1,12 @@
 NAMESPACE axosimple
     {S7.extern=ReadWrite}
-    CLASS EntityHeaderDataManager EXTENDS AXOpen.Data.AxoDataExchange
+    CLASS TechnologySharedDataExchange EXTENDS AXOpen.Data.AxoDataExchange
         VAR PUBLIC
             {#ix-generic:TOnline}
             {#ix-generic:TPlain as POCO}
             {#ix-attr:[AXOpen.Data.AxoDataEntityAttribute]}
             {#ix-attr:[Container(Layout.Stack)]}    
-            Entity : EntityData;
+            Payload : TechnologySharedDataPayload;
         END_VAR        
     END_CLASS
         

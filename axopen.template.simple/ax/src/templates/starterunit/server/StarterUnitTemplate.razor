@@ -18,21 +18,21 @@
         <div class="col">
             <AuthorizeView Roles="@Roles.can_run_automat_mode">
                 <Authorized>
-                    <AxoTaskView Component="Unit.AutomatSequence"></AxoTaskView>
+                    <AxoTaskView Component="Unit.AutomatTask"></AxoTaskView>
                 </Authorized>
             </AuthorizeView>
         </div>
         <div class="col">
             <AuthorizeView Roles="@Roles.can_run_ground_mode">
                 <Authorized>
-                     <AxoTaskView Component="Unit.GroundSequence"></AxoTaskView>
+                     <AxoTaskView Component="Unit.GroundTask"></AxoTaskView>
                 </Authorized>
             </AuthorizeView>
         </div>
         <div class="col">
             <AuthorizeView Roles="@Roles.can_run_service_mode">
                 <Authorized>
-                      <AxoTaskView Component="Unit.ServiceMode"></AxoTaskView>
+                      <AxoTaskView Component="Unit.ServiceTask"></AxoTaskView>
                 </Authorized>
             </AuthorizeView>
            
@@ -45,7 +45,7 @@
 
 @code
 {
-    private UnitServices Services => Entry.Plc.Context.StarterUnitTemplate.Services;
+    private IUnitServices Services => Entry.Plc.Context.StarterUnitTemplate.Services;
     private axosimple.StarterUnitTemplate.Unit Unit => Entry.Plc.Context.StarterUnitTemplate;
 }
     

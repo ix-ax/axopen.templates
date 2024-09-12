@@ -44,10 +44,10 @@ NAMESPACE axosimple
             GlobalObjects.ProcessData    := REF(ProcessData);
                         
             // remember last selected identifier 
-            if TechnologySettings.Common.Entity.DataEntityId <> '' THEN
-                IF GlobalObjects.LastTechnologySettings <> TechnologySettings.Common.Entity.DataEntityId THEN 
+            if TechnologySettings.Common.Payload.DataEntityId <> '' THEN
+                IF GlobalObjects.LastTechnologySettings <> TechnologySettings.Common.Payload.DataEntityId THEN 
                     IF PersistentData.InvokeUpdate(TechnologySettings, '') THEN 
-                        GlobalObjects.LastTechnologySettings := TechnologySettings.Common.Entity.DataEntityId;
+                        GlobalObjects.LastTechnologySettings := TechnologySettings.Common.Payload.DataEntityId;
                    END_IF;
                 END_IF;
             END_IF;
@@ -55,7 +55,7 @@ NAMESPACE axosimple
            IF(Inputs <> NULL AND Outputs <> NULL) THEN
                ;//Units entry calls - You can use snippet unitRootCall
             
-               StarterUnitTemplate.UnitObjects.StationNumber := eStations#StarterUnitTemplate;                          
+               StarterUnitTemplate.X.StationNumber := eStations#StarterUnitTemplate;                          
                StarterUnitTemplate.Run(THIS, Inputs^, Outputs^, 
                                        REF(TechnologySettings.StarterUnitTemplate), 
                                        REF(ProcessSettings.StarterUnitTemplate), 
@@ -90,7 +90,7 @@ NAMESPACE axosimple
     CLASS ProcessData EXTENDS AXOpen.Data.AxoDataFragmentExchange
         VAR PUBLIC                    
             {#ix-attr:[AXOpen.Data.AxoDataFragmentAttribute]}
-            Entity : EntityHeaderDataManager;   
+            Entity : SharedDataExchange;   
             
             // Units data - You can use snippet unitAddProcessData
             
@@ -98,7 +98,7 @@ NAMESPACE axosimple
             UnitTemplate : axosimple.UnitTemplate.FragmentProcessDataManger;
 
             {#ix-attr:[AXOpen.Data.AxoDataFragmentAttribute]}
-            StarterUnitTemplate : axosimple.StarterUnitTemplate.FragmentProcessDataManger;
+            StarterUnitTemplate : axosimple.StarterUnitTemplate.ProcessDataExchange;
         
         END_VAR        
     END_CLASS
@@ -107,14 +107,14 @@ NAMESPACE axosimple
     CLASS TechnologyData EXTENDS AXOpen.Data.AxoDataFragmentExchange
         VAR PUBLIC                    
             {#ix-attr:[AXOpen.Data.AxoDataFragmentAttribute]}
-            Common : TechnologyCommonDataManager;   
+            Common : TechnologySharedDataExchange;   
 
             // Units technology data - You can use snippet unitAddTechnologyData
             {#ix-attr:[AXOpen.Data.AxoDataFragmentAttribute]}
             UnitTemplate : axosimple.UnitTemplate.FragmentTechnologyDataManger;
 
             {#ix-attr:[AXOpen.Data.AxoDataFragmentAttribute]}
-            StarterUnitTemplate : axosimple.StarterUnitTemplate.FragmentTechnologyDataManger;
+            StarterUnitTemplate : axosimple.StarterUnitTemplate.TechnologyDataExchange;
         END_VAR        
     END_CLASS
 END_NAMESPACE

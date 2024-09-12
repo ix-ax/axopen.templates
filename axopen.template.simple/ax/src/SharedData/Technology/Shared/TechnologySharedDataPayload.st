@@ -1,7 +1,7 @@
 NAMESPACE axosimple
 
 {S7.extern=ReadWrite}
-CLASS TechnologyCommonData EXTENDS AXOpen.Data.AxoDataEntity
+CLASS TechnologySharedDataPayload EXTENDS AXOpen.Data.AxoDataEntity
         VAR PUBLIC		
             {#ix-set:AttributeName = "<#Cycle time#> - <#Nominal#>"}
             IdealCycleTime   : TIME;

@@ -33,15 +33,15 @@ NAMESPACE axosimple.UnitTemplate
 
         METHOD INTERNAL Run
             VAR_INPUT
-                _parent : AXOpen.Core.IAxoObject;
-                _unitObjects : REF_TO axosimple.UnitTemplate.UnitObjects;
+                inParent : AXOpen.Core.IAxoObject;
+                inUnitObjects : REF_TO axosimple.UnitTemplate.UnitObjects;
             END_VAR     
 
             IF Objs = NULL THEN 
-                Objs := _unitObjects;                               
+                Objs := inUnitObjects;                               
             END_IF;
 
-            SUPER.Run(_parent);
+            SUPER.Run(inParent);
 
         END_METHOD
         ///<summary>
@@ -89,8 +89,8 @@ NAMESPACE axosimple.UnitTemplate
                 //------------------------------------------------------- 
                 IF CurrentStep.IsFirstEntryToStep() THEN 
 
-                    IF Objs^.Global^.TechnologySettings^.Common.Entity.DataEntityId <> '' THEN
-                       techSetttingsId := Objs^.Global^.TechnologySettings^.Common.Entity.DataEntityId; // TAKE GLOGAL TECHNOLOGY SETTINGS ID
+                    IF Objs^.Global^.TechnologySettings^.Common.Payload.DataEntityId <> '' THEN
+                       techSetttingsId := Objs^.Global^.TechnologySettings^.Common.Payload.DataEntityId; // TAKE GLOGAL TECHNOLOGY SETTINGS ID
 
                     ELSIF Objs^.TechnologySettings^.Payload.DataEntityId <> '' THEN // TAKE LAST LOADED FOR STATION
                         techSetttingsId := Objs^.TechnologySettings^.Payload.DataEntityId;
@@ -102,7 +102,7 @@ NAMESPACE axosimple.UnitTemplate
                         techSetttingsId := Objs^.LastTechnologySettings;
                     END_IF;
                     
-                    IF Objs^.Global^.TechnologySettings^.Common.Entity.DataEntityId = Objs^.TechnologySettings^.Payload.DataEntityId then 
+                    IF Objs^.Global^.TechnologySettings^.Common.Payload.DataEntityId = Objs^.TechnologySettings^.Payload.DataEntityId then 
                         //THIS.MoveNext(); // you can skip loading...
                         ;
                     end_if;
@@ -127,8 +127,8 @@ NAMESPACE axosimple.UnitTemplate
                 //-------------------------------------------------------
                 CASE TO_INT( THIS.GetMicroStepValue()) OF
                     0 : 
-                        IF ProcessDataManager^.Shared.Entity.DataEntityId <> '' THEN 
-                            _currentId := ProcessDataManager^.Shared.Entity.DataEntityId;
+                        IF ProcessDataManager^.Shared.Payload.DataEntityId <> '' THEN 
+                            _currentId := ProcessDataManager^.Shared.Payload.DataEntityId;
                             THIS.SetMicroStepValue(UINT#10);
 
                         ELSE // FIST RUN OR WITHOUT DATA
@@ -136,7 +136,7 @@ NAMESPACE axosimple.UnitTemplate
                         END_IF;
 
                     10 : // update part as a corrupted a interrupted
-                        ProcessDataManager^.Shared.Entity.WasReset := true;
+                        ProcessDataManager^.Shared.Payload.WasReset := true;
                         IF ProcessDataManager^.Update(_currentId).IsDone() THEN 
                                 THIS.MoveNext(); 
                         END_IF;  

@@ -11,28 +11,27 @@ NAMESPACE axosimple.StarterUnitTemplate
             ///<summary>
             /// Handles and intializes components used by this unit.
             ///</summary>
-            Components : axosimple.StarterUnitTemplate.Components;
+            C : axosimple.StarterUnitTemplate.Components;
             
             ///<summary>
             /// Provides access to process data manager of this unit.
             ///</summary>
-            ProcessData : axosimple.StarterUnitTemplate.ProcessDataManager;
-
+            PD : axosimple.StarterUnitTemplate.ProcessDataManager;
             
             ///<summary>
-            /// Provides access to technology data managers of this unit.
+            /// Provides access to technology data manager of this unit.
             ///</summary>
-            TechnologyData : axosimple.StarterUnitTemplate.TechnologyDataManager;
+            TD : axosimple.StarterUnitTemplate.TechnologyDataManager;
 
             ///<summary>
-            /// Provides access to process data manager of this unit.
+            /// Provides access to technology settings of this unit.
             ///</summary>
-            TechnologySettings : REF_TO axosimple.StarterUnitTemplate.FragmentTechnologyDataManger;
+            TS : REF_TO axosimple.StarterUnitTemplate.TechnologyDataExchange;
 
             ///<summary>
-            /// Provides access to process data manager of this unit.
+            /// Provides access to process setting of this unit.
             ///</summary>
-            ProcessSettings : REF_TO axosimple.StarterUnitTemplate.FragmentProcessDataManger;
+            PS : REF_TO axosimple.StarterUnitTemplate.ProcessDataExchange;
 
             {#ix-attr:[AXOpen.Data.PersistentAttribute("StarterUnitTemplate")]}
             SpecialSettings :STRING[64] ;

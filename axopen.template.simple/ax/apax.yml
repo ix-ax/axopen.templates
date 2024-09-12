@@ -9,6 +9,7 @@ registries:
 devDependencies:
   "@ix-ax/ax-sdk": '0.0.0-dev.0'
   "@ax/sld": ^3.0.6-alpha
+  "@ax/stc": ^7.1.81
   #"@ix-ax/ax-sdk": '0.4.3-dev-2311.790'  
   "@ax/st-lang-contrib-library-toolbox": ^0.17.2
 dependencies:
@@ -84,9 +85,9 @@ scripts:
     mv  ./src/$unitname/server/*.* ../axpansion/server/Pages/Context/Units/
     rm -rf ./src/$unitname/server/
   osrc: |
-   if [[ "$HWCONFIG" == "TIA-NON-SECURE" ]]; then
-      apax oscr interface install $AXTARGETPLATFORMINPUT -t $AXTARGET  --accept-security-disclaimer   
-   fi   
+    if [[ "$HWCONFIG" == "TIA-NON-SECURE" ]]; then
+       apax oscr interface install $AXTARGETPLATFORMINPUT -t $AXTARGET  --accept-security-disclaimer   
+    fi   
   download: |
     apax build --ignore-scripts
     if [[ "$HWCONFIG" == "HWC" ]]; then

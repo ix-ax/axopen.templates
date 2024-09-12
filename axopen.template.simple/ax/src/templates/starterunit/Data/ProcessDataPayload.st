@@ -5,7 +5,7 @@ NAMESPACE axosimple.StarterUnitTemplate
     USING System.Strings;
  
     {S7.extern=ReadWrite}
-    CLASS ProcessData
+    CLASS ProcessDataPayload
         EXTENDS AXOpen.Data.AxoDataEntity
         VAR PUBLIC
             CounterDelay : ULINT;  

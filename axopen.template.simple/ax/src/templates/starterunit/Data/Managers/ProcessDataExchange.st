@@ -5,7 +5,7 @@ NAMESPACE axosimple.StarterUnitTemplate
     USING System.Strings;
     
     {S7.extern=ReadWrite}
-    CLASS FragmentProcessDataManger
+    CLASS ProcessDataExchange
         EXTENDS AXOpen.Data.AxoDataExchange
         VAR PUBLIC
             {#ix-generic:TOnline}
@@ -13,7 +13,7 @@ NAMESPACE axosimple.StarterUnitTemplate
             {#ix-attr:[AXOpen.Data.AxoDataEntityAttribute]}        
             {#ix-attr:[Container(Layout.Stack)]}  
             {#ix-set:AttributeName = "<#StarterUnitTemplate#>"}   
-            Payload : axosimple.StarterUnitTemplate.ProcessData;
+            Payload : ProcessDataPayload;
         END_VAR
     END_CLASS
 END_NAMESPACE    

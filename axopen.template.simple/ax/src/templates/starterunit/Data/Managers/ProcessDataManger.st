@@ -5,13 +5,13 @@ NAMESPACE axosimple.StarterUnitTemplate
     USING System.Strings;
     
     {S7.extern=ReadWrite}
-    CLASS TechnologyDataManager
+    CLASS ProcessDataManager
         EXTENDS AXOpen.Data.AxoDataFragmentExchange
         VAR PUBLIC
             {#ix-attr:[AXOpen.Data.AxoDataFragmentAttribute]}
-            Shared : axosimple.TechnologyCommonDataManager;            
+            Shared : axosimple.SharedDataExchange;
             {#ix-attr:[AXOpen.Data.AxoDataFragmentAttribute]}
-            DataManger : axosimple.StarterUnitTemplate.FragmentTechnologyDataManger;
+            Data : ProcessDataExchange;
         END_VAR        
     END_CLASS
 END_NAMESPACE    

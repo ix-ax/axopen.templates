@@ -6,37 +6,24 @@ using AXSharp.Connector;
 
 namespace axosimple.UnitTemplate
 {
-    public partial class Unit
+    public partial class Unit 
     {
-        public UnitServices Services { get; } 
-    }
-    
-    public class UnitServices : IUnitServices     
-    {
-        private UnitServices(ContextService contextService)
-        {
-            _contextService = contextService;
-        }
+        public override AXOpen.Data.AxoDataEntity? Data => this.UnitObjects.ProcessData.DataManger.Payload;
 
-        public AXOpen.Data.AxoDataEntity? Data { get; } = Entry.Plc.Context.UnitTemplate.UnitObjects.ProcessData.DataManger.Payload;
-
-        public AXOpen.Data.AxoDataEntity? DataHeader { get; } = Entry.Plc.Context.UnitTemplate.UnitObjects.ProcessData.Shared.Entity;
-
-        public AXOpen.Data.AxoDataExchangeBase? DataManger { get; } = Entry.Plc.Context.UnitTemplate.UnitObjects.ProcessData;
-
-        public AXOpen.Data.AxoDataEntity? TechnologySettings { get; } =
-            Entry.Plc.Context.TechnologySettings.UnitTemplate.Payload;
-
-        public AXOpen.Data.AxoDataEntity? SharedTechnologySettings { get; } =
-            Entry.Plc.Context.TechnologySettings.UnitTemplate.Payload;
-
-        public AxoObject? UnitComponents => Entry.Plc.Context.UnitTemplate.UnitObjects.Components;
+        public override AXOpen.Data.AxoDataEntity? DataHeader => this.UnitObjects.ProcessData.Shared.Payload;
         
-        public ITwinObject[] Associates => new ITwinObject[]
+        public override AXOpen.Data.AxoDataEntity? TechnologySettings =>
+            Entry.Plc.Context.TechnologySettings.UnitTemplate.Payload;
+
+        public override AXOpen.Data.AxoDataEntity? SharedTechnologySettings =>
+            Entry.Plc.Context.TechnologySettings.UnitTemplate.Payload;
+
+        public override AxoObject? UnitComponents => this.UnitObjects.Components;
+        
+        public override ITwinObject[] Associates => new ITwinObject[]
         {
             SharedTechnologySettings,
             TechnologySettings,
-            DataManger,
             Data,
             DataHeader,
             UnitComponents,
@@ -44,9 +31,15 @@ namespace axosimple.UnitTemplate
             Entry.Plc.Context.Safety.Zone_2
         };
         
+        public override AxoTask AutomatTask => this.AutomatSequence;
+        
+        public override AxoTask GroundTask => this.GroundSequence;
+        
+        public override AxoTask ServiceTask => this.ServiceMode;
+        
         private AxoMessageProvider _messageProvider;
         
-        public AxoMessageProvider MessageProvider
+        public override AxoMessageProvider MessageProvider
         {
             get
             {
@@ -58,17 +51,26 @@ namespace axosimple.UnitTemplate
                 return _messageProvider;
             }
         }
-
+        
+        public UnitServices Services { get; } 
+    }
+    
+    public class UnitServices : IUnitServices      
+    {
+        private UnitServices(ContextService contextService)
+        {
+            _contextService = contextService;
+        }
         
         public axosimple.BaseUnit.UnitBase Unit { get; } = Entry.Plc.Context.UnitTemplate;
 
         // Technology Data manager of unit
         private UnitTemplate.TechnologyDataManager UnitTechnologyDataManager { get; } = 
-            Entry.Plc.Context.UnitTemplate.UnitObjects.TechnologyData.CreateBuilder<UnitTemplate.TechnologyDataManager>();
+            Entry.Plc.Context.UnitTemplate.UnitObjects.TechnologyData.CreateDataFragments<UnitTemplate.TechnologyDataManager>();
 
         // Process Data manager of unit
         private UnitTemplate.ProcessDataManager UnitProcessDataManager { get; } = 
-            Entry.Plc.Context.UnitTemplate.UnitObjects.ProcessData.CreateBuilder<UnitTemplate.ProcessDataManager>();
+            Entry.Plc.Context.UnitTemplate.UnitObjects.ProcessData.CreateDataFragments<UnitTemplate.ProcessDataManager>();
         
         private ContextService _contextService { get; }
 
@@ -94,10 +96,12 @@ namespace axosimple.UnitTemplate
                 new MongoDbRepositorySettings<Pocos.axosimple.UnitTemplate.ProcessData>(ContextService.DataBaseConnectionString, ContextService.DataBaseName, "UnitTemplate_ProcessData"));
 
 
+        
+        
         public static UnitServices Create(ContextService contextService)
         {
             var retVal = new UnitServices(contextService);
-            retVal.Unit.UnitServices = retVal;
+            retVal.Unit.Services = retVal;
             retVal.SetUnitsData();
             return retVal;
         }

@@ -6,13 +6,16 @@ NAMESPACE axosimple.StarterUnitTemplate
     USING System.Strings;
     
     ///<summary>
-    /// Provides automatic mode sequence.
+    /// Provides automatic mode sequence for `StarterUnitTemplate` unit.
     ///</summary>
     {#ix-set:AttributeName = "<#AUTOMAT#>"}
     {S7.extern=ReadWrite}
     CLASS PUBLIC AutomatSequence
         EXTENDS AXOpen.Core.AxoSequencerContainer IMPLEMENTS IModeContainer
         VAR PUBLIC
+            ///<summary>
+            /// Step coordinators for this sequence.            
+            ///</summary>
             Steps : ARRAY[0..100] OF AxoStep;    
     
             _inspectionResult: BOOL;
@@ -23,7 +26,7 @@ NAMESPACE axosimple.StarterUnitTemplate
         END_VAR
 
         VAR PRIVATE
-            Objs : REF_TO axosimple.StarterUnitTemplate.UnitObjects;
+            X : REF_TO axosimple.StarterUnitTemplate.UnitObjects;
            
             _currentId : STRING;
 
@@ -33,33 +36,42 @@ NAMESPACE axosimple.StarterUnitTemplate
 
         METHOD INTERNAL Run
             VAR_INPUT
-                _parent : AXOpen.Core.IAxoObject;
-                _unitObjects : REF_TO UnitObjects;
+                inParent : AXOpen.Core.IAxoObject;
+                inUnitObjects : REF_TO UnitObjects;
             END_VAR     
 
-            IF Objs = NULL THEN 
-                Objs := _unitObjects;                                             
+            IF X = NULL THEN 
+                X := inUnitObjects;                                             
             END_IF;
 
-            SUPER.Run(_parent);
+            SUPER.Run(inParent);
         END_METHOD
-        ///<summary>
-        /// Contains logic of the steps of this sequence
-        ///</summary>
-
+                
         VAR
             resutl : IAxoTaskState;
             _isDone : BOOL;
-        END_VAR        
+        END_VAR       
+        
+        
+        
+        METHOD PROTECTED OVERRIDE OnBeforeSequenceStart
+            X^._inspectorDialog.Restore(); 
+            X^.PD.Restore();
+            X^.TD.Restore(); 
+        END_METHOD
+
+        ///<summary>
+        ///     Contains logic of the steps of this sequence
+        ///</summary>
         METHOD OVERRIDE Main
-            VAR
-                forIterator : INT := 0;  
-                dialogTimeOut : TIME:= t#3000ms;         
+            VAR                
+                
             END_VAR
 
-            IF (Objs = NULL) THEN
+            IF (X = NULL) THEN
                 RETURN;
             END_IF;
+
             // This sequecner executes the steps in cycles from top to bottom
             // in the same order they are written in the program
             // Each step in the sequence must can be used only once.
@@ -67,39 +79,30 @@ NAMESPACE axosimple.StarterUnitTemplate
             THIS.SequenceMode := eAxoSequenceMode#Cyclic;
 
             
-            IF (Steps[0].Execute(THIS, TRUE, '<#GET ID#>')) THEN
+            IF (Steps[0].Execute(THIS, TRUE, '<#LOAD TECHNOLOGY DATA#>')) THEN
+                //-------------------------------------------------------               
+                    IF(X^.TD.Read('default').IsDone()) THEN                        
+                        THIS.MoveNext(); 
+                    END_IF;    
                 //-------------------------------------------------------
-                Objs^._inspectorDialog.Restore();  
+            END_IF;
 
-                // copy data from setting to station data -> it's a problem with override checks identity
-                //ProcessData^ :=  ProcessSettings^;
-
-                Objs^.ProcessData.DataManger.Payload.PartPresence.Data()^.FailTime := TIME#3s;
-                Objs^.ProcessData.DataManger.Payload.LoadPosition.Data()^.FailTime := TIME#3s;
-                Objs^.ProcessData.DataManger.Payload.JigDataMatrixCode.Data()^.FailTime := TIME#3s;
-    
-                Objs^.ProcessData.DataManger.Payload.PartPresence.Data()^.PassTime := TIME#2.5s;
-                Objs^.ProcessData.DataManger.Payload.LoadPosition.Data()^.PassTime := TIME#2s;
-                Objs^.ProcessData.DataManger.Payload.JigDataMatrixCode.Data()^.PassTime := TIME#2s;
-
-                Objs^.ProcessData.DataManger.Payload.PartPresence.Data()^.RequiredStatus := TRUE;
-                Objs^.ProcessData.DataManger.Payload.LoadPosition.Data()^.RequiredMin := 1000.0;
-                Objs^.ProcessData.DataManger.Payload.LoadPosition.Data()^.RequiredMax := 2000.0;
-                Objs^.ProcessData.DataManger.Payload.JigDataMatrixCode.Data()^.RequiredStatus := 'passCode';
-
-                _currentId := 'newProducedPart';
-                THIS.MoveNext(); 
+            IF (Steps[1].Execute(THIS, TRUE, '<#LOAD PROCESS DATA#>')) THEN
+                //-------------------------------------------------------               
+                    IF(X^.PD.Read('default').IsDone()) THEN                        
+                        THIS.MoveNext(); 
+                    END_IF;    
                 //-------------------------------------------------------
             END_IF;
 
             IF (Steps[1].Execute(THIS, TRUE, '<#GET DATA#>')) THEN
                 //-------------------------------------------------------
                 
-                resutl := Objs^.ProcessData.DataManger.CreateOrUpdate('fasdfa');  
-                //resutl.IsDone();                 
+                resutl := X^.PD.Data.CreateOrUpdate('fasdfa');  
+                resutl.IsDone();                 
                 RETURN;    
                 
-                IF (Objs^.ProcessData.DataManger.CreateOrUpdate(_currentId).IsDone()) THEN 
+                IF (X^.PD.Data.CreateOrUpdate(_currentId).IsDone()) THEN 
                     THIS.MoveNext(); 
                 END_IF;
                 //-------------------------------------------------------
@@ -109,9 +112,9 @@ NAMESPACE axosimple.StarterUnitTemplate
             
             IF (Steps[2].Execute(THIS, TRUE, '<#Dialog notify#>')) THEN
                 //-------------------------------------------------------
-                _externalCloseOkSignal := CurrentStep.Duration > dialogTimeOut;
+                //_externalCloseOkSignal := CurrentStep.Duration > dialogTimeOut;
                 
-                _dialogAnswer := Objs^._dialog.ShowWithExternalClose(THIS, _externalCloseOkSignal)
+                _dialogAnswer := X^._dialog.ShowWithExternalClose(THIS, _externalCloseOkSignal)
                 .WithOK()
                 .WithType(eDialogType#Info)
                 .WithCaption('Info caption!')
@@ -126,9 +129,9 @@ NAMESPACE axosimple.StarterUnitTemplate
                          
             IF (Steps[3].Execute(THIS, TRUE, '<#Dialog success#>')) THEN
                 //-------------------------------------------------------
-                _externalCloseOkSignal := CurrentStep.Duration > dialogTimeOut;
+                //_externalCloseOkSignal := CurrentStep.Duration > dialogTimeOut;
 
-                    _dialogAnswer := Objs^._dialog.ShowWithExternalClose(THIS, _externalCloseOkSignal)
+                    _dialogAnswer := X^._dialog.ShowWithExternalClose(THIS, _externalCloseOkSignal)
                     .WithOK()
                     .WithType(eDialogType#Success)
                     .WithCaption('Success caption!')
@@ -142,9 +145,9 @@ NAMESPACE axosimple.StarterUnitTemplate
 
             IF (Steps[4].Execute(THIS, TRUE, '<#Dialog Warning#>')) THEN
                 //-------------------------------------------------------
-                _externalCloseOkSignal := CurrentStep.Duration > dialogTimeOut;
+                //_externalCloseOkSignal := CurrentStep.Duration > dialogTimeOut;
 
-                    _dialogAnswer := Objs^._dialog.ShowWithExternalClose(THIS, _externalCloseOkSignal)
+                    _dialogAnswer := X^._dialog.ShowWithExternalClose(THIS, _externalCloseOkSignal)
                     .WithYesNo()
                     .WithType(eDialogType#Warning)
                     .WithCaption('Warning caption!')
@@ -158,9 +161,9 @@ NAMESPACE axosimple.StarterUnitTemplate
 
             IF (Steps[5].Execute(THIS, TRUE, '<#Dialog danger#>')) THEN
                 //-------------------------------------------------------
-                _externalCloseOkSignal := CurrentStep.Duration > dialogTimeOut;
+                //_externalCloseOkSignal := CurrentStep.Duration > dialogTimeOut;
 
-                    _dialogAnswer := Objs^._dialog.ShowWithExternalClose(THIS, _externalCloseOkSignal)
+                    _dialogAnswer := X^._dialog.ShowWithExternalClose(THIS, _externalCloseOkSignal)
                     .WithYesNoCancel()
                     .WithType(eDialogType#Warning)
                     .WithCaption('Danger caption!')
@@ -174,7 +177,7 @@ NAMESPACE axosimple.StarterUnitTemplate
 
             IF (Steps[6].Execute(THIS, TRUE, 'Example Digital inspection')) THEN
                 //-------------------------------------------------------
-                Objs^.ProcessData.DataManger.Payload.PartPresence.WithCoordinator(THIS).Inspect(THIS,_inspectionResult)
+                X^.PD.Data.Payload.PartPresence.WithCoordinator(THIS).Inspect(THIS,_inspectionResult)
                 .UpdateComprehensiveResult(_comprehensiveResult)
                 .OnFail()
                 .CarryOn();
@@ -185,11 +188,11 @@ NAMESPACE axosimple.StarterUnitTemplate
                 //-------------------------------------------------------
                 _inspectionValue := -5500;
 
-                Objs^.ProcessData.DataManger.Payload.LoadPosition.WithCoordinator(THIS)
+                X^.PD.Data.Payload.LoadPosition.WithCoordinator(THIS)
                 .Inspect(THIS,_inspectionValue)
                 .UpdateComprehensiveResult(_comprehensiveResult)
                 .OnFail()
-                .Dialog( inRetryStep := Steps[50], inTerminateStep := Steps[60], inoDialog := Objs^._inspectorDialog);
+                .Dialog( inRetryStep := Steps[50], inTerminateStep := Steps[60], inoDialog := X^._inspectorDialog);
                 //-------------------------------------------------------
             END_IF;
             
@@ -197,31 +200,18 @@ NAMESPACE axosimple.StarterUnitTemplate
                 //-------------------------------------------------------
                 _inspectionData := 'tempCode';
 
-                Objs^.ProcessData.DataManger.Payload.JigDataMatrixCode.WithCoordinator(THIS)
+                X^.PD.Data.Payload.JigDataMatrixCode.WithCoordinator(THIS)
                 .Inspect(THIS,_inspectionData)
                 .UpdateComprehensiveResult(_comprehensiveResult)
                 .OnFail()
-                .Dialog( inRetryStep := Steps[70], inTerminateStep := Steps[80], inoDialog := Objs^._inspectorDialog);
+                .Dialog( inRetryStep := Steps[70], inTerminateStep := Steps[80], inoDialog := X^._inspectorDialog);
                 //-------------------------------------------------------
             END_IF;
-
-            
-            FOR forIterator := 10 TO 89 BY 1 DO
-                IF (Steps[forIterator].Execute(THIS, TRUE,Concat('DO SOMETHING -A-',ToString(forIterator)) )) THEN
-                    //-------------------------------------------------------                
-                    IF CurrentStep.Duration > TIME#50ms THEN                         
-                        THIS.MoveNext();
-                    END_IF;                
-                    //-------------------------------------------------------
-                END_IF;
-            END_FOR;
-
-
-
+                       
 
             IF (Steps[99].Execute(THIS, TRUE,'<#UPDATE DATA#>')) THEN
                 //-------------------------------------------------------
-                IF (Objs^.ProcessData.DataManger.Update(_currentId).IsDone()) THEN 
+                IF (X^.PD.Data.Update(_currentId).IsDone()) THEN 
                     THIS.MoveNext(); 
                 END_IF;
                 //-------------------------------------------------------

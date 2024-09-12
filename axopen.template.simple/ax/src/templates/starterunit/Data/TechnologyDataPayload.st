@@ -5,7 +5,7 @@ NAMESPACE axosimple.StarterUnitTemplate
     USING System.Strings;
  
     {S7.extern=ReadWrite}
-    CLASS TechnologyData
+    CLASS TechnologyDataPayload
         EXTENDS AXOpen.Data.AxoDataEntity
         VAR PUBLIC
 

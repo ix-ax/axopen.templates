@@ -1,7 +1,7 @@
 NAMESPACE axosimple
 
 {S7.extern=ReadWrite}
-CLASS EntityData EXTENDS AXOpen.Data.AxoDataEntity
+CLASS SharedDataPayload EXTENDS AXOpen.Data.AxoDataEntity
         VAR PUBLIC		
             {#ix-set:AttributeName = "<#Last station#>"}
             LastStation : eStations;

@@ -16,35 +16,24 @@ NAMESPACE axosimple.StarterUnitTemplate
             MoveToWork : AXOpen.Core.AxoTask;
         END_VAR
         VAR PRIVATE
-            Objs : REF_TO axosimple.StarterUnitTemplate.UnitObjects;
-            // Components : REF_TO axosimple.StarterUnitTemplate.Components;
-            // ProcessDataManager : REF_TO axosimple.StarterUnitTemplate.ProcessDataManager;
-            // ProcessSettingsManager : REF_TO axosimple.StarterUnitTemplate.FragmentProcessDataManger;
-            // TechnologySettingsManager : REF_TO axosimple.StarterUnitTemplate.TechnologyDataManager;
-
+            X : REF_TO axosimple.StarterUnitTemplate.UnitObjects;          
             PersistentSettings : REF_TO AxoDataPersistentExchange;
-
             _currentId : STRING;
             techSetttingsId : STRING;
         END_VAR
 
         METHOD INTERNAL Run
             VAR_INPUT
-                _parent : AXOpen.Core.IAxoObject;
-                _unitObjects : REF_TO axosimple.StarterUnitTemplate.UnitObjects;
+                inParent : AXOpen.Core.IAxoObject;
+                inUnitObjects : REF_TO axosimple.StarterUnitTemplate.UnitObjects;
             END_VAR     
 
-            IF Objs = NULL THEN 
-                Objs := _unitObjects;
-                
-                // Components := Objs^.Components;
-                // ProcessDataManager := Objs^.ProcessData;
-                // ProcessSettingsManager := Objs^.ProcessSettings;
-                // TechnologySettingsManager := Objs^.TechnologySettings;
-                PersistentSettings := Objs^.Global^.PersistentData;
+            IF X = NULL THEN 
+                X := inUnitObjects;                               
+                PersistentSettings := X^.Global^.PersistentData;
             END_IF;
 
-            SUPER.Run(_parent);
+            SUPER.Run(inParent);
         END_METHOD
 
         ///<summary>
@@ -68,7 +57,7 @@ NAMESPACE axosimple.StarterUnitTemplate
             IF (Steps[0].Execute(THIS, TRUE, '<#DIALOG#>')) THEN
                 //-------------------------------------------------------                 
 
-                _dialogAnswer := Objs^._dialog.Show(THIS).WithCaption('<#DO YOU WANT TO RUN THE GROUND MODE SEQUENCE?#>').WithYesNo().WithType(eDialogType#Warning).Answer();
+                _dialogAnswer := X^._dialog.Show(THIS).WithCaption('<#DO YOU WANT TO RUN THE GROUND MODE SEQUENCE?#>').WithYesNo().WithType(eDialogType#Warning).Answer();
 
                 IF(_dialogAnswer <> eDialogAnswer#NoAnswer) THEN  
                     IF(_dialogAnswer = eDialogAnswer#Yes) THEN
@@ -85,12 +74,12 @@ NAMESPACE axosimple.StarterUnitTemplate
             // This is more verbose but also more versatile way of executing step logic.
             IF (Steps[1].Execute(THIS, TRUE, '<#RESTORE#>')) THEN
                 //-------------------------------------------------------    
-                IF(Objs <> NULL) THEN                            
-                    Objs^.TechnologySettings^.Restore();                                    
-                    Objs^.ProcessData.DataManger.Restore();                
-                    Objs^._dialog.Restore();
-                    Objs^._alertDialog.Restore();
-                    Objs^._inspectorDialog.Restore();                
+                IF(X <> NULL) THEN                            
+                    X^.TS^.Restore();                                    
+                    X^.PD.Data.Restore();                
+                    X^._dialog.Restore();
+                    X^._alertDialog.Restore();
+                    X^._inspectorDialog.Restore();                
                     THIS.MoveNext();
                 END_IF;
                 //-------------------------------------------------------
@@ -148,23 +137,23 @@ NAMESPACE axosimple.StarterUnitTemplate
                 //------------------------------------------------------- 
                 
                 IF CurrentStep.IsFirstEntryToStep() THEN 
-                    IF(Objs^.Global = NULL) THEN RETURN; END_IF;
-                    IF(Objs^.Global^.TechnologySettings = NULL) THEN RETURN; END_IF;
+                    IF(X^.Global = NULL) THEN RETURN; END_IF;
+                    IF(X^.Global^.TechnologySettings = NULL) THEN RETURN; END_IF;
 
-                    IF Objs^.Global^.TechnologySettings^.Common.Entity.DataEntityId <> '' THEN
-                       techSetttingsId := Objs^.Global^.TechnologySettings^.Common.Entity.DataEntityId; // TAKE GLOGAL TECHNOLOGY SETTINGS ID
+                    IF X^.Global^.TechnologySettings^.Common.Payload.DataEntityId <> '' THEN
+                       techSetttingsId := X^.Global^.TechnologySettings^.Common.Payload.DataEntityId; // TAKE GLOGAL TECHNOLOGY SETTINGS ID
 
-                    ELSIF Objs^.TechnologySettings^.Payload.DataEntityId <> '' THEN // TAKE LAST LOADED FOR STATION
-                        techSetttingsId := Objs^.TechnologySettings^.Payload.DataEntityId;
+                    ELSIF X^.TS^.Payload.DataEntityId <> '' THEN // TAKE LAST LOADED FOR STATION
+                        techSetttingsId := X^.TS^.Payload.DataEntityId;
 
-                    ELSIF Objs^.LastTechnologySettings <> '' THEN // TAKE LAST LOADED FROM PERSISTENT
-                        techSetttingsId := Objs^.LastTechnologySettings;
+                    ELSIF X^.LastTechnologySettings <> '' THEN // TAKE LAST LOADED FROM PERSISTENT
+                        techSetttingsId := X^.LastTechnologySettings;
                     ELSE
-                        Objs^.LastTechnologySettings := 'default'; // FORCE DEFAULT VALUE 
-                        techSetttingsId := Objs^.LastTechnologySettings;
+                        X^.LastTechnologySettings := 'default'; // FORCE DEFAULT VALUE 
+                        techSetttingsId := X^.LastTechnologySettings;
                     END_IF;
                     
-                    IF Objs^.Global^.TechnologySettings^.Common.Entity.DataEntityId = Objs^.TechnologySettings^.Payload.DataEntityId then 
+                    IF X^.Global^.TechnologySettings^.Common.Payload.DataEntityId = X^.TS^.Payload.DataEntityId then 
                         //THIS.MoveNext(); // you can skip loading...
                         ;
                     end_if;
@@ -194,8 +183,8 @@ NAMESPACE axosimple.StarterUnitTemplate
                 //-------------------------------------------------------
                 CASE TO_INT( THIS.GetMicroStepValue()) OF
                     0 : 
-                        IF Objs^.ProcessData.Shared.Entity.DataEntityId <> '' THEN 
-                            _currentId := Objs^.ProcessData.Shared.Entity.DataEntityId;
+                        IF X^.PD.Shared.Payload.DataEntityId <> '' THEN 
+                            _currentId := X^.PD.Shared.Payload.DataEntityId;
                             THIS.SetMicroStepValue(UINT#10);
 
                         ELSE // FIST RUN OR WITHOUT DATA
@@ -203,8 +192,8 @@ NAMESPACE axosimple.StarterUnitTemplate
                         END_IF;
 
                     10 : // update part as a corrupted a interrupted
-                        Objs^.ProcessData.Shared.Entity.WasReset := true;
-                        IF Objs^.ProcessData.Update(_currentId).IsDone() THEN 
+                        X^.PD.Shared.Payload.WasReset := true;
+                        IF X^.PD.Update(_currentId).IsDone() THEN 
                                 THIS.MoveNext(); 
                         END_IF;  
                     ELSE

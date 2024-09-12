@@ -14,22 +14,22 @@ NAMESPACE axosimple.StarterUnitTemplate
             ///<summary>
             /// Provide access to unit objets, that are used into sequnces.
             ///</summary>
-            UnitObjects  : axosimple.StarterUnitTemplate.UnitObjects;
+            X  : axosimple.StarterUnitTemplate.UnitObjects;
             
             ///<summary>
             /// Ground sequence. Contains logic that brings the unit into initial state.
             ///</summary>
-            GroundSequence : axosimple.StarterUnitTemplate.GroundSequence;
+            Ground : axosimple.StarterUnitTemplate.GroundSequence;
 
             ///<summary>
             /// Automatic sequence. Contains logic for automatic operations of this unit.
             ///</summary>
-            AutomatSequence : axosimple.StarterUnitTemplate.AutomatSequence;
+            Auto : axosimple.StarterUnitTemplate.AutomatSequence;
             
             ///<summary>
             /// Service mode contains logic for service/manual operations.
             ///</summary>
-            ServiceMode : axosimple.StarterUnitTemplate.ServiceMode;
+            Service : axosimple.StarterUnitTemplate.ServiceMode;
         END_VAR
         ///<summary>
         /// Runs this unit.
@@ -37,76 +37,88 @@ NAMESPACE axosimple.StarterUnitTemplate
 
         METHOD PUBLIC Run
             VAR_INPUT
-                parent : IAxoContext;
+                inParent : IAxoContext;
             END_VAR
             VAR_IN_OUT
                 ///<summary>
                 /// Hardware input structure
                 ///</summary>
-                Inputs : axosimple.Inputs;
+                inoInputs : axosimple.Inputs;
                 ///<summary>
                 /// Hardware output structure
                 ///</summary>
-                Outputs : axosimple.Outputs;                
+                inoOutputs : axosimple.Outputs;                
             END_VAR
             VAR_INPUT
-                TechnologySettings : REF_TO axosimple.StarterUnitTemplate.FragmentTechnologyDataManger;
-                ProcessSettings : REF_TO axosimple.StarterUnitTemplate.FragmentProcessDataManger; 
-                Global : REF_TO axosimple.GlobalContextObjects;             
+                inTechnologySettings : REF_TO axosimple.StarterUnitTemplate.TechnologyDataExchange;
+                inProcessSettings : REF_TO axosimple.StarterUnitTemplate.ProcessDataExchange; 
+                inGlobal : REF_TO axosimple.GlobalContextObjects;             
             END_VAR    
-            THIS.Initialize(parent);
-            UnitObjects.ProcessSettings := ProcessSettings;
-            UnitObjects.TechnologySettings := TechnologySettings;    
-            UnitObjects.Global := Global;
-            THIS.Execute(Inputs, Outputs);                         
+            THIS.Initialize(inParent);
+            X.PS := inProcessSettings;
+            X.TS := inTechnologySettings;    
+            X.Global := inGlobal;
+            THIS.Execute(inoInputs, inoOutputs);                         
         END_METHOD
 
+        ///<summary>
+        ///     Exectute for this unit.
+        ///     Execute runs cyclicaly you should place any call of this unit in this or underlying methods. 
+        ///</summary>
         METHOD PRIVATE Execute
             VAR_IN_OUT
-                Inputs : axosimple.Inputs;
-                Outputs : axosimple.Outputs;
+                inoInputs : axosimple.Inputs;
+                inoOutputs : axosimple.Outputs;
             END_VAR
            
             // Component I/O immange and management handling.
-             UnitObjects.Components.Update(THIS, Inputs, Outputs);
+             X.C.Update(THIS, inoInputs, inoOutputs);
              
-             // Process data manager
-             UnitObjects.ProcessData.Run(THIS);
+             // Run process data manager of this unit.
+             X.PD.Run(THIS);
              
-
-             UnitObjects.TechnologyData.Run(THIS);
+             // Run technology data manger of this unit.
+             X.TD.Run(THIS);
                          
-            
-             // Handles ground sequence
-             GroundSequence.Run(THIS, REF(UnitObjects));
+            /* 
+
+                    Ground mode handling
+
+            */
+
+             Ground.Run(THIS, REF(X));
+
              // Restores other states when Ground executes
-             IF (GroundSequence.IsBusy()) THEN
-                 AutomatSequence.Restore();
-                 ServiceMode.Restore();
+             IF (Ground.IsBusy()) THEN
+                 Auto.Restore();
+                 Service.Restore();
              END_IF;
 
-             // Handles automatic sequence (ground must be previously done)           
-             AutomatSequence.IsDisabled := GroundSequence.Status <> eAxoTaskState#Done;
-             AutomatSequence.Run(THIS, REF(UnitObjects));
-             // Handles service/manual mode
-             ServiceMode.Run(THIS, UnitObjects.Components);
+             /*
+             
+                    Automatic mode handling 
+                    NOTE: Ground must be previously done.           
+
+             */
+             
+             Auto.IsDisabled := Ground.Status <> eAxoTaskState#Done;
+             Auto.Run(THIS, REF(X));
+
+
+            /*
+             
+                Service/manual mode hadnling                
+
+             */
+
+
+             Service.Run(THIS, X.C);
  
-             IF ServiceMode.IsBusy() THEN
-                 GroundSequence.Restore();
-                 AutomatSequence.Restore();
+             IF Service.IsBusy() THEN
+                 Ground.Restore();
+                 Auto.Restore();
              END_IF;
-
-             RETURN;
-            // remember last selected technolgy identifier 
-            if  (UnitObjects.TechnologySettings^.Payload.DataEntityId <> '') THEN
-                IF UnitObjects.LastTechnologySettings <> UnitObjects.TechnologySettings^.Payload.DataEntityId THEN 
-                    IF UnitObjects.Global^.PersistentData^.InvokeUpdate(THIS, '') THEN 
-                        UnitObjects.LastTechnologySettings :=  UnitObjects.TechnologySettings^.Payload.DataEntityId;
-                    END_IF;
-                END_IF;
-            END_IF;
-           
+                                                  
         END_METHOD
-    END_CLASS
-     
+    END_CLASS     
 END_NAMESPACE
