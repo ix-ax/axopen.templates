@@ -38,11 +38,10 @@ NAMESPACE axosimple
             PersistentData.Run(THIS);
             
             // initialize global object references
-            GlobalObjects.TechnologySettings    := REF(TechnologySettings);
-            GlobalObjects.ProcessSettings       := REF(ProcessSettings);
-            GlobalObjects.PersistentData := REF(PersistentData);
-            GlobalObjects.ProcessData    := REF(ProcessData);
-                        
+            GlobalObjects.TS    := REF(TechnologySettings);
+            GlobalObjects.PS       := REF(ProcessSettings);
+            GlobalObjects.Persits := REF(PersistentData);
+                                    
             // remember last selected identifier 
             if TechnologySettings.Common.Payload.DataEntityId <> '' THEN
                 IF GlobalObjects.LastTechnologySettings <> TechnologySettings.Common.Payload.DataEntityId THEN 
@@ -56,10 +55,7 @@ NAMESPACE axosimple
                ;//Units entry calls - You can use snippet unitRootCall
             
                StarterUnitTemplate.X.StationNumber := eStations#StarterUnitTemplate;                          
-               StarterUnitTemplate.Run(THIS, Inputs^, Outputs^, 
-                                       REF(TechnologySettings.StarterUnitTemplate), 
-                                       REF(ProcessSettings.StarterUnitTemplate), 
-                                       REF(GlobalObjects));
+               StarterUnitTemplate.Run(THIS, Inputs^, Outputs^, REF(GlobalObjects));
 
 
                UnitTemplate.UnitObjects.StationNumber := eStations#UnitTemplate;
@@ -79,10 +75,9 @@ NAMESPACE axosimple
             {#ix-attr:[AXOpen.Data.PersistentAttribute("")]}
             LastTechnologySettings : STRING ;
 
-            PersistentData      : REF_TO AxoDataPersistentExchange;
-            ProcessSettings     : REF_TO axosimple.ProcessData;
-            TechnologySettings  : REF_TO axosimple.TechnologyData;
-            ProcessData         : REF_TO axosimple.ProcessData;
+            Persits         : REF_TO AxoDataPersistentExchange;
+            PS              : REF_TO axosimple.ProcessData;
+            TS              : REF_TO axosimple.TechnologyData;            
         END_VAR
     END_CLASS
 

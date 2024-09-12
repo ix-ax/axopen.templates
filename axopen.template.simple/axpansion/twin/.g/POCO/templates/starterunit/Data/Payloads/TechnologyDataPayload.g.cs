@@ -11,7 +11,6 @@ namespace Pocos
             }
 
             public axosimple.TechnologyUnitHeader Header { get; set; } = new axosimple.TechnologyUnitHeader();
-            public Single HeatingTemperature { get; set; }
         }
     }
 }

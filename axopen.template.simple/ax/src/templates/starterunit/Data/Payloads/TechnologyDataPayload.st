@@ -8,11 +8,7 @@ NAMESPACE axosimple.StarterUnitTemplate
     CLASS TechnologyDataPayload
         EXTENDS AXOpen.Data.AxoDataEntity
         VAR PUBLIC
-
-            Header : axosimple.TechnologyUnitHeader;
-
-            HeatingTemperature   : REAL;
-            
+            Header : axosimple.TechnologyUnitHeader;            
         END_VAR
     END_CLASS
 END_NAMESPACE    

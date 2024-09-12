@@ -10,8 +10,6 @@ namespace axosimple.StarterUnitTemplate
     {
         public axosimple.TechnologyUnitHeader Header { get; }
 
-        public OnlinerReal HeatingTemperature { get; }
-
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         public TechnologyDataPayload(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail) : base(parent, readableTail, symbolTail)
@@ -19,7 +17,6 @@ namespace axosimple.StarterUnitTemplate
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
             PreConstruct(parent, readableTail, symbolTail);
             Header = new axosimple.TechnologyUnitHeader(this, "Header", "Header");
-            HeatingTemperature = @Connector.ConnectorAdapter.AdapterFactory.CreateREAL(this, "HeatingTemperature", "HeatingTemperature");
             PostConstruct(parent, readableTail, symbolTail);
         }
 
@@ -38,7 +35,6 @@ namespace axosimple.StarterUnitTemplate
 #pragma warning disable CS0612
             plain.Header = await Header._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
-            plain.HeatingTemperature = HeatingTemperature.LastValue;
             return plain;
         }
 
@@ -53,7 +49,6 @@ namespace axosimple.StarterUnitTemplate
 #pragma warning disable CS0612
             plain.Header = await Header._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
-            plain.HeatingTemperature = HeatingTemperature.LastValue;
             return plain;
         }
 
@@ -67,7 +62,6 @@ namespace axosimple.StarterUnitTemplate
 #pragma warning disable CS0612
             plain.Header = await Header._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
-            plain.HeatingTemperature = HeatingTemperature.LastValue;
             return plain;
         }
 
@@ -82,9 +76,6 @@ namespace axosimple.StarterUnitTemplate
 #pragma warning disable CS0612
             await this.Header._PlainToOnlineNoacAsync(plain.Header);
 #pragma warning restore CS0612
-#pragma warning disable CS0612
-            HeatingTemperature.LethargicWrite(plain.HeatingTemperature);
-#pragma warning restore CS0612
             return await this.WriteAsync<IgnoreOnPocoOperation>();
         }
 
@@ -95,9 +86,6 @@ namespace axosimple.StarterUnitTemplate
             await base._PlainToOnlineNoacAsync(plain);
 #pragma warning disable CS0612
             await this.Header._PlainToOnlineNoacAsync(plain.Header);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            HeatingTemperature.LethargicWrite(plain.HeatingTemperature);
 #pragma warning restore CS0612
         }
 
@@ -111,7 +99,6 @@ namespace axosimple.StarterUnitTemplate
             Pocos.axosimple.StarterUnitTemplate.TechnologyDataPayload plain = new Pocos.axosimple.StarterUnitTemplate.TechnologyDataPayload();
             await base.ShadowToPlainAsync(plain);
             plain.Header = await Header.ShadowToPlainAsync();
-            plain.HeatingTemperature = HeatingTemperature.Shadow;
             return plain;
         }
 
@@ -119,7 +106,6 @@ namespace axosimple.StarterUnitTemplate
         {
             await base.ShadowToPlainAsync(plain);
             plain.Header = await Header.ShadowToPlainAsync();
-            plain.HeatingTemperature = HeatingTemperature.Shadow;
             return plain;
         }
 
@@ -132,7 +118,6 @@ namespace axosimple.StarterUnitTemplate
         {
             await base.PlainToShadowAsync(plain);
             await this.Header.PlainToShadowAsync(plain.Header);
-            HeatingTemperature.Shadow = plain.HeatingTemperature;
             return this.RetrievePrimitives();
         }
 
@@ -156,8 +141,6 @@ namespace axosimple.StarterUnitTemplate
                 if (await base.DetectsAnyChangeAsync(plain))
                     return true;
                 if (await Header.DetectsAnyChangeAsync(plain.Header, latest.Header))
-                    somethingChanged = true;
-                if (plain.HeatingTemperature != HeatingTemperature.LastValue)
                     somethingChanged = true;
                 plain = latest;
                 return somethingChanged;

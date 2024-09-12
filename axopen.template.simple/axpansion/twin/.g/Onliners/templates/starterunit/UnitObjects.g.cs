@@ -17,11 +17,11 @@ namespace axosimple.StarterUnitTemplate
         [AXOpen.Data.PersistentAttribute("StarterUnitTemplate")]
         public OnlinerString SpecialSettings { get; }
 
-        public AXOpen.Core.AxoDialog _dialog { get; }
+        public AXOpen.Core.AxoDialog _DL { get; }
 
-        public AXOpen.Core.AxoAlert _alertDialog { get; }
+        public AXOpen.Core.AxoAlert _ADL { get; }
 
-        public AXOpen.Inspectors.AxoInspectorDialog _inspectorDialog { get; }
+        public AXOpen.Inspectors.AxoInspectorDialog _IDL { get; }
 
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
@@ -33,9 +33,9 @@ namespace axosimple.StarterUnitTemplate
             PD = new axosimple.StarterUnitTemplate.ProcessDataManager(this, "PD", "PD");
             TD = new axosimple.StarterUnitTemplate.TechnologyDataManager(this, "TD", "TD");
             SpecialSettings = @Connector.ConnectorAdapter.AdapterFactory.CreateSTRING(this, "SpecialSettings", "SpecialSettings");
-            _dialog = new AXOpen.Core.AxoDialog(this, "_dialog", "_dialog");
-            _alertDialog = new AXOpen.Core.AxoAlert(this, "_alertDialog", "_alertDialog");
-            _inspectorDialog = new AXOpen.Inspectors.AxoInspectorDialog(this, "_inspectorDialog", "_inspectorDialog");
+            _DL = new AXOpen.Core.AxoDialog(this, "_DL", "_DL");
+            _ADL = new AXOpen.Core.AxoAlert(this, "_ADL", "_ADL");
+            _IDL = new AXOpen.Inspectors.AxoInspectorDialog(this, "_IDL", "_IDL");
             PostConstruct(parent, readableTail, symbolTail);
         }
 
@@ -62,13 +62,13 @@ namespace axosimple.StarterUnitTemplate
 #pragma warning restore CS0612
             plain.SpecialSettings = SpecialSettings.LastValue;
 #pragma warning disable CS0612
-            plain._dialog = await _dialog._OnlineToPlainNoacAsync();
+            plain._DL = await _DL._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain._alertDialog = await _alertDialog._OnlineToPlainNoacAsync();
+            plain._ADL = await _ADL._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain._inspectorDialog = await _inspectorDialog._OnlineToPlainNoacAsync();
+            plain._IDL = await _IDL._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -92,13 +92,13 @@ namespace axosimple.StarterUnitTemplate
 #pragma warning restore CS0612
             plain.SpecialSettings = SpecialSettings.LastValue;
 #pragma warning disable CS0612
-            plain._dialog = await _dialog._OnlineToPlainNoacAsync();
+            plain._DL = await _DL._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain._alertDialog = await _alertDialog._OnlineToPlainNoacAsync();
+            plain._ADL = await _ADL._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain._inspectorDialog = await _inspectorDialog._OnlineToPlainNoacAsync();
+            plain._IDL = await _IDL._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -121,13 +121,13 @@ namespace axosimple.StarterUnitTemplate
 #pragma warning restore CS0612
             plain.SpecialSettings = SpecialSettings.LastValue;
 #pragma warning disable CS0612
-            plain._dialog = await _dialog._OnlineToPlainNoacAsync();
+            plain._DL = await _DL._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain._alertDialog = await _alertDialog._OnlineToPlainNoacAsync();
+            plain._ADL = await _ADL._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain._inspectorDialog = await _inspectorDialog._OnlineToPlainNoacAsync();
+            plain._IDL = await _IDL._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -153,13 +153,13 @@ namespace axosimple.StarterUnitTemplate
             SpecialSettings.LethargicWrite(plain.SpecialSettings);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this._dialog._PlainToOnlineNoacAsync(plain._dialog);
+            await this._DL._PlainToOnlineNoacAsync(plain._DL);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this._alertDialog._PlainToOnlineNoacAsync(plain._alertDialog);
+            await this._ADL._PlainToOnlineNoacAsync(plain._ADL);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this._inspectorDialog._PlainToOnlineNoacAsync(plain._inspectorDialog);
+            await this._IDL._PlainToOnlineNoacAsync(plain._IDL);
 #pragma warning restore CS0612
             return await this.WriteAsync<IgnoreOnPocoOperation>();
         }
@@ -182,13 +182,13 @@ namespace axosimple.StarterUnitTemplate
             SpecialSettings.LethargicWrite(plain.SpecialSettings);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this._dialog._PlainToOnlineNoacAsync(plain._dialog);
+            await this._DL._PlainToOnlineNoacAsync(plain._DL);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this._alertDialog._PlainToOnlineNoacAsync(plain._alertDialog);
+            await this._ADL._PlainToOnlineNoacAsync(plain._ADL);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this._inspectorDialog._PlainToOnlineNoacAsync(plain._inspectorDialog);
+            await this._IDL._PlainToOnlineNoacAsync(plain._IDL);
 #pragma warning restore CS0612
         }
 
@@ -205,9 +205,9 @@ namespace axosimple.StarterUnitTemplate
             plain.PD = await PD.ShadowToPlainAsync();
             plain.TD = await TD.ShadowToPlainAsync();
             plain.SpecialSettings = SpecialSettings.Shadow;
-            plain._dialog = await _dialog.ShadowToPlainAsync();
-            plain._alertDialog = await _alertDialog.ShadowToPlainAsync();
-            plain._inspectorDialog = await _inspectorDialog.ShadowToPlainAsync();
+            plain._DL = await _DL.ShadowToPlainAsync();
+            plain._ADL = await _ADL.ShadowToPlainAsync();
+            plain._IDL = await _IDL.ShadowToPlainAsync();
             return plain;
         }
 
@@ -218,9 +218,9 @@ namespace axosimple.StarterUnitTemplate
             plain.PD = await PD.ShadowToPlainAsync();
             plain.TD = await TD.ShadowToPlainAsync();
             plain.SpecialSettings = SpecialSettings.Shadow;
-            plain._dialog = await _dialog.ShadowToPlainAsync();
-            plain._alertDialog = await _alertDialog.ShadowToPlainAsync();
-            plain._inspectorDialog = await _inspectorDialog.ShadowToPlainAsync();
+            plain._DL = await _DL.ShadowToPlainAsync();
+            plain._ADL = await _ADL.ShadowToPlainAsync();
+            plain._IDL = await _IDL.ShadowToPlainAsync();
             return plain;
         }
 
@@ -236,9 +236,9 @@ namespace axosimple.StarterUnitTemplate
             await this.PD.PlainToShadowAsync(plain.PD);
             await this.TD.PlainToShadowAsync(plain.TD);
             SpecialSettings.Shadow = plain.SpecialSettings;
-            await this._dialog.PlainToShadowAsync(plain._dialog);
-            await this._alertDialog.PlainToShadowAsync(plain._alertDialog);
-            await this._inspectorDialog.PlainToShadowAsync(plain._inspectorDialog);
+            await this._DL.PlainToShadowAsync(plain._DL);
+            await this._ADL.PlainToShadowAsync(plain._ADL);
+            await this._IDL.PlainToShadowAsync(plain._IDL);
             return this.RetrievePrimitives();
         }
 
@@ -269,11 +269,11 @@ namespace axosimple.StarterUnitTemplate
                     somethingChanged = true;
                 if (plain.SpecialSettings != SpecialSettings.LastValue)
                     somethingChanged = true;
-                if (await _dialog.DetectsAnyChangeAsync(plain._dialog, latest._dialog))
+                if (await _DL.DetectsAnyChangeAsync(plain._DL, latest._DL))
                     somethingChanged = true;
-                if (await _alertDialog.DetectsAnyChangeAsync(plain._alertDialog, latest._alertDialog))
+                if (await _ADL.DetectsAnyChangeAsync(plain._ADL, latest._ADL))
                     somethingChanged = true;
-                if (await _inspectorDialog.DetectsAnyChangeAsync(plain._inspectorDialog, latest._inspectorDialog))
+                if (await _IDL.DetectsAnyChangeAsync(plain._IDL, latest._IDL))
                     somethingChanged = true;
                 plain = latest;
                 return somethingChanged;

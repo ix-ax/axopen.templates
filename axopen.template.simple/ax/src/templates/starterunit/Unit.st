@@ -49,15 +49,11 @@ NAMESPACE axosimple.StarterUnitTemplate
                 ///</summary>
                 inoOutputs : axosimple.Outputs;                
             END_VAR
-            VAR_INPUT
-                inTechnologySettings : REF_TO axosimple.StarterUnitTemplate.TechnologyDataExchange;
-                inProcessSettings : REF_TO axosimple.StarterUnitTemplate.ProcessDataExchange; 
+            VAR_INPUT                
                 inGlobal : REF_TO axosimple.GlobalContextObjects;             
             END_VAR    
-            THIS.Initialize(inParent);
-            X.PS := inProcessSettings;
-            X.TS := inTechnologySettings;    
-            X.Global := inGlobal;
+            THIS.Initialize(inParent);           
+            X.G := inGlobal;
             THIS.Execute(inoInputs, inoOutputs);                         
         END_METHOD
 

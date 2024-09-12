@@ -89,8 +89,8 @@ NAMESPACE axosimple.UnitTemplate
                 //------------------------------------------------------- 
                 IF CurrentStep.IsFirstEntryToStep() THEN 
 
-                    IF Objs^.Global^.TechnologySettings^.Common.Payload.DataEntityId <> '' THEN
-                       techSetttingsId := Objs^.Global^.TechnologySettings^.Common.Payload.DataEntityId; // TAKE GLOGAL TECHNOLOGY SETTINGS ID
+                    IF Objs^.G^.TS^.Common.Payload.DataEntityId <> '' THEN
+                       techSetttingsId := Objs^.G^.TS^.Common.Payload.DataEntityId; // TAKE GLOGAL TECHNOLOGY SETTINGS ID
 
                     ELSIF Objs^.TechnologySettings^.Payload.DataEntityId <> '' THEN // TAKE LAST LOADED FOR STATION
                         techSetttingsId := Objs^.TechnologySettings^.Payload.DataEntityId;
@@ -102,7 +102,7 @@ NAMESPACE axosimple.UnitTemplate
                         techSetttingsId := Objs^.LastTechnologySettings;
                     END_IF;
                     
-                    IF Objs^.Global^.TechnologySettings^.Common.Payload.DataEntityId = Objs^.TechnologySettings^.Payload.DataEntityId then 
+                    IF Objs^.G^.TS^.Common.Payload.DataEntityId = Objs^.TechnologySettings^.Payload.DataEntityId then 
                         //THIS.MoveNext(); // you can skip loading...
                         ;
                     end_if;

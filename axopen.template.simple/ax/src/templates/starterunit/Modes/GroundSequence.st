@@ -30,10 +30,20 @@ NAMESPACE axosimple.StarterUnitTemplate
 
             IF X = NULL THEN 
                 X := inUnitObjects;                               
-                PersistentSettings := X^.Global^.PersistentData;
+                PersistentSettings := X^.G^.Persits;
             END_IF;
 
             SUPER.Run(inParent);
+        END_METHOD
+
+
+        
+        METHOD PROTECTED OVERRIDE OnBeforeSequenceStart            
+            X^.TD.Restore();                                    
+            X^.PD.Data.Restore();                
+            X^._DL.Restore();
+            X^._ADL.Restore();
+            X^._IDL.Restore(); 
         END_METHOD
 
         ///<summary>
@@ -57,7 +67,7 @@ NAMESPACE axosimple.StarterUnitTemplate
             IF (Steps[0].Execute(THIS, TRUE, '<#DIALOG#>')) THEN
                 //-------------------------------------------------------                 
 
-                _dialogAnswer := X^._dialog.Show(THIS).WithCaption('<#DO YOU WANT TO RUN THE GROUND MODE SEQUENCE?#>').WithYesNo().WithType(eDialogType#Warning).Answer();
+                _dialogAnswer := X^._DL.Show(THIS).WithCaption('<#DO YOU WANT TO RUN THE GROUND MODE SEQUENCE?#>').WithYesNo().WithType(eDialogType#Warning).Answer();
 
                 IF(_dialogAnswer <> eDialogAnswer#NoAnswer) THEN  
                     IF(_dialogAnswer = eDialogAnswer#Yes) THEN
@@ -75,18 +85,17 @@ NAMESPACE axosimple.StarterUnitTemplate
             IF (Steps[1].Execute(THIS, TRUE, '<#RESTORE#>')) THEN
                 //-------------------------------------------------------    
                 IF(X <> NULL) THEN                            
-                    X^.TS^.Restore();                                    
+                    X^.TD.Restore();                                    
                     X^.PD.Data.Restore();                
-                    X^._dialog.Restore();
-                    X^._alertDialog.Restore();
-                    X^._inspectorDialog.Restore();                
+                    X^._DL.Restore();
+                    X^._ADL.Restore();
+                    X^._IDL.Restore();                
                     THIS.MoveNext();
                 END_IF;
                 //-------------------------------------------------------
             END_IF;
-
            
-                       
+            
             IF (Steps[2].Execute(THIS, TRUE, '<#READ PERSISTENT SETTINGS#>')) THEN
                 //------------------------------------------------------- 
                 IF CurrentStep.IsFirstEntryToStep() THEN 
@@ -137,14 +146,14 @@ NAMESPACE axosimple.StarterUnitTemplate
                 //------------------------------------------------------- 
                 
                 IF CurrentStep.IsFirstEntryToStep() THEN 
-                    IF(X^.Global = NULL) THEN RETURN; END_IF;
-                    IF(X^.Global^.TechnologySettings = NULL) THEN RETURN; END_IF;
+                    IF(X^.G = NULL) THEN RETURN; END_IF;
+                    IF(X^.G^.TS = NULL) THEN RETURN; END_IF;
 
-                    IF X^.Global^.TechnologySettings^.Common.Payload.DataEntityId <> '' THEN
-                       techSetttingsId := X^.Global^.TechnologySettings^.Common.Payload.DataEntityId; // TAKE GLOGAL TECHNOLOGY SETTINGS ID
+                    IF X^.G^.TS^.Common.Payload.DataEntityId <> '' THEN
+                       techSetttingsId := X^.G^.TS^.Common.Payload.DataEntityId; // TAKE GLOGAL TECHNOLOGY SETTINGS ID
 
-                    ELSIF X^.TS^.Payload.DataEntityId <> '' THEN // TAKE LAST LOADED FOR STATION
-                        techSetttingsId := X^.TS^.Payload.DataEntityId;
+                    ELSIF X^.TD.Data.Payload.DataEntityId <> '' THEN // TAKE LAST LOADED FOR STATION
+                        techSetttingsId := X^.TD.Data.Payload.DataEntityId;
 
                     ELSIF X^.LastTechnologySettings <> '' THEN // TAKE LAST LOADED FROM PERSISTENT
                         techSetttingsId := X^.LastTechnologySettings;
@@ -153,7 +162,7 @@ NAMESPACE axosimple.StarterUnitTemplate
                         techSetttingsId := X^.LastTechnologySettings;
                     END_IF;
                     
-                    IF X^.Global^.TechnologySettings^.Common.Payload.DataEntityId = X^.TS^.Payload.DataEntityId then 
+                    IF X^.G^.TS^.Common.Payload.DataEntityId = X^.TD.Data.Payload.DataEntityId then 
                         //THIS.MoveNext(); // you can skip loading...
                         ;
                     end_if;

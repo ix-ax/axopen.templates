@@ -21,17 +21,17 @@ NAMESPACE axosimple.StarterUnitTemplate
                 parent : IAxoObject;
             END_VAR
             VAR_IN_OUT
-                components : axosimple.StarterUnitTemplate.Components;
+                C : axosimple.StarterUnitTemplate.Components;
             END_VAR
             THIS.Initialize(parent);
             IF THIS.Execute() THEN
-                THIS.Handle(components);
+                THIS.Handle(C);
             END_IF;
         END_METHOD
 
         METHOD PRIVATE Handle
             VAR_IN_OUT
-                components : axosimple.StarterUnitTemplate.Components;
+                C : axosimple.StarterUnitTemplate.Components;
             END_VAR
             ;
             // HERE CALL LOGIC FOR MANUAL/SERICE OPERATIONS            

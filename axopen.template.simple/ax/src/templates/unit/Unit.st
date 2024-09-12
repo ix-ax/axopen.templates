@@ -57,7 +57,7 @@ NAMESPACE axosimple.UnitTemplate
             THIS.Initialize(parent);
             UnitObjects.ProcessSettings := ProcessSettings;
             UnitObjects.TechnologySettings := TechnologySettings;    
-            UnitObjects.Global := Global;
+            UnitObjects.G := Global;
             THIS.Execute(Inputs, Outputs);  
         END_METHOD
 
@@ -98,7 +98,7 @@ NAMESPACE axosimple.UnitTemplate
             // remember last selected technolgy identifier 
             if  (UnitObjects.TechnologySettings^.Payload.DataEntityId <> '') THEN
                 IF UnitObjects.LastTechnologySettings <> UnitObjects.TechnologySettings^.Payload.DataEntityId THEN 
-                    IF UnitObjects.Global^.PersistentData^.InvokeUpdate(THIS, '') THEN 
+                    IF UnitObjects.G^.Persits^.InvokeUpdate(THIS, '') THEN 
                         UnitObjects.LastTechnologySettings :=  UnitObjects.TechnologySettings^.Payload.DataEntityId;
                     END_IF;
                 END_IF;

@@ -23,27 +23,27 @@ NAMESPACE axosimple.StarterUnitTemplate
             ///</summary>
             TD : axosimple.StarterUnitTemplate.TechnologyDataManager;
 
-            ///<summary>
-            /// Provides access to technology settings of this unit.
-            ///</summary>
-            TS : REF_TO axosimple.StarterUnitTemplate.TechnologyDataExchange;
+            // ///<summary>
+            // /// Provides access to technology settings of this unit.
+            // ///</summary>
+            // TS : REF_TO axosimple.StarterUnitTemplate.TechnologyDataExchange;
 
-            ///<summary>
-            /// Provides access to process setting of this unit.
-            ///</summary>
-            PS : REF_TO axosimple.StarterUnitTemplate.ProcessDataExchange;
+            // ///<summary>
+            // /// Provides access to process setting of this unit.
+            // ///</summary>
+            // PS : REF_TO axosimple.StarterUnitTemplate.ProcessDataExchange;
 
             {#ix-attr:[AXOpen.Data.PersistentAttribute("StarterUnitTemplate")]}
             SpecialSettings :STRING[64] ;
 
             // https://ix-ax.github.io/AXOpen/core/docs/AXODIALOG.html#closing-a-dialog-with-external-signal
-            _dialog : AXOpen.Core.AxoDialog;
+            _DL     : AXOpen.Core.AxoDialog;
 
             // https://ix-ax.github.io/AXOpen/core/docs/AXOALERTDIALOG.html#invoking-alerts-from-plc
-            _alertDialog : AXOpen.Core.AxoAlert;
+            _ADL    : AXOpen.Core.AxoAlert;
 
             // it needs to be handle from auto or ground sequnce
-            _inspectorDialog       : AXOpen.Inspectors.AxoInspectorDialog;
+            _IDL    : AXOpen.Inspectors.AxoInspectorDialog;
 
         END_VAR        
     END_CLASS

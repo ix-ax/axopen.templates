@@ -8,24 +8,12 @@ namespace axosimple.StarterUnitTemplate
 {
     public partial class ProcessDataPayload : AXOpen.Data.AxoDataEntity
     {
-        public OnlinerULInt CounterDelay { get; }
-
-        public AXOpen.Inspectors.AxoDigitalInspector PartPresence { get; }
-
-        public AXOpen.Inspectors.AxoDataInspector JigDataMatrixCode { get; }
-
-        public AXOpen.Inspectors.AxoAnalogueInspector LoadPosition { get; }
-
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         public ProcessDataPayload(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail) : base(parent, readableTail, symbolTail)
         {
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
             PreConstruct(parent, readableTail, symbolTail);
-            CounterDelay = @Connector.ConnectorAdapter.AdapterFactory.CreateULINT(this, "CounterDelay", "CounterDelay");
-            PartPresence = new AXOpen.Inspectors.AxoDigitalInspector(this, "PartPresence", "PartPresence");
-            JigDataMatrixCode = new AXOpen.Inspectors.AxoDataInspector(this, "JigDataMatrixCode", "JigDataMatrixCode");
-            LoadPosition = new AXOpen.Inspectors.AxoAnalogueInspector(this, "LoadPosition", "LoadPosition");
             PostConstruct(parent, readableTail, symbolTail);
         }
 
@@ -41,16 +29,6 @@ namespace axosimple.StarterUnitTemplate
 #pragma warning disable CS0612
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
-            plain.CounterDelay = CounterDelay.LastValue;
-#pragma warning disable CS0612
-            plain.PartPresence = await PartPresence._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.JigDataMatrixCode = await JigDataMatrixCode._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.LoadPosition = await LoadPosition._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
             return plain;
         }
 
@@ -62,16 +40,6 @@ namespace axosimple.StarterUnitTemplate
 #pragma warning disable CS0612
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
-            plain.CounterDelay = CounterDelay.LastValue;
-#pragma warning disable CS0612
-            plain.PartPresence = await PartPresence._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.JigDataMatrixCode = await JigDataMatrixCode._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.LoadPosition = await LoadPosition._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
             return plain;
         }
 
@@ -81,16 +49,6 @@ namespace axosimple.StarterUnitTemplate
         {
 #pragma warning disable CS0612
             await base._OnlineToPlainNoacAsync(plain);
-#pragma warning restore CS0612
-            plain.CounterDelay = CounterDelay.LastValue;
-#pragma warning disable CS0612
-            plain.PartPresence = await PartPresence._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.JigDataMatrixCode = await JigDataMatrixCode._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.LoadPosition = await LoadPosition._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -103,18 +61,6 @@ namespace axosimple.StarterUnitTemplate
         public async Task<IEnumerable<ITwinPrimitive>> PlainToOnlineAsync(Pocos.axosimple.StarterUnitTemplate.ProcessDataPayload plain)
         {
             await base._PlainToOnlineNoacAsync(plain);
-#pragma warning disable CS0612
-            CounterDelay.LethargicWrite(plain.CounterDelay);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.PartPresence._PlainToOnlineNoacAsync(plain.PartPresence);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.JigDataMatrixCode._PlainToOnlineNoacAsync(plain.JigDataMatrixCode);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.LoadPosition._PlainToOnlineNoacAsync(plain.LoadPosition);
-#pragma warning restore CS0612
             return await this.WriteAsync<IgnoreOnPocoOperation>();
         }
 
@@ -123,18 +69,6 @@ namespace axosimple.StarterUnitTemplate
         public async Task _PlainToOnlineNoacAsync(Pocos.axosimple.StarterUnitTemplate.ProcessDataPayload plain)
         {
             await base._PlainToOnlineNoacAsync(plain);
-#pragma warning disable CS0612
-            CounterDelay.LethargicWrite(plain.CounterDelay);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.PartPresence._PlainToOnlineNoacAsync(plain.PartPresence);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.JigDataMatrixCode._PlainToOnlineNoacAsync(plain.JigDataMatrixCode);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.LoadPosition._PlainToOnlineNoacAsync(plain.LoadPosition);
-#pragma warning restore CS0612
         }
 
         public async override Task<T> ShadowToPlain<T>()
@@ -146,20 +80,12 @@ namespace axosimple.StarterUnitTemplate
         {
             Pocos.axosimple.StarterUnitTemplate.ProcessDataPayload plain = new Pocos.axosimple.StarterUnitTemplate.ProcessDataPayload();
             await base.ShadowToPlainAsync(plain);
-            plain.CounterDelay = CounterDelay.Shadow;
-            plain.PartPresence = await PartPresence.ShadowToPlainAsync();
-            plain.JigDataMatrixCode = await JigDataMatrixCode.ShadowToPlainAsync();
-            plain.LoadPosition = await LoadPosition.ShadowToPlainAsync();
             return plain;
         }
 
         protected async Task<Pocos.axosimple.StarterUnitTemplate.ProcessDataPayload> ShadowToPlainAsync(Pocos.axosimple.StarterUnitTemplate.ProcessDataPayload plain)
         {
             await base.ShadowToPlainAsync(plain);
-            plain.CounterDelay = CounterDelay.Shadow;
-            plain.PartPresence = await PartPresence.ShadowToPlainAsync();
-            plain.JigDataMatrixCode = await JigDataMatrixCode.ShadowToPlainAsync();
-            plain.LoadPosition = await LoadPosition.ShadowToPlainAsync();
             return plain;
         }
 
@@ -171,10 +97,6 @@ namespace axosimple.StarterUnitTemplate
         public async Task<IEnumerable<ITwinPrimitive>> PlainToShadowAsync(Pocos.axosimple.StarterUnitTemplate.ProcessDataPayload plain)
         {
             await base.PlainToShadowAsync(plain);
-            CounterDelay.Shadow = plain.CounterDelay;
-            await this.PartPresence.PlainToShadowAsync(plain.PartPresence);
-            await this.JigDataMatrixCode.PlainToShadowAsync(plain.JigDataMatrixCode);
-            await this.LoadPosition.PlainToShadowAsync(plain.LoadPosition);
             return this.RetrievePrimitives();
         }
 
@@ -197,14 +119,6 @@ namespace axosimple.StarterUnitTemplate
             {
                 if (await base.DetectsAnyChangeAsync(plain))
                     return true;
-                if (plain.CounterDelay != CounterDelay.LastValue)
-                    somethingChanged = true;
-                if (await PartPresence.DetectsAnyChangeAsync(plain.PartPresence, latest.PartPresence))
-                    somethingChanged = true;
-                if (await JigDataMatrixCode.DetectsAnyChangeAsync(plain.JigDataMatrixCode, latest.JigDataMatrixCode))
-                    somethingChanged = true;
-                if (await LoadPosition.DetectsAnyChangeAsync(plain.LoadPosition, latest.LoadPosition))
-                    somethingChanged = true;
                 plain = latest;
                 return somethingChanged;
             });

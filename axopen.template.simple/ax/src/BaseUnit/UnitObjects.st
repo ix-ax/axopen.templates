@@ -16,7 +16,7 @@ NAMESPACE axosimple.BaseUnit
             ///<summary>
             /// Reference global objects in this technology
             ///</summary>
-            Global : REF_TO axosimple.GlobalContextObjects;
+            G : REF_TO axosimple.GlobalContextObjects;
 
             {#ix-attr:[AXOpen.Data.PersistentAttribute("")]}
             LastTechnologySettings : STRING[64] ;
