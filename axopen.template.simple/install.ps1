@@ -30,7 +30,7 @@ function OpenSolutionWithVS2022 {
     if ($vsPath) {
         & $vsPath $solutionPath
     } else {
-        Write-Host "Visual Studio 2022 not found!"
+        Write-Host "Visual Studio 2022 not found at '$vsPath'!"
     }
 }
 

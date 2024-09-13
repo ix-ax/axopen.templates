@@ -10,8 +10,8 @@ NAMESPACE axosimple
             Outputs : REF_TO axosimple.Outputs; 
             Safety : TechnologySafety;
 
-            // Units 
-                       
+            // Units snippet unitDeclaration
+                                   
                                                             
         END_VAR      
             
@@ -22,6 +22,8 @@ NAMESPACE axosimple
             IF(Inputs = NULL || Outputs = NULL) THEN
                 RETURN;
             END_IF;                                                                   
+            
+            // Unit entry call unitEntryCall
             
         END_METHOD        
     END_CLASS   

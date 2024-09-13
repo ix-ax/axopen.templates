@@ -4,8 +4,8 @@ NAMESPACE axosimple
         VAR PUBLIC                    
             {#ix-attr:[AXOpen.Data.AxoDataFragmentAttribute]}
             Entity : SharedDataExchange;   
-            
-            // Units data - You can use snippet unitAddProcessData
+                        
+            // Units data - snippet unitAddProcessData
                                                 
         END_VAR        
     END_CLASS

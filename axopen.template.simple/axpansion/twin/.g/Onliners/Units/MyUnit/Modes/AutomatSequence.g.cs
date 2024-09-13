@@ -4,24 +4,21 @@ using AXSharp.Connector.ValueTypes;
 using System.Collections.Generic;
 using AXSharp.Connector.Localizations;
 
-namespace axosimple
+namespace axosimple.MyUnit
 {
-    public partial class ProcessData : AXOpen.Data.AxoDataFragmentExchange
+    public partial class AutomatSequence : AXOpen.Core.AxoSequencerContainer, IModeContainer
     {
-        [AXOpen.Data.AxoDataFragmentAttribute]
-        public axosimple.SharedDataExchange Entity { get; }
-
-        [AXOpen.Data.AxoDataFragmentAttribute]
-        public axosimple.MyUnit.ProcessDataExchange MyUnit { get; }
+        public AXOpen.Core.AxoStep[] Steps { get; }
 
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
-        public ProcessData(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail) : base(parent, readableTail, symbolTail)
+        public AutomatSequence(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail) : base(parent, readableTail, symbolTail)
         {
+            AttributeName = "<#AUTOMAT#>";
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
             PreConstruct(parent, readableTail, symbolTail);
-            Entity = new axosimple.SharedDataExchange(this, "Entity", "Entity");
-            MyUnit = new axosimple.MyUnit.ProcessDataExchange(this, "MyUnit", "MyUnit");
+            Steps = new AXOpen.Core.AxoStep[101];
+            AXSharp.Connector.BuilderHelpers.Arrays.InstantiateArray(Steps, this, "Steps", "Steps", (p, rt, st) => new AXOpen.Core.AxoStep(p, rt, st), new[] { (0, 100) });
             PostConstruct(parent, readableTail, symbolTail);
         }
 
@@ -30,51 +27,42 @@ namespace axosimple
             return await (dynamic)this.OnlineToPlainAsync();
         }
 
-        public new async Task<Pocos.axosimple.ProcessData> OnlineToPlainAsync()
+        public new async Task<Pocos.axosimple.MyUnit.AutomatSequence> OnlineToPlainAsync()
         {
-            Pocos.axosimple.ProcessData plain = new Pocos.axosimple.ProcessData();
+            Pocos.axosimple.MyUnit.AutomatSequence plain = new Pocos.axosimple.MyUnit.AutomatSequence();
             await this.ReadAsync<IgnoreOnPocoOperation>();
 #pragma warning disable CS0612
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.Entity = await Entity._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.MyUnit = await MyUnit._OnlineToPlainNoacAsync();
+            plain.Steps = Steps.Select(async p => await p._OnlineToPlainNoacAsync()).Select(p => p.Result).ToArray();
 #pragma warning restore CS0612
             return plain;
         }
 
         [Obsolete("This method should not be used if you indent to access the controllers data. Use `OnlineToPlain` instead.")]
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-        public new async Task<Pocos.axosimple.ProcessData> _OnlineToPlainNoacAsync()
+        public new async Task<Pocos.axosimple.MyUnit.AutomatSequence> _OnlineToPlainNoacAsync()
         {
-            Pocos.axosimple.ProcessData plain = new Pocos.axosimple.ProcessData();
+            Pocos.axosimple.MyUnit.AutomatSequence plain = new Pocos.axosimple.MyUnit.AutomatSequence();
 #pragma warning disable CS0612
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.Entity = await Entity._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.MyUnit = await MyUnit._OnlineToPlainNoacAsync();
+            plain.Steps = Steps.Select(async p => await p._OnlineToPlainNoacAsync()).Select(p => p.Result).ToArray();
 #pragma warning restore CS0612
             return plain;
         }
 
         [Obsolete("This method should not be used if you indent to access the controllers data. Use `OnlineToPlain` instead.")]
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-        protected async Task<Pocos.axosimple.ProcessData> _OnlineToPlainNoacAsync(Pocos.axosimple.ProcessData plain)
+        protected async Task<Pocos.axosimple.MyUnit.AutomatSequence> _OnlineToPlainNoacAsync(Pocos.axosimple.MyUnit.AutomatSequence plain)
         {
 #pragma warning disable CS0612
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.Entity = await Entity._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.MyUnit = await MyUnit._OnlineToPlainNoacAsync();
+            plain.Steps = Steps.Select(async p => await p._OnlineToPlainNoacAsync()).Select(p => p.Result).ToArray();
 #pragma warning restore CS0612
             return plain;
         }
@@ -84,28 +72,24 @@ namespace axosimple
             await this.PlainToOnlineAsync((dynamic)plain);
         }
 
-        public async Task<IEnumerable<ITwinPrimitive>> PlainToOnlineAsync(Pocos.axosimple.ProcessData plain)
+        public async Task<IEnumerable<ITwinPrimitive>> PlainToOnlineAsync(Pocos.axosimple.MyUnit.AutomatSequence plain)
         {
             await base._PlainToOnlineNoacAsync(plain);
+            var _Steps_i_FE8484DAB3 = 0;
 #pragma warning disable CS0612
-            await this.Entity._PlainToOnlineNoacAsync(plain.Entity);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.MyUnit._PlainToOnlineNoacAsync(plain.MyUnit);
+            Steps.Select(p => p._PlainToOnlineNoacAsync(plain.Steps[_Steps_i_FE8484DAB3++])).ToArray();
 #pragma warning restore CS0612
             return await this.WriteAsync<IgnoreOnPocoOperation>();
         }
 
         [Obsolete("This method should not be used if you indent to access the controllers data. Use `PlainToOnline` instead.")]
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-        public async Task _PlainToOnlineNoacAsync(Pocos.axosimple.ProcessData plain)
+        public async Task _PlainToOnlineNoacAsync(Pocos.axosimple.MyUnit.AutomatSequence plain)
         {
             await base._PlainToOnlineNoacAsync(plain);
+            var _Steps_i_FE8484DAB3 = 0;
 #pragma warning disable CS0612
-            await this.Entity._PlainToOnlineNoacAsync(plain.Entity);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.MyUnit._PlainToOnlineNoacAsync(plain.MyUnit);
+            Steps.Select(p => p._PlainToOnlineNoacAsync(plain.Steps[_Steps_i_FE8484DAB3++])).ToArray();
 #pragma warning restore CS0612
         }
 
@@ -114,20 +98,18 @@ namespace axosimple
             return await (dynamic)this.ShadowToPlainAsync();
         }
 
-        public new async Task<Pocos.axosimple.ProcessData> ShadowToPlainAsync()
+        public new async Task<Pocos.axosimple.MyUnit.AutomatSequence> ShadowToPlainAsync()
         {
-            Pocos.axosimple.ProcessData plain = new Pocos.axosimple.ProcessData();
+            Pocos.axosimple.MyUnit.AutomatSequence plain = new Pocos.axosimple.MyUnit.AutomatSequence();
             await base.ShadowToPlainAsync(plain);
-            plain.Entity = await Entity.ShadowToPlainAsync();
-            plain.MyUnit = await MyUnit.ShadowToPlainAsync();
+            plain.Steps = Steps.Select(async p => await p.ShadowToPlainAsync()).Select(p => p.Result).ToArray();
             return plain;
         }
 
-        protected async Task<Pocos.axosimple.ProcessData> ShadowToPlainAsync(Pocos.axosimple.ProcessData plain)
+        protected async Task<Pocos.axosimple.MyUnit.AutomatSequence> ShadowToPlainAsync(Pocos.axosimple.MyUnit.AutomatSequence plain)
         {
             await base.ShadowToPlainAsync(plain);
-            plain.Entity = await Entity.ShadowToPlainAsync();
-            plain.MyUnit = await MyUnit.ShadowToPlainAsync();
+            plain.Steps = Steps.Select(async p => await p.ShadowToPlainAsync()).Select(p => p.Result).ToArray();
             return plain;
         }
 
@@ -136,11 +118,11 @@ namespace axosimple
             await this.PlainToShadowAsync((dynamic)plain);
         }
 
-        public async Task<IEnumerable<ITwinPrimitive>> PlainToShadowAsync(Pocos.axosimple.ProcessData plain)
+        public async Task<IEnumerable<ITwinPrimitive>> PlainToShadowAsync(Pocos.axosimple.MyUnit.AutomatSequence plain)
         {
             await base.PlainToShadowAsync(plain);
-            await this.Entity.PlainToShadowAsync(plain.Entity);
-            await this.MyUnit.PlainToShadowAsync(plain.MyUnit);
+            var _Steps_i_FE8484DAB3 = 0;
+            Steps.Select(p => p.PlainToShadowAsync(plain.Steps[_Steps_i_FE8484DAB3++])).ToArray();
             return this.RetrievePrimitives();
         }
 
@@ -154,7 +136,7 @@ namespace axosimple
         ///Compares if the current plain object has changed from the previous object.This method is used by the framework to determine if the object has changed and needs to be updated.
         ///[!NOTE] Any member in the hierarchy that is ignored by the compilers (e.g. when CompilerOmitAttribute is used) will not be compared, and therefore will not be detected as changed.
         ///</summary>
-        public new async Task<bool> DetectsAnyChangeAsync(Pocos.axosimple.ProcessData plain, Pocos.axosimple.ProcessData latest = null)
+        public new async Task<bool> DetectsAnyChangeAsync(Pocos.axosimple.MyUnit.AutomatSequence plain, Pocos.axosimple.MyUnit.AutomatSequence latest = null)
         {
             if (latest == null)
                 latest = await this._OnlineToPlainNoacAsync();
@@ -163,10 +145,12 @@ namespace axosimple
             {
                 if (await base.DetectsAnyChangeAsync(plain))
                     return true;
-                if (await Entity.DetectsAnyChangeAsync(plain.Entity, latest.Entity))
-                    somethingChanged = true;
-                if (await MyUnit.DetectsAnyChangeAsync(plain.MyUnit, latest.MyUnit))
-                    somethingChanged = true;
+                for (int i760901_3001_mimi = 0; i760901_3001_mimi < latest.Steps.Length; i760901_3001_mimi++)
+                {
+                    if (await Steps.ElementAt(i760901_3001_mimi).DetectsAnyChangeAsync(plain.Steps[i760901_3001_mimi], latest.Steps[i760901_3001_mimi]))
+                        somethingChanged = true;
+                }
+
                 plain = latest;
                 return somethingChanged;
             });
@@ -177,9 +161,9 @@ namespace axosimple
             this.RetrievePrimitives().ToList().ForEach(x => x.Poll());
         }
 
-        public new Pocos.axosimple.ProcessData CreateEmptyPoco()
+        public new Pocos.axosimple.MyUnit.AutomatSequence CreateEmptyPoco()
         {
-            return new Pocos.axosimple.ProcessData();
+            return new Pocos.axosimple.MyUnit.AutomatSequence();
         }
     }
 }

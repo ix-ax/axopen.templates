@@ -4,7 +4,7 @@
   "classifications": [ "SIMATIC-AX", "Unit" ],
   "identity": "axosimple.UnitTemplate",
   "name": "Customizable starter unit template",
-  "shortName": "axosimple_starter_unit",
+  "shortName": "axobaseunit",
   "tags": {
       "language": "ST",
       "type": "item"

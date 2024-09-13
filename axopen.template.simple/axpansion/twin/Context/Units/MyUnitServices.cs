@@ -8,7 +8,7 @@ using axosimple.server.Units;
 using AXSharp.Connector;
 
 
-namespace axosimple.UnitTemplate
+namespace axosimple.MyUnit
 {
     public partial class Unit 
     {
@@ -29,7 +29,7 @@ namespace axosimple.UnitTemplate
 
         public override ITwinObject[] Associates => new ITwinObject[]
         {
-            Entry.Plc.Context.UnitTemplate,
+            Entry.Plc.Context.MyUnit,
             Entry.Plc.Context.Safety.Zone_1,
             Entry.Plc.Context.Safety.Zone_2
         };
@@ -64,7 +64,7 @@ namespace axosimple.UnitTemplate
             _contextService = contextService;
         }
         
-        public UnitBase Unit { get; } = Entry.Plc.Context.UnitTemplate;
+        public UnitBase Unit { get; } = Entry.Plc.Context.MyUnit;
         
         /// <summary>
         /// Gets context service.
@@ -74,26 +74,26 @@ namespace axosimple.UnitTemplate
         /// <summary>
         /// Gets repository for technology settings.
         /// </summary>
-        public IRepository<Pocos.axosimple.UnitTemplate.TechnologyDataPayload> TechnologySettingsRepository { get; } 
-            = new MongoDbRepositorySettings<Pocos.axosimple.UnitTemplate.TechnologyDataPayload>(
+        public IRepository<Pocos.axosimple.MyUnit.TechnologyDataPayload> TechnologySettingsRepository { get; } 
+            = new MongoDbRepositorySettings<Pocos.axosimple.MyUnit.TechnologyDataPayload>(
                 ContextService.DataBaseConnectionString, ContextService.DataBaseName, 
-                "UnitTemplate_TechnologySettings").Factory();
+                "MyUnit_TechnologySettings").Factory();
 
         /// <summary>
         /// Gets repository for process settings.
         /// </summary>
-        public IRepository<Pocos.axosimple.UnitTemplate.ProcessDataPayload> ProcessSettingsRepository { get; } 
-            = new MongoDbRepositorySettings<Pocos.axosimple.UnitTemplate.ProcessDataPayload>(
+        public IRepository<Pocos.axosimple.MyUnit.ProcessDataPayload> ProcessSettingsRepository { get; } 
+            = new MongoDbRepositorySettings<Pocos.axosimple.MyUnit.ProcessDataPayload>(
                 ContextService.DataBaseConnectionString, ContextService.DataBaseName, 
-                "UnitTemplate_ProcessSettings").Factory();
+                "MyUnit_ProcessSettings").Factory();
 
         /// <summary>
         /// Gets repository for process/production data.
         /// </summary>
-        public IRepository<Pocos.axosimple.UnitTemplate.ProcessDataPayload> ProcessDataRepository { get; } 
-            = new MongoDbRepositorySettings<Pocos.axosimple.UnitTemplate.ProcessDataPayload>(
+        public IRepository<Pocos.axosimple.MyUnit.ProcessDataPayload> ProcessDataRepository { get; } 
+            = new MongoDbRepositorySettings<Pocos.axosimple.MyUnit.ProcessDataPayload>(
                 ContextService.DataBaseConnectionString, ContextService.DataBaseName,
-                "UnitTemplate_ProcessData").Factory();
+                "MyUnit_ProcessData").Factory();
 
 
         public static UnitServices Create(ContextService contextService)
@@ -107,25 +107,25 @@ namespace axosimple.UnitTemplate
         private void InitializeDataExchange()
         {
             // initialize partial repositories in global context
-            _contextService.TechnologySettings.UnitTemplate.InitializeRemoteDataExchange(TechnologySettingsRepository);
-            _contextService.ProcessSettings.UnitTemplate.InitializeRemoteDataExchange(ProcessSettingsRepository);
-            _contextService.ProcessData.UnitTemplate.InitializeRemoteDataExchange(ProcessDataRepository);
+            _contextService.TechnologySettings.MyUnit.InitializeRemoteDataExchange(TechnologySettingsRepository);
+            _contextService.ProcessSettings.MyUnit.InitializeRemoteDataExchange(ProcessSettingsRepository);
+            _contextService.ProcessData.MyUnit.InitializeRemoteDataExchange(ProcessDataRepository);
 
             // initialize unit process data manager
-            var processDataManager = Entry.Plc.Context.UnitTemplate.X.PD.CreateDataFragments<ProcessDataManager>()!;
+            var processDataManager = Entry.Plc.Context.MyUnit.X.PD.CreateDataFragments<ProcessDataManager>()!;
             processDataManager.Shared.InitializeRemoteDataExchange(_contextService.EntityDataRepository);
             processDataManager.Data.InitializeRemoteDataExchange(ProcessDataRepository);
             processDataManager.InitializeRemoteDataExchange();
             
             // initialize unit technology data manager
             
-            var technologyDataManager = Entry.Plc.Context.UnitTemplate.X.TD.CreateDataFragments<TechnologyDataManager>();
+            var technologyDataManager = Entry.Plc.Context.MyUnit.X.TD.CreateDataFragments<TechnologyDataManager>();
             technologyDataManager.Shared.InitializeRemoteDataExchange(_contextService.TechnologyCommonRepository);
             technologyDataManager.Data.InitializeRemoteDataExchange(TechnologySettingsRepository);
             technologyDataManager.InitializeRemoteDataExchange();
         }
 
-        public string Link => @"/Context/UnitTemplate";
+        public string Link => @"/Context/MyUnit";
         public string ImageLink => "logo-header.svg";
         
     }

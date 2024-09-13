@@ -44,8 +44,7 @@ dependencies:
 variables:
   APAX_BUILD_ARGS: [ -d ]
   PLC_NAME: "plc_line"
-  HWCONFIG: "TIA"
-  # Uncomment if you want overrite system variables
+  HWCONFIG: "TIA"  
   AXTARGET: 192.168.0.4
   AXTARGETPLATFORMINPUT: .\bin\1500\
   AX_USERNAME: "adm"
@@ -83,7 +82,7 @@ scripts:
     fi
 
     # Install the dotnet template
-    dotnet new install ./src/templates/unit/ --force
+    dotnet new install ./templates/unit/ --force
 
     # Execute the dotnet new command with the provided class name
     dotnet new axobaseunit --unitname=$unitname -o ./src/Units/$unitname 

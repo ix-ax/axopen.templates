@@ -3,29 +3,29 @@ using AXSharp.Connector;
 using AXSharp.Connector.ValueTypes;
 using System.Collections.Generic;
 using AXSharp.Connector.Localizations;
-using AXOpen.Core;
-using AXOpen.Data;
 
-namespace axosimple
+namespace axosimple.MyUnit
 {
-    public partial class Context : AXOpen.Core.AxoContext
+    public partial class Unit : axosimple.BaseUnit.UnitBase
     {
-        public axosimple.GlobalContextObjects Glob { get; }
+        public axosimple.MyUnit.UnitObjects X { get; }
 
-        public axosimple.TechnologySafety Safety { get; }
+        public axosimple.MyUnit.GroundSequence Ground { get; }
 
-        public axosimple.MyUnit.Unit MyUnit { get; }
+        public axosimple.MyUnit.AutomatSequence Auto { get; }
+
+        public axosimple.MyUnit.ServiceMode Service { get; }
 
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
-        public Context(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail) : base(parent, readableTail, symbolTail)
+        public Unit(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail) : base(parent, readableTail, symbolTail)
         {
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
             PreConstruct(parent, readableTail, symbolTail);
-            Glob = new axosimple.GlobalContextObjects(this, "Glob", "Glob");
-            Safety = new axosimple.TechnologySafety(this, "Safety", "Safety");
-            MyUnit = new axosimple.MyUnit.Unit(this, "<#MyUnit#>", "MyUnit");
-            MyUnit.AttributeName = "<#MyUnit#>";
+            X = new axosimple.MyUnit.UnitObjects(this, "X", "X");
+            Ground = new axosimple.MyUnit.GroundSequence(this, "Ground", "Ground");
+            Auto = new axosimple.MyUnit.AutomatSequence(this, "Auto", "Auto");
+            Service = new axosimple.MyUnit.ServiceMode(this, "Service", "Service");
             PostConstruct(parent, readableTail, symbolTail);
         }
 
@@ -34,60 +34,69 @@ namespace axosimple
             return await (dynamic)this.OnlineToPlainAsync();
         }
 
-        public new async Task<Pocos.axosimple.Context> OnlineToPlainAsync()
+        public new async Task<Pocos.axosimple.MyUnit.Unit> OnlineToPlainAsync()
         {
-            Pocos.axosimple.Context plain = new Pocos.axosimple.Context();
+            Pocos.axosimple.MyUnit.Unit plain = new Pocos.axosimple.MyUnit.Unit();
             await this.ReadAsync<IgnoreOnPocoOperation>();
 #pragma warning disable CS0612
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.Glob = await Glob._OnlineToPlainNoacAsync();
+            plain.X = await X._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.Safety = await Safety._OnlineToPlainNoacAsync();
+            plain.Ground = await Ground._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.MyUnit = await MyUnit._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-            return plain;
-        }
-
-        [Obsolete("This method should not be used if you indent to access the controllers data. Use `OnlineToPlain` instead.")]
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-        public new async Task<Pocos.axosimple.Context> _OnlineToPlainNoacAsync()
-        {
-            Pocos.axosimple.Context plain = new Pocos.axosimple.Context();
-#pragma warning disable CS0612
-            await base._OnlineToPlainNoacAsync(plain);
+            plain.Auto = await Auto._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.Glob = await Glob._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Safety = await Safety._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.MyUnit = await MyUnit._OnlineToPlainNoacAsync();
+            plain.Service = await Service._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
 
         [Obsolete("This method should not be used if you indent to access the controllers data. Use `OnlineToPlain` instead.")]
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-        protected async Task<Pocos.axosimple.Context> _OnlineToPlainNoacAsync(Pocos.axosimple.Context plain)
+        public new async Task<Pocos.axosimple.MyUnit.Unit> _OnlineToPlainNoacAsync()
+        {
+            Pocos.axosimple.MyUnit.Unit plain = new Pocos.axosimple.MyUnit.Unit();
+#pragma warning disable CS0612
+            await base._OnlineToPlainNoacAsync(plain);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.X = await X._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.Ground = await Ground._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.Auto = await Auto._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.Service = await Service._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+            return plain;
+        }
+
+        [Obsolete("This method should not be used if you indent to access the controllers data. Use `OnlineToPlain` instead.")]
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        protected async Task<Pocos.axosimple.MyUnit.Unit> _OnlineToPlainNoacAsync(Pocos.axosimple.MyUnit.Unit plain)
         {
 #pragma warning disable CS0612
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.Glob = await Glob._OnlineToPlainNoacAsync();
+            plain.X = await X._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.Safety = await Safety._OnlineToPlainNoacAsync();
+            plain.Ground = await Ground._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.MyUnit = await MyUnit._OnlineToPlainNoacAsync();
+            plain.Auto = await Auto._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.Service = await Service._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -97,34 +106,40 @@ namespace axosimple
             await this.PlainToOnlineAsync((dynamic)plain);
         }
 
-        public async Task<IEnumerable<ITwinPrimitive>> PlainToOnlineAsync(Pocos.axosimple.Context plain)
+        public async Task<IEnumerable<ITwinPrimitive>> PlainToOnlineAsync(Pocos.axosimple.MyUnit.Unit plain)
         {
             await base._PlainToOnlineNoacAsync(plain);
 #pragma warning disable CS0612
-            await this.Glob._PlainToOnlineNoacAsync(plain.Glob);
+            await this.X._PlainToOnlineNoacAsync(plain.X);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this.Safety._PlainToOnlineNoacAsync(plain.Safety);
+            await this.Ground._PlainToOnlineNoacAsync(plain.Ground);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this.MyUnit._PlainToOnlineNoacAsync(plain.MyUnit);
+            await this.Auto._PlainToOnlineNoacAsync(plain.Auto);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.Service._PlainToOnlineNoacAsync(plain.Service);
 #pragma warning restore CS0612
             return await this.WriteAsync<IgnoreOnPocoOperation>();
         }
 
         [Obsolete("This method should not be used if you indent to access the controllers data. Use `PlainToOnline` instead.")]
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-        public async Task _PlainToOnlineNoacAsync(Pocos.axosimple.Context plain)
+        public async Task _PlainToOnlineNoacAsync(Pocos.axosimple.MyUnit.Unit plain)
         {
             await base._PlainToOnlineNoacAsync(plain);
 #pragma warning disable CS0612
-            await this.Glob._PlainToOnlineNoacAsync(plain.Glob);
+            await this.X._PlainToOnlineNoacAsync(plain.X);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this.Safety._PlainToOnlineNoacAsync(plain.Safety);
+            await this.Ground._PlainToOnlineNoacAsync(plain.Ground);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this.MyUnit._PlainToOnlineNoacAsync(plain.MyUnit);
+            await this.Auto._PlainToOnlineNoacAsync(plain.Auto);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.Service._PlainToOnlineNoacAsync(plain.Service);
 #pragma warning restore CS0612
         }
 
@@ -133,22 +148,24 @@ namespace axosimple
             return await (dynamic)this.ShadowToPlainAsync();
         }
 
-        public new async Task<Pocos.axosimple.Context> ShadowToPlainAsync()
+        public new async Task<Pocos.axosimple.MyUnit.Unit> ShadowToPlainAsync()
         {
-            Pocos.axosimple.Context plain = new Pocos.axosimple.Context();
+            Pocos.axosimple.MyUnit.Unit plain = new Pocos.axosimple.MyUnit.Unit();
             await base.ShadowToPlainAsync(plain);
-            plain.Glob = await Glob.ShadowToPlainAsync();
-            plain.Safety = await Safety.ShadowToPlainAsync();
-            plain.MyUnit = await MyUnit.ShadowToPlainAsync();
+            plain.X = await X.ShadowToPlainAsync();
+            plain.Ground = await Ground.ShadowToPlainAsync();
+            plain.Auto = await Auto.ShadowToPlainAsync();
+            plain.Service = await Service.ShadowToPlainAsync();
             return plain;
         }
 
-        protected async Task<Pocos.axosimple.Context> ShadowToPlainAsync(Pocos.axosimple.Context plain)
+        protected async Task<Pocos.axosimple.MyUnit.Unit> ShadowToPlainAsync(Pocos.axosimple.MyUnit.Unit plain)
         {
             await base.ShadowToPlainAsync(plain);
-            plain.Glob = await Glob.ShadowToPlainAsync();
-            plain.Safety = await Safety.ShadowToPlainAsync();
-            plain.MyUnit = await MyUnit.ShadowToPlainAsync();
+            plain.X = await X.ShadowToPlainAsync();
+            plain.Ground = await Ground.ShadowToPlainAsync();
+            plain.Auto = await Auto.ShadowToPlainAsync();
+            plain.Service = await Service.ShadowToPlainAsync();
             return plain;
         }
 
@@ -157,12 +174,13 @@ namespace axosimple
             await this.PlainToShadowAsync((dynamic)plain);
         }
 
-        public async Task<IEnumerable<ITwinPrimitive>> PlainToShadowAsync(Pocos.axosimple.Context plain)
+        public async Task<IEnumerable<ITwinPrimitive>> PlainToShadowAsync(Pocos.axosimple.MyUnit.Unit plain)
         {
             await base.PlainToShadowAsync(plain);
-            await this.Glob.PlainToShadowAsync(plain.Glob);
-            await this.Safety.PlainToShadowAsync(plain.Safety);
-            await this.MyUnit.PlainToShadowAsync(plain.MyUnit);
+            await this.X.PlainToShadowAsync(plain.X);
+            await this.Ground.PlainToShadowAsync(plain.Ground);
+            await this.Auto.PlainToShadowAsync(plain.Auto);
+            await this.Service.PlainToShadowAsync(plain.Service);
             return this.RetrievePrimitives();
         }
 
@@ -176,7 +194,7 @@ namespace axosimple
         ///Compares if the current plain object has changed from the previous object.This method is used by the framework to determine if the object has changed and needs to be updated.
         ///[!NOTE] Any member in the hierarchy that is ignored by the compilers (e.g. when CompilerOmitAttribute is used) will not be compared, and therefore will not be detected as changed.
         ///</summary>
-        public new async Task<bool> DetectsAnyChangeAsync(Pocos.axosimple.Context plain, Pocos.axosimple.Context latest = null)
+        public new async Task<bool> DetectsAnyChangeAsync(Pocos.axosimple.MyUnit.Unit plain, Pocos.axosimple.MyUnit.Unit latest = null)
         {
             if (latest == null)
                 latest = await this._OnlineToPlainNoacAsync();
@@ -185,11 +203,13 @@ namespace axosimple
             {
                 if (await base.DetectsAnyChangeAsync(plain))
                     return true;
-                if (await Glob.DetectsAnyChangeAsync(plain.Glob, latest.Glob))
+                if (await X.DetectsAnyChangeAsync(plain.X, latest.X))
                     somethingChanged = true;
-                if (await Safety.DetectsAnyChangeAsync(plain.Safety, latest.Safety))
+                if (await Ground.DetectsAnyChangeAsync(plain.Ground, latest.Ground))
                     somethingChanged = true;
-                if (await MyUnit.DetectsAnyChangeAsync(plain.MyUnit, latest.MyUnit))
+                if (await Auto.DetectsAnyChangeAsync(plain.Auto, latest.Auto))
+                    somethingChanged = true;
+                if (await Service.DetectsAnyChangeAsync(plain.Service, latest.Service))
                     somethingChanged = true;
                 plain = latest;
                 return somethingChanged;
@@ -201,9 +221,9 @@ namespace axosimple
             this.RetrievePrimitives().ToList().ForEach(x => x.Poll());
         }
 
-        public new Pocos.axosimple.Context CreateEmptyPoco()
+        public new Pocos.axosimple.MyUnit.Unit CreateEmptyPoco()
         {
-            return new Pocos.axosimple.Context();
+            return new Pocos.axosimple.MyUnit.Unit();
         }
     }
 }

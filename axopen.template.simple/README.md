@@ -36,9 +36,10 @@ apax alf
 ```
 
 
-Prior running the script you should check/modify the following. The `AX_USERNAME` and `AX_TARGET_PWD` will be used to configure WebAPI communication interface. Consider providing password in opaque way e.g. using environment variables.
+Prior running the script you should check/modify the following. Set the variable `HWCONFIG` to `HWC`. The `AX_USERNAME` and `AX_TARGET_PWD` will be used to configure WebAPI communication interface. Consider providing password in opaque way e.g. using environment variables.
 
 ```bash
+  HWCONFIG: "HWC"
   AXTARGET: 192.168.0.4
   AXTARGETPLATFORMINPUT: .\bin\1500\
   AX_USERNAME: "adm"
@@ -47,6 +48,7 @@ Prior running the script you should check/modify the following. The `AX_USERNAME
 
 This script is preconfigured for **S71516 (6ES7 516-3AP03-0AB0) FW3.0**, if you whish to use another target system you will need to modify `ax\hwc\plc_line.hwl.json` file to use appropriate template for your target system.
 
+ATTENTION! `apax alf` will attempt to download the hardware configuration in the target system.
 
 ## Template directory structure
 ```
