@@ -10,19 +10,9 @@ namespace axosimple
 {
     public partial class Context : AXOpen.Core.AxoContext
     {
-        public axosimple.TechnologyData TechnologySettings { get; }
-
-        public axosimple.ProcessData ProcessSettings { get; }
-
-        public axosimple.ProcessData ProcessData { get; }
-
-        public AXOpen.Data.AxoDataPersistentExchange PersistentData { get; }
-
-        public axosimple.GlobalContextObjects GlobalObjects { get; }
+        public axosimple.GlobalContextObjects Glob { get; }
 
         public axosimple.TechnologySafety Safety { get; }
-
-        public axosimple.StarterUnitTemplate.Unit StarterUnitTemplate { get; }
 
         public axosimple.UnitTemplate.Unit UnitTemplate { get; }
 
@@ -32,13 +22,8 @@ namespace axosimple
         {
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
             PreConstruct(parent, readableTail, symbolTail);
-            TechnologySettings = new axosimple.TechnologyData(this, "TechnologySettings", "TechnologySettings");
-            ProcessSettings = new axosimple.ProcessData(this, "ProcessSettings", "ProcessSettings");
-            ProcessData = new axosimple.ProcessData(this, "ProcessData", "ProcessData");
-            PersistentData = new AXOpen.Data.AxoDataPersistentExchange(this, "PersistentData", "PersistentData");
-            GlobalObjects = new axosimple.GlobalContextObjects(this, "GlobalObjects", "GlobalObjects");
+            Glob = new axosimple.GlobalContextObjects(this, "Glob", "Glob");
             Safety = new axosimple.TechnologySafety(this, "Safety", "Safety");
-            StarterUnitTemplate = new axosimple.StarterUnitTemplate.Unit(this, "StarterUnitTemplate", "StarterUnitTemplate");
             UnitTemplate = new axosimple.UnitTemplate.Unit(this, "UnitTemplate", "UnitTemplate");
             PostConstruct(parent, readableTail, symbolTail);
         }
@@ -56,25 +41,10 @@ namespace axosimple
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.TechnologySettings = await TechnologySettings._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.ProcessSettings = await ProcessSettings._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.ProcessData = await ProcessData._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.PersistentData = await PersistentData._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.GlobalObjects = await GlobalObjects._OnlineToPlainNoacAsync();
+            plain.Glob = await Glob._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
             plain.Safety = await Safety._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.StarterUnitTemplate = await StarterUnitTemplate._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
             plain.UnitTemplate = await UnitTemplate._OnlineToPlainNoacAsync();
@@ -91,25 +61,10 @@ namespace axosimple
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.TechnologySettings = await TechnologySettings._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.ProcessSettings = await ProcessSettings._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.ProcessData = await ProcessData._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.PersistentData = await PersistentData._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.GlobalObjects = await GlobalObjects._OnlineToPlainNoacAsync();
+            plain.Glob = await Glob._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
             plain.Safety = await Safety._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.StarterUnitTemplate = await StarterUnitTemplate._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
             plain.UnitTemplate = await UnitTemplate._OnlineToPlainNoacAsync();
@@ -125,25 +80,10 @@ namespace axosimple
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.TechnologySettings = await TechnologySettings._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.ProcessSettings = await ProcessSettings._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.ProcessData = await ProcessData._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.PersistentData = await PersistentData._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.GlobalObjects = await GlobalObjects._OnlineToPlainNoacAsync();
+            plain.Glob = await Glob._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
             plain.Safety = await Safety._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.StarterUnitTemplate = await StarterUnitTemplate._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
             plain.UnitTemplate = await UnitTemplate._OnlineToPlainNoacAsync();
@@ -160,25 +100,10 @@ namespace axosimple
         {
             await base._PlainToOnlineNoacAsync(plain);
 #pragma warning disable CS0612
-            await this.TechnologySettings._PlainToOnlineNoacAsync(plain.TechnologySettings);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.ProcessSettings._PlainToOnlineNoacAsync(plain.ProcessSettings);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.ProcessData._PlainToOnlineNoacAsync(plain.ProcessData);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.PersistentData._PlainToOnlineNoacAsync(plain.PersistentData);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.GlobalObjects._PlainToOnlineNoacAsync(plain.GlobalObjects);
+            await this.Glob._PlainToOnlineNoacAsync(plain.Glob);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
             await this.Safety._PlainToOnlineNoacAsync(plain.Safety);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.StarterUnitTemplate._PlainToOnlineNoacAsync(plain.StarterUnitTemplate);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
             await this.UnitTemplate._PlainToOnlineNoacAsync(plain.UnitTemplate);
@@ -192,25 +117,10 @@ namespace axosimple
         {
             await base._PlainToOnlineNoacAsync(plain);
 #pragma warning disable CS0612
-            await this.TechnologySettings._PlainToOnlineNoacAsync(plain.TechnologySettings);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.ProcessSettings._PlainToOnlineNoacAsync(plain.ProcessSettings);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.ProcessData._PlainToOnlineNoacAsync(plain.ProcessData);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.PersistentData._PlainToOnlineNoacAsync(plain.PersistentData);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.GlobalObjects._PlainToOnlineNoacAsync(plain.GlobalObjects);
+            await this.Glob._PlainToOnlineNoacAsync(plain.Glob);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
             await this.Safety._PlainToOnlineNoacAsync(plain.Safety);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.StarterUnitTemplate._PlainToOnlineNoacAsync(plain.StarterUnitTemplate);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
             await this.UnitTemplate._PlainToOnlineNoacAsync(plain.UnitTemplate);
@@ -226,13 +136,8 @@ namespace axosimple
         {
             Pocos.axosimple.Context plain = new Pocos.axosimple.Context();
             await base.ShadowToPlainAsync(plain);
-            plain.TechnologySettings = await TechnologySettings.ShadowToPlainAsync();
-            plain.ProcessSettings = await ProcessSettings.ShadowToPlainAsync();
-            plain.ProcessData = await ProcessData.ShadowToPlainAsync();
-            plain.PersistentData = await PersistentData.ShadowToPlainAsync();
-            plain.GlobalObjects = await GlobalObjects.ShadowToPlainAsync();
+            plain.Glob = await Glob.ShadowToPlainAsync();
             plain.Safety = await Safety.ShadowToPlainAsync();
-            plain.StarterUnitTemplate = await StarterUnitTemplate.ShadowToPlainAsync();
             plain.UnitTemplate = await UnitTemplate.ShadowToPlainAsync();
             return plain;
         }
@@ -240,13 +145,8 @@ namespace axosimple
         protected async Task<Pocos.axosimple.Context> ShadowToPlainAsync(Pocos.axosimple.Context plain)
         {
             await base.ShadowToPlainAsync(plain);
-            plain.TechnologySettings = await TechnologySettings.ShadowToPlainAsync();
-            plain.ProcessSettings = await ProcessSettings.ShadowToPlainAsync();
-            plain.ProcessData = await ProcessData.ShadowToPlainAsync();
-            plain.PersistentData = await PersistentData.ShadowToPlainAsync();
-            plain.GlobalObjects = await GlobalObjects.ShadowToPlainAsync();
+            plain.Glob = await Glob.ShadowToPlainAsync();
             plain.Safety = await Safety.ShadowToPlainAsync();
-            plain.StarterUnitTemplate = await StarterUnitTemplate.ShadowToPlainAsync();
             plain.UnitTemplate = await UnitTemplate.ShadowToPlainAsync();
             return plain;
         }
@@ -259,13 +159,8 @@ namespace axosimple
         public async Task<IEnumerable<ITwinPrimitive>> PlainToShadowAsync(Pocos.axosimple.Context plain)
         {
             await base.PlainToShadowAsync(plain);
-            await this.TechnologySettings.PlainToShadowAsync(plain.TechnologySettings);
-            await this.ProcessSettings.PlainToShadowAsync(plain.ProcessSettings);
-            await this.ProcessData.PlainToShadowAsync(plain.ProcessData);
-            await this.PersistentData.PlainToShadowAsync(plain.PersistentData);
-            await this.GlobalObjects.PlainToShadowAsync(plain.GlobalObjects);
+            await this.Glob.PlainToShadowAsync(plain.Glob);
             await this.Safety.PlainToShadowAsync(plain.Safety);
-            await this.StarterUnitTemplate.PlainToShadowAsync(plain.StarterUnitTemplate);
             await this.UnitTemplate.PlainToShadowAsync(plain.UnitTemplate);
             return this.RetrievePrimitives();
         }
@@ -289,19 +184,9 @@ namespace axosimple
             {
                 if (await base.DetectsAnyChangeAsync(plain))
                     return true;
-                if (await TechnologySettings.DetectsAnyChangeAsync(plain.TechnologySettings, latest.TechnologySettings))
-                    somethingChanged = true;
-                if (await ProcessSettings.DetectsAnyChangeAsync(plain.ProcessSettings, latest.ProcessSettings))
-                    somethingChanged = true;
-                if (await ProcessData.DetectsAnyChangeAsync(plain.ProcessData, latest.ProcessData))
-                    somethingChanged = true;
-                if (await PersistentData.DetectsAnyChangeAsync(plain.PersistentData, latest.PersistentData))
-                    somethingChanged = true;
-                if (await GlobalObjects.DetectsAnyChangeAsync(plain.GlobalObjects, latest.GlobalObjects))
+                if (await Glob.DetectsAnyChangeAsync(plain.Glob, latest.Glob))
                     somethingChanged = true;
                 if (await Safety.DetectsAnyChangeAsync(plain.Safety, latest.Safety))
-                    somethingChanged = true;
-                if (await StarterUnitTemplate.DetectsAnyChangeAsync(plain.StarterUnitTemplate, latest.StarterUnitTemplate))
                     somethingChanged = true;
                 if (await UnitTemplate.DetectsAnyChangeAsync(plain.UnitTemplate, latest.UnitTemplate))
                     somethingChanged = true;
@@ -326,6 +211,14 @@ namespace axosimple
         [AXOpen.Data.PersistentAttribute("")]
         public OnlinerString LastTechnologySettings { get; }
 
+        public AXOpen.Data.AxoDataPersistentExchange Persits { get; }
+
+        public axosimple.ProcessData PS { get; }
+
+        public axosimple.TechnologyData TS { get; }
+
+        public axosimple.ProcessData PD { get; }
+
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         public GlobalContextObjects(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail)
@@ -337,6 +230,10 @@ namespace axosimple
             HumanReadable = AXSharp.Connector.Connector.CreateHumanReadable(parent.HumanReadable, readableTail);
             PreConstruct(parent, readableTail, symbolTail);
             LastTechnologySettings = @Connector.ConnectorAdapter.AdapterFactory.CreateSTRING(this, "LastTechnologySettings", "LastTechnologySettings");
+            Persits = new AXOpen.Data.AxoDataPersistentExchange(this, "Persits", "Persits");
+            PS = new axosimple.ProcessData(this, "PS", "PS");
+            TS = new axosimple.TechnologyData(this, "TS", "TS");
+            PD = new axosimple.ProcessData(this, "PD", "PD");
             parent.AddChild(this);
             parent.AddKid(this);
             PostConstruct(parent, readableTail, symbolTail);
@@ -352,6 +249,18 @@ namespace axosimple
             Pocos.axosimple.GlobalContextObjects plain = new Pocos.axosimple.GlobalContextObjects();
             await this.ReadAsync<IgnoreOnPocoOperation>();
             plain.LastTechnologySettings = LastTechnologySettings.LastValue;
+#pragma warning disable CS0612
+            plain.Persits = await Persits._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.PS = await PS._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.TS = await TS._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.PD = await PD._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
             return plain;
         }
 
@@ -361,6 +270,18 @@ namespace axosimple
         {
             Pocos.axosimple.GlobalContextObjects plain = new Pocos.axosimple.GlobalContextObjects();
             plain.LastTechnologySettings = LastTechnologySettings.LastValue;
+#pragma warning disable CS0612
+            plain.Persits = await Persits._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.PS = await PS._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.TS = await TS._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.PD = await PD._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
             return plain;
         }
 
@@ -369,6 +290,18 @@ namespace axosimple
         protected async Task<Pocos.axosimple.GlobalContextObjects> _OnlineToPlainNoacAsync(Pocos.axosimple.GlobalContextObjects plain)
         {
             plain.LastTechnologySettings = LastTechnologySettings.LastValue;
+#pragma warning disable CS0612
+            plain.Persits = await Persits._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.PS = await PS._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.TS = await TS._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.PD = await PD._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
             return plain;
         }
 
@@ -382,6 +315,18 @@ namespace axosimple
 #pragma warning disable CS0612
             LastTechnologySettings.LethargicWrite(plain.LastTechnologySettings);
 #pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.Persits._PlainToOnlineNoacAsync(plain.Persits);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.PS._PlainToOnlineNoacAsync(plain.PS);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.TS._PlainToOnlineNoacAsync(plain.TS);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.PD._PlainToOnlineNoacAsync(plain.PD);
+#pragma warning restore CS0612
             return await this.WriteAsync<IgnoreOnPocoOperation>();
         }
 
@@ -391,6 +336,18 @@ namespace axosimple
         {
 #pragma warning disable CS0612
             LastTechnologySettings.LethargicWrite(plain.LastTechnologySettings);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.Persits._PlainToOnlineNoacAsync(plain.Persits);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.PS._PlainToOnlineNoacAsync(plain.PS);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.TS._PlainToOnlineNoacAsync(plain.TS);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.PD._PlainToOnlineNoacAsync(plain.PD);
 #pragma warning restore CS0612
         }
 
@@ -403,12 +360,20 @@ namespace axosimple
         {
             Pocos.axosimple.GlobalContextObjects plain = new Pocos.axosimple.GlobalContextObjects();
             plain.LastTechnologySettings = LastTechnologySettings.Shadow;
+            plain.Persits = await Persits.ShadowToPlainAsync();
+            plain.PS = await PS.ShadowToPlainAsync();
+            plain.TS = await TS.ShadowToPlainAsync();
+            plain.PD = await PD.ShadowToPlainAsync();
             return plain;
         }
 
         protected async Task<Pocos.axosimple.GlobalContextObjects> ShadowToPlainAsync(Pocos.axosimple.GlobalContextObjects plain)
         {
             plain.LastTechnologySettings = LastTechnologySettings.Shadow;
+            plain.Persits = await Persits.ShadowToPlainAsync();
+            plain.PS = await PS.ShadowToPlainAsync();
+            plain.TS = await TS.ShadowToPlainAsync();
+            plain.PD = await PD.ShadowToPlainAsync();
             return plain;
         }
 
@@ -420,6 +385,10 @@ namespace axosimple
         public async Task<IEnumerable<ITwinPrimitive>> PlainToShadowAsync(Pocos.axosimple.GlobalContextObjects plain)
         {
             LastTechnologySettings.Shadow = plain.LastTechnologySettings;
+            await this.Persits.PlainToShadowAsync(plain.Persits);
+            await this.PS.PlainToShadowAsync(plain.PS);
+            await this.TS.PlainToShadowAsync(plain.TS);
+            await this.PD.PlainToShadowAsync(plain.PD);
             return this.RetrievePrimitives();
         }
 
@@ -441,6 +410,14 @@ namespace axosimple
             return await Task.Run(async () =>
             {
                 if (plain.LastTechnologySettings != LastTechnologySettings.LastValue)
+                    somethingChanged = true;
+                if (await Persits.DetectsAnyChangeAsync(plain.Persits, latest.Persits))
+                    somethingChanged = true;
+                if (await PS.DetectsAnyChangeAsync(plain.PS, latest.PS))
+                    somethingChanged = true;
+                if (await TS.DetectsAnyChangeAsync(plain.TS, latest.TS))
+                    somethingChanged = true;
+                if (await PD.DetectsAnyChangeAsync(plain.PD, latest.PD))
                     somethingChanged = true;
                 plain = latest;
                 return somethingChanged;
@@ -538,10 +515,7 @@ namespace axosimple
         public axosimple.SharedDataExchange Entity { get; }
 
         [AXOpen.Data.AxoDataFragmentAttribute]
-        public axosimple.UnitTemplate.FragmentProcessDataManger UnitTemplate { get; }
-
-        [AXOpen.Data.AxoDataFragmentAttribute]
-        public axosimple.StarterUnitTemplate.ProcessDataExchange StarterUnitTemplate { get; }
+        public axosimple.UnitTemplate.ProcessDataExchange UnitTemplate { get; }
 
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
@@ -550,8 +524,7 @@ namespace axosimple
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
             PreConstruct(parent, readableTail, symbolTail);
             Entity = new axosimple.SharedDataExchange(this, "Entity", "Entity");
-            UnitTemplate = new axosimple.UnitTemplate.FragmentProcessDataManger(this, "UnitTemplate", "UnitTemplate");
-            StarterUnitTemplate = new axosimple.StarterUnitTemplate.ProcessDataExchange(this, "StarterUnitTemplate", "StarterUnitTemplate");
+            UnitTemplate = new axosimple.UnitTemplate.ProcessDataExchange(this, "UnitTemplate", "UnitTemplate");
             PostConstruct(parent, readableTail, symbolTail);
         }
 
@@ -573,9 +546,6 @@ namespace axosimple
 #pragma warning disable CS0612
             plain.UnitTemplate = await UnitTemplate._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.StarterUnitTemplate = await StarterUnitTemplate._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
             return plain;
         }
 
@@ -593,9 +563,6 @@ namespace axosimple
 #pragma warning disable CS0612
             plain.UnitTemplate = await UnitTemplate._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.StarterUnitTemplate = await StarterUnitTemplate._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
             return plain;
         }
 
@@ -611,9 +578,6 @@ namespace axosimple
 #pragma warning restore CS0612
 #pragma warning disable CS0612
             plain.UnitTemplate = await UnitTemplate._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.StarterUnitTemplate = await StarterUnitTemplate._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -632,9 +596,6 @@ namespace axosimple
 #pragma warning disable CS0612
             await this.UnitTemplate._PlainToOnlineNoacAsync(plain.UnitTemplate);
 #pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.StarterUnitTemplate._PlainToOnlineNoacAsync(plain.StarterUnitTemplate);
-#pragma warning restore CS0612
             return await this.WriteAsync<IgnoreOnPocoOperation>();
         }
 
@@ -649,9 +610,6 @@ namespace axosimple
 #pragma warning disable CS0612
             await this.UnitTemplate._PlainToOnlineNoacAsync(plain.UnitTemplate);
 #pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.StarterUnitTemplate._PlainToOnlineNoacAsync(plain.StarterUnitTemplate);
-#pragma warning restore CS0612
         }
 
         public async override Task<T> ShadowToPlain<T>()
@@ -665,7 +623,6 @@ namespace axosimple
             await base.ShadowToPlainAsync(plain);
             plain.Entity = await Entity.ShadowToPlainAsync();
             plain.UnitTemplate = await UnitTemplate.ShadowToPlainAsync();
-            plain.StarterUnitTemplate = await StarterUnitTemplate.ShadowToPlainAsync();
             return plain;
         }
 
@@ -674,7 +631,6 @@ namespace axosimple
             await base.ShadowToPlainAsync(plain);
             plain.Entity = await Entity.ShadowToPlainAsync();
             plain.UnitTemplate = await UnitTemplate.ShadowToPlainAsync();
-            plain.StarterUnitTemplate = await StarterUnitTemplate.ShadowToPlainAsync();
             return plain;
         }
 
@@ -688,7 +644,6 @@ namespace axosimple
             await base.PlainToShadowAsync(plain);
             await this.Entity.PlainToShadowAsync(plain.Entity);
             await this.UnitTemplate.PlainToShadowAsync(plain.UnitTemplate);
-            await this.StarterUnitTemplate.PlainToShadowAsync(plain.StarterUnitTemplate);
             return this.RetrievePrimitives();
         }
 
@@ -715,8 +670,6 @@ namespace axosimple
                     somethingChanged = true;
                 if (await UnitTemplate.DetectsAnyChangeAsync(plain.UnitTemplate, latest.UnitTemplate))
                     somethingChanged = true;
-                if (await StarterUnitTemplate.DetectsAnyChangeAsync(plain.StarterUnitTemplate, latest.StarterUnitTemplate))
-                    somethingChanged = true;
                 plain = latest;
                 return somethingChanged;
             });
@@ -739,10 +692,7 @@ namespace axosimple
         public axosimple.TechnologySharedDataExchange Common { get; }
 
         [AXOpen.Data.AxoDataFragmentAttribute]
-        public axosimple.UnitTemplate.FragmentTechnologyDataManger UnitTemplate { get; }
-
-        [AXOpen.Data.AxoDataFragmentAttribute]
-        public axosimple.StarterUnitTemplate.TechnologyDataExchange StarterUnitTemplate { get; }
+        public axosimple.UnitTemplate.TechnologyDataExchange UnitTemplate { get; }
 
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
@@ -751,8 +701,7 @@ namespace axosimple
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
             PreConstruct(parent, readableTail, symbolTail);
             Common = new axosimple.TechnologySharedDataExchange(this, "Common", "Common");
-            UnitTemplate = new axosimple.UnitTemplate.FragmentTechnologyDataManger(this, "UnitTemplate", "UnitTemplate");
-            StarterUnitTemplate = new axosimple.StarterUnitTemplate.TechnologyDataExchange(this, "StarterUnitTemplate", "StarterUnitTemplate");
+            UnitTemplate = new axosimple.UnitTemplate.TechnologyDataExchange(this, "UnitTemplate", "UnitTemplate");
             PostConstruct(parent, readableTail, symbolTail);
         }
 
@@ -774,9 +723,6 @@ namespace axosimple
 #pragma warning disable CS0612
             plain.UnitTemplate = await UnitTemplate._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.StarterUnitTemplate = await StarterUnitTemplate._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
             return plain;
         }
 
@@ -794,9 +740,6 @@ namespace axosimple
 #pragma warning disable CS0612
             plain.UnitTemplate = await UnitTemplate._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.StarterUnitTemplate = await StarterUnitTemplate._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
             return plain;
         }
 
@@ -812,9 +755,6 @@ namespace axosimple
 #pragma warning restore CS0612
 #pragma warning disable CS0612
             plain.UnitTemplate = await UnitTemplate._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.StarterUnitTemplate = await StarterUnitTemplate._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -833,9 +773,6 @@ namespace axosimple
 #pragma warning disable CS0612
             await this.UnitTemplate._PlainToOnlineNoacAsync(plain.UnitTemplate);
 #pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.StarterUnitTemplate._PlainToOnlineNoacAsync(plain.StarterUnitTemplate);
-#pragma warning restore CS0612
             return await this.WriteAsync<IgnoreOnPocoOperation>();
         }
 
@@ -850,9 +787,6 @@ namespace axosimple
 #pragma warning disable CS0612
             await this.UnitTemplate._PlainToOnlineNoacAsync(plain.UnitTemplate);
 #pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.StarterUnitTemplate._PlainToOnlineNoacAsync(plain.StarterUnitTemplate);
-#pragma warning restore CS0612
         }
 
         public async override Task<T> ShadowToPlain<T>()
@@ -866,7 +800,6 @@ namespace axosimple
             await base.ShadowToPlainAsync(plain);
             plain.Common = await Common.ShadowToPlainAsync();
             plain.UnitTemplate = await UnitTemplate.ShadowToPlainAsync();
-            plain.StarterUnitTemplate = await StarterUnitTemplate.ShadowToPlainAsync();
             return plain;
         }
 
@@ -875,7 +808,6 @@ namespace axosimple
             await base.ShadowToPlainAsync(plain);
             plain.Common = await Common.ShadowToPlainAsync();
             plain.UnitTemplate = await UnitTemplate.ShadowToPlainAsync();
-            plain.StarterUnitTemplate = await StarterUnitTemplate.ShadowToPlainAsync();
             return plain;
         }
 
@@ -889,7 +821,6 @@ namespace axosimple
             await base.PlainToShadowAsync(plain);
             await this.Common.PlainToShadowAsync(plain.Common);
             await this.UnitTemplate.PlainToShadowAsync(plain.UnitTemplate);
-            await this.StarterUnitTemplate.PlainToShadowAsync(plain.StarterUnitTemplate);
             return this.RetrievePrimitives();
         }
 
@@ -915,8 +846,6 @@ namespace axosimple
                 if (await Common.DetectsAnyChangeAsync(plain.Common, latest.Common))
                     somethingChanged = true;
                 if (await UnitTemplate.DetectsAnyChangeAsync(plain.UnitTemplate, latest.UnitTemplate))
-                    somethingChanged = true;
-                if (await StarterUnitTemplate.DetectsAnyChangeAsync(plain.StarterUnitTemplate, latest.StarterUnitTemplate))
                     somethingChanged = true;
                 plain = latest;
                 return somethingChanged;

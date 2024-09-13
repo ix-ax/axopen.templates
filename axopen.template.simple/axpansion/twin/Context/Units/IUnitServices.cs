@@ -12,7 +12,7 @@ namespace axosimple.server.Units;
 
 public interface IUnitServices
 {
-    public string Link => "Context/StarterUnitTemplate";
+    public string Link => "Context/UnitTemplate";
 
     public string ImageLink => "logo-header.svg";
 }

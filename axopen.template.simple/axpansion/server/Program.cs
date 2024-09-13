@@ -61,7 +61,6 @@ AxoApplication.CreateBuilder().ConfigureLogger(new SerilogLogger(new LoggerConfi
 
 //Entry.Plc.ContextLogger.StartDequeuing(AxoApplication.Current.Logger, 250);
 
-axosimple.StarterUnitTemplate.UnitServices.Create(ContextService.Instance);
 axosimple.UnitTemplate.UnitServices.Create(ContextService.Instance);
 
 // Clean Temp directory

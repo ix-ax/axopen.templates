@@ -1,43 +1,47 @@
-﻿using AXOpen.Base.Data;
+﻿using System.Runtime.CompilerServices;
+using AXOpen.Base.Data;
+using AXOpen.Data;
 using AXOpen.Data.MongoDb;
 using AXOpen.Messaging.Static;
+using axosimple.BaseUnit;
 using axosimple.server.Units;
 using AXSharp.Connector;
+
 
 namespace axosimple.UnitTemplate
 {
     public partial class Unit 
     {
-        public override AXOpen.Data.AxoDataEntity? Data => this.UnitObjects.ProcessData.DataManger.Payload;
-
-        public override AXOpen.Data.AxoDataEntity? DataHeader => this.UnitObjects.ProcessData.Shared.Payload;
+        ///<inheritdoc/>
+        public override AxoDataEntity? Data => this.X.PD.Data.Payload;
         
-        public override AXOpen.Data.AxoDataEntity? TechnologySettings =>
-            Entry.Plc.Context.TechnologySettings.UnitTemplate.Payload;
-
-        public override AXOpen.Data.AxoDataEntity? SharedTechnologySettings =>
-            Entry.Plc.Context.TechnologySettings.UnitTemplate.Payload;
-
-        public override AxoObject? UnitComponents => this.UnitObjects.Components;
+        ///<inheritdoc/>
+        public override AxoDataEntity? DataHeader => this.X.PD.Shared.Payload;
         
+        ///<inheritdoc/>
+        public override AxoDataEntity? TechnologySettings => this.X.TD.Shared.Payload;
+
+        ///<inheritdoc/>
+        public override AxoDataEntity? SharedTechnologySettings => this.X.TD.Data.Payload;
+
+        ///<inheritdoc/>
+        public override AxoObject? UnitComponents => this.X.C;
+
         public override ITwinObject[] Associates => new ITwinObject[]
         {
-            SharedTechnologySettings,
-            TechnologySettings,
-            Data,
-            DataHeader,
-            UnitComponents,
-            Entry.Plc.Context.Safety.Zone_1, 
+            Entry.Plc.Context.UnitTemplate,
+            Entry.Plc.Context.Safety.Zone_1,
             Entry.Plc.Context.Safety.Zone_2
         };
-        
-        public override AxoTask AutomatTask => this.AutomatSequence;
-        
-        public override AxoTask GroundTask => this.GroundSequence;
-        
-        public override AxoTask ServiceTask => this.ServiceMode;
-        
+
         private AxoMessageProvider _messageProvider;
+        private UnitServices _services;
+
+        public override AxoTask AutomatTask => this.Auto;
+        
+        public override AxoTask GroundTask => this.Ground;
+        
+        public override AxoTask ServiceTask => this.Service;
         
         public override AxoMessageProvider MessageProvider
         {
@@ -51,81 +55,74 @@ namespace axosimple.UnitTemplate
                 return _messageProvider;
             }
         }
-        
-        public UnitServices Services { get; } 
     }
     
-    public class UnitServices : IUnitServices      
+    public class UnitServices : IUnitServices
     {
-        private UnitServices(ContextService contextService)
+        internal UnitServices(ContextService contextService)
         {
             _contextService = contextService;
         }
         
-        public axosimple.BaseUnit.UnitBase Unit { get; } = Entry.Plc.Context.UnitTemplate;
-
-        // Technology Data manager of unit
-        private UnitTemplate.TechnologyDataManager UnitTechnologyDataManager { get; } = 
-            Entry.Plc.Context.UnitTemplate.UnitObjects.TechnologyData.CreateDataFragments<UnitTemplate.TechnologyDataManager>();
-
-        // Process Data manager of unit
-        private UnitTemplate.ProcessDataManager UnitProcessDataManager { get; } = 
-            Entry.Plc.Context.UnitTemplate.UnitObjects.ProcessData.CreateDataFragments<UnitTemplate.ProcessDataManager>();
+        public UnitBase Unit { get; } = Entry.Plc.Context.UnitTemplate;
         
+        /// <summary>
+        /// Gets context service.
+        /// </summary>
         private ContextService _contextService { get; }
 
         /// <summary>
-        /// repository - settings connected with technology not with procuction process
+        /// Gets repository for technology settings.
         /// </summary>
-        public IRepository<Pocos.axosimple.UnitTemplate.TechnologyData> TechnologySettingsRepository { get; } 
-            = AXOpen.Data.MongoDb.Repository.Factory<Pocos.axosimple.UnitTemplate.TechnologyData>(
-                new MongoDbRepositorySettings<Pocos.axosimple.UnitTemplate.TechnologyData>(ContextService.DataBaseConnectionString, ContextService.DataBaseName, "UnitTemplate_TechnologySettings"));
+        public IRepository<Pocos.axosimple.UnitTemplate.TechnologyDataPayload> TechnologySettingsRepository { get; } 
+            = new MongoDbRepositorySettings<Pocos.axosimple.UnitTemplate.TechnologyDataPayload>(
+                ContextService.DataBaseConnectionString, ContextService.DataBaseName, 
+                "UnitTemplate_TechnologySettings").Factory();
 
         /// <summary>
-        /// repository - settings connected with specific recepie
+        /// Gets repository for process settings.
         /// </summary>
-        public IRepository<Pocos.axosimple.UnitTemplate.ProcessData> ProcessSettingsRepository { get; } 
-            = AXOpen.Data.MongoDb.Repository.Factory<Pocos.axosimple.UnitTemplate.ProcessData>(
-                new MongoDbRepositorySettings<Pocos.axosimple.UnitTemplate.ProcessData>(ContextService.DataBaseConnectionString, ContextService.DataBaseName, "UnitTemplate_ProcessSettings"));
+        public IRepository<Pocos.axosimple.UnitTemplate.ProcessDataPayload> ProcessSettingsRepository { get; } 
+            = new MongoDbRepositorySettings<Pocos.axosimple.UnitTemplate.ProcessDataPayload>(
+                ContextService.DataBaseConnectionString, ContextService.DataBaseName, 
+                "UnitTemplate_ProcessSettings").Factory();
 
         /// <summary>
-        /// repository - data connected with specific part or piece in production/technology
+        /// Gets repository for process/production data.
         /// </summary>
-        public IRepository<Pocos.axosimple.UnitTemplate.ProcessData> ProcessDataRepository { get; } 
-            = AXOpen.Data.MongoDb.Repository.Factory<Pocos.axosimple.UnitTemplate.ProcessData>(
-                new MongoDbRepositorySettings<Pocos.axosimple.UnitTemplate.ProcessData>(ContextService.DataBaseConnectionString, ContextService.DataBaseName, "UnitTemplate_ProcessData"));
+        public IRepository<Pocos.axosimple.UnitTemplate.ProcessDataPayload> ProcessDataRepository { get; } 
+            = new MongoDbRepositorySettings<Pocos.axosimple.UnitTemplate.ProcessDataPayload>(
+                ContextService.DataBaseConnectionString, ContextService.DataBaseName,
+                "UnitTemplate_ProcessData").Factory();
 
 
-        
-        
         public static UnitServices Create(ContextService contextService)
         {
             var retVal = new UnitServices(contextService);
             retVal.Unit.Services = retVal;
-            retVal.SetUnitsData();
+            retVal.InitializeDataExchange();
             return retVal;
         }
 
-        private void SetUnitsData()
+        private void InitializeDataExchange()
         {
             // initialize partial repositories in global context
             _contextService.TechnologySettings.UnitTemplate.InitializeRemoteDataExchange(TechnologySettingsRepository);
             _contextService.ProcessSettings.UnitTemplate.InitializeRemoteDataExchange(ProcessSettingsRepository);
             _contextService.ProcessData.UnitTemplate.InitializeRemoteDataExchange(ProcessDataRepository);
-            
+
             // initialize unit process data manager
-            UnitProcessDataManager.Shared.InitializeRemoteDataExchange(_contextService.EntityDataRepository);
-            UnitProcessDataManager.DataManger.InitializeRemoteDataExchange(ProcessDataRepository);
-            UnitProcessDataManager.InitializeRemoteDataExchange();
+            var processDataManager = Entry.Plc.Context.UnitTemplate.X.PD.CreateDataFragments<ProcessDataManager>()!;
+            processDataManager.Shared.InitializeRemoteDataExchange(_contextService.EntityDataRepository);
+            processDataManager.Data.InitializeRemoteDataExchange(ProcessDataRepository);
+            processDataManager.InitializeRemoteDataExchange();
             
             // initialize unit technology data manager
-            UnitTechnologyDataManager.Shared.InitializeRemoteDataExchange(_contextService.TechnologyCommonRepository);
-            UnitTechnologyDataManager.DataManger.InitializeRemoteDataExchange(TechnologySettingsRepository);
-            UnitTechnologyDataManager.InitializeRemoteDataExchange();
+            
+            var technologyDataManager = Entry.Plc.Context.UnitTemplate.X.TD.CreateDataFragments<TechnologyDataManager>();
+            technologyDataManager.Shared.InitializeRemoteDataExchange(_contextService.TechnologyCommonRepository);
+            technologyDataManager.Data.InitializeRemoteDataExchange(TechnologySettingsRepository);
+            technologyDataManager.InitializeRemoteDataExchange();
         }
-        
-        public string Link => "Context/UnitTemplate";
-        
-        public string ImageLink => "logo-axopen-no-background.svg";
     }
 }

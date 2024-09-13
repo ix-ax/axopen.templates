@@ -9,7 +9,6 @@ namespace axosimple
     public enum eStations : Int16
     {
         None = 0,
-        StarterUnitTemplate = 1,
         UnitTemplate = 1,
         CU_1 = 1,
         CU_2 = 2,

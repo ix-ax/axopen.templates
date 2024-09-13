@@ -3,7 +3,6 @@ using AXOpen.Base.Data;
 using AXOpen.Data;
 using AXOpen.Data.MongoDb;
 using axosimple.server.Units;
-using axosimple.StarterUnitTemplate;
 
 namespace axosimple
 {
@@ -17,14 +16,14 @@ namespace axosimple
         private ContextService()
         {
             SetContextData();
-            Entry.Plc.Context.PersistentData.InitializeRemoteDataExchange(Entry.Plc.Context, Repository.Factory<AXOpen.Data.PersistentRecord>(new MongoDbRepositorySettings<PersistentRecord>(DataBaseConnectionString, DataBaseName, "Persistent_Data")));
+            Entry.Plc.Context.Glob.Persits.InitializeRemoteDataExchange(Entry.Plc.Context, Repository.Factory<AXOpen.Data.PersistentRecord>(new MongoDbRepositorySettings<PersistentRecord>(DataBaseConnectionString, DataBaseName, "Persistent_Data")));
         }
 
         private axosimple.Context Context { get; } = Entry.Plc.Context;
         
-        public axosimple.ProcessData ProcessData { get; } = Entry.Plc.Context.ProcessData.CreateDataFragments<axosimple.ProcessData>();
-        public axosimple.ProcessData ProcessSettings { get; } = Entry.Plc.Context.ProcessSettings.CreateDataFragments<axosimple.ProcessData>();
-        public axosimple.TechnologyData TechnologySettings { get; } = Entry.Plc.Context.TechnologySettings.CreateDataFragments<axosimple.TechnologyData>();
+        public axosimple.ProcessData ProcessData { get; } = Entry.Plc.Context.Glob.PD.CreateDataFragments<axosimple.ProcessData>();
+        public axosimple.ProcessData ProcessSettings { get; } = Entry.Plc.Context.Glob.PS.CreateDataFragments<axosimple.ProcessData>();
+        public axosimple.TechnologyData TechnologySettings { get; } = Entry.Plc.Context.Glob.TS.CreateDataFragments<axosimple.TechnologyData>();
 
         public static string DataBaseConnectionString { get; } = "mongodb://localhost:27017";
         public static string DataBaseName { get; } = "axosimple";

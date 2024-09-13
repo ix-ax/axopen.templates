@@ -12,8 +12,7 @@ CONFIGURATION MyConfiguration
         Context : axosimple.Context;     
         {S7.extern=ReadWrite}  
         S71500Rtc :  AXOpen.S71500.Rtc;  
-        {S7.extern=ReadWrite}  
-        {OpcUa = ReadWrite}  
+        {S7.extern=ReadWrite}          
         ContextLogger : AXOpen.Logging.AxoLogger;       
     END_VAR
 

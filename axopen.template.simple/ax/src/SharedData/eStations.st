@@ -11,9 +11,8 @@ NAMESPACE axosimple
             ///<summary>
             /// Fist Station in Technology, Create data with unique identifier.
             ///</summary>
-            StarterUnitTemplate := 1,
             UnitTemplate := 1,
-
+          
             // examples...
             CU_1 := 1,
             CU_2 := 2,

@@ -7,45 +7,44 @@ NAMESPACE axosimple.UnitTemplate
 
     {S7.extern=ReadWrite}
     CLASS PUBLIC UnitObjects EXTENDS axosimple.BaseUnit.UnitObjects
-        VAR PUBLIC
+        VAR PUBLIC            
             ///<summary>
             /// Handles and intializes components used by this unit.
             ///</summary>
-            Components : axosimple.UnitTemplate.Components;
-           
-            ///<summary>
-            /// Provides access to process data manager of this unit
-            ///</summary>
-            ProcessData : axosimple.UnitTemplate.ProcessDataManager;
-
-
-            ///<summary>
-            /// Provides access to technology data managers of this unit.
-            ///</summary>
-            TechnologyData : axosimple.UnitTemplate.TechnologyDataManager;
-
-            ///<summary>
-            /// Provides access to process data manager of this unit
-            ///</summary>
-            TechnologySettings : REF_TO axosimple.UnitTemplate.FragmentTechnologyDataManger;
-                     
-            ///<summary>
-            /// Provides access to process data manager of this unit
-            ///</summary>
-            ProcessSettings : REF_TO axosimple.UnitTemplate.FragmentProcessDataManger;
-
+            C : axosimple.UnitTemplate.Components;
             
+            ///<summary>
+            /// Provides access to process data manager of this unit.
+            ///</summary>
+            PD : axosimple.UnitTemplate.ProcessDataManager;
+            
+            ///<summary>
+            /// Provides access to technology data manager of this unit.
+            ///</summary>
+            TD : axosimple.UnitTemplate.TechnologyDataManager;
+
+            // ///<summary>
+            // /// Provides access to technology settings of this unit.
+            // ///</summary>
+            // TS : REF_TO axosimple.UnitTemplate.TechnologyDataExchange;
+
+            // ///<summary>
+            // /// Provides access to process setting of this unit.
+            // ///</summary>
+            // PS : REF_TO axosimple.UnitTemplate.ProcessDataExchange;
+
             {#ix-attr:[AXOpen.Data.PersistentAttribute("UnitTemplate")]}
-            SpecialSettings : STRING[64] ;
+            SpecialSettings :STRING[64] ;
 
             // https://ix-ax.github.io/AXOpen/core/docs/AXODIALOG.html#closing-a-dialog-with-external-signal
-            _dialog : AXOpen.Core.AxoDialog;
+            _DL     : AXOpen.Core.AxoDialog;
 
             // https://ix-ax.github.io/AXOpen/core/docs/AXOALERTDIALOG.html#invoking-alerts-from-plc
-            _alertDialog : AXOpen.Core.AxoAlert;
-  
+            _ADL    : AXOpen.Core.AxoAlert;
+
             // it needs to be handle from auto or ground sequnce
-            _inspectorDialog       : AXOpen.Inspectors.AxoInspectorDialog;
+            _IDL    : AXOpen.Inspectors.AxoInspectorDialog;
+
         END_VAR        
     END_CLASS
 

@@ -12,13 +12,8 @@ namespace Pocos
             {
             }
 
-            public axosimple.TechnologyData TechnologySettings { get; set; } = new axosimple.TechnologyData();
-            public axosimple.ProcessData ProcessSettings { get; set; } = new axosimple.ProcessData();
-            public axosimple.ProcessData ProcessData { get; set; } = new axosimple.ProcessData();
-            public AXOpen.Data.AxoDataPersistentExchange PersistentData { get; set; } = new AXOpen.Data.AxoDataPersistentExchange();
-            public axosimple.GlobalContextObjects GlobalObjects { get; set; } = new axosimple.GlobalContextObjects();
+            public axosimple.GlobalContextObjects Glob { get; set; } = new axosimple.GlobalContextObjects();
             public axosimple.TechnologySafety Safety { get; set; } = new axosimple.TechnologySafety();
-            public axosimple.StarterUnitTemplate.Unit StarterUnitTemplate { get; set; } = new axosimple.StarterUnitTemplate.Unit();
             public axosimple.UnitTemplate.Unit UnitTemplate { get; set; } = new axosimple.UnitTemplate.Unit();
         }
 
@@ -29,6 +24,10 @@ namespace Pocos
             }
 
             public string LastTechnologySettings { get; set; } = string.Empty;
+            public AXOpen.Data.AxoDataPersistentExchange Persits { get; set; } = new AXOpen.Data.AxoDataPersistentExchange();
+            public axosimple.ProcessData PS { get; set; } = new axosimple.ProcessData();
+            public axosimple.TechnologyData TS { get; set; } = new axosimple.TechnologyData();
+            public axosimple.ProcessData PD { get; set; } = new axosimple.ProcessData();
         }
 
         public partial class ProcessData : AXOpen.Data.AxoDataFragmentExchange, AXSharp.Connector.IPlain
@@ -38,8 +37,7 @@ namespace Pocos
             }
 
             public axosimple.SharedDataExchange Entity { get; set; } = new axosimple.SharedDataExchange();
-            public axosimple.UnitTemplate.FragmentProcessDataManger UnitTemplate { get; set; } = new axosimple.UnitTemplate.FragmentProcessDataManger();
-            public axosimple.StarterUnitTemplate.ProcessDataExchange StarterUnitTemplate { get; set; } = new axosimple.StarterUnitTemplate.ProcessDataExchange();
+            public axosimple.UnitTemplate.ProcessDataExchange UnitTemplate { get; set; } = new axosimple.UnitTemplate.ProcessDataExchange();
         }
 
         public partial class TechnologyData : AXOpen.Data.AxoDataFragmentExchange, AXSharp.Connector.IPlain
@@ -49,8 +47,7 @@ namespace Pocos
             }
 
             public axosimple.TechnologySharedDataExchange Common { get; set; } = new axosimple.TechnologySharedDataExchange();
-            public axosimple.UnitTemplate.FragmentTechnologyDataManger UnitTemplate { get; set; } = new axosimple.UnitTemplate.FragmentTechnologyDataManger();
-            public axosimple.StarterUnitTemplate.TechnologyDataExchange StarterUnitTemplate { get; set; } = new axosimple.StarterUnitTemplate.TechnologyDataExchange();
+            public axosimple.UnitTemplate.TechnologyDataExchange UnitTemplate { get; set; } = new axosimple.UnitTemplate.TechnologyDataExchange();
         }
     }
 }

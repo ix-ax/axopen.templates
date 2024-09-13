@@ -6,21 +6,6 @@
   "BackgroundSVGInput": "",
   "Items": [
     {
-      "Id": "8e729099b499008e6604e84d6b67169f01935c21fc69da20fcc0a0ec0dd770a0",
-      "Left": 27.283950617283935,
-      "Top": 6.527777777777779,
-      "Transform": "TopCenter",
-      "Presentation": "Spot",
-      "Width": -1,
-      "Height": -1,
-      "ZIndex": 10,
-      "Scale": 1,
-      "Roles": "",
-      "PresentationTemplate": null,
-      "Background": false,
-      "BackgroundColor": "#FFFFFF"
-    },
-    {
       "Id": "f122746ffacbbf3a0633a9695c646677467d58ed708ea07d46a16dea4f178979",
       "Left": 78.74999999999999,
       "Top": 6.913580246913581,
@@ -40,5 +25,5 @@
   "Scale": 1,
   "TranslateX": 0,
   "TranslateY": 0,
-  "AllowZoomingAndPanning": true
+  "AllowZoomingAndPanning": false
 }

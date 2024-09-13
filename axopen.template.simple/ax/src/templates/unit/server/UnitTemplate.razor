@@ -6,7 +6,9 @@
 @using AXOpen.Core;
 @using axosimple.server.Units
 @using axosimple.UnitTemplate
+@using Context = axosimple.Context
 @using Unit = axosimple.server.Components.Unit
+
 @inject IAlertService _alerts
 @inherits RenderableComplexComponentBase<axosimple.UnitTemplate.Unit>
 
@@ -16,21 +18,21 @@
         <div class="col">
             <AuthorizeView Roles="@Roles.can_run_automat_mode">
                 <Authorized>
-                    <AxoTaskView Component="Unit.AutomatSequence"></AxoTaskView>
+                    <AxoTaskView Component="Unit.AutomatTask"></AxoTaskView>
                 </Authorized>
             </AuthorizeView>
         </div>
         <div class="col">
             <AuthorizeView Roles="@Roles.can_run_ground_mode">
                 <Authorized>
-                     <AxoTaskView Component="Unit.GroundSequence"></AxoTaskView>
+                     <AxoTaskView Component="Unit.GroundTask"></AxoTaskView>
                 </Authorized>
             </AuthorizeView>
         </div>
         <div class="col">
             <AuthorizeView Roles="@Roles.can_run_service_mode">
                 <Authorized>
-                      <AxoTaskView Component="Unit.ServiceMode"></AxoTaskView>
+                      <AxoTaskView Component="Unit.ServiceTask"></AxoTaskView>
                 </Authorized>
             </AuthorizeView>
            
@@ -38,11 +40,12 @@
     </div>
 </div>
 
+ 
 <axosimple.server.Components.Unit Component="@Unit"/>
-
 
 @code
 {
-    private UnitServices Services => Entry.Plc.Context.UnitTemplate.Services;
+    private IUnitServices Services => Entry.Plc.Context.UnitTemplate.Services;
     private axosimple.UnitTemplate.Unit Unit => Entry.Plc.Context.UnitTemplate;
 }
+    

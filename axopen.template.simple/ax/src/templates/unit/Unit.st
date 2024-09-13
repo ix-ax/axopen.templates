@@ -14,22 +14,22 @@ NAMESPACE axosimple.UnitTemplate
             ///<summary>
             /// Provide access to unit objets, that are used into sequnces.
             ///</summary>
-            UnitObjects  : axosimple.UnitTemplate.UnitObjects;
+            X  : axosimple.UnitTemplate.UnitObjects;
             
             ///<summary>
             /// Ground sequence. Contains logic that brings the unit into initial state.
             ///</summary>
-            GroundSequence : axosimple.UnitTemplate.GroundSequence;
+            Ground : axosimple.UnitTemplate.GroundSequence;
 
             ///<summary>
             /// Automatic sequence. Contains logic for automatic operations of this unit.
             ///</summary>
-            AutomatSequence : axosimple.UnitTemplate.AutomatSequence;
+            Auto : axosimple.UnitTemplate.AutomatSequence;
             
             ///<summary>
             /// Service mode contains logic for service/manual operations.
             ///</summary>
-            ServiceMode : axosimple.UnitTemplate.ServiceMode;
+            Service : axosimple.UnitTemplate.ServiceMode;
         END_VAR
         ///<summary>
         /// Runs this unit.
@@ -37,74 +37,84 @@ NAMESPACE axosimple.UnitTemplate
 
         METHOD PUBLIC Run
             VAR_INPUT
-                parent : IAxoContext;
+                inParent : IAxoContext;
             END_VAR
             VAR_IN_OUT
                 ///<summary>
                 /// Hardware input structure
                 ///</summary>
-                Inputs : axosimple.Inputs;
+                inoInputs : axosimple.Inputs;
                 ///<summary>
                 /// Hardware output structure
                 ///</summary>
-                Outputs : axosimple.Outputs;                
-            END_VAR  
-            VAR_INPUT
-                TechnologySettings : REF_TO axosimple.UnitTemplate.FragmentTechnologyDataManger;
-                ProcessSettings : REF_TO axosimple.UnitTemplate.FragmentProcessDataManger; 
-                Global : REF_TO axosimple.GlobalContextObjects;             
+                inoOutputs : axosimple.Outputs;                
+            END_VAR
+            VAR_INPUT                
+                inGlobal : REF_TO axosimple.GlobalContextObjects;             
             END_VAR    
-            THIS.Initialize(parent);
-            UnitObjects.ProcessSettings := ProcessSettings;
-            UnitObjects.TechnologySettings := TechnologySettings;    
-            UnitObjects.G := Global;
-            THIS.Execute(Inputs, Outputs);  
+            THIS.Initialize(inParent);           
+            X.G := inGlobal;
+            THIS.Execute(inoInputs, inoOutputs);                         
         END_METHOD
 
+        ///<summary>
+        ///     Exectute for this unit.
+        ///     Execute runs cyclicaly you should place any call of this unit in this or underlying methods. 
+        ///</summary>
         METHOD PRIVATE Execute
             VAR_IN_OUT
-                Inputs : axosimple.Inputs;
-                Outputs : axosimple.Outputs;
+                inoInputs : axosimple.Inputs;
+                inoOutputs : axosimple.Outputs;
             END_VAR
-          
+           
             // Component I/O immange and management handling.
-            UnitObjects.Components.Update(THIS, Inputs, Outputs);
-            // Process data manager
-            UnitObjects.ProcessData.Run(THIS);
-            // Process settings data manager
-            UnitObjects.ProcessSettings^.Run(THIS);
-            // Technology data manager
-            UnitObjects.TechnologySettings^.Run(THIS);
-            // Handles ground sequence
-            GroundSequence.Run(THIS, REF(UnitObjects));
-                       
-            // Restores other states when Ground executes
-            IF (GroundSequence.IsBusy()) THEN
-                AutomatSequence.Restore();
-                ServiceMode.Restore();
-            END_IF;
-            
-            // Handles automatic sequence (ground must be previously done)           
-            AutomatSequence.IsDisabled := GroundSequence.Status <> eAxoTaskState#Done;
-            AutomatSequence.Run(THIS, REF(UnitObjects));
-            // Handles service/manual mode
-            ServiceMode.Run(THIS, UnitObjects.Components);
+             X.C.Update(THIS, inoInputs, inoOutputs);
+             
+             // Run process data manager of this unit.
+             X.PD.Run(THIS);
+             
+             // Run technology data manger of this unit.
+             X.TD.Run(THIS);
+                         
+            /* 
 
-            IF ServiceMode.IsBusy() THEN
-                GroundSequence.Restore();
-                AutomatSequence.Restore();
-            END_IF;
+                    Ground mode handling
 
-            // remember last selected technolgy identifier 
-            if  (UnitObjects.TechnologySettings^.Payload.DataEntityId <> '') THEN
-                IF UnitObjects.LastTechnologySettings <> UnitObjects.TechnologySettings^.Payload.DataEntityId THEN 
-                    IF UnitObjects.G^.Persits^.InvokeUpdate(THIS, '') THEN 
-                        UnitObjects.LastTechnologySettings :=  UnitObjects.TechnologySettings^.Payload.DataEntityId;
-                    END_IF;
-                END_IF;
-            END_IF;
+            */
 
+             Ground.Run(THIS, REF(X));
+
+             // Restores other states when Ground executes
+             IF (Ground.IsBusy()) THEN
+                 Auto.Restore();
+                 Service.Restore();
+             END_IF;
+
+             /*
+             
+                    Automatic mode handling 
+                    NOTE: Ground must be previously done.           
+
+             */
+             
+             Auto.IsDisabled := Ground.Status <> eAxoTaskState#Done;
+             Auto.Run(THIS, REF(X));
+
+
+            /*
+             
+                Service/manual mode hadnling                
+
+             */
+
+
+             Service.Run(THIS, X.C);
+ 
+             IF Service.IsBusy() THEN
+                 Ground.Restore();
+                 Auto.Restore();
+             END_IF;
+                                                  
         END_METHOD
-    END_CLASS
-     
+    END_CLASS     
 END_NAMESPACE

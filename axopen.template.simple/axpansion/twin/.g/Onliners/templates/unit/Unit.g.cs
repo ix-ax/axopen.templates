@@ -8,13 +8,13 @@ namespace axosimple.UnitTemplate
 {
     public partial class Unit : axosimple.BaseUnit.UnitBase
     {
-        public axosimple.UnitTemplate.UnitObjects UnitObjects { get; }
+        public axosimple.UnitTemplate.UnitObjects X { get; }
 
-        public axosimple.UnitTemplate.GroundSequence GroundSequence { get; }
+        public axosimple.UnitTemplate.GroundSequence Ground { get; }
 
-        public axosimple.UnitTemplate.AutomatSequence AutomatSequence { get; }
+        public axosimple.UnitTemplate.AutomatSequence Auto { get; }
 
-        public axosimple.UnitTemplate.ServiceMode ServiceMode { get; }
+        public axosimple.UnitTemplate.ServiceMode Service { get; }
 
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
@@ -22,10 +22,10 @@ namespace axosimple.UnitTemplate
         {
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
             PreConstruct(parent, readableTail, symbolTail);
-            UnitObjects = new axosimple.UnitTemplate.UnitObjects(this, "UnitObjects", "UnitObjects");
-            GroundSequence = new axosimple.UnitTemplate.GroundSequence(this, "GroundSequence", "GroundSequence");
-            AutomatSequence = new axosimple.UnitTemplate.AutomatSequence(this, "AutomatSequence", "AutomatSequence");
-            ServiceMode = new axosimple.UnitTemplate.ServiceMode(this, "ServiceMode", "ServiceMode");
+            X = new axosimple.UnitTemplate.UnitObjects(this, "X", "X");
+            Ground = new axosimple.UnitTemplate.GroundSequence(this, "Ground", "Ground");
+            Auto = new axosimple.UnitTemplate.AutomatSequence(this, "Auto", "Auto");
+            Service = new axosimple.UnitTemplate.ServiceMode(this, "Service", "Service");
             PostConstruct(parent, readableTail, symbolTail);
         }
 
@@ -42,16 +42,16 @@ namespace axosimple.UnitTemplate
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.UnitObjects = await UnitObjects._OnlineToPlainNoacAsync();
+            plain.X = await X._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.GroundSequence = await GroundSequence._OnlineToPlainNoacAsync();
+            plain.Ground = await Ground._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.AutomatSequence = await AutomatSequence._OnlineToPlainNoacAsync();
+            plain.Auto = await Auto._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.ServiceMode = await ServiceMode._OnlineToPlainNoacAsync();
+            plain.Service = await Service._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -65,16 +65,16 @@ namespace axosimple.UnitTemplate
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.UnitObjects = await UnitObjects._OnlineToPlainNoacAsync();
+            plain.X = await X._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.GroundSequence = await GroundSequence._OnlineToPlainNoacAsync();
+            plain.Ground = await Ground._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.AutomatSequence = await AutomatSequence._OnlineToPlainNoacAsync();
+            plain.Auto = await Auto._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.ServiceMode = await ServiceMode._OnlineToPlainNoacAsync();
+            plain.Service = await Service._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -87,16 +87,16 @@ namespace axosimple.UnitTemplate
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.UnitObjects = await UnitObjects._OnlineToPlainNoacAsync();
+            plain.X = await X._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.GroundSequence = await GroundSequence._OnlineToPlainNoacAsync();
+            plain.Ground = await Ground._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.AutomatSequence = await AutomatSequence._OnlineToPlainNoacAsync();
+            plain.Auto = await Auto._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.ServiceMode = await ServiceMode._OnlineToPlainNoacAsync();
+            plain.Service = await Service._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -110,16 +110,16 @@ namespace axosimple.UnitTemplate
         {
             await base._PlainToOnlineNoacAsync(plain);
 #pragma warning disable CS0612
-            await this.UnitObjects._PlainToOnlineNoacAsync(plain.UnitObjects);
+            await this.X._PlainToOnlineNoacAsync(plain.X);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this.GroundSequence._PlainToOnlineNoacAsync(plain.GroundSequence);
+            await this.Ground._PlainToOnlineNoacAsync(plain.Ground);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this.AutomatSequence._PlainToOnlineNoacAsync(plain.AutomatSequence);
+            await this.Auto._PlainToOnlineNoacAsync(plain.Auto);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this.ServiceMode._PlainToOnlineNoacAsync(plain.ServiceMode);
+            await this.Service._PlainToOnlineNoacAsync(plain.Service);
 #pragma warning restore CS0612
             return await this.WriteAsync<IgnoreOnPocoOperation>();
         }
@@ -130,16 +130,16 @@ namespace axosimple.UnitTemplate
         {
             await base._PlainToOnlineNoacAsync(plain);
 #pragma warning disable CS0612
-            await this.UnitObjects._PlainToOnlineNoacAsync(plain.UnitObjects);
+            await this.X._PlainToOnlineNoacAsync(plain.X);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this.GroundSequence._PlainToOnlineNoacAsync(plain.GroundSequence);
+            await this.Ground._PlainToOnlineNoacAsync(plain.Ground);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this.AutomatSequence._PlainToOnlineNoacAsync(plain.AutomatSequence);
+            await this.Auto._PlainToOnlineNoacAsync(plain.Auto);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            await this.ServiceMode._PlainToOnlineNoacAsync(plain.ServiceMode);
+            await this.Service._PlainToOnlineNoacAsync(plain.Service);
 #pragma warning restore CS0612
         }
 
@@ -152,20 +152,20 @@ namespace axosimple.UnitTemplate
         {
             Pocos.axosimple.UnitTemplate.Unit plain = new Pocos.axosimple.UnitTemplate.Unit();
             await base.ShadowToPlainAsync(plain);
-            plain.UnitObjects = await UnitObjects.ShadowToPlainAsync();
-            plain.GroundSequence = await GroundSequence.ShadowToPlainAsync();
-            plain.AutomatSequence = await AutomatSequence.ShadowToPlainAsync();
-            plain.ServiceMode = await ServiceMode.ShadowToPlainAsync();
+            plain.X = await X.ShadowToPlainAsync();
+            plain.Ground = await Ground.ShadowToPlainAsync();
+            plain.Auto = await Auto.ShadowToPlainAsync();
+            plain.Service = await Service.ShadowToPlainAsync();
             return plain;
         }
 
         protected async Task<Pocos.axosimple.UnitTemplate.Unit> ShadowToPlainAsync(Pocos.axosimple.UnitTemplate.Unit plain)
         {
             await base.ShadowToPlainAsync(plain);
-            plain.UnitObjects = await UnitObjects.ShadowToPlainAsync();
-            plain.GroundSequence = await GroundSequence.ShadowToPlainAsync();
-            plain.AutomatSequence = await AutomatSequence.ShadowToPlainAsync();
-            plain.ServiceMode = await ServiceMode.ShadowToPlainAsync();
+            plain.X = await X.ShadowToPlainAsync();
+            plain.Ground = await Ground.ShadowToPlainAsync();
+            plain.Auto = await Auto.ShadowToPlainAsync();
+            plain.Service = await Service.ShadowToPlainAsync();
             return plain;
         }
 
@@ -177,10 +177,10 @@ namespace axosimple.UnitTemplate
         public async Task<IEnumerable<ITwinPrimitive>> PlainToShadowAsync(Pocos.axosimple.UnitTemplate.Unit plain)
         {
             await base.PlainToShadowAsync(plain);
-            await this.UnitObjects.PlainToShadowAsync(plain.UnitObjects);
-            await this.GroundSequence.PlainToShadowAsync(plain.GroundSequence);
-            await this.AutomatSequence.PlainToShadowAsync(plain.AutomatSequence);
-            await this.ServiceMode.PlainToShadowAsync(plain.ServiceMode);
+            await this.X.PlainToShadowAsync(plain.X);
+            await this.Ground.PlainToShadowAsync(plain.Ground);
+            await this.Auto.PlainToShadowAsync(plain.Auto);
+            await this.Service.PlainToShadowAsync(plain.Service);
             return this.RetrievePrimitives();
         }
 
@@ -203,13 +203,13 @@ namespace axosimple.UnitTemplate
             {
                 if (await base.DetectsAnyChangeAsync(plain))
                     return true;
-                if (await UnitObjects.DetectsAnyChangeAsync(plain.UnitObjects, latest.UnitObjects))
+                if (await X.DetectsAnyChangeAsync(plain.X, latest.X))
                     somethingChanged = true;
-                if (await GroundSequence.DetectsAnyChangeAsync(plain.GroundSequence, latest.GroundSequence))
+                if (await Ground.DetectsAnyChangeAsync(plain.Ground, latest.Ground))
                     somethingChanged = true;
-                if (await AutomatSequence.DetectsAnyChangeAsync(plain.AutomatSequence, latest.AutomatSequence))
+                if (await Auto.DetectsAnyChangeAsync(plain.Auto, latest.Auto))
                     somethingChanged = true;
-                if (await ServiceMode.DetectsAnyChangeAsync(plain.ServiceMode, latest.ServiceMode))
+                if (await Service.DetectsAnyChangeAsync(plain.Service, latest.Service))
                     somethingChanged = true;
                 plain = latest;
                 return somethingChanged;
