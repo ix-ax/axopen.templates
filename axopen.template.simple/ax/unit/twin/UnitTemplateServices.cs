@@ -124,5 +124,9 @@ namespace axosimple.UnitTemplate
             technologyDataManager.Data.InitializeRemoteDataExchange(TechnologySettingsRepository);
             technologyDataManager.InitializeRemoteDataExchange();
         }
+        
+        public string Link => "Context/UnitTemplate";
+
+        public string ImageLink => "logo-header.svg";
     }
 }

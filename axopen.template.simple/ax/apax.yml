@@ -64,26 +64,39 @@ scripts:
     - apax download
   build:
     - apax build
-  addunit: |
-    while [ -z "$unitname" ]; do
-      echo "Enter the unit name (mandatory):"
-      echo "ATTENTION: The name must start with upper-case letter, no space and no special characters. The name must comply with legal type name for AX"
-      read unitname
-    done
+  create-unit: |
+    if [ -z "$1" ]; then
+      # If no argument, prompt for unitname input
+      while [[ ! "$unitname" =~ ^[A-Z][a-zA-Z0-9]*$ ]]; do
+        echo "Enter the unit name (mandatory):"
+        echo "ATTENTION: The name must start with an upper-case letter, no spaces, and no special characters."
+        read unitname
+      done
+    else
+      # If argument provided, use it as unitname
+      unitname=$1
+      # Validate the unitname
+      if [[ ! "$unitname" =~ ^[A-Z][a-zA-Z0-9]*$ ]]; then
+        echo "Error: Unit name must start with an upper-case letter and contain no spaces or special characters."
+        exit 1
+      fi
+    fi
 
+    # Install the dotnet template
     dotnet new install ./src/templates/unit/ --force
+
     # Execute the dotnet new command with the provided class name
-    dotnet new axobaseunit --unitname=$unitname  -o ./src/$unitname 
+    dotnet new axobaseunit --unitname=$unitname -o ./src/Units/$unitname 
 
     # Move twin files to twin project 
     mkdir -p ../axpansion/twin/Context/Units/
-    mv  ./src/$unitname/twin/*.cs ../axpansion/twin/Context/Units/
-    rm -rf ./src/$unitname/twin/
+    mv  ./src/Units/$unitname/twin/*.cs ../axpansion/twin/Context/Units/
+    rm -rf ./src/Units/$unitname/twin/
 
     # Move server files to server project 
     mkdir -p ../axpansion/server/Pages/Context/Units/
-    mv  ./src/$unitname/server/*.* ../axpansion/server/Pages/Context/Units/
-    rm -rf ./src/$unitname/server/
+    mv  ./src/Units/$unitname/server/*.* ../axpansion/server/Pages/Context/Units/
+    rm -rf ./src/Units/$unitname/server/
   osrc: |
     if [[ "$HWCONFIG" == "TIA-NON-SECURE" ]]; then
        apax oscr interface install $AXTARGETPLATFORMINPUT -t $AXTARGET  --accept-security-disclaimer   

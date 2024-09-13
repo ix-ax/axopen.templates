@@ -61,7 +61,8 @@ AxoApplication.CreateBuilder().ConfigureLogger(new SerilogLogger(new LoggerConfi
 
 //Entry.Plc.ContextLogger.StartDequeuing(AxoApplication.Current.Logger, 250);
 
-axosimple.UnitTemplate.UnitServices.Create(ContextService.Instance);
+// Register the unit services
+CreateUnitServices();
 
 // Clean Temp directory
 IAxoDataExchange.CleanUp();
@@ -108,7 +109,11 @@ app.MapFallbackToPage("/_Host");
 
 app.Run();
 
-
+static void CreateUnitServices()
+{
+    // axosimple.UnitTemplate.UnitServices.Create(ContextService.Instance);
+    // axosimple.MyUnit.UnitServices.Create(ContextService.Instance); 
+}
 
 static (IRepository<User>, IRepository<Group>) SetUpUserRepositories()
 {

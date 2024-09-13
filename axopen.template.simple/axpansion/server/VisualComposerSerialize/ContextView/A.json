@@ -19,6 +19,21 @@
       "PresentationTemplate": null,
       "Background": false,
       "BackgroundColor": "#FFFFFF"
+    },
+    {
+      "Id": "43b192a5e60f7cdf040b11ac10ed7791a1da4acc6a5216ccd6c99b6e2be6c0e5",
+      "Left": 31.28547579298832,
+      "Top": 6.494156928213687,
+      "Transform": "TopCenter",
+      "Presentation": "Spot",
+      "Width": -1,
+      "Height": -1,
+      "ZIndex": 10,
+      "Scale": 1,
+      "Roles": "",
+      "PresentationTemplate": null,
+      "Background": false,
+      "BackgroundColor": "#FFFFFF"
     }
   ],
   "Theme": "text-dark",

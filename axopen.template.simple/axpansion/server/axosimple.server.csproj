@@ -32,10 +32,6 @@
 		<Folder Include="wwwroot\js\" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Content Include="..\..\ax\src\templates\unit\server\UnitTemplate.razor" Link="Pages\Context\Units\UnitTemplate.razor" />
-	</ItemGroup>
-
 	<!--PACKAGES
 	 <ItemGroup>
 		<PackageReference Include="AXOpen.Components.Abb.Robotics.Blazor" Version="0.4.4-alpha.857" />

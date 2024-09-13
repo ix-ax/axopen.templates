@@ -16,7 +16,6 @@
 		<Folder Include=".certs\TIA\" />
 		<Folder Include=".meta\" />
 		<Content Include=".meta\**" />
-		<Compile Include="..\..\ax\src\templates\unit\twin\UnitTemplateServices.cs" Link="Context\Units\UnitTemplateServices.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
