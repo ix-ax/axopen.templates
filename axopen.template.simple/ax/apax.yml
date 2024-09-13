@@ -73,7 +73,7 @@ scripts:
 
     dotnet new install ./src/templates/unit/ --force
     # Execute the dotnet new command with the provided class name
-    dotnet new axosimple_unit --unitname=$unitname  -o ./src/$unitname 
+    dotnet new axobaseunit --unitname=$unitname  -o ./src/$unitname 
 
     # Move twin files to twin project 
     mkdir -p ../axpansion/twin/Context/Units/
