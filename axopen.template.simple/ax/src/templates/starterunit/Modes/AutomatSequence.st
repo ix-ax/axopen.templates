@@ -80,7 +80,7 @@ NAMESPACE axosimple.StarterUnitTemplate
 
             
             IF (Steps[0].Execute(THIS, TRUE, '<#LOAD TECHNOLOGY DATA#>')) THEN
-                //-------------------------------------------------------               
+                //-------------------------------------------------------      
                     IF(X^.TD.Read('default').IsDone()) THEN                        
                         THIS.MoveNext(); 
                     END_IF;    
@@ -90,27 +90,22 @@ NAMESPACE axosimple.StarterUnitTemplate
             IF (Steps[1].Execute(THIS, TRUE, '<#LOAD PROCESS DATA#>')) THEN
                 //-------------------------------------------------------               
                     IF(X^.PD.Read('default').IsDone()) THEN                        
+                        _currentId := ToString(THIS.GetContext().GetRtc().NowUTC());
                         THIS.MoveNext(); 
                     END_IF;    
                 //-------------------------------------------------------
             END_IF;
 
-            IF (Steps[1].Execute(THIS, TRUE, '<#GET DATA#>')) THEN
+            IF (Steps[2].Execute(THIS, TRUE, CONCAT('CREATE ITEM: ',_currentId))) THEN
                 //-------------------------------------------------------
-                
-                resutl := X^.PD.Data.CreateOrUpdate('fasdfa');  
-                resutl.IsDone();                 
-                RETURN;    
-                
-                IF (X^.PD.Data.CreateOrUpdate(_currentId).IsDone()) THEN 
+
+                IF (X^.PD.CreateOrUpdate(_currentId).IsDone()) THEN 
                     THIS.MoveNext(); 
                 END_IF;
                 //-------------------------------------------------------
             END_IF;
             
-           
-            
-            IF (Steps[2].Execute(THIS, TRUE, '<#Dialog notify#>')) THEN
+            IF (Steps[3].Execute(THIS, TRUE, '<#Dialog notify#>')) THEN
                 //-------------------------------------------------------
                 //_externalCloseOkSignal := CurrentStep.Duration > dialogTimeOut;
                 
@@ -127,7 +122,7 @@ NAMESPACE axosimple.StarterUnitTemplate
             END_IF;
 
                          
-            IF (Steps[3].Execute(THIS, TRUE, '<#Dialog success#>')) THEN
+            IF (Steps[4].Execute(THIS, TRUE, '<#Dialog success#>')) THEN
                 //-------------------------------------------------------
                 //_externalCloseOkSignal := CurrentStep.Duration > dialogTimeOut;
 
@@ -143,7 +138,7 @@ NAMESPACE axosimple.StarterUnitTemplate
                 //-------------------------------------------------------
             END_IF;
 
-            IF (Steps[4].Execute(THIS, TRUE, '<#Dialog Warning#>')) THEN
+            IF (Steps[5].Execute(THIS, TRUE, '<#Dialog Warning#>')) THEN
                 //-------------------------------------------------------
                 //_externalCloseOkSignal := CurrentStep.Duration > dialogTimeOut;
 
@@ -153,13 +148,13 @@ NAMESPACE axosimple.StarterUnitTemplate
                     .WithCaption('Warning caption!')
                     .WithText('Warning - dialog will be closed by external timeout 2s!').Answer();
                     
-                    IF( _dialogAnswer = eDialogAnswer#Ok) THEN
+                    IF( _dialogAnswer = eDialogAnswer#Yes) THEN
                         THIS.MoveNext();
                     END_IF;
                 //-------------------------------------------------------
             END_IF;
 
-            IF (Steps[5].Execute(THIS, TRUE, '<#Dialog danger#>')) THEN
+            IF (Steps[6].Execute(THIS, TRUE, '<#Dialog danger#>')) THEN
                 //-------------------------------------------------------
                 //_externalCloseOkSignal := CurrentStep.Duration > dialogTimeOut;
 
@@ -169,13 +164,13 @@ NAMESPACE axosimple.StarterUnitTemplate
                     .WithCaption('Danger caption!')
                     .WithText('Danger - dialog will be closed by external timeout 2s!').Answer();
                     
-                    IF( _dialogAnswer = eDialogAnswer#Ok) THEN
+                    IF( _dialogAnswer = eDialogAnswer#Yes) THEN
                         THIS.MoveNext();
                     END_IF;
                 //-------------------------------------------------------
             END_IF;
 
-            IF (Steps[6].Execute(THIS, TRUE, 'Example Digital inspection')) THEN
+            IF (Steps[7].Execute(THIS, TRUE, 'Example Digital inspection')) THEN
                 //-------------------------------------------------------
                 X^.PD.Data.Payload.PartPresence.WithCoordinator(THIS).Inspect(THIS,_inspectionResult)
                 .UpdateComprehensiveResult(_comprehensiveResult)
@@ -184,7 +179,7 @@ NAMESPACE axosimple.StarterUnitTemplate
                 //-------------------------------------------------------
             END_IF;
 
-            IF (Steps[7].Execute(THIS, TRUE, 'Example Analog inspection')) THEN         
+            IF (Steps[8].Execute(THIS, TRUE, 'Example Analog inspection')) THEN         
                 //-------------------------------------------------------
                 _inspectionValue := -5500;
 
@@ -196,7 +191,7 @@ NAMESPACE axosimple.StarterUnitTemplate
                 //-------------------------------------------------------
             END_IF;
             
-            IF (Steps[8].Execute(THIS, TRUE, 'Example Data inspection')) THEN
+            IF (Steps[9].Execute(THIS, TRUE, 'Example Data inspection')) THEN
                 //-------------------------------------------------------
                 _inspectionData := 'tempCode';
 
@@ -209,9 +204,9 @@ NAMESPACE axosimple.StarterUnitTemplate
             END_IF;
                        
 
-            IF (Steps[99].Execute(THIS, TRUE,'<#UPDATE DATA#>')) THEN
+            IF (Steps[99].Execute(THIS, TRUE,CONCAT('UPDATE ITEM: ', _currentId))) THEN
                 //-------------------------------------------------------
-                IF (X^.PD.Data.Update(_currentId).IsDone()) THEN 
+                IF (X^.PD.Update(_currentId).IsDone()) THEN 
                     THIS.MoveNext(); 
                 END_IF;
                 //-------------------------------------------------------

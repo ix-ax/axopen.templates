@@ -46,7 +46,7 @@ variables:
   PLC_NAME: "plc_line"
   HWCONFIG: "TIA"
   # Uncomment if you want overrite system variables
-  AXTARGET: 192.168.0.4
+  AXTARGET: 10.10.10.120
   AXTARGETPLATFORMINPUT: .\bin\1500\
   AX_USERNAME: "adm"
   AX_TARGET_PWD: "123ABCDabcd$#!"
@@ -105,7 +105,7 @@ scripts:
       apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -C ./certs/$PLC_NAME/$PLC_NAME.cer  --mode delta    
     fi
     if [[ "$HWCONFIG" == "TIA" ]]; then
-      apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -C ./certs/TIA/Communication.cer  --mode delta    
+      apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r -C ./certs/TIA/Communication.cer --password $AX_TARGET_PWD   --username $AX_USERNAME --mode delta    
     fi   
     if [[ "$HWCONFIG" == "TIA-NON-SECURE" ]]; then
       apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT --mode delta
