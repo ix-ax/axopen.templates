@@ -64,9 +64,10 @@ namespace axosimple
             = new(ConnectorAdapterBuilder.Build()
                 .CreateWebApi(TargetIp, UserName, Pass, CertificateValidationHwc, IgnoreSslErrors));
         
-        public static axosimpleTwinController TiaNonSecurePlc { get; }
-            = new(ConnectorAdapterBuilder.Build()
-                .CreateWebApi(TargetIp, "Everybody",string.Empty, IgnoreSslErrors));
+        // not compatible with FW 4.0
+        //public static axosimpleTwinController TiaNonSecurePlc { get; }
+        //    = new(ConnectorAdapterBuilder.Build()
+        //        .CreateWebApi(TargetIp, "Everybody",string.Empty, IgnoreSslErrors));
     }
     
     public static class Entry

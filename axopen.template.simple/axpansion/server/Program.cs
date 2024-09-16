@@ -112,7 +112,7 @@ app.Run();
 static void CreateUnitServices()
 {
     // axosimple.UnitTemplate.UnitServices.Create(ContextService.Instance);
-    axosimple.MyUnit.UnitServices.Create(ContextService.Instance); 
+    // axosimple.MyUnit.UnitServices.Create(ContextService.Instance); 
 }
 
 static (IRepository<User>, IRepository<Group>) SetUpUserRepositories()
