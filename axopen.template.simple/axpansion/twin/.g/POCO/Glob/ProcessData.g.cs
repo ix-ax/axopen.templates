@@ -11,7 +11,6 @@ namespace Pocos
             }
 
             public axosimple.SharedDataExchange Entity { get; set; } = new axosimple.SharedDataExchange();
-            public axosimple.MyUnit.ProcessDataExchange MyUnit { get; set; } = new axosimple.MyUnit.ProcessDataExchange();
         }
     }
 }

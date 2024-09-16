@@ -14,7 +14,6 @@ namespace Pocos
 
             public axosimple.GlobalContextObjects Glob { get; set; } = new axosimple.GlobalContextObjects();
             public axosimple.TechnologySafety Safety { get; set; } = new axosimple.TechnologySafety();
-            public axosimple.MyUnit.Unit MyUnit { get; set; } = new axosimple.MyUnit.Unit();
         }
     }
 }

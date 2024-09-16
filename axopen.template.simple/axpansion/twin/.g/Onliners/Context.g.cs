@@ -14,8 +14,6 @@ namespace axosimple
 
         public axosimple.TechnologySafety Safety { get; }
 
-        public axosimple.MyUnit.Unit MyUnit { get; }
-
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         public Context(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail) : base(parent, readableTail, symbolTail)
@@ -24,8 +22,6 @@ namespace axosimple
             PreConstruct(parent, readableTail, symbolTail);
             Glob = new axosimple.GlobalContextObjects(this, "Glob", "Glob");
             Safety = new axosimple.TechnologySafety(this, "Safety", "Safety");
-            MyUnit = new axosimple.MyUnit.Unit(this, "<#MyUnit#>", "MyUnit");
-            MyUnit.AttributeName = "<#MyUnit#>";
             PostConstruct(parent, readableTail, symbolTail);
         }
 
@@ -47,9 +43,6 @@ namespace axosimple
 #pragma warning disable CS0612
             plain.Safety = await Safety._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.MyUnit = await MyUnit._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
             return plain;
         }
 
@@ -67,9 +60,6 @@ namespace axosimple
 #pragma warning disable CS0612
             plain.Safety = await Safety._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.MyUnit = await MyUnit._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
             return plain;
         }
 
@@ -85,9 +75,6 @@ namespace axosimple
 #pragma warning restore CS0612
 #pragma warning disable CS0612
             plain.Safety = await Safety._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.MyUnit = await MyUnit._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -106,9 +93,6 @@ namespace axosimple
 #pragma warning disable CS0612
             await this.Safety._PlainToOnlineNoacAsync(plain.Safety);
 #pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.MyUnit._PlainToOnlineNoacAsync(plain.MyUnit);
-#pragma warning restore CS0612
             return await this.WriteAsync<IgnoreOnPocoOperation>();
         }
 
@@ -123,9 +107,6 @@ namespace axosimple
 #pragma warning disable CS0612
             await this.Safety._PlainToOnlineNoacAsync(plain.Safety);
 #pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.MyUnit._PlainToOnlineNoacAsync(plain.MyUnit);
-#pragma warning restore CS0612
         }
 
         public async override Task<T> ShadowToPlain<T>()
@@ -139,7 +120,6 @@ namespace axosimple
             await base.ShadowToPlainAsync(plain);
             plain.Glob = await Glob.ShadowToPlainAsync();
             plain.Safety = await Safety.ShadowToPlainAsync();
-            plain.MyUnit = await MyUnit.ShadowToPlainAsync();
             return plain;
         }
 
@@ -148,7 +128,6 @@ namespace axosimple
             await base.ShadowToPlainAsync(plain);
             plain.Glob = await Glob.ShadowToPlainAsync();
             plain.Safety = await Safety.ShadowToPlainAsync();
-            plain.MyUnit = await MyUnit.ShadowToPlainAsync();
             return plain;
         }
 
@@ -162,7 +141,6 @@ namespace axosimple
             await base.PlainToShadowAsync(plain);
             await this.Glob.PlainToShadowAsync(plain.Glob);
             await this.Safety.PlainToShadowAsync(plain.Safety);
-            await this.MyUnit.PlainToShadowAsync(plain.MyUnit);
             return this.RetrievePrimitives();
         }
 
@@ -188,8 +166,6 @@ namespace axosimple
                 if (await Glob.DetectsAnyChangeAsync(plain.Glob, latest.Glob))
                     somethingChanged = true;
                 if (await Safety.DetectsAnyChangeAsync(plain.Safety, latest.Safety))
-                    somethingChanged = true;
-                if (await MyUnit.DetectsAnyChangeAsync(plain.MyUnit, latest.MyUnit))
                     somethingChanged = true;
                 plain = latest;
                 return somethingChanged;

@@ -11,7 +11,6 @@ namespace Pocos
             }
 
             public axosimple.TechnologySharedDataExchange Common { get; set; } = new axosimple.TechnologySharedDataExchange();
-            public axosimple.MyUnit.TechnologyDataExchange MyUnit { get; set; } = new axosimple.MyUnit.TechnologyDataExchange();
         }
     }
 }

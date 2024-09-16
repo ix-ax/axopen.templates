@@ -11,9 +11,6 @@ namespace axosimple
         [AXOpen.Data.AxoDataFragmentAttribute]
         public axosimple.SharedDataExchange Entity { get; }
 
-        [AXOpen.Data.AxoDataFragmentAttribute]
-        public axosimple.MyUnit.ProcessDataExchange MyUnit { get; }
-
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         public ProcessData(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail) : base(parent, readableTail, symbolTail)
@@ -21,7 +18,6 @@ namespace axosimple
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
             PreConstruct(parent, readableTail, symbolTail);
             Entity = new axosimple.SharedDataExchange(this, "Entity", "Entity");
-            MyUnit = new axosimple.MyUnit.ProcessDataExchange(this, "MyUnit", "MyUnit");
             PostConstruct(parent, readableTail, symbolTail);
         }
 
@@ -40,9 +36,6 @@ namespace axosimple
 #pragma warning disable CS0612
             plain.Entity = await Entity._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.MyUnit = await MyUnit._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
             return plain;
         }
 
@@ -57,9 +50,6 @@ namespace axosimple
 #pragma warning disable CS0612
             plain.Entity = await Entity._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.MyUnit = await MyUnit._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
             return plain;
         }
 
@@ -72,9 +62,6 @@ namespace axosimple
 #pragma warning restore CS0612
 #pragma warning disable CS0612
             plain.Entity = await Entity._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.MyUnit = await MyUnit._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -90,9 +77,6 @@ namespace axosimple
 #pragma warning disable CS0612
             await this.Entity._PlainToOnlineNoacAsync(plain.Entity);
 #pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.MyUnit._PlainToOnlineNoacAsync(plain.MyUnit);
-#pragma warning restore CS0612
             return await this.WriteAsync<IgnoreOnPocoOperation>();
         }
 
@@ -103,9 +87,6 @@ namespace axosimple
             await base._PlainToOnlineNoacAsync(plain);
 #pragma warning disable CS0612
             await this.Entity._PlainToOnlineNoacAsync(plain.Entity);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.MyUnit._PlainToOnlineNoacAsync(plain.MyUnit);
 #pragma warning restore CS0612
         }
 
@@ -119,7 +100,6 @@ namespace axosimple
             Pocos.axosimple.ProcessData plain = new Pocos.axosimple.ProcessData();
             await base.ShadowToPlainAsync(plain);
             plain.Entity = await Entity.ShadowToPlainAsync();
-            plain.MyUnit = await MyUnit.ShadowToPlainAsync();
             return plain;
         }
 
@@ -127,7 +107,6 @@ namespace axosimple
         {
             await base.ShadowToPlainAsync(plain);
             plain.Entity = await Entity.ShadowToPlainAsync();
-            plain.MyUnit = await MyUnit.ShadowToPlainAsync();
             return plain;
         }
 
@@ -140,7 +119,6 @@ namespace axosimple
         {
             await base.PlainToShadowAsync(plain);
             await this.Entity.PlainToShadowAsync(plain.Entity);
-            await this.MyUnit.PlainToShadowAsync(plain.MyUnit);
             return this.RetrievePrimitives();
         }
 
@@ -164,8 +142,6 @@ namespace axosimple
                 if (await base.DetectsAnyChangeAsync(plain))
                     return true;
                 if (await Entity.DetectsAnyChangeAsync(plain.Entity, latest.Entity))
-                    somethingChanged = true;
-                if (await MyUnit.DetectsAnyChangeAsync(plain.MyUnit, latest.MyUnit))
                     somethingChanged = true;
                 plain = latest;
                 return somethingChanged;
