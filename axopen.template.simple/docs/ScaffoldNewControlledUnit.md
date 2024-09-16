@@ -104,15 +104,12 @@ Navigate to [`src\Context.st`](src\Context.st) `Main` method and add entry call 
 
 ```iecst
 METHOD PROTECTED OVERRIDE Main    
+    Safety.Run(THIS);                    
+    Glob.Run(THIS)
+    
     IF(Inputs = NULL || Outputs = NULL) THEN
         RETURN;
-    END_IF;    
-
-    Safety.Run(THIS);                    
-    Glob.TS.Run(THIS);
-    Glob.PS.Run(THIS);
-    Glob.PD.Run(THIS);
-    Glob.Persits.Run(THIS);
+    END_IF;      
                                                     
     MyUnit.Run(THIS, Inputs^, Outputs^, REF(Glob));                                       
 END_METHOD            

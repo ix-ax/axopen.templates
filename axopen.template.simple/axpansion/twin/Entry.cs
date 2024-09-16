@@ -54,16 +54,18 @@ namespace axosimple
         {
             return certificate.Thumbprint == HwcCertificate.Thumbprint;
         }
-        
+
+        // Use only one twin controller.
+        // Comment out all others that are not used in your case.
         public static axosimpleTwinController TiaPlc { get; }
             = new(ConnectorAdapterBuilder.Build()
                 .CreateWebApi(TargetIp, UserName, Pass, CertificateValidationTia, IgnoreSslErrors));
-     
-        
-        public static axosimpleTwinController HwcPlc { get; }
-            = new(ConnectorAdapterBuilder.Build()
-                .CreateWebApi(TargetIp, UserName, Pass, CertificateValidationHwc, IgnoreSslErrors));
-        
+
+
+        //public static axosimpleTwinController HwcPlc { get; }
+        //    = new(ConnectorAdapterBuilder.Build()
+        //        .CreateWebApi(TargetIp, UserName, Pass, CertificateValidationHwc, IgnoreSslErrors));
+
         // not compatible with FW 4.0
         //public static axosimpleTwinController TiaNonSecurePlc { get; }
         //    = new(ConnectorAdapterBuilder.Build()
