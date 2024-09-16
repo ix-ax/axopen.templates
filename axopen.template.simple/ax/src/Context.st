@@ -11,6 +11,8 @@ NAMESPACE axosimple
             Safety : TechnologySafety;
 
             // Units snippet unitDeclaration
+            {#ix-set:AttributeName = "<#Cu10#>"} 
+            Cu10 : axosimple.Cu10.Unit;
                                    
                                                             
         END_VAR      
@@ -24,7 +26,8 @@ NAMESPACE axosimple
             END_IF;                                                                   
             
             // Unit entry call unitEntryCall
-            
+            Cu10.Run(THIS, Inputs^, Outputs^, REF(Glob));
+                        
         END_METHOD        
     END_CLASS   
              

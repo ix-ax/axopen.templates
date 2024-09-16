@@ -6,7 +6,9 @@ NAMESPACE axosimple
             Common : TechnologySharedDataExchange;   
                  
             // Units data - snippet unitAddTechnologyData
-            
+            {#ix-attr:[AXOpen.Data.AxoDataFragmentAttribute]}
+            Cu10 : axosimple.Cu10.TechnologyDataExchange;
+                        
         END_VAR        
     END_CLASS
 END_NAMESPACE    

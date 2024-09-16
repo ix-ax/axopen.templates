@@ -11,6 +11,9 @@ namespace axosimple
         [AXOpen.Data.AxoDataFragmentAttribute]
         public axosimple.SharedDataExchange Entity { get; }
 
+        [AXOpen.Data.AxoDataFragmentAttribute]
+        public axosimple.Cu10.ProcessDataExchange Cu10 { get; }
+
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         public ProcessData(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail) : base(parent, readableTail, symbolTail)
@@ -18,6 +21,7 @@ namespace axosimple
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
             PreConstruct(parent, readableTail, symbolTail);
             Entity = new axosimple.SharedDataExchange(this, "Entity", "Entity");
+            Cu10 = new axosimple.Cu10.ProcessDataExchange(this, "Cu10", "Cu10");
             PostConstruct(parent, readableTail, symbolTail);
         }
 
@@ -36,6 +40,9 @@ namespace axosimple
 #pragma warning disable CS0612
             plain.Entity = await Entity._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.Cu10 = await Cu10._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
             return plain;
         }
 
@@ -50,6 +57,9 @@ namespace axosimple
 #pragma warning disable CS0612
             plain.Entity = await Entity._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.Cu10 = await Cu10._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
             return plain;
         }
 
@@ -62,6 +72,9 @@ namespace axosimple
 #pragma warning restore CS0612
 #pragma warning disable CS0612
             plain.Entity = await Entity._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.Cu10 = await Cu10._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -77,6 +90,9 @@ namespace axosimple
 #pragma warning disable CS0612
             await this.Entity._PlainToOnlineNoacAsync(plain.Entity);
 #pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.Cu10._PlainToOnlineNoacAsync(plain.Cu10);
+#pragma warning restore CS0612
             return await this.WriteAsync<IgnoreOnPocoOperation>();
         }
 
@@ -87,6 +103,9 @@ namespace axosimple
             await base._PlainToOnlineNoacAsync(plain);
 #pragma warning disable CS0612
             await this.Entity._PlainToOnlineNoacAsync(plain.Entity);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.Cu10._PlainToOnlineNoacAsync(plain.Cu10);
 #pragma warning restore CS0612
         }
 
@@ -100,6 +119,7 @@ namespace axosimple
             Pocos.axosimple.ProcessData plain = new Pocos.axosimple.ProcessData();
             await base.ShadowToPlainAsync(plain);
             plain.Entity = await Entity.ShadowToPlainAsync();
+            plain.Cu10 = await Cu10.ShadowToPlainAsync();
             return plain;
         }
 
@@ -107,6 +127,7 @@ namespace axosimple
         {
             await base.ShadowToPlainAsync(plain);
             plain.Entity = await Entity.ShadowToPlainAsync();
+            plain.Cu10 = await Cu10.ShadowToPlainAsync();
             return plain;
         }
 
@@ -119,6 +140,7 @@ namespace axosimple
         {
             await base.PlainToShadowAsync(plain);
             await this.Entity.PlainToShadowAsync(plain.Entity);
+            await this.Cu10.PlainToShadowAsync(plain.Cu10);
             return this.RetrievePrimitives();
         }
 
@@ -142,6 +164,8 @@ namespace axosimple
                 if (await base.DetectsAnyChangeAsync(plain))
                     return true;
                 if (await Entity.DetectsAnyChangeAsync(plain.Entity, latest.Entity))
+                    somethingChanged = true;
+                if (await Cu10.DetectsAnyChangeAsync(plain.Cu10, latest.Cu10))
                     somethingChanged = true;
                 plain = latest;
                 return somethingChanged;

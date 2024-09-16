@@ -11,6 +11,7 @@ namespace Pocos
             }
 
             public axosimple.SharedDataExchange Entity { get; set; } = new axosimple.SharedDataExchange();
+            public axosimple.Cu10.ProcessDataExchange Cu10 { get; set; } = new axosimple.Cu10.ProcessDataExchange();
         }
     }
 }

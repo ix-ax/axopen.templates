@@ -4,24 +4,17 @@ using AXSharp.Connector.ValueTypes;
 using System.Collections.Generic;
 using AXSharp.Connector.Localizations;
 
-namespace axosimple
+namespace axosimple.Cu10
 {
-    public partial class TechnologyData : AXOpen.Data.AxoDataFragmentExchange
+    public partial class ServiceMode : AXOpen.Core.AxoTask, IModeContainer
     {
-        [AXOpen.Data.AxoDataFragmentAttribute]
-        public axosimple.TechnologySharedDataExchange Common { get; }
-
-        [AXOpen.Data.AxoDataFragmentAttribute]
-        public axosimple.Cu10.TechnologyDataExchange Cu10 { get; }
-
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
-        public TechnologyData(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail) : base(parent, readableTail, symbolTail)
+        public ServiceMode(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail) : base(parent, readableTail, symbolTail)
         {
+            AttributeName = "<#SERVICE#>";
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
             PreConstruct(parent, readableTail, symbolTail);
-            Common = new axosimple.TechnologySharedDataExchange(this, "Common", "Common");
-            Cu10 = new axosimple.Cu10.TechnologyDataExchange(this, "Cu10", "Cu10");
             PostConstruct(parent, readableTail, symbolTail);
         }
 
@@ -30,51 +23,33 @@ namespace axosimple
             return await (dynamic)this.OnlineToPlainAsync();
         }
 
-        public new async Task<Pocos.axosimple.TechnologyData> OnlineToPlainAsync()
+        public new async Task<Pocos.axosimple.Cu10.ServiceMode> OnlineToPlainAsync()
         {
-            Pocos.axosimple.TechnologyData plain = new Pocos.axosimple.TechnologyData();
+            Pocos.axosimple.Cu10.ServiceMode plain = new Pocos.axosimple.Cu10.ServiceMode();
             await this.ReadAsync<IgnoreOnPocoOperation>();
 #pragma warning disable CS0612
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
+            return plain;
+        }
+
+        [Obsolete("This method should not be used if you indent to access the controllers data. Use `OnlineToPlain` instead.")]
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        public new async Task<Pocos.axosimple.Cu10.ServiceMode> _OnlineToPlainNoacAsync()
+        {
+            Pocos.axosimple.Cu10.ServiceMode plain = new Pocos.axosimple.Cu10.ServiceMode();
 #pragma warning disable CS0612
-            plain.Common = await Common._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Cu10 = await Cu10._OnlineToPlainNoacAsync();
+            await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
             return plain;
         }
 
         [Obsolete("This method should not be used if you indent to access the controllers data. Use `OnlineToPlain` instead.")]
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-        public new async Task<Pocos.axosimple.TechnologyData> _OnlineToPlainNoacAsync()
-        {
-            Pocos.axosimple.TechnologyData plain = new Pocos.axosimple.TechnologyData();
-#pragma warning disable CS0612
-            await base._OnlineToPlainNoacAsync(plain);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Common = await Common._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Cu10 = await Cu10._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-            return plain;
-        }
-
-        [Obsolete("This method should not be used if you indent to access the controllers data. Use `OnlineToPlain` instead.")]
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-        protected async Task<Pocos.axosimple.TechnologyData> _OnlineToPlainNoacAsync(Pocos.axosimple.TechnologyData plain)
+        protected async Task<Pocos.axosimple.Cu10.ServiceMode> _OnlineToPlainNoacAsync(Pocos.axosimple.Cu10.ServiceMode plain)
         {
 #pragma warning disable CS0612
             await base._OnlineToPlainNoacAsync(plain);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Common = await Common._OnlineToPlainNoacAsync();
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            plain.Cu10 = await Cu10._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -84,29 +59,17 @@ namespace axosimple
             await this.PlainToOnlineAsync((dynamic)plain);
         }
 
-        public async Task<IEnumerable<ITwinPrimitive>> PlainToOnlineAsync(Pocos.axosimple.TechnologyData plain)
+        public async Task<IEnumerable<ITwinPrimitive>> PlainToOnlineAsync(Pocos.axosimple.Cu10.ServiceMode plain)
         {
             await base._PlainToOnlineNoacAsync(plain);
-#pragma warning disable CS0612
-            await this.Common._PlainToOnlineNoacAsync(plain.Common);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.Cu10._PlainToOnlineNoacAsync(plain.Cu10);
-#pragma warning restore CS0612
             return await this.WriteAsync<IgnoreOnPocoOperation>();
         }
 
         [Obsolete("This method should not be used if you indent to access the controllers data. Use `PlainToOnline` instead.")]
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-        public async Task _PlainToOnlineNoacAsync(Pocos.axosimple.TechnologyData plain)
+        public async Task _PlainToOnlineNoacAsync(Pocos.axosimple.Cu10.ServiceMode plain)
         {
             await base._PlainToOnlineNoacAsync(plain);
-#pragma warning disable CS0612
-            await this.Common._PlainToOnlineNoacAsync(plain.Common);
-#pragma warning restore CS0612
-#pragma warning disable CS0612
-            await this.Cu10._PlainToOnlineNoacAsync(plain.Cu10);
-#pragma warning restore CS0612
         }
 
         public async override Task<T> ShadowToPlain<T>()
@@ -114,20 +77,16 @@ namespace axosimple
             return await (dynamic)this.ShadowToPlainAsync();
         }
 
-        public new async Task<Pocos.axosimple.TechnologyData> ShadowToPlainAsync()
+        public new async Task<Pocos.axosimple.Cu10.ServiceMode> ShadowToPlainAsync()
         {
-            Pocos.axosimple.TechnologyData plain = new Pocos.axosimple.TechnologyData();
+            Pocos.axosimple.Cu10.ServiceMode plain = new Pocos.axosimple.Cu10.ServiceMode();
             await base.ShadowToPlainAsync(plain);
-            plain.Common = await Common.ShadowToPlainAsync();
-            plain.Cu10 = await Cu10.ShadowToPlainAsync();
             return plain;
         }
 
-        protected async Task<Pocos.axosimple.TechnologyData> ShadowToPlainAsync(Pocos.axosimple.TechnologyData plain)
+        protected async Task<Pocos.axosimple.Cu10.ServiceMode> ShadowToPlainAsync(Pocos.axosimple.Cu10.ServiceMode plain)
         {
             await base.ShadowToPlainAsync(plain);
-            plain.Common = await Common.ShadowToPlainAsync();
-            plain.Cu10 = await Cu10.ShadowToPlainAsync();
             return plain;
         }
 
@@ -136,11 +95,9 @@ namespace axosimple
             await this.PlainToShadowAsync((dynamic)plain);
         }
 
-        public async Task<IEnumerable<ITwinPrimitive>> PlainToShadowAsync(Pocos.axosimple.TechnologyData plain)
+        public async Task<IEnumerable<ITwinPrimitive>> PlainToShadowAsync(Pocos.axosimple.Cu10.ServiceMode plain)
         {
             await base.PlainToShadowAsync(plain);
-            await this.Common.PlainToShadowAsync(plain.Common);
-            await this.Cu10.PlainToShadowAsync(plain.Cu10);
             return this.RetrievePrimitives();
         }
 
@@ -154,7 +111,7 @@ namespace axosimple
         ///Compares if the current plain object has changed from the previous object.This method is used by the framework to determine if the object has changed and needs to be updated.
         ///[!NOTE] Any member in the hierarchy that is ignored by the compilers (e.g. when CompilerOmitAttribute is used) will not be compared, and therefore will not be detected as changed.
         ///</summary>
-        public new async Task<bool> DetectsAnyChangeAsync(Pocos.axosimple.TechnologyData plain, Pocos.axosimple.TechnologyData latest = null)
+        public new async Task<bool> DetectsAnyChangeAsync(Pocos.axosimple.Cu10.ServiceMode plain, Pocos.axosimple.Cu10.ServiceMode latest = null)
         {
             if (latest == null)
                 latest = await this._OnlineToPlainNoacAsync();
@@ -163,10 +120,6 @@ namespace axosimple
             {
                 if (await base.DetectsAnyChangeAsync(plain))
                     return true;
-                if (await Common.DetectsAnyChangeAsync(plain.Common, latest.Common))
-                    somethingChanged = true;
-                if (await Cu10.DetectsAnyChangeAsync(plain.Cu10, latest.Cu10))
-                    somethingChanged = true;
                 plain = latest;
                 return somethingChanged;
             });
@@ -177,9 +130,9 @@ namespace axosimple
             this.RetrievePrimitives().ToList().ForEach(x => x.Poll());
         }
 
-        public new Pocos.axosimple.TechnologyData CreateEmptyPoco()
+        public new Pocos.axosimple.Cu10.ServiceMode CreateEmptyPoco()
         {
-            return new Pocos.axosimple.TechnologyData();
+            return new Pocos.axosimple.Cu10.ServiceMode();
         }
     }
 }
