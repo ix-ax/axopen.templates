@@ -50,8 +50,10 @@ variables:
   AX_USERNAME: "adm"
   AX_TARGET_PWD: "123ABCDabcd$#!"
   MY_VERY_STRONG_PASSWORD: $AX_TARGET_PWD
-  COM_CERT_PATH: .\certs\Communication.cer
+  TIA_CERT_PATH: .\certs\TIA\Communication.cer
+  MONITOR_FILE: monitor.mon
 scripts:
+  plcsim: ..\\scripts\\StartPlcSimAdvCli.exe 
   ci: apax clean apax install
   ixc:
     - dotnet tool restore --no-cache
@@ -106,7 +108,7 @@ scripts:
       apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r -C ./certs/$PLC_NAME/$PLC_NAME.cer      
     fi
     if [[ "$HWCONFIG" == "TIA" ]]; then
-      apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r -C ./certs/TIA/Communication.cer --password $AX_TARGET_PWD   --username $AX_USERNAME 
+      apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r -C $TIA_CERT_PATH -p $AX_TARGET_PWD -u $AX_USERNAME 
     fi   
     if [[ "$HWCONFIG" == "TIA-NON-SECURE" ]]; then
       apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r    
@@ -114,10 +116,10 @@ scripts:
   delta: |
     apax build --ignore-scripts
     if [[ "$HWCONFIG" == "HWC" ]]; then
-      apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -C ./certs/$PLC_NAME/$PLC_NAME.cer  --mode delta    
+      apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -C ./certs/$PLC_NAME/$PLC_NAME.cer --mode delta    
     fi
     if [[ "$HWCONFIG" == "TIA" ]]; then
-      apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -C ./certs/TIA/Communication.cer  --mode delta    
+      apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -C $TIA_CERT_PATH -p $AX_TARGET_PWD -u $AX_USERNAME --mode delta    
     fi   
     if [[ "$HWCONFIG" == "TIA-NON-SECURE" ]]; then
       apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT --mode delta
@@ -179,7 +181,13 @@ scripts:
           ..\\scripts\\all.sh $PLC_NAME $AXTARGET $AXTARGETPLATFORMINPUT 
       fi
     - echo $(date +%D)"-"$(date +%H)":"$(date +%M)":"$(date +%S) " - Finished in :" $(expr $(date +%s) - $START) "s"
-
+  monitor: |
+    if [[ "$HWCONFIG" == "HWC" ]]; then
+      apax mon -t $AXTARGET -C ./certs/$PLC_NAME/$PLC_NAME.cer -f $MONITOR_FILE -c
+    fi
+    if [[ "$HWCONFIG" == "TIA" ]]; then
+      apax mon -t $AXTARGET -C $TIA_CERT_PATH -p $AX_TARGET_PWD -u $AX_USERNAME -f $MONITOR_FILE -c
+    fi   
 publicKeys:
   "@ix-ax": 30c06ef7830b4dfd8f16e003508da1ac2d187714d0e1f38279a9332cbe4e4e17
 installStrategy: overridable
