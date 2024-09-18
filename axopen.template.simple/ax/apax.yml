@@ -44,7 +44,7 @@ dependencies:
 variables:
   APAX_BUILD_ARGS: [ -d ]
   PLC_NAME: "plc_line"
-  HWCONFIG: "TIA"  
+  HWCONFIG: "TIA"
   AXTARGET: 10.10.10.120
   AXTARGETPLATFORMINPUT: .\bin\1500\
   AX_USERNAME: "adm"
@@ -81,11 +81,30 @@ scripts:
       fi
     fi
 
+    # copy templates
+    if [ -d "./tmp_templates" ]; then      
+      rm ./tmp_templates -r
+    fi
+    
+    cp -r ./templates-sources/ ./tmp_templates
+
+    find ./tmp_templates -type d -name '*_template.config' | while read dir; do
+      new_dir="${dir%_template.config}.template.config"
+      mv "$dir" "$new_dir"
+    done
+
+    find ./tmp_templates -type f -name '*_template.json' | while read file; do
+      new_file="${file%_template.json}template.json"
+      mv "$file" "$new_file"  
+    done
+
     # Install the dotnet template
-    dotnet new install ./templates/unit/ --force
+    dotnet new install ./tmp_templates/ --force   
+    
+
 
     # Execute the dotnet new command with the provided class name
-    dotnet new axobaseunit --unitname=$unitname -o ./src/Units/$unitname 
+    dotnet new axosimple-unit --unitname=$unitname -o ./src/Units/$unitname 
 
     # Move twin files to twin project 
     mkdir -p ../axpansion/twin/Context/Units/
@@ -96,6 +115,10 @@ scripts:
     mkdir -p ../axpansion/server/Pages/Context/Units/
     mv  ./src/Units/$unitname/server/*.* ../axpansion/server/Pages/Context/Units/
     rm -rf ./src/Units/$unitname/server/
+
+    # Remove temporary template
+    dotnet new uninstall ./tmp_templates
+    rm ./tmp_templates -r
   osrc: |
     if [[ "$HWCONFIG" == "TIA-NON-SECURE" ]]; then
        apax oscr interface install $AXTARGETPLATFORMINPUT -t $AXTARGET  --accept-security-disclaimer   
