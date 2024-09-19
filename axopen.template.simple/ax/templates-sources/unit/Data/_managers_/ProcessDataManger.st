@@ -12,6 +12,15 @@ NAMESPACE axosimple.UnitTemplate
             Shared : axosimple.SharedDataExchange;
             {#ix-attr:[AXOpen.Data.AxoDataFragmentAttribute]}
             Data : ProcessDataExchange;
-        END_VAR        
+        END_VAR 
+        
+        METHOD OVERRIDE Run
+            VAR_INPUT
+                inParent : IAxoObject;
+            END_VAR    
+            Shared.Run(THIS);
+            Data.Run(THIS);
+            SUPER.Run(inParent);
+        END_VAR    
     END_CLASS
 END_NAMESPACE    
