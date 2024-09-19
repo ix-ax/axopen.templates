@@ -119,6 +119,26 @@ scripts:
     # Remove temporary template
     dotnet new uninstall ./tmp_templates
     rm ./tmp_templates -r
+  delete-unit: |
+    if [ -z "$1" ]; then
+      # If no argument, prompt for unitname input
+      while [[ ! "$unitname" =~ ^[A-Z][a-zA-Z0-9]*$ ]]; do
+        echo "Enter the unit name (mandatory):"
+        echo "ATTENTION: The name must start with an upper-case letter, no spaces, and no special characters."
+        read unitname
+      done
+    else
+      # If argument provided, use it as unitname
+      unitname=$1
+      # Validate the unitname
+      if [[ ! "$unitname" =~ ^[A-Z][a-zA-Z0-9]*$ ]]; then
+        echo "Error: Unit name must start with an upper-case letter and contain no spaces or special characters."
+        exit 1
+      fi
+    fi
+    rm ./src/Units/$unitname -rf
+    rm "../axpansion/server/Pages/Context/Units/"${unitname}".razor" -f
+    rm "../axpansion/twin/Context/Units/"${unitname}"Services.cs" -f
   osrc: |
     if [[ "$HWCONFIG" == "TIA-NON-SECURE" ]]; then
        apax oscr interface install $AXTARGETPLATFORMINPUT -t $AXTARGET  --accept-security-disclaimer   
