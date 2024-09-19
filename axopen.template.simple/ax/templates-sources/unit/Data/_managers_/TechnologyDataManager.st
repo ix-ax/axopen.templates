@@ -13,14 +13,14 @@ NAMESPACE axosimple.UnitTemplate
             {#ix-attr:[AXOpen.Data.AxoDataFragmentAttribute]}
             Data : TechnologyDataExchange;
         END_VAR  
-        
-        METHOD OVERRIDE Run
+
+        METHOD PUBLIC OVERRIDE Run
             VAR_INPUT
-                inParent : IAxoObject;
-            END_VAR    
-            Shared.Run(THIS);
-            Data.Run(THIS);
-            SUPER.Run(inParent);
-        END_VAR          
+                parent : IAxoObject;
+            END_VAR
+              Shared.Run(THIS);
+              Data.Run(THIS);
+              SUPER.Run(parent := parent);
+        END_METHOD           
     END_CLASS
 END_NAMESPACE    
