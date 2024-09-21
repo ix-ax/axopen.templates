@@ -11,6 +11,7 @@ NAMESPACE axosimple
             Safety : TechnologySafety;
 
             // Units snippet unitDeclaration
+           
                                    
                                                             
         END_VAR      
@@ -24,6 +25,7 @@ NAMESPACE axosimple
             END_IF;                                                                   
             
             // Unit entry call unitEntryCall
+           
             
         END_METHOD        
     END_CLASS   

@@ -7,6 +7,7 @@ NAMESPACE axosimple
                  
             // Units data - snippet unitAddTechnologyData
             
+            
         END_VAR        
     END_CLASS
 END_NAMESPACE    

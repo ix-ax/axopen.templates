@@ -6,6 +6,8 @@ NAMESPACE axosimple
             Entity : SharedDataExchange;   
                         
             // Units data - snippet unitAddProcessData
+           
+            
                                                 
         END_VAR        
     END_CLASS
