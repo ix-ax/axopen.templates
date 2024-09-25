@@ -21,6 +21,8 @@ namespace axosimple
 
         public OnlinerBool[] D1 { get; }
 
+        partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
+        partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         public Inputs(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail)
         {
             this.@SymbolTail = symbolTail;
@@ -28,6 +30,7 @@ namespace axosimple
             this.@Parent = parent;
             HumanReadable = AXSharp.Connector.Connector.CreateHumanReadable(parent.HumanReadable, readableTail);
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
+            PreConstruct(parent, readableTail, symbolTail);
             P0 = new OnlinerBool[8];
             AXSharp.Connector.BuilderHelpers.Arrays.InstantiateArray(P0, this, "P0", "P0", (p, rt, st) => @Connector.ConnectorAdapter.AdapterFactory.CreateBOOL(p, rt, st), new[] { (0, 7) });
             P1 = new OnlinerBool[8];
@@ -42,6 +45,7 @@ namespace axosimple
             AXSharp.Connector.BuilderHelpers.Arrays.InstantiateArray(D1, this, "D1", "D1", (p, rt, st) => @Connector.ConnectorAdapter.AdapterFactory.CreateBOOL(p, rt, st), new[] { (0, 7) });
             parent.AddChild(this);
             parent.AddKid(this);
+            PostConstruct(parent, readableTail, symbolTail);
         }
 
         public async virtual Task<T> OnlineToPlain<T>()
