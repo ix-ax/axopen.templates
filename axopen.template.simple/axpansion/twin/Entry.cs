@@ -42,18 +42,18 @@ namespace axosimple
 
         // Use only one twin controller.
         // Comment out all others that are not used in your case.
-        public static s7_1516_v40TwinController SecurePlc { get; }
+        public static axosimpleTwinController SecurePlc { get; }
             = new(ConnectorAdapterBuilder.Build()
             .CreateWebApi(TargetIp, UserName, Pass, CertificateValidation, IgnoreSslErrors));
 
         // not compatible with FW 4.0
-        //public static s7_1516_v40TwinController NonSecurePlc { get; }
+        //public static axosimpleTwinController NonSecurePlc { get; }
         //    = new(ConnectorAdapterBuilder.Build()
         //        .CreateWebApi(TargetIp, "Everybody",string.Empty, IgnoreSslErrors));
     }
     
     public static class Entry
     {
-        public static s7_1516_v40TwinController Plc {get; } = TwinConnectorSelector.SecurePlc;
+        public static axosimpleTwinController Plc {get; } = TwinConnectorSelector.SecurePlc;
     }
 }
