@@ -111,7 +111,7 @@ app.Run();
 
 static void CreateUnitServices()
 {
-    // axosimple.UnitTemplate.UnitServices.Create(ContextService.Instance);
+    var contextService = ContextService.Instance;
     // axosimple.MyUnit.UnitServices.Create(ContextService.Instance); 
 }
 
@@ -119,23 +119,6 @@ static (IRepository<User>, IRepository<Group>) SetUpUserRepositories()
 {
     var MongoConnectionString = "mongodb://localhost:27017";
     var MongoDatabaseName = "axosimple";
-    var MongoExePath = "C:\\Program Files\\MongoDB\\Server\\7.0\\bin\\mongod.exe";
-    var MongoDbPath = "D:\\DATA\\DB6\\";
-
-    try
-    {
-        var processes = Process.GetProcessesByName("mongod");
-        foreach (Process process in processes)
-        {
-          //  process.Kill(); 
-        }
-        //Process.Start(MongoExePath, $" --dbpath {MongoDbPath} --bind_ip_all");
-    }
-    catch (Exception e)
-    {
-
-        throw e;
-    }
     
     IRepository<User> userRepo      = Repository.Factory<User>(new MongoDbRepositorySettings<User>(MongoConnectionString, MongoDatabaseName, "Users", idExpression: t => t.Id));
     IRepository<Group> groupRepo    = Repository.Factory<Group>(new MongoDbRepositorySettings<Group>(MongoConnectionString, MongoDatabaseName, "Groups"));
