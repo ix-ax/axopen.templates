@@ -17,10 +17,10 @@ NAMESPACE axosimple.UnitTemplate
         METHOD PUBLIC OVERRIDE Run
             VAR_INPUT
                 parent : IAxoObject;
-            END_VAR
-              Shared.Run(THIS);
-              Data.Run(THIS);
+            END_VAR            
               SUPER.Run(parent := parent);
+              Shared.Run(parent);
+              Data.Run(parent);
         END_METHOD           
     END_CLASS
 END_NAMESPACE    

@@ -19,10 +19,10 @@ namespace axosimple.UnitTemplate
         public override AxoDataEntity? DataHeader => this.X.PD.Shared.Payload;
         
         ///<inheritdoc/>
-        public override AxoDataEntity? TechnologySettings => this.X.TD.Shared.Payload;
+        public override AxoDataEntity? TechnologySettings => this.X.TD.Data.Payload;
 
         ///<inheritdoc/>
-        public override AxoDataEntity? SharedTechnologySettings => this.X.TD.Data.Payload;
+        public override AxoDataEntity? SharedTechnologySettings => this.X.TD.Shared.Payload;
 
         ///<inheritdoc/>
         public override AxoObject? UnitComponents => this.X.C;
