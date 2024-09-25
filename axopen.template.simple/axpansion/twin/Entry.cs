@@ -25,55 +25,35 @@ namespace axosimple
         private static string Pass => @"123ABCDabcd$#!"; //Environment.GetEnvironmentVariable("AX_TARGET_PWD");       //Environment.GetEnvironmentVariable("AX_TARGET_PWD"); // <- Pass in the password that you have set up for the user. NOT AS PLAIN TEXT! Use user secrets instead.
         private static string UserName = "adm"; //Environment.GetEnvironmentVariable("AX_USERNAME"); //<- replace by user name you have set up in your WebAPI settings        
         private const bool IgnoreSslErrors = true; // <- When you have your certificates in order set this to false.
+        private static string CertificatePath = ".certs\\Communication.cer"; //".certs\\plc_line.cer"  
 
-        static string GetCertPathTia()
+        static string GetCertPath()
         {
             var fp = new FileInfo(Path.Combine(Assembly.GetExecutingAssembly().Location));
-            return Path.Combine(fp.DirectoryName, ".certs\\TIA\\Communication.cer");
+            return Path.Combine(fp.DirectoryName, CertificatePath);
         }
 
-        static readonly X509Certificate2 TiaCertificate = new X509Certificate2(GetCertPathTia());
+        static readonly X509Certificate2 Certificate = new X509Certificate2(GetCertPath());
 
-        private static bool CertificateValidationTia(HttpRequestMessage requestMessage, X509Certificate2 certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        private static bool CertificateValidation(HttpRequestMessage requestMessage, X509Certificate2 certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
-            return certificate.Thumbprint == TiaCertificate.Thumbprint;
-        }
-
-        static string GetCertPathHwc()
-        {
-            var fp = new FileInfo(Path.Combine(Assembly.GetExecutingAssembly().Location));
-            return Path.Combine(fp.DirectoryName, ".certs\\plc_line.cer");
-        }
-
-        static readonly X509Certificate2 HwcCertificate = new X509Certificate2(GetCertPathHwc());
-
-        private static bool CertificateValidationHwc(HttpRequestMessage requestMessage, 
-                                                    X509Certificate2 certificate, 
-                                                    X509Chain chain, 
-                                                    SslPolicyErrors sslPolicyErrors)
-        {
-            return certificate.Thumbprint == HwcCertificate.Thumbprint;
+            return certificate.Thumbprint == Certificate.Thumbprint;
         }
 
         // Use only one twin controller.
         // Comment out all others that are not used in your case.
-        public static axosimpleTwinController TiaPlc { get; }
+        public static s7_1516_v40TwinController SecurePlc { get; }
             = new(ConnectorAdapterBuilder.Build()
-                .CreateWebApi(TargetIp, UserName, Pass, CertificateValidationTia, IgnoreSslErrors));
-
-
-        //public static axosimpleTwinController HwcPlc { get; }
-        //    = new(ConnectorAdapterBuilder.Build()
-        //        .CreateWebApi(TargetIp, UserName, Pass, CertificateValidationHwc, IgnoreSslErrors));
+            .CreateWebApi(TargetIp, UserName, Pass, CertificateValidation, IgnoreSslErrors));
 
         // not compatible with FW 4.0
-        //public static axosimpleTwinController TiaNonSecurePlc { get; }
+        //public static s7_1516_v40TwinController NonSecurePlc { get; }
         //    = new(ConnectorAdapterBuilder.Build()
         //        .CreateWebApi(TargetIp, "Everybody",string.Empty, IgnoreSslErrors));
     }
     
     public static class Entry
     {
-        public static axosimpleTwinController Plc { get; } = TwinConnectorSelector.TiaPlc;
+        public static s7_1516_v40TwinController Plc {get; } = TwinConnectorSelector.SecurePlc;
     }
 }
