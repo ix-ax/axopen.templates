@@ -45,7 +45,7 @@ Navigate to [`src\Context.st`](src\Context.st#7) `VAR PUBLIC` section and add ne
     // Units
 
     {#ix-set:AttributeName = "<#MY UNIT#>"} 
-    MyUnit : MyUnit.Unit;
+    MyUnit : MyUnit.UnitContainer;
 END_VAR      
 ```
 
