@@ -21,11 +21,11 @@ NAMESPACE axosimple.UnitTemplate
                 parent : IAxoObject;
             END_VAR
             VAR_IN_OUT
-                C : axosimple.UnitTemplate.Components;
+                X : axosimple.UnitTemplate.Unit;
             END_VAR
             THIS.Initialize(parent);
             IF THIS.Execute() THEN
-                THIS.Handle(C);
+                THIS.Handle(X.C);
             END_IF;
         END_METHOD
 

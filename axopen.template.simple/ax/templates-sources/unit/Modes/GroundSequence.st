@@ -16,7 +16,7 @@ NAMESPACE axosimple.UnitTemplate
             MoveToWork : AXOpen.Core.AxoTask;
         END_VAR
         VAR PRIVATE
-            X : REF_TO axosimple.UnitTemplate.UnitObjects;          
+            X : REF_TO axosimple.UnitTemplate.Unit;          
             PersistentSettings : REF_TO AxoDataPersistentExchange;
             _currentId : STRING;
             techSetttingsId : STRING;
@@ -25,7 +25,7 @@ NAMESPACE axosimple.UnitTemplate
         METHOD INTERNAL Run
             VAR_INPUT
                 inParent : AXOpen.Core.IAxoObject;
-                inUnitObjects : REF_TO axosimple.UnitTemplate.UnitObjects;
+                inUnitObjects : REF_TO axosimple.UnitTemplate.Unit;
             END_VAR     
 
             IF X = NULL THEN 
@@ -35,17 +35,7 @@ NAMESPACE axosimple.UnitTemplate
 
             SUPER.Run(inParent);
         END_METHOD
-
-
-        
-        METHOD PROTECTED OVERRIDE OnBeforeSequenceStart            
-            X^.TD.Restore();                                    
-            X^.PD.Data.Restore();                
-            X^._DL.Restore();
-            X^._ADL.Restore();
-            X^._IDL.Restore(); 
-        END_METHOD
-
+                
         ///<summary>
         /// Contains logic of the steps of this sequence
         ///</summary>
@@ -71,6 +61,11 @@ NAMESPACE axosimple.UnitTemplate
 
                 IF(_dialogAnswer <> eDialogAnswer#NoAnswer) THEN  
                     IF(_dialogAnswer = eDialogAnswer#Yes) THEN
+                        X^.TS.Restore();                                    
+                        X^.PD.Restore();                
+                        X^._DL.Restore();
+                        X^._ADL.Restore();
+                        X^._IDL.Restore(); 
                         THIS.MoveNext();                   
                     END_IF;
                     
@@ -138,8 +133,8 @@ NAMESPACE axosimple.UnitTemplate
                     IF X^.G^.TS.Common.Payload.DataEntityId <> '' THEN
                        techSetttingsId := X^.G^.TS.Common.Payload.DataEntityId; // TAKE GLOGAL TECHNOLOGY SETTINGS ID
 
-                    ELSIF X^.TD.Data.Payload.DataEntityId <> '' THEN // TAKE LAST LOADED FOR STATION
-                        techSetttingsId := X^.TD.Data.Payload.DataEntityId;
+                    ELSIF X^.TS.Data.Payload.DataEntityId <> '' THEN // TAKE LAST LOADED FOR STATION
+                        techSetttingsId := X^.TS.Data.Payload.DataEntityId;
 
                     ELSIF X^.LastTechnologySettings <> '' THEN // TAKE LAST LOADED FROM PERSISTENT
                         techSetttingsId := X^.LastTechnologySettings;
@@ -148,7 +143,7 @@ NAMESPACE axosimple.UnitTemplate
                         techSetttingsId := X^.LastTechnologySettings;
                     END_IF;
                     
-                    IF X^.G^.TS.Common.Payload.DataEntityId = X^.TD.Data.Payload.DataEntityId then 
+                    IF X^.G^.TS.Common.Payload.DataEntityId = X^.TS.Data.Payload.DataEntityId then 
                         //THIS.MoveNext(); // you can skip loading...
                         ;
                     end_if;
@@ -161,39 +156,14 @@ NAMESPACE axosimple.UnitTemplate
                 END_IF;
                 //-------------------------------------------------------
             END_IF;
-                   
-            
-            FOR forIterator := 6 TO 98 BY 1 DO
-                IF (Steps[forIterator].Execute(THIS, TRUE,Concat('DO SOMETHING -G-',ToString(forIterator)) )) THEN
-                    //-------------------------------------------------------                
-                    IF CurrentStep.Duration > TIME#25ms THEN                         
-                        THIS.MoveNext();
-                    END_IF;                
-                    //-------------------------------------------------------
-                END_IF;
-            END_FOR;
-                      
+                                                                 
 
             IF (Steps[99].Execute(THIS, TRUE, '<#SAVE DATA#>')) THEN
                 //-------------------------------------------------------
-                CASE TO_INT( THIS.GetMicroStepValue()) OF
-                    0 : 
-                        IF X^.PD.Shared.Payload.DataEntityId <> '' THEN 
-                            _currentId := X^.PD.Shared.Payload.DataEntityId;
-                            THIS.SetMicroStepValue(UINT#10);
-
-                        ELSE // FIST RUN OR WITHOUT DATA
-                            THIS.MoveNext();
-                        END_IF;
-
-                    10 : // update part as a corrupted a interrupted
-                        X^.PD.Shared.Payload.WasReset := true;
-                        IF X^.PD.Update(_currentId).IsDone() THEN 
-                                THIS.MoveNext(); 
-                        END_IF;  
-                    ELSE
-                        THIS.SetMicroStepValue(UINT#0);
-                END_CASE;
+                X^.PD.Shared.Payload.WasReset := true;
+                IF(X^.PD.CreateOrUpdate(X^.PD.Shared.Payload.DataEntityId).IsDone()) THEN
+                    THIS.MoveNext();
+                END_IF;                    
                 //-------------------------------------------------------
             END_IF;
            

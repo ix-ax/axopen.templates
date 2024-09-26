@@ -3,9 +3,11 @@ NAMESPACE axosimple
     CLASS ProcessData EXTENDS AXOpen.Data.AxoDataFragmentExchange
         VAR PUBLIC                    
             {#ix-attr:[AXOpen.Data.AxoDataFragmentAttribute]}
-            Entity : SharedDataExchange;   
+            Shared : SharedDataExchange;   
                         
             // Units data - snippet unitAddProcessData
+            //{#ix-attr:[AXOpen.Data.AxoDataFragmentAttribute]}
+            // UnitTemplate : axosimple.UnitTemplate.ProcessDataExchange;
            
             
                                                 

@@ -8,7 +8,8 @@ NAMESPACE axosimple.UnitTemplate
     CLASS ProcessDataPayload
         EXTENDS AXOpen.Data.AxoDataEntity
         VAR PUBLIC
-                  
+            {#ix-set:AttributeName = "<#Unit header#>"}             
+            UnitHeader : UnitHeader;     
         END_VAR
     END_CLASS
 END_NAMESPACE    

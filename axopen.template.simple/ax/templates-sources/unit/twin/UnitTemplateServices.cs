@@ -10,7 +10,7 @@ using AXSharp.Connector;
 
 namespace axosimple.UnitTemplate
 {
-    public partial class Unit 
+    public partial class UnitContainer 
     {
         ///<inheritdoc/>
         public override AxoDataEntity? Data => this.X.PD.Data.Payload;
@@ -19,10 +19,10 @@ namespace axosimple.UnitTemplate
         public override AxoDataEntity? DataHeader => this.X.PD.Shared.Payload;
         
         ///<inheritdoc/>
-        public override AxoDataEntity? TechnologySettings => this.X.TD.Data.Payload;
+        public override AxoDataEntity? TechnologySettings => this.X.TS.Data.Payload;
 
         ///<inheritdoc/>
-        public override AxoDataEntity? SharedTechnologySettings => this.X.TD.Shared.Payload;
+        public override AxoDataEntity? SharedTechnologySettings => this.X.TS.Shared.Payload;
 
         ///<inheritdoc/>
         public override AxoObject? UnitComponents => this.X.C;
@@ -64,7 +64,7 @@ namespace axosimple.UnitTemplate
             _contextService = contextService;
         }
         
-        public UnitBase Unit { get; } = Entry.Plc.Context.UnitTemplate;
+        public UnitContainerBase Unit { get; } = Entry.Plc.Context.UnitTemplate;
         
         /// <summary>
         /// Gets context service.
@@ -119,7 +119,7 @@ namespace axosimple.UnitTemplate
             
             // initialize unit technology data manager
             
-            var technologyDataManager = Entry.Plc.Context.UnitTemplate.X.TD.CreateDataFragments<TechnologyDataManager>();
+            var technologyDataManager = Entry.Plc.Context.UnitTemplate.X.TS.CreateDataFragments<TechnologyDataManager>();
             technologyDataManager.Shared.InitializeRemoteDataExchange(_contextService.TechnologyCommonRepository);
             technologyDataManager.Data.InitializeRemoteDataExchange(TechnologySettingsRepository);
             technologyDataManager.InitializeRemoteDataExchange();

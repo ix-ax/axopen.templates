@@ -18,6 +18,7 @@ using AXOpen.VisualComposer;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson.Serialization;
 using System.Diagnostics;
+using System.Runtime.InteropServices.JavaScript;
 using AXOpen.VisualComposer;
 
 
@@ -42,6 +43,7 @@ Entry.Plc.Connector.BuildAndStart().ReadWriteCycleDelay = 50;
 Entry.Plc.Connector.ConcurrentRequestMaxCount = 3;
 Entry.Plc.Connector.ConcurrentRequestDelay = 25;
 Entry.Plc.Connector.ExceptionBehaviour = CommExceptionBehaviour.Ignore;
+
 
 Entry.Plc.Connector.SetLoggerConfiguration(new LoggerConfiguration()
     .WriteTo
@@ -68,6 +70,11 @@ CreateUnitServices();
 IAxoDataExchange.CleanUp();
 
 #endregion AxoApplication
+
+
+await Entry.Plc.Context.TimeSynch.SetAsync(DateTime.UtcNow);
+await Entry.Plc.Context.DoSynchronize.SetAsync(true);
+
 
 var app = builder.Build();
 
@@ -112,7 +119,7 @@ app.Run();
 static void CreateUnitServices()
 {
     var contextService = ContextService.Instance;
-    // axosimple.MyUnit.UnitServices.Create(ContextService.Instance); 
+    // axosimple.UnitTemplate.UnitServices.Create(ContextService.Instance); 
 }
 
 static (IRepository<User>, IRepository<Group>) SetUpUserRepositories()

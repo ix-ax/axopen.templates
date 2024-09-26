@@ -85,7 +85,7 @@ scripts:
     if [ -d "./tmp_templates" ]; then      
       rm ./tmp_templates -r
     fi
-    
+
     cp -r ./templates-sources/ ./tmp_templates
 
     find ./tmp_templates -type d -name '*_template.config' | while read dir; do
@@ -100,7 +100,7 @@ scripts:
 
     # Install the dotnet template
     dotnet new install ./tmp_templates/ --force   
-    
+
 
 
     # Execute the dotnet new command with the provided class name
