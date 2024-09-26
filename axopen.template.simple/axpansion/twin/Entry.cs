@@ -29,143 +29,40 @@ namespace axosimple
 
     public class TwinConnectorSelector
     {
-        
-        public static string TargetIp { get; }
-        private static axosimpleTwinController? _plcInstance;
-        private static readonly object _lock = new();
-        private static bool _isInitialized = false;
+        public static string TargetIp { get; } = Environment.GetEnvironmentVariable("AXTARGET"); // <- replace by your IP 
+        private static string Pass => @"123ABCDabcd$#!"; //Environment.GetEnvironmentVariable("AX_TARGET_PWD");       //Environment.GetEnvironmentVariable("AX_TARGET_PWD"); // <- Pass in the password that you have set up for the user. NOT AS PLAIN TEXT! Use user secrets instead.
+        private static string UserName = "adm"; //Environment.GetEnvironmentVariable("AX_USERNAME"); //<- replace by user name you have set up in your WebAPI settings        
+        private const bool IgnoreSslErrors = true; // <- When you have your certificates in order set this to false.
+        private static string CertificatePath = "certs\\Communication.cer"; 
 
-        // Dictionary to hold configurations for each connection type
-        private static readonly Dictionary<ConnectionType, ConnectionConfig> _configurations = new();
-
-        // Static constructor to initialize configurations
-        static TwinConnectorSelector()
+        static string GetCertPath()
         {
-            string assemblyDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
-
-            // Common settings
-            TargetIp = Environment.GetEnvironmentVariable("AXTARGET") ?? "default_ip"; // Replace "default_ip" as needed
-            string password = @"123ABCDabcd$#!"; // Replace with secure password handling
-            string userName = "adm"; // Replace with secure username handling
-            bool ignoreSslErrors = true; // Set to false in production
-
-            // Certificate paths
-            string tiaCertPath = Path.Combine(assemblyDir, ".certs", "TIA", "Communication.cer");
-            string hwcCertPath = Path.Combine(assemblyDir, ".certs", "plc_line.cer");
-
-            // Load certificates if they exist
-            X509Certificate2? tiaCertificate = File.Exists(tiaCertPath) ? new X509Certificate2(tiaCertPath) : null;
-            X509Certificate2? hwcCertificate = File.Exists(hwcCertPath) ? new X509Certificate2(hwcCertPath) : null;
-
-            // Certificate validation callback
-            Func<X509Certificate2, Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool>> createValidationCallback = expectedCert =>
-            {
-                return (requestMessage, certificate, chain, sslPolicyErrors) => certificate.Thumbprint == expectedCert.Thumbprint;
-            };
-
-            // Initialize configurations
-            _configurations[ConnectionType.Tia] = new ConnectionConfig
-            {
-                TargetIp = TargetIp,
-                UserName = userName,
-                Password = password,
-                CertificateValidationCallback = tiaCertificate != null ? createValidationCallback(tiaCertificate) : null,
-                IgnoreSslErrors = ignoreSslErrors
-            };
-
-            _configurations[ConnectionType.Hwc] = new ConnectionConfig
-            {
-                TargetIp = TargetIp,
-                UserName = userName,
-                Password = password,
-                CertificateValidationCallback = hwcCertificate != null ? createValidationCallback(hwcCertificate) : null,
-                IgnoreSslErrors = ignoreSslErrors
-            };
-
-            _configurations[ConnectionType.TiaNonSecure] = new ConnectionConfig
-            {
-                TargetIp = TargetIp,
-                UserName = "Everybody",
-                Password = string.Empty,
-                IgnoreSslErrors = ignoreSslErrors
-                // No certificate validation callback needed for non-secure connection
-            };
+            var fp = new FileInfo(Path.Combine(Assembly.GetExecutingAssembly().Location));
+            return Path.Combine(fp.DirectoryName, CertificatePath);
         }
 
-        /// <summary>
-        /// Initializes the TwinConnector with the specified connection type.
-        /// </summary>
-        public static void Initialize(ConnectionType connectionType)
+        static readonly X509Certificate2 Certificate = new X509Certificate2(GetCertPath());
+
+        private static bool CertificateValidation(HttpRequestMessage requestMessage, X509Certificate2 certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
-            if (_isInitialized)
-                throw new InvalidOperationException("TwinConnectorSelector has already been initialized.");
-
-            lock (_lock)
-            {
-                if (_isInitialized)
-                    throw new InvalidOperationException("TwinConnectorSelector has already been initialized.");
-
-                if (!_configurations.TryGetValue(connectionType, out var config))
-                    throw new ArgumentException($"Configuration for connection type '{connectionType}' not found.");
-
-                var builder = ConnectorAdapterBuilder.Build();
-                ConnectorAdapter connectorAdapter;
-
-                if (config.CertificateValidationCallback != null)
-                {
-                    // Use the overload with certificate validation callback
-                    connectorAdapter = builder.CreateWebApi(
-                        config.TargetIp,
-                        config.UserName,
-                        config.Password,
-                        config.CertificateValidationCallback,
-                        config.IgnoreSslErrors);
-                }
-                else
-                {
-                    // Use the overload without certificate validation callback
-                    connectorAdapter = builder.CreateWebApi(
-                        config.TargetIp,
-                        config.UserName,
-                        config.Password,
-                        config.IgnoreSslErrors);
-                }
-
-                _plcInstance = new axosimpleTwinController(connectorAdapter);
-                _isInitialized = true;
-            }
+            return certificate.Thumbprint == Certificate.Thumbprint;
         }
 
-        /// <summary>
-        /// Gets the singleton instance of the TwinController.
-        /// </summary>
-        public static axosimpleTwinController Plc
-        {
-            get
-            {
-                if (!_isInitialized)
-                    throw new InvalidOperationException("TwinConnectorSelector is not initialized. Call Initialize() first.");
+        // Use only one twin controller.
+        // Comment out all others that are not used in your case.
+        public static axosimpleTwinController SecurePlc { get; }
+            = new(ConnectorAdapterBuilder.Build()
+            .CreateWebApi(TargetIp, UserName, Pass, CertificateValidation, IgnoreSslErrors));
 
-                return _plcInstance!;
-            }
-        }
+        // not compatible with FW 4.0
+        //public static axosimpleTwinController NonSecurePlc { get; }
+        //    = new(ConnectorAdapterBuilder.Build()
+        //        .CreateWebApi(TargetIp, "Everybody",string.Empty, IgnoreSslErrors));
     }
 
     public static class Entry
     {
-        private static readonly Lazy<axosimpleTwinController> _plcInstance = new Lazy<axosimpleTwinController>(() =>
-        {
-            // Initialize the TwinConnectorSelector with the desired ConnectionType
-            TwinConnectorSelector.Initialize(ConnectionType.Tia);
-
-            // Return the initialized Plc instance
-            return TwinConnectorSelector.Plc;
-        }, System.Threading.LazyThreadSafetyMode.ExecutionAndPublication);
-
-        /// <summary>
-        /// Provides access to the singleton axosimpleTwinController instance.
-        /// </summary>
-        public static axosimpleTwinController Plc => _plcInstance.Value;
+        public static axosimpleTwinController Plc {get; } = TwinConnectorSelector.SecurePlc;
     }
 
 }
