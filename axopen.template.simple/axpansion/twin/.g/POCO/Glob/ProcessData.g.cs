@@ -10,7 +10,7 @@ namespace Pocos
             {
             }
 
-            public axosimple.SharedDataExchange Entity { get; set; } = new axosimple.SharedDataExchange();
+            public axosimple.SharedDataExchange Shared { get; set; } = new axosimple.SharedDataExchange();
         }
     }
 }

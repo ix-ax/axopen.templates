@@ -20,7 +20,7 @@ NAMESPACE axosimple.UnitTemplate
         END_VAR
 
         VAR PRIVATE
-            X : REF_TO axosimple.UnitTemplate.UnitObjects;
+            X : REF_TO axosimple.UnitTemplate.Unit;
            
             _currentId : STRING;
 
@@ -31,7 +31,7 @@ NAMESPACE axosimple.UnitTemplate
         METHOD INTERNAL Run
             VAR_INPUT
                 inParent : AXOpen.Core.IAxoObject;
-                inUnitObjects : REF_TO UnitObjects;
+                inUnitObjects : REF_TO Unit;
             END_VAR     
 
             IF X = NULL THEN 
@@ -51,7 +51,7 @@ NAMESPACE axosimple.UnitTemplate
         METHOD PROTECTED OVERRIDE OnBeforeSequenceStart
             X^._IDL.Restore(); 
             X^.PD.Restore();
-            X^.TD.Restore(); 
+            X^.TS.Restore(); 
         END_METHOD
           
         ///<summary>
@@ -72,23 +72,37 @@ NAMESPACE axosimple.UnitTemplate
             
             IF (Steps[0].Execute(THIS, TRUE, '<#LOAD TECHNOLOGY DATA#>')) THEN
                 //-------------------------------------------------------               
-                    IF(X^.TD.Read('default').IsDone()) THEN                        
+                    IF(X^.TS.Read('default').IsDone()) THEN                        
                         THIS.MoveNext(); 
                     END_IF;    
                 //-------------------------------------------------------
             END_IF;
 
             IF (Steps[1].Execute(THIS, TRUE, '<#LOAD PROCESS DATA#>')) THEN
-                //-------------------------------------------------------                                   
-                    IF(X^.PD.Read('').IsDone()) THEN                        
+                //-------------------------------------------------------                                                       
+                    IF(X^.G^.PS.Read('default').IsDone()) THEN
+                        X^.PD.Shared.Payload := X^.G^.PS.Shared.Payload;
+                        X^.PD.Data.Payload := X^.G^.PS.UnitTemplate.Payload;  
+                        _currentId := ToString(THIS._context_.GetRtc().NowUTC());                      
                         THIS.MoveNext(); 
+                    END_IF;    
+                //-------------------------------------------------------
+            END_IF;
+
+
+            IF (Steps[2].Execute(THIS, TRUE, '<#DO SOMETHING#>')) THEN
+                //-------------------------------------------------------                                                       
+                    IF(THIS.CurrentStep.Duration >= LT#5S) THEN
+                        X^.PD.Shared.Payload.Carrier := _currentId;
+                        X^.PD.Data.Payload.UnitHeader.Operator := _currentId;
+                        THIS.MoveNext();
                     END_IF;    
                 //-------------------------------------------------------
             END_IF;
 
             IF (Steps[90].Execute(THIS, TRUE, '<#SAVE DATA#>')) THEN
                 //-------------------------------------------------------                                                 
-                IF (X^.PD.Data.CreateOrUpdate(_currentId).IsDone()) THEN 
+                IF (X^.PD.CreateOrUpdate(_currentId).IsDone()) THEN 
                     THIS.MoveNext(); 
                 END_IF;
                 //-------------------------------------------------------

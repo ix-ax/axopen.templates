@@ -6,7 +6,7 @@ using AXSharp.Connector.Localizations;
 
 namespace axosimple.BaseUnit
 {
-    public partial class UnitObjects : AXSharp.Connector.ITwinObject
+    public partial class UnitBase : AXSharp.Connector.ITwinObject
     {
         public OnlinerInt StationNumber { get; }
 
@@ -15,7 +15,7 @@ namespace axosimple.BaseUnit
 
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
-        public UnitObjects(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail)
+        public UnitBase(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail)
         {
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
             this.@SymbolTail = symbolTail;
@@ -35,9 +35,9 @@ namespace axosimple.BaseUnit
             return await (dynamic)this.OnlineToPlainAsync();
         }
 
-        public async Task<Pocos.axosimple.BaseUnit.UnitObjects> OnlineToPlainAsync()
+        public async Task<Pocos.axosimple.BaseUnit.UnitBase> OnlineToPlainAsync()
         {
-            Pocos.axosimple.BaseUnit.UnitObjects plain = new Pocos.axosimple.BaseUnit.UnitObjects();
+            Pocos.axosimple.BaseUnit.UnitBase plain = new Pocos.axosimple.BaseUnit.UnitBase();
             await this.ReadAsync<IgnoreOnPocoOperation>();
             plain.StationNumber = StationNumber.LastValue;
             plain.LastTechnologySettings = LastTechnologySettings.LastValue;
@@ -46,9 +46,9 @@ namespace axosimple.BaseUnit
 
         [Obsolete("This method should not be used if you indent to access the controllers data. Use `OnlineToPlain` instead.")]
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-        public async Task<Pocos.axosimple.BaseUnit.UnitObjects> _OnlineToPlainNoacAsync()
+        public async Task<Pocos.axosimple.BaseUnit.UnitBase> _OnlineToPlainNoacAsync()
         {
-            Pocos.axosimple.BaseUnit.UnitObjects plain = new Pocos.axosimple.BaseUnit.UnitObjects();
+            Pocos.axosimple.BaseUnit.UnitBase plain = new Pocos.axosimple.BaseUnit.UnitBase();
             plain.StationNumber = StationNumber.LastValue;
             plain.LastTechnologySettings = LastTechnologySettings.LastValue;
             return plain;
@@ -56,7 +56,7 @@ namespace axosimple.BaseUnit
 
         [Obsolete("This method should not be used if you indent to access the controllers data. Use `OnlineToPlain` instead.")]
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-        protected async Task<Pocos.axosimple.BaseUnit.UnitObjects> _OnlineToPlainNoacAsync(Pocos.axosimple.BaseUnit.UnitObjects plain)
+        protected async Task<Pocos.axosimple.BaseUnit.UnitBase> _OnlineToPlainNoacAsync(Pocos.axosimple.BaseUnit.UnitBase plain)
         {
             plain.StationNumber = StationNumber.LastValue;
             plain.LastTechnologySettings = LastTechnologySettings.LastValue;
@@ -68,7 +68,7 @@ namespace axosimple.BaseUnit
             await this.PlainToOnlineAsync((dynamic)plain);
         }
 
-        public async Task<IEnumerable<ITwinPrimitive>> PlainToOnlineAsync(Pocos.axosimple.BaseUnit.UnitObjects plain)
+        public async Task<IEnumerable<ITwinPrimitive>> PlainToOnlineAsync(Pocos.axosimple.BaseUnit.UnitBase plain)
         {
 #pragma warning disable CS0612
             StationNumber.LethargicWrite(plain.StationNumber);
@@ -81,7 +81,7 @@ namespace axosimple.BaseUnit
 
         [Obsolete("This method should not be used if you indent to access the controllers data. Use `PlainToOnline` instead.")]
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-        public async Task _PlainToOnlineNoacAsync(Pocos.axosimple.BaseUnit.UnitObjects plain)
+        public async Task _PlainToOnlineNoacAsync(Pocos.axosimple.BaseUnit.UnitBase plain)
         {
 #pragma warning disable CS0612
             StationNumber.LethargicWrite(plain.StationNumber);
@@ -96,15 +96,15 @@ namespace axosimple.BaseUnit
             return await (dynamic)this.ShadowToPlainAsync();
         }
 
-        public async Task<Pocos.axosimple.BaseUnit.UnitObjects> ShadowToPlainAsync()
+        public async Task<Pocos.axosimple.BaseUnit.UnitBase> ShadowToPlainAsync()
         {
-            Pocos.axosimple.BaseUnit.UnitObjects plain = new Pocos.axosimple.BaseUnit.UnitObjects();
+            Pocos.axosimple.BaseUnit.UnitBase plain = new Pocos.axosimple.BaseUnit.UnitBase();
             plain.StationNumber = StationNumber.Shadow;
             plain.LastTechnologySettings = LastTechnologySettings.Shadow;
             return plain;
         }
 
-        protected async Task<Pocos.axosimple.BaseUnit.UnitObjects> ShadowToPlainAsync(Pocos.axosimple.BaseUnit.UnitObjects plain)
+        protected async Task<Pocos.axosimple.BaseUnit.UnitBase> ShadowToPlainAsync(Pocos.axosimple.BaseUnit.UnitBase plain)
         {
             plain.StationNumber = StationNumber.Shadow;
             plain.LastTechnologySettings = LastTechnologySettings.Shadow;
@@ -116,7 +116,7 @@ namespace axosimple.BaseUnit
             await this.PlainToShadowAsync((dynamic)plain);
         }
 
-        public async Task<IEnumerable<ITwinPrimitive>> PlainToShadowAsync(Pocos.axosimple.BaseUnit.UnitObjects plain)
+        public async Task<IEnumerable<ITwinPrimitive>> PlainToShadowAsync(Pocos.axosimple.BaseUnit.UnitBase plain)
         {
             StationNumber.Shadow = plain.StationNumber;
             LastTechnologySettings.Shadow = plain.LastTechnologySettings;
@@ -133,7 +133,7 @@ namespace axosimple.BaseUnit
         ///Compares if the current plain object has changed from the previous object.This method is used by the framework to determine if the object has changed and needs to be updated.
         ///[!NOTE] Any member in the hierarchy that is ignored by the compilers (e.g. when CompilerOmitAttribute is used) will not be compared, and therefore will not be detected as changed.
         ///</summary>
-        public async Task<bool> DetectsAnyChangeAsync(Pocos.axosimple.BaseUnit.UnitObjects plain, Pocos.axosimple.BaseUnit.UnitObjects latest = null)
+        public async Task<bool> DetectsAnyChangeAsync(Pocos.axosimple.BaseUnit.UnitBase plain, Pocos.axosimple.BaseUnit.UnitBase latest = null)
         {
             if (latest == null)
                 latest = await this._OnlineToPlainNoacAsync();
@@ -154,9 +154,9 @@ namespace axosimple.BaseUnit
             this.RetrievePrimitives().ToList().ForEach(x => x.Poll());
         }
 
-        public Pocos.axosimple.BaseUnit.UnitObjects CreateEmptyPoco()
+        public Pocos.axosimple.BaseUnit.UnitBase CreateEmptyPoco()
         {
-            return new Pocos.axosimple.BaseUnit.UnitObjects();
+            return new Pocos.axosimple.BaseUnit.UnitBase();
         }
 
         private IList<AXSharp.Connector.ITwinObject> Children { get; } = new List<AXSharp.Connector.ITwinObject>();

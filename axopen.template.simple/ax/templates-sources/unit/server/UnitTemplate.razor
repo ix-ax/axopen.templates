@@ -10,7 +10,7 @@
 @using Unit = axosimple.server.Components.Unit
 
 @inject IAlertService _alerts
-@inherits RenderableComplexComponentBase<axosimple.UnitTemplate.Unit>
+@inherits RenderableComplexComponentBase<axosimple.UnitTemplate.UnitContainer>
 
 
 <div class="container text-center">
@@ -46,6 +46,6 @@
 @code
 {
     private IUnitServices Services => Entry.Plc.Context.UnitTemplate.Services;
-    private axosimple.UnitTemplate.Unit Unit => Entry.Plc.Context.UnitTemplate;
+    private axosimple.UnitTemplate.UnitContainer Unit => Entry.Plc.Context.UnitTemplate;
 }
     

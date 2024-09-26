@@ -1,0 +1,59 @@
+{
+  "BackgroundWidth": 100,
+  "BackgroundHeight": 100,
+  "ImgSrc": null,
+  "BackgroundColor": "#FFFFFF",
+  "BackgroundSVGInput": "",
+  "Items": [
+    {
+      "Id": "a7f471caa9a824e01ca730ccfe0004d2a1b437e5e85f9d06d2d48dbf93c5da9a",
+      "Left": 45.17933133282241,
+      "Top": 8.523205141477948,
+      "Transform": "TopCenter",
+      "Presentation": "Spot",
+      "Width": -1,
+      "Height": -1,
+      "ZIndex": 10,
+      "Scale": 1,
+      "Roles": "",
+      "PresentationTemplate": null,
+      "Background": false,
+      "BackgroundColor": "#FFFFFF"
+    },
+    {
+      "Id": "7e9b3962197cf2b5d427fecf101aec02d1a23753da0ac82baec7bfcee963678f",
+      "Left": 22.183549132528242,
+      "Top": 20.443040389048907,
+      "Transform": "TopCenter",
+      "Presentation": "Spot",
+      "Width": -1,
+      "Height": -1,
+      "ZIndex": 10,
+      "Scale": 1,
+      "Roles": "",
+      "PresentationTemplate": null,
+      "Background": false,
+      "BackgroundColor": "#FFFFFF"
+    },
+    {
+      "Id": "5444a645e967f7326eb4de8d4624a60b6d9fc270053b0f6861a687edb6ea1357",
+      "Left": 21.867098265056377,
+      "Top": 27.563291139240505,
+      "Transform": "TopCenter",
+      "Presentation": "Spot",
+      "Width": -1,
+      "Height": -1,
+      "ZIndex": 10,
+      "Scale": 1,
+      "Roles": "",
+      "PresentationTemplate": null,
+      "Background": false,
+      "BackgroundColor": "#FFFFFF"
+    }
+  ],
+  "Theme": "text-dark",
+  "Scale": 1,
+  "TranslateX": 0.5274277699144574,
+  "TranslateY": -0.42194414742385355,
+  "AllowZoomingAndPanning": true
+}

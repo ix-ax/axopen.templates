@@ -1,24 +1,32 @@
-﻿#define TIA
-// ixsharpblazor
-// Copyright (c) 2023 Peter Kurhajec (PTKu), MTS,  and Contributors. All Rights Reserved.
-// Contributors: https://github.com/ix-ax/axsharp/graphs/contributors
-// See the LICENSE file in the repository root for more information.
-// https://github.com/ix-ax/axsharp/blob/dev/LICENSE
-// Third party licenses: https://github.com/ix-ax/axsharp/blob/master/notices.md
-
-using AXSharp.Connector;
+﻿using AXSharp.Connector;
+using AXSharp.Connector.S71500.WebApi;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AXSharp.Connector.S71500.WebApi;
-using System.Net.Security;
+using System.IO;
+using System.Net.Http;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
+using MongoDB.Driver.Core.Connections;
 
 namespace axosimple
 {
+    public enum ConnectionType
+    {
+        Tia,
+        Hwc,
+        TiaNonSecure
+    }
+
+    public class ConnectionConfig
+    {
+        public string TargetIp { get; set; } = string.Empty;
+        public string UserName { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool>? CertificateValidationCallback { get; set; }
+        public bool IgnoreSslErrors { get; set; } = true;
+    }
+
     public class TwinConnectorSelector
     {
         public static string TargetIp { get; } = Environment.GetEnvironmentVariable("AXTARGET"); // <- replace by your IP 
@@ -51,9 +59,10 @@ namespace axosimple
         //    = new(ConnectorAdapterBuilder.Build()
         //        .CreateWebApi(TargetIp, "Everybody",string.Empty, IgnoreSslErrors));
     }
-    
+
     public static class Entry
     {
         public static axosimpleTwinController Plc {get; } = TwinConnectorSelector.SecurePlc;
     }
+
 }

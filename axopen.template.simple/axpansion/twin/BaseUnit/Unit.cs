@@ -11,7 +11,7 @@ using AXSharp.Connector;
 
 namespace axosimple.BaseUnit
 {
-    public abstract partial class UnitBase : AXOpen.Core.AxoObject, axosimple.IUnit
+    public abstract partial class UnitContainerBase : AXOpen.Core.AxoObject, axosimple.IUnit
     {
         /// <summary>
         /// Gets the data payload for the unit.

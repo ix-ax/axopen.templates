@@ -55,12 +55,11 @@ namespace axosimple
 
         public ContextService SetContextData()
         {
-           
-            ProcessSettings.Entity.InitializeRemoteDataExchange(this.EntitySettingsRepository);
+            ProcessSettings.Shared.InitializeRemoteDataExchange(this.EntitySettingsRepository);
             ProcessSettings.InitializeRemoteDataExchange();
 
            
-            ProcessData.Entity.InitializeRemoteDataExchange(this.EntityDataRepository);
+            ProcessData.Shared.InitializeRemoteDataExchange(this.EntityDataRepository);
             ProcessData.InitializeRemoteDataExchange();
 
            

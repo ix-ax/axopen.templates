@@ -4,9 +4,9 @@ namespace Pocos
 {
     namespace axosimple.BaseUnit
     {
-        public partial class UnitObjects : AXSharp.Connector.IPlain
+        public partial class UnitBase : AXSharp.Connector.IPlain
         {
-            public UnitObjects()
+            public UnitBase()
             {
             }
 

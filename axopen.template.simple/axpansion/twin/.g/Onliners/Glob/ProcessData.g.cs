@@ -9,7 +9,7 @@ namespace axosimple
     public partial class ProcessData : AXOpen.Data.AxoDataFragmentExchange
     {
         [AXOpen.Data.AxoDataFragmentAttribute]
-        public axosimple.SharedDataExchange Entity { get; }
+        public axosimple.SharedDataExchange Shared { get; }
 
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
@@ -17,7 +17,7 @@ namespace axosimple
         {
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
             PreConstruct(parent, readableTail, symbolTail);
-            Entity = new axosimple.SharedDataExchange(this, "Entity", "Entity");
+            Shared = new axosimple.SharedDataExchange(this, "Shared", "Shared");
             PostConstruct(parent, readableTail, symbolTail);
         }
 
@@ -34,7 +34,7 @@ namespace axosimple
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.Entity = await Entity._OnlineToPlainNoacAsync();
+            plain.Shared = await Shared._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -48,7 +48,7 @@ namespace axosimple
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.Entity = await Entity._OnlineToPlainNoacAsync();
+            plain.Shared = await Shared._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -61,7 +61,7 @@ namespace axosimple
             await base._OnlineToPlainNoacAsync(plain);
 #pragma warning restore CS0612
 #pragma warning disable CS0612
-            plain.Entity = await Entity._OnlineToPlainNoacAsync();
+            plain.Shared = await Shared._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
             return plain;
         }
@@ -75,7 +75,7 @@ namespace axosimple
         {
             await base._PlainToOnlineNoacAsync(plain);
 #pragma warning disable CS0612
-            await this.Entity._PlainToOnlineNoacAsync(plain.Entity);
+            await this.Shared._PlainToOnlineNoacAsync(plain.Shared);
 #pragma warning restore CS0612
             return await this.WriteAsync<IgnoreOnPocoOperation>();
         }
@@ -86,7 +86,7 @@ namespace axosimple
         {
             await base._PlainToOnlineNoacAsync(plain);
 #pragma warning disable CS0612
-            await this.Entity._PlainToOnlineNoacAsync(plain.Entity);
+            await this.Shared._PlainToOnlineNoacAsync(plain.Shared);
 #pragma warning restore CS0612
         }
 
@@ -99,14 +99,14 @@ namespace axosimple
         {
             Pocos.axosimple.ProcessData plain = new Pocos.axosimple.ProcessData();
             await base.ShadowToPlainAsync(plain);
-            plain.Entity = await Entity.ShadowToPlainAsync();
+            plain.Shared = await Shared.ShadowToPlainAsync();
             return plain;
         }
 
         protected async Task<Pocos.axosimple.ProcessData> ShadowToPlainAsync(Pocos.axosimple.ProcessData plain)
         {
             await base.ShadowToPlainAsync(plain);
-            plain.Entity = await Entity.ShadowToPlainAsync();
+            plain.Shared = await Shared.ShadowToPlainAsync();
             return plain;
         }
 
@@ -118,7 +118,7 @@ namespace axosimple
         public async Task<IEnumerable<ITwinPrimitive>> PlainToShadowAsync(Pocos.axosimple.ProcessData plain)
         {
             await base.PlainToShadowAsync(plain);
-            await this.Entity.PlainToShadowAsync(plain.Entity);
+            await this.Shared.PlainToShadowAsync(plain.Shared);
             return this.RetrievePrimitives();
         }
 
@@ -141,7 +141,7 @@ namespace axosimple
             {
                 if (await base.DetectsAnyChangeAsync(plain))
                     return true;
-                if (await Entity.DetectsAnyChangeAsync(plain.Entity, latest.Entity))
+                if (await Shared.DetectsAnyChangeAsync(plain.Shared, latest.Shared))
                     somethingChanged = true;
                 plain = latest;
                 return somethingChanged;

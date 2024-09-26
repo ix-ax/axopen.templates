@@ -4,6 +4,8 @@ using AXSharp.Connector.ValueTypes;
 using System.Collections.Generic;
 using AXSharp.Connector.Localizations;
 using AXOpen.Core;
+using AXOpen;
+using AXOpen.Core;
 using AXOpen.Data;
 
 namespace axosimple
@@ -14,6 +16,18 @@ namespace axosimple
 
         public axosimple.TechnologySafety Safety { get; }
 
+        public AXOpen.S71500.Rtc S71500Rtc { get; }
+
+        public AXOpen.S71500.Rtm S71500Rtm { get; }
+
+        public AXOpen.Logging.AxoLogger ContextLogger { get; }
+
+        public OnlinerBool DoSynchronize { get; }
+
+        public OnlinerLDateTime TimeSynch { get; }
+
+        public OnlinerLDateTime ControllerRtm { get; }
+
         partial void PreConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         partial void PostConstruct(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail);
         public Context(AXSharp.Connector.ITwinObject parent, string readableTail, string symbolTail) : base(parent, readableTail, symbolTail)
@@ -22,6 +36,12 @@ namespace axosimple
             PreConstruct(parent, readableTail, symbolTail);
             Glob = new axosimple.GlobalContextObjects(this, "Glob", "Glob");
             Safety = new axosimple.TechnologySafety(this, "Safety", "Safety");
+            S71500Rtc = new AXOpen.S71500.Rtc(this, "S71500Rtc", "S71500Rtc");
+            S71500Rtm = new AXOpen.S71500.Rtm(this, "S71500Rtm", "S71500Rtm");
+            ContextLogger = new AXOpen.Logging.AxoLogger(this, "ContextLogger", "ContextLogger");
+            DoSynchronize = @Connector.ConnectorAdapter.AdapterFactory.CreateBOOL(this, "DoSynchronize", "DoSynchronize");
+            TimeSynch = @Connector.ConnectorAdapter.AdapterFactory.CreateLDATE_AND_TIME(this, "TimeSynch", "TimeSynch");
+            ControllerRtm = @Connector.ConnectorAdapter.AdapterFactory.CreateLDATE_AND_TIME(this, "ControllerRtm", "ControllerRtm");
             PostConstruct(parent, readableTail, symbolTail);
         }
 
@@ -43,6 +63,18 @@ namespace axosimple
 #pragma warning disable CS0612
             plain.Safety = await Safety._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.S71500Rtc = await S71500Rtc._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.S71500Rtm = await S71500Rtm._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.ContextLogger = await ContextLogger._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+            plain.DoSynchronize = DoSynchronize.LastValue;
+            plain.TimeSynch = TimeSynch.LastValue;
+            plain.ControllerRtm = ControllerRtm.LastValue;
             return plain;
         }
 
@@ -60,6 +92,18 @@ namespace axosimple
 #pragma warning disable CS0612
             plain.Safety = await Safety._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.S71500Rtc = await S71500Rtc._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.S71500Rtm = await S71500Rtm._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.ContextLogger = await ContextLogger._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+            plain.DoSynchronize = DoSynchronize.LastValue;
+            plain.TimeSynch = TimeSynch.LastValue;
+            plain.ControllerRtm = ControllerRtm.LastValue;
             return plain;
         }
 
@@ -76,6 +120,18 @@ namespace axosimple
 #pragma warning disable CS0612
             plain.Safety = await Safety._OnlineToPlainNoacAsync();
 #pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.S71500Rtc = await S71500Rtc._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.S71500Rtm = await S71500Rtm._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            plain.ContextLogger = await ContextLogger._OnlineToPlainNoacAsync();
+#pragma warning restore CS0612
+            plain.DoSynchronize = DoSynchronize.LastValue;
+            plain.TimeSynch = TimeSynch.LastValue;
+            plain.ControllerRtm = ControllerRtm.LastValue;
             return plain;
         }
 
@@ -93,6 +149,24 @@ namespace axosimple
 #pragma warning disable CS0612
             await this.Safety._PlainToOnlineNoacAsync(plain.Safety);
 #pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.S71500Rtc._PlainToOnlineNoacAsync(plain.S71500Rtc);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.S71500Rtm._PlainToOnlineNoacAsync(plain.S71500Rtm);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.ContextLogger._PlainToOnlineNoacAsync(plain.ContextLogger);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            DoSynchronize.LethargicWrite(plain.DoSynchronize);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            TimeSynch.LethargicWrite(plain.TimeSynch);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            ControllerRtm.LethargicWrite(plain.ControllerRtm);
+#pragma warning restore CS0612
             return await this.WriteAsync<IgnoreOnPocoOperation>();
         }
 
@@ -107,6 +181,24 @@ namespace axosimple
 #pragma warning disable CS0612
             await this.Safety._PlainToOnlineNoacAsync(plain.Safety);
 #pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.S71500Rtc._PlainToOnlineNoacAsync(plain.S71500Rtc);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.S71500Rtm._PlainToOnlineNoacAsync(plain.S71500Rtm);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            await this.ContextLogger._PlainToOnlineNoacAsync(plain.ContextLogger);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            DoSynchronize.LethargicWrite(plain.DoSynchronize);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            TimeSynch.LethargicWrite(plain.TimeSynch);
+#pragma warning restore CS0612
+#pragma warning disable CS0612
+            ControllerRtm.LethargicWrite(plain.ControllerRtm);
+#pragma warning restore CS0612
         }
 
         public async override Task<T> ShadowToPlain<T>()
@@ -120,6 +212,12 @@ namespace axosimple
             await base.ShadowToPlainAsync(plain);
             plain.Glob = await Glob.ShadowToPlainAsync();
             plain.Safety = await Safety.ShadowToPlainAsync();
+            plain.S71500Rtc = await S71500Rtc.ShadowToPlainAsync();
+            plain.S71500Rtm = await S71500Rtm.ShadowToPlainAsync();
+            plain.ContextLogger = await ContextLogger.ShadowToPlainAsync();
+            plain.DoSynchronize = DoSynchronize.Shadow;
+            plain.TimeSynch = TimeSynch.Shadow;
+            plain.ControllerRtm = ControllerRtm.Shadow;
             return plain;
         }
 
@@ -128,6 +226,12 @@ namespace axosimple
             await base.ShadowToPlainAsync(plain);
             plain.Glob = await Glob.ShadowToPlainAsync();
             plain.Safety = await Safety.ShadowToPlainAsync();
+            plain.S71500Rtc = await S71500Rtc.ShadowToPlainAsync();
+            plain.S71500Rtm = await S71500Rtm.ShadowToPlainAsync();
+            plain.ContextLogger = await ContextLogger.ShadowToPlainAsync();
+            plain.DoSynchronize = DoSynchronize.Shadow;
+            plain.TimeSynch = TimeSynch.Shadow;
+            plain.ControllerRtm = ControllerRtm.Shadow;
             return plain;
         }
 
@@ -141,6 +245,12 @@ namespace axosimple
             await base.PlainToShadowAsync(plain);
             await this.Glob.PlainToShadowAsync(plain.Glob);
             await this.Safety.PlainToShadowAsync(plain.Safety);
+            await this.S71500Rtc.PlainToShadowAsync(plain.S71500Rtc);
+            await this.S71500Rtm.PlainToShadowAsync(plain.S71500Rtm);
+            await this.ContextLogger.PlainToShadowAsync(plain.ContextLogger);
+            DoSynchronize.Shadow = plain.DoSynchronize;
+            TimeSynch.Shadow = plain.TimeSynch;
+            ControllerRtm.Shadow = plain.ControllerRtm;
             return this.RetrievePrimitives();
         }
 
@@ -166,6 +276,18 @@ namespace axosimple
                 if (await Glob.DetectsAnyChangeAsync(plain.Glob, latest.Glob))
                     somethingChanged = true;
                 if (await Safety.DetectsAnyChangeAsync(plain.Safety, latest.Safety))
+                    somethingChanged = true;
+                if (await S71500Rtc.DetectsAnyChangeAsync(plain.S71500Rtc, latest.S71500Rtc))
+                    somethingChanged = true;
+                if (await S71500Rtm.DetectsAnyChangeAsync(plain.S71500Rtm, latest.S71500Rtm))
+                    somethingChanged = true;
+                if (await ContextLogger.DetectsAnyChangeAsync(plain.ContextLogger, latest.ContextLogger))
+                    somethingChanged = true;
+                if (plain.DoSynchronize != DoSynchronize.LastValue)
+                    somethingChanged = true;
+                if (plain.TimeSynch != TimeSynch.LastValue)
+                    somethingChanged = true;
+                if (plain.ControllerRtm != ControllerRtm.LastValue)
                     somethingChanged = true;
                 plain = latest;
                 return somethingChanged;

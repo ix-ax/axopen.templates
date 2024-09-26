@@ -6,7 +6,7 @@ NAMESPACE axosimple.BaseUnit
     USING System.Strings;
 
     {S7.extern=ReadWrite}
-    CLASS PUBLIC UnitObjects
+    CLASS PUBLIC UnitBase
         VAR PUBLIC
             ///<summary>
             /// Station/Unit number.
@@ -20,7 +20,7 @@ NAMESPACE axosimple.BaseUnit
 
             {#ix-attr:[AXOpen.Data.PersistentAttribute("")]}
             LastTechnologySettings : STRING[64] ;
-        END_VAR        
+        END_VAR                        
     END_CLASS
 
 END_NAMESPACE
