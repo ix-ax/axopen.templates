@@ -27,6 +27,17 @@
               "Parameters": {
                 "HttpsOnly": true
               }
+            },
+            {
+              "Type": "OpcUaServer",
+              "Enabled": true,
+              "Parameters": {
+                "GuestAuthentication": false,
+                "SecurityPolicies": [
+                  "Basic256Sha256Sign",
+                  "Basic256Sha256SignEncrypt"
+                ]
+              }
             }
           ],
           "UserManagement": {
@@ -40,13 +51,21 @@
                   "QueryDiagnostics",
                   "FlashLed"
                 ]
+              },
+              {
+                "Name": "OpcUaServerRole",
+                "FunctionRights": [
+                  "OpcUAServerAccess",
+                  "OpcUAManageCertificates"
+                ]
               }
             ],
             "Users": [
               {
                 "Name": "usr",
                 "AssignedRoles": [
-                  "WebServerAccessRole"
+                  "WebServerAccessRole",
+                  "OpcUaServerRole"
                 ]
               }
             ]

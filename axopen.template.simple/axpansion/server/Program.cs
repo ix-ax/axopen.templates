@@ -61,8 +61,8 @@ AxoApplication.CreateBuilder().ConfigureLogger(new SerilogLogger(new LoggerConfi
 
 //Entry.Plc.ContextLogger.StartDequeuing(AxoApplication.Current.Logger, 250);
 
-axosimple.StarterUnitTemplate.UnitServices.Create(ContextService.Instance);
-axosimple.UnitTemplate.UnitServices.Create(ContextService.Instance);
+// Register the unit services
+CreateUnitServices();
 
 // Clean Temp directory
 IAxoDataExchange.CleanUp();
@@ -109,7 +109,11 @@ app.MapFallbackToPage("/_Host");
 
 app.Run();
 
-
+static void CreateUnitServices()
+{
+    // axosimple.UnitTemplate.UnitServices.Create(ContextService.Instance);
+    // axosimple.MyUnit.UnitServices.Create(ContextService.Instance); 
+}
 
 static (IRepository<User>, IRepository<Group>) SetUpUserRepositories()
 {
@@ -123,9 +127,9 @@ static (IRepository<User>, IRepository<Group>) SetUpUserRepositories()
         var processes = Process.GetProcessesByName("mongod");
         foreach (Process process in processes)
         {
-            process.Kill(); 
+          //  process.Kill(); 
         }
-        Process.Start(MongoExePath, $" --dbpath {MongoDbPath} --bind_ip_all");
+        //Process.Start(MongoExePath, $" --dbpath {MongoDbPath} --bind_ip_all");
     }
     catch (Exception e)
     {

@@ -1,53 +1,136 @@
-## 1. Create Controlled Unit (CU)
+# How to add controlled unit
 
-Install to AxCode extension: CodeTour.
-When you open the Template poject in AxCode extension CodeTour automaticaly open code tour that describe all steps that are needed for scaffold of CU. Template project also contains all snippets for scaffolding.
+## Run `create-unit` script
 
-![](assets\CodeTour.png)
-
-## 2. Apax AddUnit
-Template.Simple project contains apax script for adding CU. When you execute next apax command, it will add new CU from template to project structure.
-> [!NOTE] Use this name in all snippets!
+```bash
+apax create-unit MyUnit
 ```
-apax addunit
+or
+
+```bash
+apax create-unit
+
 ```
-## 3. CU declaration
-Declaraton of CU is placed to `ax\src\Context.st`. Context is the root of Technology. On the same layer is defined instance of other data`s object due to allowed depth of structure.  There is prepared snippet for adding unit declaraion. 
+**When running the script interactively or when unit name is non compliant, you might see something like this:**
 
- ![Unit Declaration](assets\UnitDeclaration.png)
+```bash
+> apax create-unit
 
-## 4. CU number
-For part flow in the technology is used unique CU number. It is defined in file  `ax\src\CommonData\eStations.st`.
+Enter the unit name (mandatory):
+ATTENTION: The name must start with an upper-case letter, no spaces, and no special characters.
+```
 
-## 5. CU root call
-CU logic needs to be called in `ax\src\Context.st`.
+This script will do the following:
 
-![Unit root call](assets\UnitRootCall.png)
+- Installs a .NET template located in the ./src/templates/unit/ directory using the 
+- Generates a new unit using the placing it in the `./src/Units/$unitname` folder.
+- Moves specific twin-related files from the generated unit to the `../axpansion/twin/Context/Units/` directory.
+- Moves server-related files to the `../axpansion/server/Pages/Context/Units/ directory`.
 
-## 6. Add CU Process Data 
-CU Process data needs to be added to global process data manager. 
-`ax\src\Context.st`.
-![Add CU to Process data ](assets\AddUnitProcessData.png)
-
-
-## 7. Add CU Technology Data 
-CU Technology data needs to be added to global technology data manager. 
-`ax\src\Context.st`.
-
-![Add CU to Technology data ](assets\AddUnitTechnologyData.png)
+## Controller program
 
 
-## 8. Initialize CU repository (.net) 
-On .net side must be initialized repository that will be used by DataExchange instace.
-![Add CU repositories](assets\AddUnitRepositories.png)
+### Create a new instance of new controlled unit in 
 
 
-## 9. Connect Plc data with Server in (.net) 
-Script that add CU also create a CUService.cs file that initilize Process and technology data. But connection or call with instance of the repository needs to be done manualy.
-![Connect PLC CU with Server](assets\ConnectPlcWithServer.png)
+Navigate to [`src\Context.st`](src\Context.st#7) `VAR PUBLIC` section and add new instance of newly create controlled unit.
+
+```iecst
+ VAR PUBLIC          
+    Glob : GlobalContextObjects;           
+    Inputs : REF_TO axosimple.Inputs;
+    Outputs : REF_TO axosimple.Outputs; 
+    Safety : TechnologySafety;
+
+    // Units
+
+    {#ix-set:AttributeName = "<#MY UNIT#>"} 
+    MyUnit : MyUnit.Unit;
+END_VAR      
+```
+
+You can use `unitDeclaration` snippet.
 
 
-## 10. Add CU To Units View (*.blazor) 
-In HMI Units view are displayed all CU that are in Technology. Also must be specified munualy logo an name of controlled unit.
+### Add data of the unit to Process data.
 
-[!include[Ref](Navigation.md)]
+Navigate to [`src\Glob\ProcessData.st`](src\Glob\ProcessData.st) `VAR PUBLIC` section and add new instance of process data of newly create controlled unit.
+
+
+```iecst
+NAMESPACE axosimple
+    {S7.extern=ReadWrite}
+    CLASS ProcessData EXTENDS AXOpen.Data.AxoDataFragmentExchange
+        VAR PUBLIC                    
+            {#ix-attr:[AXOpen.Data.AxoDataFragmentAttribute]}
+            Entity : SharedDataExchange;   
+                                                           
+            {#ix-set:AttributeName = "<#MY UNIT#>"} 
+            MyUnit : MyUnit.ProcessDataExchange;
+        END_VAR        
+    END_CLASS
+END_NAMESPACE   
+```
+You can use `unitAddProcessData` snippet.
+
+
+### Add data of the unit to technological data.
+
+Navigate to [`src\Glob\TechnologyData.st`](src\Glob\TechnologyData.st) `VAR PUBLIC` section and add new instance of process data of newly create controlled unit.
+
+
+```iecst
+NAMESPACE axosimple
+    {S7.extern=ReadWrite}
+    CLASS TechnologyData EXTENDS AXOpen.Data.AxoDataFragmentExchange
+        VAR PUBLIC                    
+            {#ix-attr:[AXOpen.Data.AxoDataFragmentAttribute]}
+            Common : TechnologySharedDataExchange;   
+            
+            {#ix-set:AttributeName = "<#MY UNIT#>"} 
+            MyUnit : MyUnit.TechnologyDataExchange;
+        END_VAR        
+    END_CLASS
+END_NAMESPACE 
+```
+You can use `unitAddTechnologyData` snippet.
+
+
+### Add entry call of the newly added controlled unit
+
+
+Navigate to [`src\Context.st`](src\Context.st) `Main` method and add entry call for the newly created controlled unit.
+
+
+```iecst
+METHOD PROTECTED OVERRIDE Main    
+    Safety.Run(THIS);                    
+    Glob.Run(THIS)
+    
+    IF(Inputs = NULL || Outputs = NULL) THEN
+        RETURN;
+    END_IF;      
+                                                    
+    MyUnit.Run(THIS, Inputs^, Outputs^, REF(Glob));                                       
+END_METHOD            
+```
+
+### Build and Download
+
+```iecst
+apax push
+```
+
+## Server
+
+Navigate to [`..\axpansion\server\Program.cs`](..\axpansion\server\Program.cs) add services initialization for newly created controlled unit to `CreateUnitServices` method and add appropriate call.
+
+```C#
+static void CreateUnitServices()
+{   
+    axosimple.MyUnit.UnitServices.Create(ContextService.Instance); 
+}
+```
+
+Important! Call must be placed after Twin connector is initialzed and running and AxoApplication has been initialized. It should be places in `
+

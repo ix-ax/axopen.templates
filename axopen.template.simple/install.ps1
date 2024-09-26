@@ -30,29 +30,30 @@ function OpenSolutionWithVS2022 {
     if ($vsPath) {
         & $vsPath $solutionPath
     } else {
-        Write-Host "Visual Studio 2022 not found!"
+        Write-Host "Visual Studio 2022 not found at '$vsPath'!"
     }
 }
 
 $currentPath = pwd
 $startingPath = $currentPath.Path
-$directories = Get-ChildItem -Path $startingPath -Recurse -Directory | Where-Object { $_.Name -eq '_template.config' }
+
+# $directories = Get-ChildItem -Path $startingPath -Recurse -Directory | Where-Object { $_.Name -eq '_template.config' }
 
 # Rename each directory
-foreach ($dir in $directories) {
-    $newName = $dir.FullName.Replace('_template.config', '.template.config')
-    Rename-Item -Path $dir.FullName -NewName $newName
-    Write-Output "Renamed: $($dir.FullName) to $newName"
-}
+# foreach ($dir in $directories) {
+#     $newName = $dir.FullName.Replace('_template.config', '.template.config')
+#     Rename-Item -Path $dir.FullName -NewName $newName
+#     Write-Output "Renamed: $($dir.FullName) to $newName"
+# }
 
-# Rename files named '_template.json' to 'template.json'
-$files = Get-ChildItem -Path $startingPath -Recurse -File | Where-Object { $_.Name -eq '_template.json' }
+# # Rename files named '_template.json' to 'template.json'
+# $files = Get-ChildItem -Path $startingPath -Recurse -File | Where-Object { $_.Name -eq '_template.json' }
 
-foreach ($file in $files) {
-    $newName = $file.DirectoryName + '\template.json'
-    Rename-Item -Path $file.FullName -NewName $newName
-    Write-Output "Renamed file: $($file.FullName) to $newName"
-}
+# foreach ($file in $files) {
+#     $newName = $file.DirectoryName + '\template.json'
+#     Rename-Item -Path $file.FullName -NewName $newName
+#     Write-Output "Renamed file: $($file.FullName) to $newName"
+# }
 
 dotnet tool restore
 Set-Location ax

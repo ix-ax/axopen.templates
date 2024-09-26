@@ -4,8 +4,12 @@ namespace Pocos
 {
     namespace axosimple
     {
-        public partial class Outputs
+        public partial class Outputs : AXSharp.Connector.IPlain
         {
+            public Outputs()
+            {
+            }
+
             public Boolean[] P0 { get; set; } = new Boolean[8];
             public Boolean[] P1 { get; set; } = new Boolean[8];
             public Int32[] A0 { get; set; } = new Int32[8];
