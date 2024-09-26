@@ -13,7 +13,7 @@ How to setup the communication in TIA portal
 
 https://console.simatic-ax.siemens.io/docs/sld/example
 
-You will need to export the certificates into `ax/certs/TIA/` folder of this directory named `Communication.cer` and `Webserver.cer`. For program loading and web server communication respectively. 
+You will need to export the certificates into `ax/certs/` folder of this directory named `Communication.cer` and `Webserver.cer`. For program loading and web server communication respectively. 
 
 > IMPORTANT!
 > This template points to these files with these exact names; please make sure you named the files as indicated.

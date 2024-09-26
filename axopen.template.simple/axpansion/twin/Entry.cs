@@ -25,7 +25,7 @@ namespace axosimple
         private static string Pass => @"123ABCDabcd$#!"; //Environment.GetEnvironmentVariable("AX_TARGET_PWD");       //Environment.GetEnvironmentVariable("AX_TARGET_PWD"); // <- Pass in the password that you have set up for the user. NOT AS PLAIN TEXT! Use user secrets instead.
         private static string UserName = "adm"; //Environment.GetEnvironmentVariable("AX_USERNAME"); //<- replace by user name you have set up in your WebAPI settings        
         private const bool IgnoreSslErrors = true; // <- When you have your certificates in order set this to false.
-        private static string CertificatePath = ".certs\\Communication.cer"; //".certs\\plc_line.cer"  
+        private static string CertificatePath = "certs\\Communication.cer"; 
 
         static string GetCertPath()
         {

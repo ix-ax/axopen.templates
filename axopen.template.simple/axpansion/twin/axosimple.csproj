@@ -18,10 +18,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="..\..\ax\certs\plc_line\plc_line.cer" Link=".certs\plc_line.cer">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Include="..\..\ax\certs\TIA\Communication.cer" Link=".certs\TIA\Communication.cer">
+	  <None Include="..\..\ax\certs\Communication.cer" Link="certs\Communication.cer">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>
