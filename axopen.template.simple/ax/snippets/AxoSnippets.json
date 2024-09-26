@@ -6,7 +6,7 @@
         "scope": "st",
         "body":[
         "{#ix-set:AttributeName = \"<#${1:name}#>\"} ",
-        "${1:name} : axosimple.${1:name}.Unit;",        
+        "${1:name} : axosimple.${1:name}.UnitContainer;",        
         "$0"
         ],
     "description": "Adds declaration of controlled unit"
