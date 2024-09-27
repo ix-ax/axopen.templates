@@ -104,11 +104,22 @@
     {
         get 
         {
-            return new UnitContainerBase[]
-            { 
-                //Entry.Plc.Context.UnitTemplate,
-            };
+            List<ITwinObject> CUs = (Entry.Plc.Context.GetChildren().Where(o => o is UnitContainerBase)).ToList();
+
+            if (CUs != null && CUs.Count() > 0)
+            {
+                List<UnitContainerBase> CUBs = new List<UnitContainerBase>();
+                foreach (ITwinObject CU in CUs)
+                {
+                    UnitContainerBase CUB = CU as UnitContainerBase;
+                    CUBs.Add(CUB);
+                }
+                return CUBs.ToArray();
+            }
+            else
+            {
+                return new UnitContainerBase[] { };
+            }
         }
     }
-
 }
