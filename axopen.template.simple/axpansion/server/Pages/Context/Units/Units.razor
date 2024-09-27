@@ -102,24 +102,9 @@
 
     private UnitContainerBase[] ControlledUnits 
     {
-        get 
+        get
         {
-            List<ITwinObject> CUs = (Entry.Plc.Context.GetChildren().Where(o => o is UnitContainerBase)).ToList();
-
-            if (CUs != null && CUs.Count() > 0)
-            {
-                List<UnitContainerBase> CUBs = new List<UnitContainerBase>();
-                foreach (ITwinObject CU in CUs)
-                {
-                    UnitContainerBase CUB = CU as UnitContainerBase;
-                    CUBs.Add(CUB);
-                }
-                return CUBs.ToArray();
-            }
-            else
-            {
-                return new UnitContainerBase[] { };
-            }
+            return (Entry.Plc.Context.GetChildren().Where(o => o is UnitContainerBase)).Cast<UnitContainerBase>().ToArray();
         }
     }
 }
