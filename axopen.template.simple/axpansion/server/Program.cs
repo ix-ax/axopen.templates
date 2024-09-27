@@ -120,6 +120,30 @@ static void CreateUnitServices()
 {
     var contextService = ContextService.Instance;
     // axosimple.UnitTemplate.UnitServices.Create(ContextService.Instance); 
+
+    Assembly? assembly = Assembly.GetAssembly(typeof(axosimpleTwinController));
+
+
+    if (contextService != null && assembly != null)
+    {
+        IEnumerable<Type> unitServices = assembly.GetTypes().Where(t => typeof(IUnitServices).IsAssignableFrom(t) && t.IsClass && !t.IsAbstract);
+
+        foreach (Type unitService in unitServices)
+        {
+            if (unitService.FullName != null)
+            {
+                Type classType = assembly.GetType(unitService.FullName);
+                if (classType != null)
+                {
+                    MethodInfo? createMethod = classType.GetMethod("Create", BindingFlags.Public | BindingFlags.Static);
+                    if (createMethod != null)
+                    {
+                        createMethod.Invoke(null, new object[] { contextService });
+                    }
+                }
+            }
+        }
+    }
 }
 
 static (IRepository<User>, IRepository<Group>) SetUpUserRepositories()
