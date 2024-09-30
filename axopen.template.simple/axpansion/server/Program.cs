@@ -68,6 +68,9 @@ AxoApplication.CreateBuilder().ConfigureLogger(new SerilogLogger(new LoggerConfi
 // Register the unit services
 CreateUnitServices();
 
+// Default view generation
+CreateDefaultUnitsView();
+
 // Clean Temp directory
 IAxoDataExchange.CleanUp();
 
