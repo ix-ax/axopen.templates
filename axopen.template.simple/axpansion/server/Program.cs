@@ -20,7 +20,9 @@ using MongoDB.Bson.Serialization;
 using System.Diagnostics;
 using System.Runtime.InteropServices.JavaScript;
 using AXOpen.VisualComposer;
-
+using axosimple.BaseUnit;
+using System.Net;
+using AXOpen.VisualComposer.Types;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -145,6 +147,40 @@ static void CreateUnitServices()
         }
     }
 }
+
+static async void CreateDefaultUnitsView()
+{
+    List<ITwinObject> CUs = Entry.Plc.Context.GetChildren().Where(o => o is UnitContainerBase).ToList();
+    if (CUs != null && CUs.Count() > 0)
+    {
+        VisualComposerContainer VisualComposerContainer = new VisualComposerContainer();
+        VisualComposerContainer.Id = "ContextView";
+        VisualComposerContainer.FileName = "_generated";
+        VisualComposerContainer.CurrentView = "_generated";
+        VisualComposerContainer.BackgroundWidth = 100;
+        VisualComposerContainer.BackgroundHeight = 200;
+        VisualComposerContainer.ImgSrc = null;
+        VisualComposerContainer.BackgroundColor = "#027dfb";
+        VisualComposerContainer.BackgroundSVGInput = "";
+        double left = 1;
+        double top = 1;
+        TransformType transform = TransformType.TopLeft;
+
+        foreach (ITwinObject CU in CUs)
+        {
+            VisualComposerContainer.AddChildren(CU as ITwinElement, left, top, TransformType.TopLeft, "Spot", -1, -1, 10, 1, "", null, true, "#FFFFFF");
+            left = left + 25;
+            if (left > 76)
+            {
+                left = 1;
+                top = top + 13;
+            }
+
+        }
+        await VisualComposerContainer.SaveAsync();
+    }
+}
+
 
 static (IRepository<User>, IRepository<Group>) SetUpUserRepositories()
 {
