@@ -1,6 +1,7 @@
 {
   "Views": [
-    "A"
+    "A",
+    "_generated"
   ],
-  "DefaultView": "A"
+  "DefaultView": "_generated"
 }

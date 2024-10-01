@@ -102,13 +102,9 @@
 
     private UnitContainerBase[] ControlledUnits 
     {
-        get 
+        get
         {
-            return new UnitContainerBase[]
-            { 
-                //Entry.Plc.Context.UnitTemplate,
-            };
+            return (Entry.Plc.Context.GetChildren().Where(o => o is UnitContainerBase)).Cast<UnitContainerBase>().ToArray();
         }
     }
-
 }

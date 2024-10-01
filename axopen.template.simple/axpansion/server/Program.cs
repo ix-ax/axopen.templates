@@ -20,7 +20,9 @@ using MongoDB.Bson.Serialization;
 using System.Diagnostics;
 using System.Runtime.InteropServices.JavaScript;
 using AXOpen.VisualComposer;
-
+using axosimple.BaseUnit;
+using System.Net;
+using AXOpen.VisualComposer.Types;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,6 +67,9 @@ AxoApplication.CreateBuilder().ConfigureLogger(new SerilogLogger(new LoggerConfi
 
 // Register the unit services
 CreateUnitServices();
+
+// Default view generation
+CreateDefaultUnitsView();
 
 // Clean Temp directory
 IAxoDataExchange.CleanUp();
@@ -120,7 +125,65 @@ static void CreateUnitServices()
 {
     var contextService = ContextService.Instance;
     // axosimple.UnitTemplate.UnitServices.Create(ContextService.Instance); 
+
+    Assembly? assembly = Assembly.GetAssembly(typeof(axosimpleTwinController));
+
+
+    if (contextService != null && assembly != null)
+    {
+        IEnumerable<Type> unitServices = assembly.GetTypes().Where(t => typeof(IUnitServices).IsAssignableFrom(t) && t.IsClass && !t.IsAbstract);
+
+        foreach (Type unitService in unitServices)
+        {
+            if (unitService.FullName != null)
+            {
+                Type classType = assembly.GetType(unitService.FullName);
+                if (classType != null)
+                {
+                    MethodInfo? createMethod = classType.GetMethod("Create", BindingFlags.Public | BindingFlags.Static);
+                    if (createMethod != null)
+                    {
+                        createMethod.Invoke(null, new object[] { contextService });
+                    }
+                }
+            }
+        }
+    }
 }
+
+static async void CreateDefaultUnitsView()
+{
+    List<ITwinObject> CUs = Entry.Plc.Context.GetChildren().Where(o => o is UnitContainerBase).ToList();
+    if (CUs != null && CUs.Count() > 0)
+    {
+        VisualComposerContainer VisualComposerContainer = new VisualComposerContainer();
+        VisualComposerContainer.Id = "ContextView";
+        VisualComposerContainer.FileName = "_generated";
+        VisualComposerContainer.CurrentView = "_generated";
+        VisualComposerContainer.BackgroundWidth = 100;
+        VisualComposerContainer.BackgroundHeight = 200;
+        VisualComposerContainer.ImgSrc = null;
+        VisualComposerContainer.BackgroundColor = "#027dfb";
+        VisualComposerContainer.BackgroundSVGInput = "";
+        double left = 1;
+        double top = 1;
+        TransformType transform = TransformType.TopLeft;
+
+        foreach (ITwinObject CU in CUs)
+        {
+            VisualComposerContainer.AddChildren(CU as ITwinElement, left, top, TransformType.TopLeft, "Spot", -1, -1, 10, 1, "", null, true, "#FFFFFF");
+            left = left + 25;
+            if (left > 76)
+            {
+                left = 1;
+                top = top + 13;
+            }
+
+        }
+        await VisualComposerContainer.SaveAsync();
+    }
+}
+
 
 static (IRepository<User>, IRepository<Group>) SetUpUserRepositories()
 {
