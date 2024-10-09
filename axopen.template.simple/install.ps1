@@ -61,10 +61,10 @@ apax install
 apax build
 Set-Location ..\tools\AXOpen.Simple.Tools\AXOpen.Simple.Tools\.apax
 apax install
-Set-Location ..\..\..\
+Set-Location ..\..\..\..\
 axcode .
-axcode -g ..\README.md:0
-Set-Location ..
+axcode -g README.md:0
+#Set-Location ..
 dotnet clean this.proj
 dotnet build this.proj
 dotnet slngen this.proj -o axosimple.sln --folders true --launch false
