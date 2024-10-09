@@ -123,7 +123,7 @@ scripts:
     CuDec="axosimple.Context"
     PdDec="axosimple.ProcessData"
     TdDec="axosimple.TechnologyData"
-    dotnet run --project ..\\tools\\AXOpen.Simple.Tools\\AXOpen.Simple.Tools\\AXOpen.Simple.Tools.csproj cuadd -x $AxProjDir -n $unitname -d $CuDec -p $PdDec -t $TdDec    
+    dotnet run --project ..\\tools\\AXOpen.Simple.Tools\\AXOpen.Simple.Tools\\AXOpen.Simple.Tools.csproj -- cuadd -x $AxProjDir -n $unitname -d $CuDec -p $PdDec -t $TdDec
   delete-unit: |
     if [ -z "$1" ]; then
       # If no argument, prompt for unitname input
