@@ -61,9 +61,9 @@ apax install
 apax build
 Set-Location ..\tools\AXOpen.Simple.Tools\AXOpen.Simple.Tools\.apax
 apax install
-Set-Location ..\..\..\
-axcode .
-axcode -g ..\README.md:0
+Set-Location ..\..\..\..\
+axcode .\ax\
+axcode -g README.md:0
 #Set-Location ..
 
 #Create an empty cert file
