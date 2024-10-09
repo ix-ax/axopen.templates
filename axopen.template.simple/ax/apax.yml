@@ -45,7 +45,7 @@ variables:
   APAX_BUILD_ARGS: [ -d ]
   PLC_NAME: "plc_line"
   HWCONFIG: "TIA"
-  AXTARGET: 192.168.0.4
+  AXTARGET: 10.10.10.120
   AXTARGETPLATFORMINPUT: .\bin\1500\
   AX_USERNAME: "adm"
   AX_TARGET_PWD: "123ABCDabcd$#!"
@@ -119,6 +119,11 @@ scripts:
     # Remove temporary template
     dotnet new uninstall ./tmp_templates
     rm ./tmp_templates -r
+    AxProjDir=${PWD}
+    CuDec="axosimple.Context"
+    PdDec="axosimple.ProcessData"
+    TdDec="axosimple.TechnologyData"
+    .\\tools\\AxProjectModificator.exe cuadd -x $AxProjDir -n $unitname -d $CuDec -p $PdDec -t $TdDec    
   delete-unit: |
     if [ -z "$1" ]; then
       # If no argument, prompt for unitname input
@@ -149,7 +154,7 @@ scripts:
       apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r -C ./certs/$PLC_NAME/$PLC_NAME.cer      
     fi
     if [[ "$HWCONFIG" == "TIA" ]]; then
-      apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r -C $COM_CERT_PATH --password $AX_TARGET_PWD   --username $AX_USERNAME 
+      apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r -C $COM_CERT_PATH --password $AX_TARGET_PWD --username $AX_USERNAME 
     fi   
     if [[ "$HWCONFIG" == "TIA-NON-SECURE" ]]; then
       apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -r    
@@ -157,10 +162,10 @@ scripts:
   delta: |
     apax build --ignore-scripts
     if [[ "$HWCONFIG" == "HWC" ]]; then
-      apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -C ./certs/$PLC_NAME/$PLC_NAME.cer  --mode delta    
+      apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -C ./certs/$PLC_NAME/$PLC_NAME.cer --mode delta    
     fi
     if [[ "$HWCONFIG" == "TIA" ]]; then
-      apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -C $COM_CERT_PATH --mode delta    
+      apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT -C $COM_CERT_PATH  --password $AX_TARGET_PWD --username $AX_USERNAME --mode delta    
     fi   
     if [[ "$HWCONFIG" == "TIA-NON-SECURE" ]]; then
       apax sld load --accept-security-disclaimer -t $AXTARGET -i $AXTARGETPLATFORMINPUT --mode delta

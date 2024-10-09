@@ -59,6 +59,9 @@ dotnet tool restore
 Set-Location ax
 apax install
 apax build
+Set-Location .\tools\AXOpen.Simple.Tools\AXOpen.Simple.Tools\.apax
+apax install
+Set-Location ..\..\..\..\
 axcode .
 axcode -g ..\README.md:0
 Set-Location ..

@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include=".apax\apax.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AXSharp.Compiler" Version="0.19.3-alpha.232" />
+    <PackageReference Include="AXSharp.Compiler.Cs" Version="0.19.3-alpha.232" />
+    <PackageReference Include="Cocona" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AX.ST.Compiler.PluginAbstractions">
+      <HintPath>.apax\.apax\packages\@ax\stc-win-x64\bin\AX.ST.Compiler.PluginAbstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="AX.ST.Semantic">
+      <HintPath>.apax\.apax\packages\@ax\stc-win-x64\bin\AX.ST.Semantic.dll</HintPath>
+    </Reference>   
+    <Reference Include="AX.Text">
+      <HintPath>.apax\.apax\packages\@ax\stc-win-x64\bin\AX.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="AX.Text">
+      <HintPath>.apax\.apax\packages\@ax\stc-win-x64\bin\AX.ST.Syntax.dll</HintPath>
+    </Reference>    
+  </ItemGroup>  
+</Project>
