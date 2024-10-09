@@ -6,6 +6,7 @@ NAMESPACE axosimple
             {#ix-generic:TPlain as POCO}
             {#ix-attr:[AXOpen.Data.AxoDataEntityAttribute]}
             {#ix-attr:[Container(Layout.Stack)]}    
+            {#ix-set:AttributeName = "<#UnitTemplate#>"}   
             Payload : TechnologySharedDataPayload;
         END_VAR        
     END_CLASS

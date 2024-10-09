@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "ax_add_cu": {
+      "commandName": "Project",
+      "workingDirectory": "D:\\_tmp\\abcd\\app\\",
+      "commandLineArgs": "cuadd -x D:\\_tmp\\abcd\\app\\ax\\ -n Cu30 -d abcd.Context -p abcd.ProcessData -t abcd.TechnologyData"
+    }
+  }
+}
+
+

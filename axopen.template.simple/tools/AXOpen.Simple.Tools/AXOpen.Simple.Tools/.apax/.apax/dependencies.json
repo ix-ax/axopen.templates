@@ -1,0 +1,245 @@
+{
+  "@ax/stc": {
+    "name": "@ax/stc",
+    "version": "7.1.81",
+    "path": "D:\\github\\ix-ax\\_axopen\\axopen.templates\\tools\\AxProjectModificator\\AxProjectModificator\\.apax\\.apax\\packages\\@ax\\stc",
+    "workspace": false,
+    "dev": true,
+    "apaxYml": {
+      "name": "@ax/stc",
+      "version": "7.1.81",
+      "author": "Siemens AG",
+      "description": "The ST compiler.",
+      "type": "generic",
+      "keywords": [
+        "tool"
+      ],
+      "scripts": {
+        "build": "# dummy"
+      },
+      "variables": {
+        "THIRD_PARTY_SOURCE_PACKAGE": "@ax/third-party-sources-stc@7.1.0"
+      },
+      "_internalPackageJsonPassthrough": {
+        "optionalDependencies": {
+          "@ax/stc-win-x64": "7.1.81",
+          "@ax/stc-linux-x64": "7.1.81"
+        }
+      }
+    },
+    "files": [
+      "apax.sig",
+      "apax.yml",
+      "CHANGELOG.md",
+      "package.json",
+      "README.md"
+    ]
+  },
+  "@ax/stc-win-x64": {
+    "name": "@ax/stc-win-x64",
+    "version": "7.1.81",
+    "path": "D:\\github\\ix-ax\\_axopen\\axopen.templates\\tools\\AxProjectModificator\\AxProjectModificator\\.apax\\.apax\\packages\\@ax\\stc-win-x64",
+    "workspace": false,
+    "dev": true,
+    "apaxYml": {
+      "name": "@ax/stc-win-x64",
+      "version": "7.1.81",
+      "author": "Siemens AG",
+      "description": "The Windows (x64) version of the ST compiler. Do not reference this package directly, use @ax/stc instead.",
+      "type": "generic",
+      "scripts": {
+        "build": "dotnet publish ../../../src/AX.ST.Compiler.CLI -o bin -r win-x64 -c Release --no-self-contained -p:DebugType=None -p:DebugSymbols=false\n"
+      },
+      "dependencies": {
+        "@ax/st-docs": "7.1.81"
+      },
+      "variables": {
+        "THIRD_PARTY_SOURCE_PACKAGE": "@ax/third-party-sources-stc@7.1.0"
+      },
+      "_internalPackageJsonPassthrough": {
+        "bin": {
+          "stc": "./bin/stc.exe"
+        },
+        "os": [
+          "win32"
+        ],
+        "cpu": [
+          "x64"
+        ],
+        "hidden": true
+      },
+      "keywords": [
+        "hidden"
+      ]
+    },
+    "files": [
+      "apax.sig",
+      "apax.yml",
+      "package.json",
+      "bin/AX.Core.SharedCollections.dll",
+      "bin/AX.DocComments.dll",
+      "bin/AX.DocComments.xml",
+      "bin/AX.Integrity.dll",
+      "bin/AX.IoAbstraction.dll",
+      "bin/AX.Languages.Iec.Symbols.dll",
+      "bin/AX.Package.dll",
+      "bin/AX.PluginLoader.dll",
+      "bin/AX.ST.Compiler.dll",
+      "bin/AX.ST.Compiler.dll.config",
+      "bin/AX.ST.Compiler.PluginAbstractions.dll",
+      "bin/AX.ST.Compiler.PluginAbstractions.xml",
+      "bin/AX.ST.Compiler.xml",
+      "bin/AX.ST.Semantic.dll",
+      "bin/AX.ST.Semantic.xml",
+      "bin/AX.ST.Syntax.dll",
+      "bin/AX.ST.Syntax.xml",
+      "bin/AX.Target.Builder.Itf.dll",
+      "bin/AX.Target.Builder.Itf.xml",
+      "bin/AX.Text.dll",
+      "bin/Google.Protobuf.dll",
+      "bin/JetBrains.Annotations.dll",
+      "bin/JetBrains.FormatRipper.dll",
+      "bin/JetBrains.HabitatDetector.dll",
+      "bin/JetBrains.Profiler.Api.dll",
+      "bin/JetBrains.Profiler.SelfApi.dll",
+      "bin/libsodium.dll",
+      "bin/McMaster.Extensions.CommandLineUtils.dll",
+      "bin/Microsoft.Extensions.Configuration.Abstractions.dll",
+      "bin/Microsoft.Extensions.Configuration.Binder.dll",
+      "bin/Microsoft.Extensions.Configuration.dll",
+      "bin/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+      "bin/Microsoft.Extensions.DependencyInjection.dll",
+      "bin/Microsoft.Extensions.Logging.Abstractions.dll",
+      "bin/Microsoft.Extensions.Logging.Configuration.dll",
+      "bin/Microsoft.Extensions.Logging.Console.dll",
+      "bin/Microsoft.Extensions.Logging.dll",
+      "bin/Microsoft.Extensions.Options.ConfigurationExtensions.dll",
+      "bin/Microsoft.Extensions.Options.dll",
+      "bin/Microsoft.Extensions.Primitives.dll",
+      "bin/Microsoft.IdentityModel.Abstractions.dll",
+      "bin/Microsoft.IdentityModel.JsonWebTokens.dll",
+      "bin/Microsoft.IdentityModel.Logging.dll",
+      "bin/Microsoft.IdentityModel.Tokens.dll",
+      "bin/NSec.Cryptography.dll",
+      "bin/ProcessTools.dll",
+      "bin/SemanticVersioning.dll",
+      "bin/stc.deps.json",
+      "bin/stc.dll",
+      "bin/stc.dll.config",
+      "bin/stc.exe",
+      "bin/stc.runtimeconfig.json",
+      "bin/stc.xml",
+      "bin/System.IdentityModel.Tokens.Jwt.dll",
+      "bin/System.Security.Cryptography.Pkcs.dll",
+      "bin/System.Text.Encodings.Web.dll",
+      "bin/System.Text.Json.dll"
+    ]
+  },
+  "@ax/st-docs": {
+    "name": "@ax/st-docs",
+    "version": "7.1.81",
+    "path": "D:\\github\\ix-ax\\_axopen\\axopen.templates\\tools\\AxProjectModificator\\AxProjectModificator\\.apax\\.apax\\packages\\@ax\\st-docs",
+    "workspace": false,
+    "dev": true,
+    "apaxYml": {
+      "name": "@ax/st-docs",
+      "version": "7.1.81",
+      "author": "Siemens AG",
+      "description": "Documentation package of the ST compiler",
+      "type": "generic",
+      "keywords": [
+        "docs",
+        "hidden"
+      ],
+      "scripts": {
+        "build": "cp -r ../../../docs .\ngrep -v _INTERNAL_ ../../../CHANGELOG.md | sed 's/[a-zA-Z]\\{2\\}-[0-9]\\+: //g' > CHANGELOG.md\nprettier --write CHANGELOG.md\n"
+      },
+      "_internalPackageJsonPassthrough": {
+        "hidden": true
+      }
+    },
+    "files": [
+      "apax.sig",
+      "apax.yml",
+      "CHANGELOG.md",
+      "package.json",
+      "docs/cli.md",
+      "docs/_index.md",
+      "docs/1_language/03_access-modifier.md",
+      "docs/1_language/04_types-and-variables.md",
+      "docs/1_language/05_expressions.md",
+      "docs/1_language/06_overloading.md",
+      "docs/1_language/07_statements.md",
+      "docs/1_language/08_comments.md",
+      "docs/1_language/09_documentation-comments.md",
+      "docs/1_language/10_pragmas.md",
+      "docs/1_language/11_preprocessor-directives.md",
+      "docs/1_language/12_syntax-reference.md",
+      "docs/1_language/index.md",
+      "docs/3_major-changes/1_major-changes-stc-5.0.md",
+      "docs/3_major-changes/2_major-changes-stc-6.0.md",
+      "docs/3_major-changes/3_major-changes-stc-7.0.md",
+      "docs/3_major-changes/index.md",
+      "docs/2_target-specific/01_runtime-behaviors.md",
+      "docs/2_target-specific/index.md",
+      "docs/1_language/01_program-structure/1_configuration.md",
+      "docs/1_language/01_program-structure/2_program-organization-unit.md",
+      "docs/1_language/01_program-structure/3_namespaces.md",
+      "docs/1_language/01_program-structure/4_pou-interface.md",
+      "docs/1_language/01_program-structure/index.md",
+      "docs/1_language/02_oop/1_inheritance.md",
+      "docs/1_language/02_oop/2_interfaces.md",
+      "docs/1_language/02_oop/3_copyfunctions.md",
+      "docs/1_language/02_oop/index.md",
+      "docs/1_language/images/directive-syntax-highlighting.png",
+      "docs/1_language/images/partial-access-width.png",
+      "docs/1_language/images/stringstructure.jpg",
+      "docs/1_language/diagrams/accessModifier.svg",
+      "docs/1_language/diagrams/arrayTypeDeclaration.svg",
+      "docs/1_language/diagrams/calls.svg",
+      "docs/1_language/diagrams/caseStatement.svg",
+      "docs/1_language/diagrams/classDeclaration.svg",
+      "docs/1_language/diagrams/conditionalStatement.svg",
+      "docs/1_language/diagrams/configDeclaration.svg",
+      "docs/1_language/diagrams/constructs.svg",
+      "docs/1_language/diagrams/continueStatement.svg",
+      "docs/1_language/diagrams/elements.svg",
+      "docs/1_language/diagrams/enumTypeDeclaration.svg",
+      "docs/1_language/diagrams/exitStatement.svg",
+      "docs/1_language/diagrams/expression.svg",
+      "docs/1_language/diagrams/forStatement.svg",
+      "docs/1_language/diagrams/functionBlockDeclaration.svg",
+      "docs/1_language/diagrams/functionDeclaration.svg",
+      "docs/1_language/diagrams/iterationStatement.svg",
+      "docs/1_language/diagrams/jumpStatement.svg",
+      "docs/1_language/diagrams/methodDeclaration.svg",
+      "docs/1_language/diagrams/namedValueTypeDeclaration.svg",
+      "docs/1_language/diagrams/namespaceDeclaration.svg",
+      "docs/1_language/diagrams/namespaceElement.svg",
+      "docs/1_language/diagrams/progConfig.svg",
+      "docs/1_language/diagrams/programDeclaration.svg",
+      "docs/1_language/diagrams/programming.stgrammar.svg",
+      "docs/1_language/diagrams/repeatStatement.svg",
+      "docs/1_language/diagrams/returnStatement.svg",
+      "docs/1_language/diagrams/statementList.svg",
+      "docs/1_language/diagrams/structTypeDeclaration.svg",
+      "docs/1_language/diagrams/taskConfig.svg",
+      "docs/1_language/diagrams/varDeclarationSection.svg",
+      "docs/1_language/diagrams/whileStatement.svg",
+      "docs/1_language/_types/conversion-table.md",
+      "docs/1_language/_types/conversion-table.png",
+      "docs/1_language/_types/fullTable.png",
+      "docs/1_language/_types/index.md",
+      "docs/1_language/_types/numeric.png",
+      "docs/1_language/_types/string.png",
+      "docs/1_language/_types/time.png",
+      "docs/1_language/_types/types.xlsx",
+      "docs/2_target-specific/target-specific-tasks/1_synchronous-tasks-tia-instructions.md",
+      "docs/2_target-specific/target-specific-tasks/index.md",
+      "docs/2_target-specific/images/synchronous-tasks-tia/ioConfig.png",
+      "docs/2_target-specific/images/synchronous-tasks-tia/profinetNetwork.png",
+      "docs/2_target-specific/images/synchronous-tasks-tia/selectSyncDomain.gif",
+      "docs/2_target-specific/images/synchronous-tasks-tia/syncDomain.png"
+    ]
+  }
+}
