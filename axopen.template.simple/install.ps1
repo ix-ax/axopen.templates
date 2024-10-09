@@ -62,9 +62,6 @@ apax build
 Set-Location ..\tools\AXOpen.Simple.Tools\AXOpen.Simple.Tools\.apax
 apax install
 Set-Location ..\..\..\..\
-axcode .\ax\
-axcode -g README.md:0
-#Set-Location ..
 
 #Create an empty cert file
 
@@ -95,6 +92,8 @@ if (Test-Path $filepath) {
     $input = Read-Host "Press Enter to continue after verifying the certificate"
 }
 
+axcode .\ax\
+axcode -g README.md:0
 
 dotnet clean this.proj
 dotnet build this.proj
