@@ -65,6 +65,24 @@ Set-Location ..\..\..\..\
 axcode .
 axcode -g README.md:0
 #Set-Location ..
+
+#Create an empty cert file
+
+$filepath = ".\ax\certs\Communication.cer"
+$disclaimer = "This is a placeholder certificate file and must be replaced with a valid certificate before use."
+
+if (-not (Test-Path $filepath)) {
+    # Create the file
+    New-Item -Path $filepath -ItemType File
+    Write-Host "File created at $filepath"
+    
+    # Add the disclaimer to the newly created file
+    Add-Content -Path $filepath -Value $disclaimer
+    Write-Host "Disclaimer added to $filepath"
+} else {
+    Write-Host "File already exists at $filepath"
+}
+
 dotnet clean this.proj
 dotnet build this.proj
 dotnet slngen this.proj -o axosimple.sln --folders true --launch false

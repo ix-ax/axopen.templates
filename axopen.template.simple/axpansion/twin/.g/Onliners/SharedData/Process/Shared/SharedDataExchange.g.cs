@@ -18,7 +18,8 @@ namespace axosimple
         {
             Symbol = AXSharp.Connector.Connector.CreateSymbol(parent.Symbol, symbolTail);
             PreConstruct(parent, readableTail, symbolTail);
-            Payload = new axosimple.SharedDataPayload(this, "Payload", "Payload");
+            Payload = new axosimple.SharedDataPayload(this, "<#UnitTemplate#>", "Payload");
+            Payload.AttributeName = "<#UnitTemplate#>";
             PostConstruct(parent, readableTail, symbolTail);
         }
 
