@@ -68,7 +68,8 @@ if (Test-Path $filepath) {
     }
 } else {
     Write-Host "Certificate file 'Communication.cer' not found." -ForegroundColor Red
-    Write-Host "Please ensure you have the correct file in the './axosimple/app/ax/certs/' directory." -ForegroundColor Red
+    Write-Host "If you are using TIA portal for your hardware configuration, please ensure you have the correct file in the './axosimple/app/ax/certs/Communication.cer'" -ForegroundColor Red
+    Write-Host "If you're using 'hwc' you can ignore this prompt the application is equiped with a script that will create and store the certificate for you." -ForegroundColor Red
     
     # Wait for user input before continuing
     $input = Read-Host "Press Enter to continue after verifying the certificate"
