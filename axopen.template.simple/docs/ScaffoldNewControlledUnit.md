@@ -26,11 +26,17 @@ This script will do the following:
 - Generates a new unit using the placing it in the `./src/Units/$unitname` folder.
 - Moves specific twin-related files from the generated unit to the `../axpansion/twin/Context/Units/` directory.
 - Moves server-related files to the `../axpansion/server/Pages/Context/Units/ directory`.
+- The script will also modify your source code adding necessary variables and calls. 
 
-## Controller program
+
+## Adding controlled unit manually
+
+**The following assumes you have the controlled unit created from the template and the files were copied to the server and twin manually**
+
+### Controller program
 
 
-### Create a new instance of new controlled unit in 
+#### Create a new instance of new controlled unit in 
 
 
 Navigate to [`src\Context.st`](src\Context.st#7) `VAR PUBLIC` section and add new instance of newly create controlled unit.
@@ -52,7 +58,7 @@ END_VAR
 You can use `unitDeclaration` snippet.
 
 
-### Add data of the unit to Process data.
+#### Add data of the unit to Process data.
 
 Navigate to [`src\Glob\ProcessData.st`](src\Glob\ProcessData.st) `VAR PUBLIC` section and add new instance of process data of newly create controlled unit.
 
@@ -74,7 +80,7 @@ END_NAMESPACE
 You can use `unitAddProcessData` snippet.
 
 
-### Add data of the unit to technological data.
+#### Add data of the unit to technological data.
 
 Navigate to [`src\Glob\TechnologyData.st`](src\Glob\TechnologyData.st) `VAR PUBLIC` section and add new instance of process data of newly create controlled unit.
 
@@ -96,7 +102,7 @@ END_NAMESPACE
 You can use `unitAddTechnologyData` snippet.
 
 
-### Add entry call of the newly added controlled unit
+#### Add entry call of the newly added controlled unit
 
 
 Navigate to [`src\Context.st`](src\Context.st) `Main` method and add entry call for the newly created controlled unit.
@@ -115,13 +121,13 @@ METHOD PROTECTED OVERRIDE Main
 END_METHOD            
 ```
 
-### Build and Download
+#### Build and Download
 
 ```iecst
 apax push
 ```
 
-## Server
+### Server
 
 Navigate to [`..\axpansion\server\Program.cs`](..\axpansion\server\Program.cs) add services initialization for newly created controlled unit to `CreateUnitServices` method and add appropriate call.
 
@@ -129,6 +135,10 @@ Navigate to [`..\axpansion\server\Program.cs`](..\axpansion\server\Program.cs) a
 static void CreateUnitServices()
 {   
     axosimple.MyUnit.UnitServices.Create(ContextService.Instance); 
+    .
+    .
+    .
+    .
 }
 ```
 

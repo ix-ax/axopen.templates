@@ -1,0 +1,1 @@
+.\.runtime\mongodbserver\mongodb-win32-x86_64-windows-8.0.0\bin\mongod.exe --dbpath .\.runtime\data\db\

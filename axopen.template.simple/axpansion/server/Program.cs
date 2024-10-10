@@ -23,8 +23,14 @@ using AXOpen.VisualComposer;
 using axosimple.BaseUnit;
 using System.Net;
 using AXOpen.VisualComposer.Types;
+using axosimple.server;
 
 var builder = WebApplication.CreateBuilder(args);
+
+if(!MongoHelper.IsMongodRunning())
+{
+    Console.WriteLine("Mongod process not running here.");
+}
 
 // Add services to the container.
 builder.Services.ConfigureAxBlazorSecurity(SetUpUserRepositories(), Roles.CreateRoles(),true);
@@ -37,6 +43,8 @@ builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddVisualComposerService();
+
+
 
 #region AxoApplication
 
