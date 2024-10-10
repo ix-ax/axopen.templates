@@ -54,25 +54,14 @@ NAMESPACE axosimple.UnitTemplate
             // This sets the sequence to run once (top-botton) and stops with done after closing.
             THIS.SequenceMode := eAxoSequenceMode#RunOnce;
 
-            IF (Steps[0].Execute(THIS, TRUE, '<#DIALOG#>')) THEN
-                //-------------------------------------------------------                 
-
-                _dialogAnswer := X^._DL.Show(THIS).WithCaption('<#DO YOU WANT TO RUN THE GROUND MODE SEQUENCE?#>').WithYesNo().WithType(eDialogType#Warning).Answer();
-
-                IF(_dialogAnswer <> eDialogAnswer#NoAnswer) THEN  
-                    IF(_dialogAnswer = eDialogAnswer#Yes) THEN
-                        X^.TS.Restore();                                    
-                        X^.PD.Restore();                
-                        X^._DL.Restore();
-                        X^._ADL.Restore();
-                        X^._IDL.Restore(); 
-                        THIS.MoveNext();                   
-                    END_IF;
-                    
-                    IF(_dialogAnswer = eDialogAnswer#No) THEN
-                        THIS.Restore();
-                    END_IF;
-                END_IF;    
+            IF (Steps[0].Execute(THIS, TRUE, '<#RESTORE#>')) THEN
+                //-------------------------------------------------------                             
+                    X^.TS.Restore();                                    
+                    X^.PD.Restore();                
+                    X^._DL.Restore();
+                    X^._ADL.Restore();
+                    X^._IDL.Restore(); 
+                    THIS.MoveNext();                                       
                 //-------------------------------------------------------
             END_IF;
 
