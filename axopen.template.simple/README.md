@@ -21,8 +21,8 @@ You will need to export the certificates into `ax/certs/` folder of this directo
 your.project/
 ├──ax
 │  └─ certs                          [Communication certificates]
-│      ├── Communication.cer         [Program loading (sld)]
-│      └── Webserver.cer             [WebAPI server application communication]
+│      ├── Communication.cer         [Program loading (sld)] This is the default certificate all types of communications with the controller.
+│      └── Webserver.cer             (Optional)[WebAPI server application communication]
 
 
 ### Using `hwc`
@@ -34,7 +34,6 @@ For a quick configuration of a target system using `hwc` you can run the followi
 ```bash
 apax alf
 ```
-
 
 Prior running the script you should check/modify the following. Set the variable `HWCONFIG` to `HWC`. The `AX_USERNAME` and `AX_TARGET_PWD` will be used to configure WebAPI communication interface. Consider providing password in opaque way e.g. using environment variables.
 
@@ -81,24 +80,14 @@ your.project/
 ### .NET
 
 
-Go to [Entry.cs](axosimple.twin/Entry.cs) to configure the comunication between your controller and .net twin connector.
+Go to [Entry.cs](axpansion/twin/Entry.cs) to configure the comunication between your controller and .net twin connector.
 
-
-Define what method has been used to set up your controller. There are three options:
-
-- `TIA` configured with TIA portal with full security (certificates and password)
-- `TIA-NON-SECURE` configured with TIA portal without any security except for UserName and password for WebAPI access.
-- `HWC` configured using `hwc` with fully featured security.
-
-e.g.
-```C#
-#define TIA
-```
+Modify following members according to your environment
 
 ~~~C#
 private static string TargetIp = "192.168.0.4"; // <- replace by your IP 
-private const string UserName = "Everybody"; //<- replace by user name you have set up in your WebAPI settings
-private const string Pass = ""; // <- Pass in the password that you have set up for the user. NOT AS PLAIN TEXT! Use user secrets instead.
+private const string UserName = "adm"; //<- replace by user name you have set up in your WebAPI settings
+private const string Pass = @"123ABCDabcd$#!"; // <- Pass in the password that you have set up for the user. NOT AS PLAIN TEXT! Use user secrets instead.
 private const bool IgnoreSslErrors = true; // <- When you have your certificates in order set this to false.
 ~~~
 

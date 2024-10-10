@@ -37,24 +37,6 @@ function OpenSolutionWithVS2022 {
 $currentPath = pwd
 $startingPath = $currentPath.Path
 
-# $directories = Get-ChildItem -Path $startingPath -Recurse -Directory | Where-Object { $_.Name -eq '_template.config' }
-
-# Rename each directory
-# foreach ($dir in $directories) {
-#     $newName = $dir.FullName.Replace('_template.config', '.template.config')
-#     Rename-Item -Path $dir.FullName -NewName $newName
-#     Write-Output "Renamed: $($dir.FullName) to $newName"
-# }
-
-# # Rename files named '_template.json' to 'template.json'
-# $files = Get-ChildItem -Path $startingPath -Recurse -File | Where-Object { $_.Name -eq '_template.json' }
-
-# foreach ($file in $files) {
-#     $newName = $file.DirectoryName + '\template.json'
-#     Rename-Item -Path $file.FullName -NewName $newName
-#     Write-Output "Renamed file: $($file.FullName) to $newName"
-# }
-
 dotnet tool restore
 Set-Location ax
 apax install
