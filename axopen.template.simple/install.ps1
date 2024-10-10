@@ -85,7 +85,7 @@ if (Test-Path $filepath) {
 }
 
 # Get mongodb server installation.
-.\Get-MongoDb
+Read-Host "This application requires mongodb server to work with data. You can provision an instalce of mongodb server running `Get-MongoDb` script and execute running `RunMongo` script."
 
 axcode .\ax\ 
 axcode -g README.md:0
