@@ -19,7 +19,7 @@
 
 	<ItemGroup>
 	  <None Include="..\..\ax\certs\Communication.cer" Link="certs\Communication.cer">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>
 
