@@ -74,25 +74,31 @@ if (Test-Path $filepath) {
     $fileContent = Get-Content -Path $filepath
     
     # Check if the file contains the placeholder disclaimer (or just check existence)
-    if ($fileContent -like "*placeholder*") {
+    if ($fileContent -like $placeholderDisclaimer) {
         Write-Host "`nIMPORTANT: The file 'Communication.cer' is a placeholder certificate." -ForegroundColor Yellow
         Write-Host "You must replace this file with a valid certificate obtained from the TIA Portal." -ForegroundColor Yellow
         Write-Host "Please follow the instructions in the README.md file to replace it before deployment.`n" -ForegroundColor Yellow
 
         # Prompt the user for confirmation to continue
         $input = Read-Host "Press Enter once you've understood this message and replaced the certificate, or when you're ready to proceed"
-    } else {
+        } else {
         Write-Host "The certificate file 'Communication.cer' has been updated." -ForegroundColor Green
     }
 } else {
     Write-Host "Certificate file 'Communication.cer' not found." -ForegroundColor Red
-    Write-Host "Please ensure you have the correct file in the './ax/certs/' directory." -ForegroundColor Red
+    Write-Host "Please ensure you have the correct file in the './axosimple/app/ax/certs/' directory." -ForegroundColor Red
     
     # Wait for user input before continuing
     $input = Read-Host "Press Enter to continue after verifying the certificate"
+
+   if (-not (Test-Path $filepath)) {
+        New-Item -Path $filepath -ItemType File
+        Add-Content -Path $filepath -Value $placeholderDisclaimer
+        Write-Host "No cert file found I  created one that you'll need to replace later". 
+    }     
 }
 
-axcode .\ax\
+axcode .\ax\ 
 axcode -g README.md:0
 
 dotnet clean this.proj
