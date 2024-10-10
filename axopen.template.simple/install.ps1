@@ -77,7 +77,10 @@ if (Test-Path $filepath) {
    if (-not (Test-Path $filepath)) {
         New-Item -Path $filepath -ItemType File
         Add-Content -Path $filepath -Value $placeholderDisclaimer
-        Write-Host "No cert file found I  created one that you'll need to replace later". 
+        Write-Host "No cert file found. I created one that you'll need to replace later".
+        Write-Host "`nIMPORTANT: The file 'Communication.cer' is a placeholder certificate." -ForegroundColor Yellow
+        Write-Host "You must replace this file with a valid certificate obtained from the TIA Portal." -ForegroundColor Yellow
+        Write-Host "Please follow the instructions in the README.md file to replace it before deployment.`n" -ForegroundColor Yellow 
     }     
 }
 
