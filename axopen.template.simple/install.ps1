@@ -84,6 +84,9 @@ if (Test-Path $filepath) {
     }     
 }
 
+# Get mongodb server installation.
+.\Get-MongoDb
+
 axcode .\ax\ 
 axcode -g README.md:0
 

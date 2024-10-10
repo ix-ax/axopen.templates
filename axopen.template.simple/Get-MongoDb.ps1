@@ -44,6 +44,12 @@ function Ensure-DirectoryExists {
     }
 }
 
+if((Test-Path $extractFolder))
+{
+    Write-Host "Directory '$extractFolder' exist. Assuming MongoDB server is downloaded." -ForegroundColor Yellow
+    return;
+}
+
 # Step 1: Ensure data folder exists
 Ensure-DirectoryExists($dataFolder)
 
