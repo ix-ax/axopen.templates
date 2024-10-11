@@ -84,16 +84,45 @@ if (Test-Path $filepath) {
     }     
 }
 
-# Get mongodb server installation.
-$input = Read-Host "This application requires mongodb server to work with data. You can provision an instalce of mongodb server running `Get-MongoDb` script and execute running `RunMongo` script."
+# Function to prompt user and ensure valid input (yes/y or no/n)
+function Get-YesNoInput($message) {
+    $validInput = $false
+    while (-not $validInput) {
+        $input = Read-Host $message
+        if ($input -eq "yes" -or $input -eq "y" -or $input -eq "no" -or $input -eq "n") {
+            $validInput = $true
+        } else {
+            Write-Host "Invalid input. Please enter yes/y or no/n." -ForegroundColor Yellow
+        }
+    }
+    return $input
+}
 
-axcode .\ax\ 
-axcode -g README.md:0
+# Prompt user for MongoDB installation
+$installMongo = Get-YesNoInput "This application requires MongoDB server to work with data. Would you like to provision an instance of MongoDB server using the 'Get-MongoDb' script? (yes/y or no/n)"
+if ($installMongo -eq "yes" -or $installMongo -eq "y") {
+    # Run the Get-MongoDb script
+    Write-Host "Running 'Get-MongoDb.ps1' script..."
+    ./Get-MongoDb.ps1
+}
 
+# Clean, build, and generate solution file for the .NET project
 dotnet clean this.proj
 dotnet build this.proj
 dotnet slngen this.proj -o axosimple.sln --folders true --launch false
-OpenSolutionWithVS2022 -solutionPath axosimple.sln
+
+# Prompt the user to see if they want to open the project with axcode
+$openAxcode = Get-YesNoInput "Do you want to open the project in axcode? (yes/y or no/n)"
+if ($openAxcode -eq "yes" -or $openAxcode -eq "y") {
+    axcode .\ax\
+    axcode -g README.md:0
+}
+
+# Prompt the user to see if they want to open the solution in Visual Studio 2022
+$openVS = Get-YesNoInput "Do you want to open the solution in Visual Studio 2022? (yes/y or no/n)"
+if ($openVS -eq "yes" -or $openVS -eq "y") {
+    OpenSolutionWithVS2022 -solutionPath axosimple.sln
+}
 
 
 

@@ -1,4 +1,4 @@
-name: "ix-ax-template"
+name: "axosimple.workspace"
 version: 0.1.0
 type: workspace
 devDependencies:
